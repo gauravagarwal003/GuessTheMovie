@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Search and Select</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="searchbar">
+        <input type="text" id="search" placeholder="Search" onkeyup="filterMovies()">
+        <button id="clearSearch" onclick="clearSearch()">X</button>
+    </div>
+    <ul id="movieList" class="movie-list"></ul>
+    <div id="currentReview"></div>
+    <div id="currentMovieDisplay"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
