@@ -3,27 +3,34 @@
     --letterboxdGreen: #66dd67;
     --letterboxdBlue: #66b9ef;
     --letterboxdBackground: rgb(25,25,30);
-    --white: rgb(255 255 255);
-    --black: rgb(0 0 0);
-    --gray: rgb(30 30 40);
   }
 
+  @font-face {
+    font-family: 'LetterBoxdFont';
+    src: url('sharp-grotesk-smbold-20-regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
 body{
-    background-color: var(--letterboxdBlue);
+    font-family: 'LetterBoxdFont';
+    background-color: rgb(46,52,63);
 }
   
 .movie-list {
     list-style-type: none;
     padding: 0;
+    color: white;
 }
 
 .movie-list li {
     cursor: pointer;
-    padding: 5px;
+    padding: 10px;
+    font-weight: lighter;
 }
 
 .movie-list li:hover {
-    background-color: var(--letterboxdOrange) ;
+    background-color: rgb(20,20,25);
 }
 
 img {
@@ -33,8 +40,8 @@ img {
 }
 
 #search{
-    color: var(--white);
-    background-color: var(--letterboxdGreen);
+    background-color: rgb(220,220,220);
+    color: rgb(120,130,150)
 }
 
 #searchbar {
@@ -62,11 +69,11 @@ img {
     border: none;
     cursor: pointer;
     font-size: 16px;
-    color: #999;
+    color: rgb(120,135,150);
 }
 
 #clearSearch:hover {
-    color: #555; /* Adjust color on hover */
+    color: black; /* Adjust color on hover */
 }
 
 
@@ -79,10 +86,27 @@ img {
     color: var(--white); /* Change this to your desired placeholder color */
 }
 
-#currentReview, #searchbar, #movieList{
+#currentReview, #searchbar{
     margin-top: 10px;
     margin-bottom: 10px;
     max-width: fit-content;
     margin-left: auto;
     margin-right: auto;  
+}
+
+#movieList{
+    max-width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+#currentMovieDisplay{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-width: fit-content;
+    margin-left: auto;
+    margin-right: auto;  
+    color: white;
+
 }

@@ -13,6 +13,17 @@ fetch('movies.csv')
         });
     });
 
+// Function to clear search input and movie list
+function clearSearchAndMovies() {
+    // Clear search input
+    document.getElementById('search').value = '';
+    
+    // Clear movie list
+    const movieList = document.getElementById('movieList');
+    movieList.innerHTML = '';
+}
+    
+
 // Function to display movies
 function displayMovies(movies) {
     const movieList = document.getElementById('movieList');
@@ -41,11 +52,16 @@ function filterMovies() {
 function selectMovie(movieID) {
     const selectedMovie = movieID === currentMovie;
     const currentMovieDisplay = document.getElementById('currentMovieDisplay');
-    if (selectedMovie) {
-        currentMovieDisplay.textContent = `Correct!`;
-    }
-    else{
-        currentMovieDisplay.textContent = `Wrong!`;
+    const movie = movieData.find(movie => movie.movieID === movieID);
+    
+    if (movie) {
+        if (selectedMovie) {
+            currentMovieDisplay.innerHTML = `<a href="https://letterboxd.com/film/${movieID}" style="text-decoration:none">${`You got it! ${movieData.find(movie => movie.movieID === movieID).title} (${movieData.find(movie => movie.movieID === movieID).year})  is the correct movie.`}</a>`;
+            clearSearchAndMovies();
+        } else {
+            currentMovieDisplay.innerHTML = `Wrong! ${movieLink} is not the correct movie. Try again!`;
+            clearSearchAndMovies();
+        }
     }
 }
 
@@ -79,7 +95,12 @@ function displayRandomImage(folderName) {
 
 // Fetch and display a random movie on page load
 fetch('/random-movie')
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
     .then(data => {
         currentMovie = data.movie;
         displayRandomImage(currentMovie);
@@ -87,6 +108,3 @@ fetch('/random-movie')
     .catch(error => {
         console.error('Error fetching random movie:', error);
     });
-
-
-console.log(currentMovie);
