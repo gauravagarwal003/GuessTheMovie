@@ -22,6 +22,26 @@ function clearSearchAndMovies() {
     const movieList = document.getElementById('movieList');
     movieList.innerHTML = '';
 }
+
+function refresh() {
+    currentMovieDisplay.innerHTML = ``;
+    clearSearchAndMovies();
+    fetch('/random-movie')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        currentMovie = data.movie;
+        displayRandomImage(currentMovie);
+    })
+    .catch(error => {
+        console.error('Error fetching random movie:', error);
+    });
+
+}
     
 
 // Function to display movies
@@ -53,13 +73,13 @@ function selectMovie(movieID) {
     const selectedMovie = movieID === currentMovie;
     const currentMovieDisplay = document.getElementById('currentMovieDisplay');
     const movie = movieData.find(movie => movie.movieID === movieID);
-    
+    console.log(movie);
     if (movie) {
         if (selectedMovie) {
-            currentMovieDisplay.innerHTML = `<a href="https://letterboxd.com/film/${movieID}" style="text-decoration:none">${`You got it! ${movieData.find(movie => movie.movieID === movieID).title} (${movieData.find(movie => movie.movieID === movieID).year})  is the correct movie.`}</a>`;
+            currentMovieDisplay.innerHTML = `<a href="https://letterboxd.com/film/${movieID}" style="text-decoration:none; color:white;" target="_blank">${`You got it! ${movie.title} (${movie.year}) is the correct movie.`}</a>`;
             clearSearchAndMovies();
         } else {
-            currentMovieDisplay.innerHTML = `Wrong! ${movieLink} is not the correct movie. Try again!`;
+            currentMovieDisplay.innerHTML = `<a href="https://letterboxd.com/film/${movieID}" style="text-decoration:none; color:white;" target="_blank">${`Wrong! ${movie.title} (${movie.year}) is not the correct movie.`}</a>`;
             clearSearchAndMovies();
         }
     }

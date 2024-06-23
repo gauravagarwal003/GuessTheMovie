@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Search and Select</title>
+    <title>Guess the Movie</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="searchbar">
+        <button id="refresh" onclick="refresh()" title="Generate new image">⟳</button>
         <input type="text" id="search" placeholder="Search" onkeyup="filterMovies()">
-        <button id="clearSearch" onclick="clearSearchAndMovies()">×</button>
+        <button id="clearSearch" onclick="clearSearchAndMovies()" title = "Clear searchbar and list">×</button>
     </div>
     <ul id="movieList" class="movie-list"></ul>
     
