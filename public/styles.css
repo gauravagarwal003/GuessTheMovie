@@ -2,35 +2,64 @@
     --letterboxdOrange: #ef8733;
     --letterboxdGreen: #66dd67;
     --letterboxdBlue: #66b9ef;
-    --letterboxdBackground: rgb(25,25,30);
-  }
+    --letterboxdBackground: rgb(25, 25, 30);
+    --currentBackground: rgb(46, 52, 63);
+    --searchbarBackground: rgb(220, 220, 220);
+    --searchbarText: rgb(110, 120, 140);
+    --movieListText: white;
+}
 
-  @font-face {
+@font-face {
     font-family: 'LetterBoxdFont';
     src: url('sharp-grotesk-smbold-20-regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
-  }
-  
-body{
-    font-family: 'LetterBoxdFont';
-    background-color: rgb(46,52,63);
 }
-  
+
+body {
+    font-family: 'LetterBoxdFont';
+    background-color: var(--currentBackground);
+}
+
+#search-row {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin: 10px auto;
+    max-width: fit-content;
+}
+
+#search {
+    background-color: var(--searchbarBackground);
+    color: var(--searchbarText);
+    margin-right: 10px;
+    border: none;
+    outline: none;
+    padding: 10px;
+    border-radius: 20px;
+    font-size: 16px;
+}
+
+#search::placeholder {
+    color: var(--searchbarText);
+}
+
 .movie-list {
     list-style-type: none;
-    padding: 0;
-    color: white;
+    color: var(--movieListText);
+    max-width: fit-content;
+    margin: auto;
 }
 
 .movie-list li {
-    cursor: pointer;
     padding: 10px;
-    font-weight: lighter;
+    width: fit-content;
+    margin: auto;
 }
 
 .movie-list li:hover {
-    background-color: rgb(20,20,25);
+    background-color: rgb(20, 20, 25);
+    width: fit-content;
 }
 
 img {
@@ -39,91 +68,32 @@ img {
     max-width: 100%;
 }
 
-#search{
-    background-color: rgb(220,220,220);
-    color: rgb(110,120,140)
-}
-
-#searchbar {
-    padding-top: 10px;
-    border-radius: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    position: relative; /* Allows positioning the clear button */
-}
-
-#refresh{
-    position: absolute;
-    top: 55%;
-    right: 100%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 50px;
-    color: rgb(120,135,150);
-}
-
-#refresh:hover {
-    color: black; /* Adjust color on hover */
-}
-
-
-#searchbar input[type="text"] {
-    border: none;
-    outline: none;
-    width: 100%; /* Adjust width as needed */
-    padding: 10px;
-    border-radius: 20px;
-    font-size: 16px;
-}
-
-#clearSearch {
-    position: absolute;
-    top: 60%;
-    right: -8%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 2em;
-    color: rgb(120,135,150);
-}
-
-#clearSearch:hover {
-    color: black; /* Adjust color on hover */
-}
-
-
-#searchbar input[type="text"]:focus {
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-}
-
-
-#searchbar input[type="text"]::placeholder {
-    color: var(--white); /* Change this to your desired placeholder color */
-}
-
-#currentReview, #searchbar{
-    margin-top: 10px;
-    margin-bottom: 10px;
+#reviewContainer {
+    margin: 10px auto;
     max-width: fit-content;
-    margin-left: auto;
-    margin-right: auto;  
 }
 
-#movieList{
+#textDisplay,
+#allButtons {
     max-width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
+    margin: 0 auto; 
+    text-align: center; 
 }
 
-#currentMovieDisplay{
-    margin-top: 10px;
-    margin-bottom: 10px;
-    max-width: fit-content;
-    margin-left: auto;
-    margin-right: auto;  
+#textDisplay {
+    padding-bottom: 10px;
+}
+
+#imageButtons button {
+    background-color: transparent;
     color: white;
-    font-size: 1.5em;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px;
+}
+
+#imageButtons button.active {
+    background-color: rgba(255, 255, 255, 0.2); 
+    color: black; 
 }

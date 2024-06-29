@@ -7,15 +7,17 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="searchbar">
-        <button id="refresh" onclick="refresh()" title="Generate new image">⟳</button>
+    <div id="reviewContainer"></div>
+    <div id="textDisplay"></div>
+    <div id="allButtons">
+        <div id="imageButtons"></div>
+        <button onclick="pressButton()" id = "multi-button">Give Up</button>
+    </div>
+
+    <div id="search-row">
         <input type="text" id="search" placeholder="Search" onkeyup="filterMovies()">
-        <button id="clearSearch" onclick="clearSearchAndMovies()" title = "Clear searchbar and list">×</button>
     </div>
     <ul id="movieList" class="movie-list"></ul>
-    
-    <div id="currentReview"></div>
-    <div id="currentMovieDisplay"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
     <script src="script.js"></script>

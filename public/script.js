@@ -1,5 +1,15 @@
-let movieData = [];
-var currentMovie = ''; // Global variable
+let movieList = [];
+let correctMovieID = '';
+let incorrectGuessCount = 0;
+const maxIncorrectGuesses = 5;
+let reviewImages = [];
+let currentImageIndex = 1;
+let gameOver = false;
+
+const imageButtonsContainer = document.getElementById('imageButtons');
+const multiButton = document.querySelector('button[id="multi-button"]');
+const textDisplay = document.getElementById('textDisplay');
+textDisplay.innerHTML = `<a style="color:white;">You have 5 tries to guess the movie. For every wrong guess, you will get a new review. Search and click on a movie to submit it. Good luck!</a>`;
 
 // Load the CSV file and parse it
 fetch('movies.csv')
@@ -7,124 +17,146 @@ fetch('movies.csv')
     .then(data => {
         Papa.parse(data, {
             header: true,
-            complete: function(results) {
-                movieData = results.data; // Store the entire row data
+            complete: results => {
+                movieList = results.data;
             }
         });
     });
 
-// Function to clear search input and movie list
-function clearSearchAndMovies() {
-    // Clear search input
-    document.getElementById('search').value = '';
-    
-    // Clear movie list
-    const movieList = document.getElementById('movieList');
-    movieList.innerHTML = '';
-}
-
-function refresh() {
-    currentMovieDisplay.innerHTML = ``;
-    clearSearchAndMovies();
-    fetch('/random-movie')
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        currentMovie = data.movie;
-        displayRandomImage(currentMovie);
-    })
-    .catch(error => {
-        console.error('Error fetching random movie:', error);
-    });
-
-}
-    
-
-// Function to display movies
-function displayMovies(movies) {
-    const movieList = document.getElementById('movieList');
-    movieList.innerHTML = '';
-    const moviesToShow = movies.slice(0, 10); // Only show the first 10 movies
-    moviesToShow.forEach(movie => {
-        const li = document.createElement('li');
-        li.textContent = `${movie.title} (${movie.year})`;
-        li.onclick = () => selectMovie(movie.movieID);
-        movieList.appendChild(li);
-    });
-}
-
 // Function to filter movies based on search input
 function filterMovies() {
-    const query = document.getElementById('search').value.toLowerCase();
-    if (query === '') {
-        document.getElementById('movieList').innerHTML = '';
+    const searchQuery = document.getElementById('search').value.toLowerCase();
+    if (searchQuery === '') {
+        clearSearchAndMovieList();
         return;
     }
-    const filteredMovies = movieData.filter(movie => movie.title.toLowerCase().includes(query));
-    displayMovies(filteredMovies);
+    const filteredMovies = movieList.filter(movie => movie.title.toLowerCase().includes(searchQuery));
+    displayMovieList(filteredMovies);
+}
+
+// Function to display movie list
+function displayMovieList(movies) {
+    const movieListElement = document.getElementById('movieList');
+    movieListElement.innerHTML = '';
+    movies.slice(0, 10).forEach(movie => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `${movie.title} (${movie.year})`;
+        listItem.onclick = () => selectMovie(movie.movieID);
+        movieListElement.appendChild(listItem);
+    });
 }
 
 // Function to handle movie selection
-function selectMovie(movieID) {
-    const selectedMovie = movieID === currentMovie;
-    const currentMovieDisplay = document.getElementById('currentMovieDisplay');
-    const movie = movieData.find(movie => movie.movieID === movieID);
-    console.log(movie);
-    if (movie) {
-        if (selectedMovie) {
-            currentMovieDisplay.innerHTML = `<a href="https://letterboxd.com/film/${movieID}" style="text-decoration:none; color:white;" target="_blank">${`You got it! ${movie.title} (${movie.year}) is the correct movie.`}</a>`;
-            clearSearchAndMovies();
+function selectMovie(guessedMovieID) {
+    const guessedMovie = movieList.find(movie => movie.movieID === guessedMovieID);
+    const correctMovie = movieList.find(movie => movie.movieID === correctMovieID);
+    const isCorrectMovie = guessedMovieID === correctMovieID;
+
+    if (isCorrectMovie) {
+        textDisplay.innerHTML = `<a href="https://letterboxd.com/film/${guessedMovieID}" style="text-decoration:none; color:white;" target="_blank">You got it! ${guessedMovie.title} (${guessedMovie.year}) is the correct movie.</a>`;
+        finishGame();
+    } else {
+        incorrectGuessCount++;
+        textDisplay.innerHTML = `<a href="https://letterboxd.com/film/${guessedMovieID}" style="text-decoration:none; color:white;" target="_blank">Wrong! ${guessedMovie.title} (${guessedMovie.year}) is not the correct movie.</a>`;
+        clearSearchAndMovieList();
+        if (incorrectGuessCount < maxIncorrectGuesses) {
+            fetchRandomImage(correctMovieID);
         } else {
-            currentMovieDisplay.innerHTML = `<a href="https://letterboxd.com/film/${movieID}" style="text-decoration:none; color:white;" target="_blank">${`Wrong! ${movie.title} (${movie.year}) is not the correct movie.`}</a>`;
-            clearSearchAndMovies();
+            textDisplay.innerHTML = `<a href="https://letterboxd.com/film/${correctMovieID}" style="text-decoration:none; color:white;" target="_blank">You lost! ${correctMovie.title} (${correctMovie.year}) is the correct movie.</a>`;
+            finishGame();
         }
     }
 }
 
+function finishGame() {
+    clearSearchAndMovieList();
+    gameOver = true;
+    multiButton.textContent = 'Refresh';
+    document.getElementById('search').remove();
+}
+
+// Function to give up and reveal the correct movie
+function pressButton() {
+    if (gameOver) {
+        location.reload();
+    } else {
+        const movie = movieList.find(m => m.movieID === correctMovieID);
+        textDisplay.innerHTML = `<a href="https://letterboxd.com/film/${correctMovieID}" style="text-decoration:none; color:white;" target="_blank">The correct movie was ${movie.title} (${movie.year}).</a>`;
+        finishGame();
+    }
+}
+
+// Function to clear search input and movie list
+function clearSearchAndMovieList() {
+    document.getElementById('search').value = '';
+    document.getElementById('movieList').innerHTML = '';
+}
+
 // Function to display a random image from the reviews folder
-function displayRandomImage(folderName) {
-    fetch(`/random-image?name=${folderName}`)
+function fetchRandomImage(movieName) {
+    fetch(`/random-image?name=${movieName}`)
         .then(response => {
-            if (response.status === 404) {
-                return;
-            }
+            if (response.status === 404) return;
             return response.blob();
         })
         .then(blob => {
             if (blob) {
-                const imgContainer = document.getElementById('currentReview');
-                if (imgContainer) {
-                    imgContainer.innerHTML = ''; // Clear any existing content
-                    const img = document.createElement('img');
-                    img.id = 'randomImage';
-                    img.src = URL.createObjectURL(blob);
-                    imgContainer.appendChild(img);
-                } else {
-                    console.error('Div with ID "currentReview" not found.');
-                }
+                const imageUrl = URL.createObjectURL(blob);
+                reviewImages.push(imageUrl);
+                updateImageButtons();
+                displayCurrentImage();
+
             }
         })
-        .catch(error => {
-            console.error('Error fetching random image:', error);
-        });
+        .catch(error => console.error('Error fetching random image:', error));
+}
+
+// Function to display the current image in the reviewImages array
+function displayCurrentImage(index = currentImageIndex) {
+    const reviewContainer = document.getElementById('reviewContainer');
+    reviewContainer.innerHTML = ''; // Clear any existing content
+    if (reviewImages.length > 0) {
+        const img = document.createElement('img');
+        img.id = 'reviewImage';
+        img.src = reviewImages[index - 1];
+        reviewContainer.appendChild(img);
+    }
+}
+
+function makeButtonActive(index) {
+    const buttons = document.querySelectorAll('#imageButtons button');
+    buttons.forEach(button => {
+        if (button.textContent === index) {
+            button.classList.toggle('active', true);
+        } else {
+            button.classList.toggle('active', false);
+        }
+    });
+}
+
+// Function to update image navigation buttons
+function updateImageButtons() {
+    currentImageIndex = reviewImages.length;
+    const button = document.createElement('button');
+    button.textContent = currentImageIndex;
+    button.onclick = () => {
+        displayCurrentImage(button.textContent);
+        makeButtonActive(button.textContent);
+
+    };
+    imageButtonsContainer.appendChild(button);
+    makeButtonActive(button.textContent);
+
 }
 
 // Fetch and display a random movie on page load
 fetch('/random-movie')
     .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
+        if (!response.ok) throw new Error('Network response was not ok');
         return response.json();
     })
     .then(data => {
-        currentMovie = data.movie;
-        displayRandomImage(currentMovie);
+        correctMovieID = data.movie;
+        fetchRandomImage(correctMovieID);
     })
-    .catch(error => {
-        console.error('Error fetching random movie:', error);
-    });
+    .catch(error => console.error('Error fetching random movie:', error));
