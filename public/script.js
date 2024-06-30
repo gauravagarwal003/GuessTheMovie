@@ -1,7 +1,7 @@
 let movieList = [];
 let correctMovieID = '';
 let incorrectGuessCount = 0;
-const maxIncorrectGuesses = 3;
+const maxIncorrectGuesses = 5;
 let reviewImages = [];
 let currentImageIndex = 1;
 let gameOver = false;
@@ -71,7 +71,7 @@ function selectMovie(guessedMovieID) {
 function finishGame() {
     clearSearchAndMovieList();
     gameOver = true;
-    multiButton.textContent = '{Play Again}';
+    multiButton.textContent = 'Play Again';
     document.getElementById('search').remove();
 }
 

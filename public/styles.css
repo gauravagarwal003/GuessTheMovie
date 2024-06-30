@@ -3,10 +3,17 @@
     --letterboxdGreen: #66dd67;
     --letterboxdBlue: #66b9ef;
     --letterboxdBackground: rgb(25, 25, 30);
+    --bonewhite: rgb(249, 246, 238);
+
     --currentBackground: rgb(46, 52, 63);
-    --searchbarBackground: rgb(220, 220, 220);
-    --searchbarText: rgb(110, 120, 140);
-    --movieListText: white;
+    --searchbarBackground: var(--bonewhite);
+    --searchbarText: rgb(100, 110, 130);
+    --movieListText: var(--bonewhite);
+    --activeButtonBackground: var(--letterboxdBackground);
+    --activeButtonText: var(--bonewhite);
+    --inactiveButtonBackground: transparent;
+    --inactiveButtonText: rgb(150, 170, 190);
+    --movieHoverBackground: var(--letterboxdBackground);
 }
 
 @font-face {
@@ -21,6 +28,16 @@ body {
     background-color: var(--currentBackground);
 }
 
+#multi-button{
+    font-family: 'LetterBoxdFont';
+    background-color: transparent;
+    color: var(--bonewhite);
+    outline: none;
+    border: none;
+}
+#multi-button:hover{
+    color: var(--letterboxdOrange);
+}
 #search-row {
     display: flex;
     align-items: center;
@@ -30,9 +47,9 @@ body {
 }
 
 #search {
+    font-family: 'LetterBoxdFont';
     background-color: var(--searchbarBackground);
     color: var(--searchbarText);
-    margin-right: 10px;
     border: none;
     outline: none;
     padding: 10px;
@@ -53,13 +70,15 @@ body {
 }
 
 .movie-list li {
+    font-size: 18px;
     padding: 10px;
     width: fit-content;
     margin: auto;
 }
 
 .movie-list li:hover {
-    background-color: rgb(20, 20, 25);
+    font-size: 20px;
+    background-color: var(--movieHoverBackground);
     width: fit-content;
 }
 
@@ -72,29 +91,41 @@ img {
 #reviewContainer {
     margin: 10px auto;
     max-width: fit-content;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.35);
 }
 
 #textDisplay,
 #allButtons {
-    max-width: fit-content;
     margin: 0 auto; 
     text-align: center; 
 }
 
 #textDisplay {
-    padding-bottom: 10px;
+    font-size: 25px;
+    max-width: 740px;
+}  
+
+#allButtons {
+    max-width: fit-content;
+    align-items: center;
+    display: flex;
+}   
+
+#imageButtons {
+    margin-right: 30px;
 }
 
+
 #imageButtons button {
-    background-color: transparent;
-    color: white;
+    font-family: 'LetterBoxdFont';
+    background-color: var(--inactiveButtonBackground);
+    color: var(--inactiveButtonText);
     border: none;
     cursor: pointer;
     font-size: 16px;
-    padding: 10px;
 }
 
 #imageButtons button.active {
-    background-color: rgba(255, 255, 255, 0.2); 
-    color: black; 
+    background-color: var(--activeButtonBackground); 
+    color: var(--activeButtonText); 
 }
