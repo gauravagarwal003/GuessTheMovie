@@ -1,7 +1,7 @@
 let movieList = [];
 let correctMovieID = '';
 let incorrectGuessCount = 0;
-const maxIncorrectGuesses = 5;
+const maxIncorrectGuesses = 3;
 let reviewImages = [];
 let currentImageIndex = 1;
 let gameOver = false;
@@ -9,7 +9,7 @@ let gameOver = false;
 const imageButtonsContainer = document.getElementById('imageButtons');
 const multiButton = document.querySelector('button[id="multi-button"]');
 const textDisplay = document.getElementById('textDisplay');
-textDisplay.innerHTML = `<a style="color:white;">You have 5 tries to guess the movie. For every wrong guess, you will get a new review. Search and click on a movie to submit it. Good luck!</a>`;
+textDisplay.innerHTML = `<a style="color:white;">You have ${maxIncorrectGuesses} tries to guess the movie. For every wrong guess, you will get a new review. Search and click on a movie to submit it. Good luck!</a>`;
 
 // Load the CSV file and parse it
 fetch('movies.csv')
@@ -62,7 +62,7 @@ function selectMovie(guessedMovieID) {
         if (incorrectGuessCount < maxIncorrectGuesses) {
             fetchRandomImage(correctMovieID);
         } else {
-            textDisplay.innerHTML = `<a href="https://letterboxd.com/film/${correctMovieID}" style="text-decoration:none; color:white;" target="_blank">You lost! ${correctMovie.title} (${correctMovie.year}) is the correct movie.</a>`;
+            textDisplay.innerHTML = `<a href="https://letterboxd.com/film/${correctMovieID}" style="text-decoration:none; color:white;" target="_blank">You lost! The correct movie is ${correctMovie.title} (${correctMovie.year}).</a>`;
             finishGame();
         }
     }
@@ -71,7 +71,7 @@ function selectMovie(guessedMovieID) {
 function finishGame() {
     clearSearchAndMovieList();
     gameOver = true;
-    multiButton.textContent = 'Refresh';
+    multiButton.textContent = '{Play Again}';
     document.getElementById('search').remove();
 }
 
