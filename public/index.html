@@ -1,27 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guess the Movie</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/7bf137f933.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
-    <div id="textDisplay"></div>
+    <div id="page-container">
+        <div id="content-wrap">
+            <div id="textDisplay"></div>
+            <div id="reviewContainer"></div>
+            <div id="allButtons">
+                <div id="imageButtons"></div>
+                <button onclick="pressButton()" id="multi-button">Skip Guess</button>
+            </div>
 
-    <div id="reviewContainer"></div>
-    <div id="allButtons">
-        <div id="imageButtons"></div>
-        <button onclick="pressButton()" id = "multi-button">Give Up</button>
+
+            <div id="search-row">
+                <input type="text" id="search" placeholder="Search" onkeyup="filterMovies()">
+            </div>
+            <ul id="movieList" class="movie-list"></ul>
+
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+            <script src="script.js"></script>
+
+        </div>
+        <footer id="footer">
+            <div id="footerItem">Created by Gaurav</div>
+            <a id="footerIcon" href="https://github.com/gauravagarwal003" target="_blank"><i
+                    class="fa-brands fa-github"></i></a>
+            <a id="footerIcon" href="https://letterboxd.com/gaurava/"  target="_blank">
+                <img src="LBColorLogo.png" onmouseover="this.src='LBBWLogo.png'" onmouseout = "this.src='LBColorLogo.png'" class="footer-image">
+            </a>
+        </footer>
     </div>
 
-
-    <div id="search-row">
-        <input type="text" id="search" placeholder="Search" onkeyup="filterMovies()">
-    </div>
-    <ul id="movieList" class="movie-list"></ul>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
-    <script src="script.js"></script>
 </body>
+
 </html>

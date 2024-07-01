@@ -1,4 +1,4 @@
-let movieList = [];
+let moviesData = [];
 let correctMovieID = '';
 let incorrectGuessCount = 0;
 const maxIncorrectGuesses = 5;
@@ -18,7 +18,7 @@ fetch('movies.csv')
         Papa.parse(data, {
             header: true,
             complete: results => {
-                movieList = results.data;
+                moviesData = results.data;
             }
         });
     });
@@ -30,7 +30,7 @@ function filterMovies() {
         clearSearchAndMovieList();
         return;
     }
-    const filteredMovies = movieList.filter(movie => movie.title.toLowerCase().includes(searchQuery));
+    const filteredMovies = moviesData.filter(movie => movie.title.toLowerCase().includes(searchQuery));
     displayMovieList(filteredMovies);
 }
 
@@ -48,8 +48,8 @@ function displayMovieList(movies) {
 
 // Function to handle movie selection
 function selectMovie(guessedMovieID) {
-    const guessedMovie = movieList.find(movie => movie.movieID === guessedMovieID);
-    const correctMovie = movieList.find(movie => movie.movieID === correctMovieID);
+    const guessedMovie = moviesData.find(movie => movie.movieID === guessedMovieID);
+    const correctMovie = moviesData.find(movie => movie.movieID === correctMovieID);
     const isCorrectMovie = guessedMovieID === correctMovieID;
 
     if (isCorrectMovie) {
@@ -75,14 +75,28 @@ function finishGame() {
     document.getElementById('search').remove();
 }
 
-// Function to give up and reveal the correct movie
+// Function to skip guess 
 function pressButton() {
     if (gameOver) {
         location.reload();
     } else {
-        const movie = movieList.find(m => m.movieID === correctMovieID);
-        textDisplay.innerHTML = `<a href="https://letterboxd.com/film/${correctMovieID}" style="text-decoration:none; color:white;" target="_blank">The correct movie was ${movie.title} (${movie.year}).</a>`;
-        finishGame();
+        incorrectGuessCount++;
+        clearSearchAndMovieList();
+        console.log('Incorrect guess count:', incorrectGuessCount);
+        if (incorrectGuessCount < maxIncorrectGuesses) {
+            fetchRandomImage(correctMovieID);
+            if (maxIncorrectGuesses - incorrectGuessCount == 1) {
+                guessString = "1 guess"
+            }
+            else{
+                guessString = `${maxIncorrectGuesses - incorrectGuessCount} guesses`
+            }
+            textDisplay.innerHTML = `<a style="text-decoration:none; color:white;" target="_blank">You skipped! You have ${guessString} left.</a>`;
+        } else {
+            const correctMovie = moviesData.find(movie => movie.movieID === correctMovieID);
+            textDisplay.innerHTML = `<a href="https://letterboxd.com/film/${correctMovieID}" style="text-decoration:none; color:white;" target="_blank">You lost! The correct movie is ${correctMovie.title} (${correctMovie.year}).</a>`;
+            finishGame();
+        }
     }
 }
 
