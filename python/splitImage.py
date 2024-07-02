@@ -9,7 +9,7 @@ reviews = sys.argv[3]
 reviews = list(map(int, reviews.split(',')))
 
 
-image = Image.open(f"/Users/gaurav/Downloads/LBreviews/pages/{movie}/page{pageNum}.png")
+image = Image.open(f"/Users/gaurav/Downloads/LBGuessMovie/pages/{movie}/page{pageNum}.png")
 image = image.convert('RGB')  # Ensure the image is in RGB mode
 
 # Define the target color
@@ -41,7 +41,7 @@ y_coords.append(firstY)  # Add the first y-coordinate
 
 # Sort the y-coordinates (just in case they are not sorted)
 y_coords.sort()
-directory = f"/Users/gaurav/Downloads/LBreviews/images/{movie}/"
+directory = f"/Users/gaurav/Downloads/LBGuessMovie/images/{movie}/"
 if not os.path.exists(directory):
     os.makedirs(directory)
 

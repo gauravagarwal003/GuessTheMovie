@@ -5,6 +5,8 @@ const maxIncorrectGuesses = 5;
 let reviewImages = [];
 let currentImageIndex = 1;
 let gameOver = false;
+const maxMoviesToShow = 10;
+
 
 const imageButtonsContainer = document.getElementById('imageButtons');
 const multiButton = document.querySelector('button[id="multi-button"]');
@@ -38,7 +40,7 @@ function filterMovies() {
 function displayMovieList(movies) {
     const movieListElement = document.getElementById('movieList');
     movieListElement.innerHTML = '';
-    movies.slice(0, 10).forEach(movie => {
+    movies.slice(0, maxMoviesToShow).forEach(movie => {
         const listItem = document.createElement('li');
         listItem.textContent = `${movie.title} (${movie.year})`;
         listItem.onclick = () => selectMovie(movie.movieID);

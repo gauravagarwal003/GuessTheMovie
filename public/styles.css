@@ -151,18 +151,17 @@ img {
     color: var(--bonewhite);
     display: flex;
     align-items: center;
+    justify-content: center; 
 }
 
 #footerItem,
 #footerIcon {
-    padding-left: 15px;
+    padding-left: 8px;
     padding-right: 8px;
 }
 
 #footerIcon {
     font-size: 1.3rem;
-    padding-left: 8px;
-    padding-right: 8px;
     color: #6e5494;
 }
 

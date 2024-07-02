@@ -9,10 +9,10 @@ import sys
 movie = sys.argv[1]
 pageNum = sys.argv[2]
 
-if not os.path.exists(f"/Users/gaurav/Downloads/LBreviews/pages/{movie}"):
-    os.makedirs(f"/Users/gaurav/Downloads/LBreviews/pages/{movie}")
+if not os.path.exists(f"/Users/gaurav/Downloads/LBGuessMovie/pages/{movie}"):
+    os.makedirs(f"/Users/gaurav/Downloads/LBGuessMovie/pages/{movie}")
     
-if os.path.exists(f"/Users/gaurav/Downloads/LBreviews/pages/{movie}/page{pageNum}.png"):
+if os.path.exists(f"/Users/gaurav/Downloads/LBGuessMovie/pages/{movie}/page{pageNum}.png"):
     exit()
 
 # Configure Firefox WebDriver options
@@ -36,7 +36,7 @@ driver.set_window_size(width, height)
 
 # Find the full page element (usually 'body') and capture the screenshot
 full_page = driver.find_element(By.TAG_NAME, "body")
-full_page.screenshot(f"/Users/gaurav/Downloads/LBreviews/pages/{movie}/page{pageNum}.png")
+full_page.screenshot(f"/Users/gaurav/Downloads/LBGuessMovie/pages/{movie}/page{pageNum}.png")
 
 
 # Close the browser window
