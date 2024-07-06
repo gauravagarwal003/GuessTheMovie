@@ -1,11 +1,12 @@
 let moviesData = [];
 let correctMovieID = '';
 let incorrectGuessCount = 0;
-const maxIncorrectGuesses = 5;
 let reviewImages = [];
 let currentImageIndex = 1;
 let gameOver = false;
 const maxMoviesToShow = 10;
+const selectedColumns = ['title', 'year', 'movieID', 'posterLink']; // Columns to select from the CSV file
+const maxIncorrectGuesses = 5;
 
 
 const imageButtonsContainer = document.getElementById('imageButtons');
@@ -13,17 +14,6 @@ const multiButton = document.querySelector('button[id="multi-button"]');
 const textDisplay = document.getElementById('textDisplay');
 textDisplay.innerHTML = `<a style="color:white;">You have ${maxIncorrectGuesses} tries to guess the movie. For every wrong guess, you will get a new review. Search and click on a movie to submit it. Good luck!</a>`;
 
-// Load the CSV file and parse it
-fetch('movies.csv')
-    .then(response => response.text())
-    .then(data => {
-        Papa.parse(data, {
-            header: true,
-            complete: results => {
-                moviesData = results.data;
-            }
-        });
-    });
 
 // Function to filter movies based on search input
 function filterMovies() {
@@ -164,6 +154,25 @@ function updateImageButtons() {
     makeButtonActive(button.textContent);
 
 }
+
+// Load the CSV file and parse it
+fetch('movies.csv')
+    .then(response => response.text())
+    .then(data => {
+        Papa.parse(data, {
+            header: true,
+            complete: results => {
+                moviesData = results.data.map(row => {
+                    let selectedRow = {};
+                    selectedColumns.forEach(col => {
+                        selectedRow[col] = row[col];
+                    });
+                    return selectedRow;
+                });
+            }
+        });
+    });
+
 
 // Fetch and display a random movie on page load
 fetch('/random-movie')
