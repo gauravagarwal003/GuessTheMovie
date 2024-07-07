@@ -103,6 +103,7 @@ img {
 }
 
 #textDisplay {
+    margin-top: 10px;
     font-size: 20px;
     max-width: 740px;
 }
@@ -177,4 +178,14 @@ img {
 
 .footer-image:hover {
     color: var(--bonewhite);
+}
+
+#movie_poster {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    background-size: contain; 
+    background-repeat: no-repeat;
+    background-position: center; 
 }

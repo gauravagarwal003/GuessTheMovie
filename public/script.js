@@ -65,6 +65,23 @@ function finishGame() {
     gameOver = true;
     multiButton.textContent = 'Play Again';
     document.getElementById('search').remove();
+
+    const img = document.createElement('img');
+    const correctMovie = moviesData.find(movie => movie.movieID === correctMovieID);
+    img.src = correctMovie.posterLink;
+    const existingDiv = document.getElementById('movie_poster');
+    if (existingDiv) {
+        existingDiv.innerHTML = '';  
+        existingDiv.appendChild(img);
+    } else {
+        console.error('Div with specified ID not found.');
+    }
+    existingDiv.setAttribute("href", "https://letterboxd.com/film/" + correctMovieID);
+    existingDiv.setAttribute("target", "_blank"); // Add this line to open in a new tab
+    const parent = document.getElementById('content-wrap');
+    const div1 = document.getElementById('textDisplay');
+    parent.appendChild(div1);
+  
 }
 
 // Function to skip guess 
@@ -86,7 +103,7 @@ function pressButton() {
             textDisplay.innerHTML = `<a style="text-decoration:none; color:white;" target="_blank">You skipped! You have ${guessString} left.</a>`;
         } else {
             const correctMovie = moviesData.find(movie => movie.movieID === correctMovieID);
-            textDisplay.innerHTML = `<a href="https://letterboxd.com/film/${correctMovieID}" style="text-decoration:none; color:white;" target="_blank">You lost! The correct movie is ${correctMovie.title} (${correctMovie.year}).</a>`;
+            textDisplay.innerHTML = `<a style="text-decoration:none; color:white;" target="_blank">You lost! The correct movie is ${correctMovie.title} (${correctMovie.year}).</a>`;
             finishGame();
         }
     }
