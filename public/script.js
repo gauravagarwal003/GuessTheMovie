@@ -81,6 +81,9 @@ function finishGame() {
     const parent = document.getElementById('content-wrap');
     const div1 = document.getElementById('textDisplay');
     parent.appendChild(div1);
+    const search_row = document.getElementById('search-row');
+    search_row.style.margin = "0px";
+
   
 }
 

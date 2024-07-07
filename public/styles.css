@@ -180,12 +180,18 @@ img {
     color: var(--bonewhite);
 }
 
-#movie_poster {
+.image-container {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    margin-top: 5px;
+}
+#movie_poster {
+    display: inline-block;
+}
+#movie_poster img {
+    display: block;
+    max-width: 100%;
     height: auto;
-    background-size: contain; 
-    background-repeat: no-repeat;
-    background-position: center; 
 }
