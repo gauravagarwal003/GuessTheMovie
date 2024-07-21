@@ -22,9 +22,10 @@ app.get('/check-folder', (req, res) => {
     });
 });
 
-// Endpoint to get a random image from the reviews folder of a movie
-app.get('/random-image', (req, res) => {
+// Endpoint to get all images from the reviews folder of a movie
+app.get('/images', (req, res) => {
     const folderName = req.query.name;
+    const index = parseInt(req.query.index, 10);
     const reviewsPath = path.join(__dirname, 'images', folderName);
 
     fs.readdir(reviewsPath, (err, files) => {
@@ -33,9 +34,13 @@ app.get('/random-image', (req, res) => {
             return;
         }
 
-        const randomImage = files[Math.floor(Math.random() * files.length)];
-        res.sendFile(path.join(reviewsPath, randomImage));
-        console.log(`Random image: ${path.join(reviewsPath, randomImage)}`);
+        if (index >= 0 && index < files.length) {
+            const imagePath = path.join(reviewsPath, files[index]);
+            res.sendFile(imagePath);
+          } else {
+            res.status(404).json({ error: 'Image not found' });
+          }
+      
     });
 });
 

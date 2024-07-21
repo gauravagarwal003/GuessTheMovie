@@ -61,6 +61,7 @@ body {
 
 #search::placeholder {
     color: var(--searchbarText);
+    padding-left: 2px;
 }
 
 .movie-list {
