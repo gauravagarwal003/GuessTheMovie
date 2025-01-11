@@ -8,7 +8,15 @@ pageNum = sys.argv[2]
 whichReview = sys.argv[3]
 reviewNum = sys.argv[4]
 
-image = Image.open(f"/Users/gaurav/Downloads/LBGuessMovie/pages/{movie}/page{pageNum}.png")
+script_dir = os.path.dirname(__file__)
+root_dir = os.path.join(script_dir, '..')
+target_folde_pages = os.path.join(root_dir, 'pages')
+target_folder_pages = os.path.normpath(target_folde_pages)
+target_folder_images = os.path.join(root_dir, 'images')
+target_folder_images = os.path.normpath(target_folder_images)
+
+
+image = Image.open(f"{target_folder_pages}/{movie}/page{pageNum}.png")
 image = image.convert('RGB')  # Ensure the image is in RGB mode
 
 # Define the target color
@@ -40,7 +48,7 @@ y_coords.append(firstY)  # Add the first y-coordinate
 
 # Sort the y-coordinates (just in case they are not sorted)
 y_coords.sort()
-directory = f"/Users/gaurav/Downloads/LBGuessMovie/images/{movie}/"
+directory = f"{target_folder_images}/{movie}/"
 if not os.path.exists(directory):
     os.makedirs(directory)
 
