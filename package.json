@@ -1,4 +1,15 @@
 {
+  "name": "guess-the-movie",
+  "version": "1.0.0",
+  "description": "Movie guessing game",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": ">=18.x"
+  },
   "dependencies": {
     "express": "^4.19.2"
   }
