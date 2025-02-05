@@ -12,7 +12,7 @@ const maxIncorrectGuesses = 5;
 const imageButtonsContainer = document.getElementById('imageButtons');
 const multiButton = document.querySelector('button[id="multi-button"]');
 const textDisplay = document.getElementById('textDisplay');
-textDisplay.innerHTML = `<a style="color:white;">You have ${maxIncorrectGuesses} tries to guess the movie. For every wrong guess, you will get a new review. Search and click on a movie to submit it. Good luck!</a>`;
+textDisplay.innerHTML = `<a style="color:white;">You have ${maxIncorrectGuesses} tries to guess the movie. For every incorrect guess, you'll get a new review. You can switch between reviews. Search and click on a movie to submit it. Good luck!</a>`;
 
 // Function to filter movies based on search input
 function filterMovies() {
@@ -63,7 +63,14 @@ function selectMovie(guessedMovieID) {
         finishGame();
     } else {
         incorrectGuessCount++;
-        textDisplay.innerHTML = `<a href="https://letterboxd.com/film/${guessedMovieID}" style="text-decoration:none; color:white;" target="_blank">Wrong! ${guessedMovie.title} (${guessedMovie.year}) is not the correct movie.</a>`;
+        if (maxIncorrectGuesses - incorrectGuessCount == 1) {
+            guessString = "1 guess"
+        }
+        else{
+            guessString = `${maxIncorrectGuesses - incorrectGuessCount} guesses`
+        }
+
+        textDisplay.innerHTML = `<a href="https://letterboxd.com/film/${guessedMovieID}" style="text-decoration:none; color:white;" target="_blank">Wrong! ${guessedMovie.title} (${guessedMovie.year}) is not the correct movie. You have ${guessString} left. Switch between reviews to get more info!</a>`;
         clearSearchAndMovieList();
         if (incorrectGuessCount < maxIncorrectGuesses) {
             reviewImages = allImages.slice(0, incorrectGuessCount + 1);
@@ -120,7 +127,7 @@ function pressButton() {
             else{
                 guessString = `${maxIncorrectGuesses - incorrectGuessCount} guesses`
             }
-            textDisplay.innerHTML = `<a style="text-decoration:none; color:white;" target="_blank">You skipped! You have ${guessString} left.</a>`;
+            textDisplay.innerHTML = `<a style="text-decoration:none; color:white;" target="_blank">You skipped! You have ${guessString} left. Switch between reviews to get more info!</a>`;
         } else {
             const correctMovie = moviesData.find(movie => movie.movieID === correctMovieID);
             textDisplay.innerHTML = `<a style="text-decoration:none; color:white;" target="_blank">You lost! The correct movie is ${correctMovie.title} (${correctMovie.year}).</a>`;
