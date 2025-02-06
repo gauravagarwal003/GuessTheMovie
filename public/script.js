@@ -40,18 +40,6 @@ function displayMovieList(movies) {
     });
 }
 
-// Function to display movie list
-function displayMovieList(movies) {
-    const movieListElement = document.getElementById('movieList');
-    movieListElement.innerHTML = '';
-    movies.slice(0, maxMoviesToShow).forEach(movie => {
-        const listItem = document.createElement('li');
-        listItem.textContent = `${movie.title} (${movie.year})`;
-        listItem.onclick = () => selectMovie(movie.movieID);
-        movieListElement.appendChild(listItem);
-    });
-}
-
 // Function to handle movie selection
 function selectMovie(guessedMovieID) {
     const guessedMovie = moviesData.find(movie => movie.movieID === guessedMovieID);
@@ -80,11 +68,20 @@ function selectMovie(guessedMovieID) {
             textDisplay.innerHTML = `<a href="https://letterboxd.com/film/${correctMovieID}" style="text-decoration:none; color:white;" target="_blank">You lost! The correct movie is ${correctMovie.title} (${correctMovie.year}).</a>`;
             finishGame();
         }
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        window.scrollTo(0, 0);
+
     }
 }
 
 function finishGame() {
     clearSearchAndMovieList();
+    if(incorrectGuessCount < maxIncorrectGuesses){
+        reviewImages = allImages.slice(0, maxIncorrectGuesses);
+        updateImageButtons();
+    }
     gameOver = true;
     multiButton.textContent = 'Play Again';
     document.getElementById('search').remove();
@@ -102,16 +99,23 @@ function finishGame() {
     existingDiv.setAttribute("href", "https://letterboxd.com/film/" + correctMovieID);
     existingDiv.setAttribute("target", "_blank"); // Add this line to open in a new tab
     const parent = document.getElementById('content-wrap');
-    const div1 = document.getElementById('textDisplay');
+    // const orderDivs = ["reviewContainer", "allButtons","movie_container", "textDisplay"];
+    // for (let i = 0; i < orderDivs.length; i++) {
+    //     let current_div = document.getElementById(orderDivs[i]);
+    //     parent.prepend(current_div);
+    // }
+    const div1 = document.getElementById('movie_container');
     parent.appendChild(div1);
     const search_row = document.getElementById('search-row');
     search_row.style.margin = "0px";
-
-  
 }
 
 // Function to skip guess 
 function pressButton() {
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
     if (gameOver) {
         location.reload();
     } else {
@@ -130,7 +134,7 @@ function pressButton() {
             textDisplay.innerHTML = `<a style="text-decoration:none; color:white;" target="_blank">You skipped! You have ${guessString} left. Switch between reviews to get more info!</a>`;
         } else {
             const correctMovie = moviesData.find(movie => movie.movieID === correctMovieID);
-            textDisplay.innerHTML = `<a style="text-decoration:none; color:white;" target="_blank">You lost! The correct movie is ${correctMovie.title} (${correctMovie.year}).</a>`;
+            textDisplay.innerHTML = `<a href="https://letterboxd.com/film/${correctMovieID}" style="text-decoration:none; color:white;" target="_blank">You lost! The correct movie is ${correctMovie.title} (${correctMovie.year}).</a>`;
             finishGame();
         }
     }
