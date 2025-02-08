@@ -240,3 +240,5 @@ fetch('/random-movie')
         fetchAllImagesSequentially(correctMovieID);
     })
     .catch(error => console.error('Error fetching random movie:', error));
+
+
