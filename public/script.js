@@ -83,12 +83,14 @@ function finishGame() {
         updateImageButtons();
     }
     gameOver = true;
+    multiButton.setAttribute('aria-label', 'Play Again');
     multiButton.textContent = 'Play Again';
     document.getElementById('search').remove();
 
     const img = document.createElement('img');
     const correctMovie = moviesData.find(movie => movie.movieID === correctMovieID);
     img.src = correctMovie.posterLink;
+    img.alt = `${correctMovie.title} (${correctMovie.year}) movie poster`;
     const existingDiv = document.getElementById('movie_poster');
     if (existingDiv) {
         existingDiv.innerHTML = '';  
@@ -178,6 +180,8 @@ function displayCurrentImage(index = 1) {
     reviewContainer.innerHTML = ''; // Clear any existing content
     if (reviewImages.length > 0) {
         const img = document.createElement('img');
+        const correctMovie = moviesData.find(movie => movie.movieID === correctMovieID);
+        img.alt = `Image of review for ${correctMovie.title}`;
         img.id = 'reviewImage';
         img.src = reviewImages[index - 1];
         reviewContainer.appendChild(img);
@@ -237,6 +241,7 @@ fetch('/random-movie')
     })
     .then(data => {
         correctMovieID = data.movie;
+        const existingDiv = document.getElementById('movie_poster');
         fetchAllImagesSequentially(correctMovieID);
     })
     .catch(error => console.error('Error fetching random movie:', error));

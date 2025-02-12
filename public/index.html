@@ -17,17 +17,17 @@
 </head>
 
 <body>
-    <div id="page-container">
+    <main id="page-container">
         <div id="content-wrap">
-            <div id="textDisplay"></div>
+            <div id="textDisplay" role="status" aria-live="polite"></div>
             <div id="reviewContainer"></div>
-            <div id="allButtons">
+            <nav id="allButtons">
                 <div id="imageButtons"></div>
                 <button onclick="pressButton()" id="multi-button">Skip Guess</button>
-            </div>
-
+            </nav>
 
             <div id="search-row">
+                <label for="search" class="visually-hidden">Search for a movie</label>
                 <input type="text" id="search" placeholder="Search" onkeyup="filterMovies()" autocomplete="off">
             </div>
             <ul id="movieList" class="movie-list"></ul>
@@ -42,13 +42,13 @@
         </div>
         <footer id="footer">
             <div id="footerItem">Created by Gaurav</div>
-            <a id="footerIcon" href="https://github.com/gauravagarwal003" target="_blank"><i
+            <a id="footerIcon" href="https://github.com/gauravagarwal003" alt="Github Profile" aria-label = "Github Profile"  target="_blank"><i
                     class="fa-brands fa-github"></i></a>
             <a id="footerIcon" href="https://letterboxd.com/gaurava/"  target="_blank">
-                <img src="LBColorLogo.png" onmouseover="this.src='LBBWLogo.png'" onmouseout = "this.src='LBColorLogo.png'" class="footer-image">
+                <img src="LBColorLogo.png" alt="Letterboxd Profile" onmouseover="this.src='LBBWLogo.png'" onmouseout = "this.src='LBColorLogo.png'" class="footer-image">
             </a>
         </footer>
-    </div>
+    </main>
 
 </body>
 
