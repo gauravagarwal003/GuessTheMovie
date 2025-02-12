@@ -208,4 +208,12 @@ img {
     white-space: nowrap !important; 
     border: 0 !important;
   }
+
+.footer-image {
+    /* Base image is loaded in HTML (src="LBColorLogo.png") */
+  }
+  a:hover .footer-image,
+  a:focus .footer-image {
+    content: url("LBBWLogo.png");
+}
   
