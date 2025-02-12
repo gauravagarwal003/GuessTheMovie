@@ -1,46 +1,66 @@
-from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
-from selenium.webdriver.common.by import By
+from PIL import Image
 import os
 import sys
 
 # Get the arguments
 movie = sys.argv[1]
 pageNum = sys.argv[2]
+whichReview = sys.argv[3]
+reviewNum = sys.argv[4]
+
 script_dir = os.path.dirname(__file__)
 root_dir = os.path.join(script_dir, '..')
-target_folder = os.path.join(root_dir, 'pages')
-target_folder = os.path.normpath(target_folder)
-
-if not os.path.exists(f"{target_folder}/{movie}"):
-    os.makedirs(f"{target_folder}/{movie}")
-    
-if os.path.exists(f"{target_folder}/{movie}/page{pageNum}.png"):
-    exit()
-
-# Configure Firefox WebDriver options
-options = Options()
-options.add_argument("--width=1920")
-options.add_argument("--height=1080")
-options.add_argument("--headless")  # Use headless mode for running in the background
-
-# Initialize the Firefox WebDriver
-driver = webdriver.Firefox(options=options)
-
-# Navigate to the URL you want to capture
-driver.get(f"https://letterboxd.com/film/{movie}/reviews/by/activity/page/{pageNum}/")
-
-# Use JavaScript to get the full width and height of the webpage
-width = driver.execute_script("return Math.max( document.body.scrollWidth, document.body.offsetWidth, document.documentElement.clientWidth, document.documentElement.scrollWidth, document.documentElement.offsetWidth );")
-height = driver.execute_script("return Math.max( document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight );")
-
-# Set the window size to match the entire webpage
-driver.set_window_size(width, height)
-
-# Find the full page element (usually 'body') and capture the screenshot
-full_page = driver.find_element(By.TAG_NAME, "body")
-full_page.screenshot(f"{target_folder}/{movie}/page{pageNum}.png")
+target_folde_pages = os.path.join(root_dir, 'pages')
+target_folder_pages = os.path.normpath(target_folde_pages)
+target_folder_images = os.path.join(root_dir, 'images')
+target_folder_images = os.path.normpath(target_folder_images)
 
 
-# Close the browser window
-driver.quit()
+image = Image.open(f"{target_folder_pages}/{movie}/page{pageNum}.png")
+image = image.convert('RGB')  # Ensure the image is in RGB mode
+
+# Define the target color
+between = (44, 52, 64)  
+start = (68, 85, 102)
+end = (51, 68, 85)
+
+# Get the image dimensions
+width, height = image.size
+
+# Create a list to store coordinates
+betweenYs = set()
+
+# Search for the color
+for y in range(height):
+    if image.getpixel((500, y)) == start:
+        firstY = y
+    elif image.getpixel((500, y)) == between:
+        betweenYs.add(y)
+                
+    elif image.getpixel((500, y)) == end:
+        lastY = y
+        break            
+            
+# List of y-coordinates
+y_coords = list(betweenYs)
+y_coords.append(lastY)  # Add the last y-coordinate
+y_coords.append(firstY)  # Add the first y-coordinate   
+
+# Sort the y-coordinates (just in case they are not sorted)
+y_coords.sort()
+directory = f"{target_folder_images}/{movie}/"
+if not os.path.exists(directory):
+    os.makedirs(directory)
+
+# Crop and save sections between y-coordinates
+for i in range(len(y_coords) - 1):
+    top = y_coords[i] + 1  # Start just after the current y-coordinate
+    bottom = y_coords[i + 1]  # End just before the next y-coordinate
+    cropped_image = image.crop((450, top, image.width - 730, bottom))
+    file_name = f'review_{reviewNum}_p{pageNum}_r{i + 1}.png'
+
+    # Save the cropped image
+    if i + 1 == int(whichReview):
+        cropped_image_path = os.path.join(directory, file_name)
+        cropped_image.save(cropped_image_path)
+        exit()
