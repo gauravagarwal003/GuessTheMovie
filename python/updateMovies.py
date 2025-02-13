@@ -1,56 +1,85 @@
+import pandas as pd
+import os
 import requests
+import json
 from bs4 import BeautifulSoup
-from fake_useragent import UserAgent
 import time
+from functions import *
 
-sleep_time = 2
+CSV_FILE_NAME = "movies.csv"
+script_dir = os.path.dirname(__file__)
+root_dir = os.path.join(script_dir, '..')
+CSV_FILE_NAME = os.path.join(root_dir, 'public', CSV_FILE_NAME)
+CSV_FILE_NAME = os.path.normpath(CSV_FILE_NAME)
+
+minViews = 100000
+with open(CSV_FILE_NAME, 'w') as file:
+    file.write("movieID,title,year,posterLink\n")
 requestsSession = requests.Session()
-
-for pageNum in range(1, 2):
-    link = f"https://letterboxd.com/films/popular/page/{pageNum}/"
+numPages = 35
     
-    # Generate a random User-Agent
-    ua = UserAgent()
-    headers = {
-        "User-Agent": ua.random,
-        "Accept-Language": "en-US,en;q=0.9",
-        "Referer": "https://letterboxd.com/",
-        "DNT": "1",  # Do Not Track header
-        "Connection": "keep-alive",
-    }
-
-    try:
-        response = requestsSession.get(link, headers=headers, timeout=10)
+def addMovieToDatabase(movieID):
+    response = requestsSession.get(f"https://letterboxd.com/film/{movieID}/details")
+    responseLikes = requestsSession.get(f"https://letterboxd.com/film/{movieID}/likes")
         
-        if response.status_code != 200:
-            print(f"Failed to retrieve page {pageNum}. Status code: {response.status_code}")
-            continue
+    soup = BeautifulSoup(response.text, 'lxml')
+    soupLikes = BeautifulSoup(responseLikes.text, 'lxml')
 
-        # Save HTML for debugging
-        with open("movies.html", "w", encoding="utf-8") as f:
-            f.write(response.text)
-
-        # Parse the HTML
-        soup = BeautifulSoup(response.text, 'html.parser')
-
-        for li in soup.find_all("li", class_="listitem poster-container"):
-            react_component = li.find("div", class_="react-component")
-            if react_component:
-                movie = react_component.get("data-film-slug")
-                posterNum = react_component.get("data-film-id")
-
-                # Construct the poster URL
-                posterPath = "/".join(list(posterNum))  # e.g., "4/2/6/4/0/6" for 426406
-                posterLink = f"https://a.ltrbxd.com/resized/film-poster/{posterPath}/{posterNum}-{movie}-0-230-0-345-crop.jpg"
-
-                # Extract frame-title
-                frame_title_tag = li.find("span", class_="frame-title")
-                frame_title = frame_title_tag.text if frame_title_tag else "Unknown Title"
-
-                print(movie, posterLink, frame_title)
-                quit()
+    # check if movie satisfies minimum views
+    if getnumViews(True, movieID, soup = soupLikes) < minViews:
+        return False
         
-        time.sleep(sleep_time)  # Prevent getting blocked
+    # check if movie is a TV show or miniseries (according to TMDB link)
+    if not isMovie(movieID, soup = soup):
+        return False
+    
+    data = {}
+    
+    # add movie id
+    data['movieID'] = {movieID}
+    
+    # add title
+    data['title'] = getTitle(movieID, soup = soup)
+        
+    # add year
+    data['year'] = getReleaseYear(movieID, soup = soup)
 
-    except requests.exceptions.RequestException as e:
-        print(f"Request failed: {e}")
+    scriptTag = soup.find('script', type='application/ld+json')
+    if scriptTag:
+        json_content = scriptTag.string
+        start_index = json_content.find('/* <![CDATA[ */') + len('/* <![CDATA[ */')
+        end_index = json_content.find('/* ]]> */')
+        json_data = json_content[start_index:end_index].strip()
+        jsonData = json.loads(json_data)
+             
+    # add link to image of poster
+    data['posterLink'] = ""  
+    if scriptTag:
+        data['posterLink'] = getPosterLink(movieID, jsonData = jsonData)    
+
+    # commit changes
+    df = pd.DataFrame([data])
+    df.to_csv(CSV_FILE_NAME, mode='a', header=not os.path.exists(CSV_FILE_NAME), index=False)
+    return True
+
+def populateDatabase(base_url):
+    page_number = 1
+    while page_number < numPages:
+        startPage = time.time()
+        url = f"{base_url}/page/{page_number}/"
+        response = requestsSession.get(url)
+        soup = BeautifulSoup(response.text, 'lxml')
+        movie_divs = soup.find_all('div', class_='really-lazy-load')
+        if not movie_divs:
+            break
+        for div in movie_divs:
+            try:
+                addMovieToDatabase(div['data-film-slug'])
+            except Exception as e:
+                print(f"An error occurred while trying to add movie {div['data-film-slug']}: {e}" + "\n")
+    
+        print(f"Page {page_number} took {time.time() - startPage} seconds")
+        page_number += 1  
+
+url = f"https://letterboxd.com/hershwin/list/all-the-movies/by/popular"
+populateDatabase(url)
