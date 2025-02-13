@@ -15,13 +15,13 @@ jobs:
         uses: actions/setup-python@v4  
         with:
           python-version: 3.11
-          
+
       - name: Install Dependencies
         run: |
           pip install -r requirements.txt
 
       - name: Run Scraper
-        run: python your_script.py
+        run: python3 python/updateMovies.py
 
       - name: Upload Scraped Data
         uses: actions/upload-artifact@v4 
