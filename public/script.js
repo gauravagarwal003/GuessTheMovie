@@ -2,7 +2,9 @@ let moviesData = [];
 let correctMovieID = '';
 let incorrectGuessCount = 0;
 let reviewImages = [];
+let reviewTexts = [];
 let allImages = [];
+let allText = [];   
 let currentImageIndex = 1;
 let gameOver = false;
 const maxMoviesToShow = 10;
@@ -62,6 +64,7 @@ function selectMovie(guessedMovieID) {
         clearSearchAndMovieList();
         if (incorrectGuessCount < maxIncorrectGuesses) {
             reviewImages = allImages.slice(0, incorrectGuessCount + 1);
+            reviewTexts = allText.slice(0, incorrectGuessCount + 1);
             updateImageButtons();
             displayCurrentImage(incorrectGuessCount + 1);
         } else {
@@ -80,6 +83,7 @@ function finishGame() {
     clearSearchAndMovieList();
     if(incorrectGuessCount < maxIncorrectGuesses){
         reviewImages = allImages.slice(0, maxIncorrectGuesses);
+        reviewTexts = allText.slice(0, maxIncorrectGuesses);
         updateImageButtons();
     }
     gameOver = true;
@@ -125,6 +129,7 @@ function pressButton() {
         clearSearchAndMovieList();
         if (incorrectGuessCount < maxIncorrectGuesses) {
             reviewImages = allImages.slice(0, incorrectGuessCount + 1);
+            reviewTexts = allText.slice(0, incorrectGuessCount + 1);
             updateImageButtons();
             displayCurrentImage(incorrectGuessCount + 1);
             if (maxIncorrectGuesses - incorrectGuessCount == 1) {
@@ -151,13 +156,18 @@ function clearSearchAndMovieList() {
 // Function to display all images from the reviews folder
 async function fetchImages(movieName, index) {
     try {
-        const response = await fetch(`/images?name=${movieName}&index=${index}`);
-        if (response.status === 404) return;
-        const blob = await response.blob();
-        const imageUrl = URL.createObjectURL(blob);
+        const response1 = await fetch(`/images?name=${movieName}&index=${index}`);
+        const response2 = await fetch(`/text?name=${movieName}&index=${index}`);
+        if (response2.status === 404) return;
+        if (response1.status === 404) return;
+        const blob1 = await response1.blob();
+        const blob2 = await response2.text();
+        const imageUrl = URL.createObjectURL(blob1);
         allImages.push(imageUrl);
+        allText.push(blob2);
         if (index == 0) {
             reviewImages.push(imageUrl);
+            reviewTexts.push(blob2);
         }
 
         updateImageButtons();
@@ -181,9 +191,10 @@ function displayCurrentImage(index = 1) {
     if (reviewImages.length > 0) {
         const img = document.createElement('img');
         const correctMovie = moviesData.find(movie => movie.movieID === correctMovieID);
-        img.alt = `Image of review for ${correctMovie.title}`;
+        img.alt = `Review: ${reviewTexts[index - 1]}`;
         img.id = 'reviewImage';
         img.src = reviewImages[index - 1];
+        img
         reviewContainer.appendChild(img);
     }
 }

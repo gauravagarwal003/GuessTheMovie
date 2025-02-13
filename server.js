@@ -22,6 +22,29 @@ app.get('/check-folder', (req, res) => {
     });
 });
 
+// Endpoint to get all the text for reviews of a movie
+app.get('/text', (req, res) => {
+    const folderName = req.query.name;
+    const index = parseInt(req.query.index, 10);
+    const reviewsPath = path.join(__dirname, 'text', folderName);
+
+    fs.readdir(reviewsPath, (err, files) => {
+        if (err || files.length === 0) {
+            res.status(404).json({ error: 'No text found or an error occurred' });
+            return;
+        }
+
+        if (index >= 0 && index < files.length) {
+            const textPath = path.join(reviewsPath, files[index]);
+            res.sendFile(textPath);
+          } else {
+            res.status(404).json({ error: 'Text not found' });
+          }
+      
+    });
+});
+
+
 // Endpoint to get all images from the reviews folder of a movie
 app.get('/images', (req, res) => {
     const folderName = req.query.name;

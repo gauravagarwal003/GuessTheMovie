@@ -12,6 +12,13 @@ root_dir = os.path.join(script_dir, '..')
 target_folder = os.path.join(root_dir, 'text', movie)
 target_folder = os.path.normpath(target_folder)
 
+if not os.path.exists(target_folder):
+    os.makedirs(target_folder)
+
+for file in os.listdir(target_folder):
+    file_path = os.path.join(target_folder, file)
+    if os.path.isfile(file_path): 
+        os.remove(file_path)
 
 for i in pages:
     lst = i.split(':')

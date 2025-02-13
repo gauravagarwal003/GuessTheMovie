@@ -10,13 +10,12 @@ reviewNum = sys.argv[4]
 
 script_dir = os.path.dirname(__file__)
 root_dir = os.path.join(script_dir, '..')
-target_folde_pages = os.path.join(root_dir, 'pages')
-target_folder_pages = os.path.normpath(target_folde_pages)
-target_folder_images = os.path.join(root_dir, 'images')
+target_folder_pages = os.path.join(root_dir, 'pages', movie)
+target_folder_pages = os.path.normpath(target_folder_pages)
+target_folder_images = os.path.join(root_dir, 'images', movie)
 target_folder_images = os.path.normpath(target_folder_images)
 
-
-image = Image.open(f"{target_folder_pages}/{movie}/page{pageNum}.png")
+image = Image.open(f"{target_folder_pages}/page{pageNum}.png")
 image = image.convert('RGB')  # Ensure the image is in RGB mode
 
 # Define the target color
@@ -48,9 +47,6 @@ y_coords.append(firstY)  # Add the first y-coordinate
 
 # Sort the y-coordinates (just in case they are not sorted)
 y_coords.sort()
-directory = f"{target_folder_images}/{movie}/"
-if not os.path.exists(directory):
-    os.makedirs(directory)
 
 # Crop and save sections between y-coordinates
 for i in range(len(y_coords) - 1):
@@ -61,6 +57,6 @@ for i in range(len(y_coords) - 1):
 
     # Save the cropped image
     if i + 1 == int(whichReview):
-        cropped_image_path = os.path.join(directory, file_name)
+        cropped_image_path = os.path.join(target_folder_images, file_name)
         cropped_image.save(cropped_image_path)
         exit()
