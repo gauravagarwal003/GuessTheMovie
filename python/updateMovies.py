@@ -7,7 +7,7 @@ sleep_time = 2
 requestsSession = requests.Session()
 
 for pageNum in range(1, 2):
-    link = f"https://letterboxd.com/sprudelheinz/list/all-the-movies-sorted-by-movie-posters-1/by/popular/page/{pageNum}/"
+    link = f"https://letterboxd.com/films/popular/page/{pageNum}/"
     
     # Generate a random User-Agent
     ua = UserAgent()
