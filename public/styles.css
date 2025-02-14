@@ -156,6 +156,16 @@ img {
     justify-content: center; 
 }
 
+#footerItem {
+    color: #6f4e37;
+    
+}
+
+#footerItem:hover{
+    color: var(--bonewhite);
+}
+
+
 #footerItem,
 #footerIcon {
     padding-left: 8px;
