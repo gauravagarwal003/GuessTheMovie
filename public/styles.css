@@ -157,12 +157,11 @@ img {
 }
 
 #footerItem {
-    color: #6f4e37;
-    
+    color: #6f4e37 !important;
 }
 
 #footerItem:hover{
-    color: var(--bonewhite);
+    color: var(--bonewhite)  !important;
 }
 
 
