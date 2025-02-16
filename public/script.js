@@ -232,13 +232,17 @@ fetch('movies.csv')
         Papa.parse(data, {
             header: true,
             complete: results => {
-                moviesData = results.data.map(row => {
-                    let selectedRow = {};
-                    selectedColumns.forEach(col => {
-                        selectedRow[col] = row[col];
-                    });
-                    return selectedRow;
-                });
+                moviesData = results.data
+                    .map(row => {
+                        let selectedRow = {};
+                        selectedColumns.forEach(col => {
+                            selectedRow[col] = row[col];
+                        });
+                        return selectedRow;
+                    })
+                    .filter(row => 
+                        Object.values(row).every(value => value !== undefined && value !== null && value !== "")
+                    );
             }
         });
     });
