@@ -158,17 +158,11 @@ img {
 
 #footerItem {
     color: #6f4e37 !important;
+    padding-left: 0.25%;
 }
 
 #footerItem:hover{
     color: var(--bonewhite)  !important;
-}
-
-
-#footerItem,
-#footerIcon {
-    padding-left: 8px;
-    padding-right: 8px;
 }
 
 #footerIcon {
@@ -219,10 +213,12 @@ img {
   }
 
 .footer-image {
+    padding-right: 10px;
     /* Base image is loaded in HTML (src="LBColorLogo.png") */
   }
   a:hover .footer-image,
   a:focus .footer-image {
     content: url("LBBWLogo.png");
+    
 }
   
