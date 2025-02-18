@@ -1,12 +1,13 @@
-from PIL import Image
+from PIL import Image, ImageDraw
 import os
-import sys
 
-# Get the arguments
-movie = sys.argv[1]
-pageNum = sys.argv[2]
-whichReview = sys.argv[3]
-reviewNum = sys.argv[4]
+
+
+movie = 'challengers'
+pageNum = '2'
+whichReview = '1'
+reviewNum = '1'
+
 
 script_dir = os.path.dirname(__file__)
 root_dir = os.path.join(script_dir, '..')
@@ -35,31 +36,27 @@ width, height = image.size
 betweenYs = set()
 
 # Search for the color
-y = 0
-while y < height:
+for y in range(height):
     pixel = image.getpixel((175, y))
     if is_color_match(pixel, veryStart) and not veryStartFound:
         veryStartFound = True
     if veryStartFound:
         if is_color_match(pixel, start):
+            print('start')
             firstY = y
-            y += 4
             
         elif is_color_match(pixel, between_1) or is_color_match(pixel, between_2):
             betweenYs.add(y)
-            y += 4
                     
         elif is_color_match(pixel, end):
+            print('end')
             lastY = y
-            break   
-    y += 1
-                    
+            break            
+            
 # List of y-coordinates
 y_coords = list(betweenYs)
-y_coords.append(lastY)  # Add the last y-coordinate
-y_coords.append(firstY)  # Add the first y-coordinate   
-
-# Sort the y-coordinates (just in case they are not sorted)
+#y_coords.append(lastY)  # Add the last y-coordinate
+#y_coords.append(firstY)  # Add the first y-coordinate   
 
 firstFound = False
 for x in range(width):
@@ -73,21 +70,12 @@ for x in range(width):
             lastWidth = x + 25
             break
 
-y_coords.sort()
-# Crop and save sections between y-coordinates
-count = 0
-for i in range(len(y_coords) - 1):
-    count += 1
-    top = y_coords[i] + 1  # Start just after the current y-coordinate
-    bottom = y_coords[i + 1]  # End just before the next y-coordinate
-    cropped_image = image.crop((firstWidth, top, lastWidth, bottom))
-    file_name = f'review_{reviewNum}_p{pageNum}_r{i + 1}.png'
+draw = ImageDraw.Draw(image)
+draw.line([(firstWidth, 0), (firstWidth, height - 1)], fill="red", width=1)
+draw.line([(lastWidth, 0), (lastWidth, height - 1)], fill="red", width=1)
 
-    # Save the cropped image
-    if i + 1 == int(whichReview):
-        if cropped_image.mode not in ["RGB", "RGBA"]:
-            cropped_image = cropped_image.convert("RGB")
+for y in y_coords:
+    draw.line([(0, y), (width - 1, y)], fill="red", width=1)
 
-        cropped_image_path = os.path.join(target_folder_images, file_name)
-        cropped_image.save(cropped_image_path)
-        exit()
+image.save('red_lines.png')
+image.show()

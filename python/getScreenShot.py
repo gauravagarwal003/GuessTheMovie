@@ -1,5 +1,7 @@
 from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 import random
 import os
@@ -14,7 +16,7 @@ for i in pages:
     lst = i.split(':')
     if len(lst) != 2 or not lst[0].isdigit() or not lst[1].isdigit():
         print(f"INVALID REVIEW FOR {movie}")
-        sys.exit(1)
+        quit()
 
 # Setup directories
 script_dir = os.path.dirname(__file__)
@@ -36,17 +38,17 @@ for file in os.listdir(target_folder):
     file_path = os.path.join(target_folder, file)
     if os.path.isfile(file_path): 
         os.remove(file_path)
+        
+options = Options()
+options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36")
+options.add_argument("--width=1920")
+options.add_argument("--height=1080")
+options.add_argument("--headless")
+driver = webdriver.Chrome(options=options)
 
 try: 
-    for pageNum in [item.split(":")[0] for item in pages]:
+    for pageNum in set([item.split(":")[0] for item in pages]):
         print(f"Getting page {pageNum} for {movie}")    
-        options = Options()
-        options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36")
-        options.add_argument("--width=1920")
-        options.add_argument("--height=1080")
-        options.add_argument("--headless")
-        driver = webdriver.Chrome(options=options)
-
         driver.get(f"https://letterboxd.com/film/{movie}/reviews/by/activity/page/{pageNum}/")
         print(f"Got page {pageNum} for {movie}")
         width = driver.execute_script("return Math.max( document.body.scrollWidth, document.body.offsetWidth, document.documentElement.clientWidth, document.documentElement.scrollWidth, document.documentElement.offsetWidth );")

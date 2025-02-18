@@ -47,7 +47,7 @@ for pageNum, reviewNum in dict.items():
     film_details = soup.find_all('li', class_='film-detail')
     for i in reviewNum:
         target_file = os.path.join(target_folder,f'{pages.index(f"{pageNum}:{i}") + 1}_p{pageNum}_r{i}.txt')
-        review = film_details[int(i) - 1].find('div', class_='body-text -prose collapsible-text').text
+        review = film_details[int(i) - 1].find('div', class_='body-text').find('p').text
         with open(target_file, 'w', encoding='utf-8') as file:
             file.write(review)
         print(f"Added review {i} for page {pageNum} of {movie}")
