@@ -4,7 +4,6 @@
     --letterboxdBlue: #66b9ef;
     --letterboxdBackground: rgb(25, 25, 30);
     --bonewhite: rgb(249, 246, 238);
-
     --currentBackground: rgb(46, 52, 63);
     --searchbarBackground: var(--bonewhite);
     --searchbarText: rgb(100, 110, 130);
@@ -16,20 +15,17 @@
     --movieHoverBackground: var(--letterboxdBackground);
 }
 
-@font-face {
-    font-family: 'LetterBoxdFont';
-    src: url('sharp-grotesk-smbold-20-regular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-}
+*{
+    font-family:  'Familjen Grotesk', sans-serif, bold !important;
+    text-shadow: 0.5px 0.5px 0 rgba(0,0,0,0.1);
 
+}
+  
 body {
-    font-family: 'LetterBoxdFont';
     background-color: var(--currentBackground);
 }
 
 #multi-button {
-    font-family: 'LetterBoxdFont';
     background-color: transparent;
     color: var(--bonewhite);
     outline: none;
@@ -49,7 +45,6 @@ body {
 }
 
 #search {
-    font-family: 'LetterBoxdFont';
     background-color: var(--searchbarBackground);
     color: var(--searchbarText);
     border: none;
@@ -121,7 +116,6 @@ img {
 
 
 #imageButtons button {
-    font-family: 'LetterBoxdFont';
     background-color: var(--inactiveButtonBackground);
     color: var(--inactiveButtonText);
     border: none;
