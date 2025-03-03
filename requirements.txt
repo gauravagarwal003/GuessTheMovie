@@ -2,5 +2,3 @@ pandas
 requests
 beautifulsoup4
 lxml
-python-dotenv
-dropbox
