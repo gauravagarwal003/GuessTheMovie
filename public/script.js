@@ -32,6 +32,16 @@ function hasGameBeenPlayed(correctMovieID, stats) {
     return stats.games.some(game => game.correctMovieID === correctMovieID);
 }
 
+// ---------------------------
+// UI update helper function
+// ---------------------------
+function updateStatsDisplay() {
+  statsDisplay.innerHTML = `<a style="color:white;">You have played ${globalGameStats.totalPlayed} games and won ${globalGameStats.totalWon} of them.</a>`;
+}
+
+// ---------------------------
+// Starter functions (e.g., filtering, displaying, game logic)
+// ---------------------------
 function filterMovies() {
     const searchQuery = document.getElementById('search').value.toLowerCase();
     if (searchQuery === '') {
@@ -39,7 +49,7 @@ function filterMovies() {
         return;
     }
     const filteredMovies = moviesData.filter(movie => {
-        const regex = new RegExp(`\\b${searchQuery}`, 'i'); // \b asserts position at a word boundary
+        const regex = new RegExp(`\\b${searchQuery}`, 'i');
         return regex.test(movie.title.toLowerCase());
     });
     displayMovieList(filteredMovies);
@@ -64,12 +74,16 @@ function selectMovie(guessedMovieID) {
     
     const textDisplay = document.getElementById('textDisplay');
     if (isCorrectMovie) {
-        textDisplay.innerHTML = `<a href="https://letterboxd.com/film/${guessedMovieID}" style="text-decoration:none; color:white;" target="_blank">You got it! ${guessedMovie.title} (${guessedMovie.year}) is the correct movie.</a>`;
+        textDisplay.innerHTML = `<a href="https://letterboxd.com/film/${guessedMovieID}" style="text-decoration:none; color:white;" target="_blank">
+            You got it! ${guessedMovie.title} (${guessedMovie.year}) is the correct movie.
+        </a>`;
         finishGame();
     } else {
         incorrectGuessCount++;
-        let guessString = (maxIncorrectGuesses - incorrectGuessCount == 1) ? "1 guess" : `${maxIncorrectGuesses - incorrectGuessCount} guesses`;
-        textDisplay.innerHTML = `<a href="https://letterboxd.com/film/${guessedMovieID}" style="text-decoration:none; color:white;" target="_blank">Wrong! ${guessedMovie.title} (${guessedMovie.year}) is not the correct movie. You have ${guessString} left. Switch between reviews to get more info!</a>`;
+        let guessString = (maxIncorrectGuesses - incorrectGuessCount === 1) ? "1 guess" : `${maxIncorrectGuesses - incorrectGuessCount} guesses`;
+        textDisplay.innerHTML = `<a href="https://letterboxd.com/film/${guessedMovieID}" style="text-decoration:none; color:white;" target="_blank">
+            Wrong! ${guessedMovie.title} (${guessedMovie.year}) is not the correct movie. You have ${guessString} left. Switch between reviews to get more info!
+        </a>`;
         clearSearchAndMovieList();
         if (incorrectGuessCount < maxIncorrectGuesses) {
             reviewImages = allImages.slice(0, incorrectGuessCount + 1);
@@ -77,7 +91,9 @@ function selectMovie(guessedMovieID) {
             updateImageButtons();
             displayCurrentImage(incorrectGuessCount + 1);
         } else {
-            textDisplay.innerHTML = `<a href="https://letterboxd.com/film/${correctMovieID}" style="text-decoration:none; color:white;" target="_blank">You lost! The correct movie is ${correctMovie.title} (${correctMovie.year}).</a>`;
+            textDisplay.innerHTML = `<a href="https://letterboxd.com/film/${correctMovieID}" style="text-decoration:none; color:white;" target="_blank">
+                You lost! The correct movie is ${correctMovie.title} (${correctMovie.year}).
+            </a>`;
             finishGame();
         }
         if ('scrollRestoration' in history) {
@@ -129,13 +145,11 @@ function finishGame() {
     }
     existingDiv.setAttribute("href", "https://letterboxd.com/film/" + correctMovieID);
     existingDiv.setAttribute("target", "_blank");
-
     const parent = document.getElementById('content-wrap');
     const div1 = document.getElementById('movie_container');
     parent.appendChild(div1);
     document.getElementById('search-row').style.margin = "0px";
-
-    // Update game stats if not already played
+    
     if (!hasGameBeenPlayed(correctMovieID, globalGameStats)) {
         const currentGame = {
             correctMovieID: correctMovieID,
@@ -149,6 +163,7 @@ function finishGame() {
         };
         updateGameStats(currentGame);
     }
+    updateStatsDisplay(); // Display updated stats
 }
 
 function pressButton() {
@@ -166,11 +181,15 @@ function pressButton() {
             reviewTexts = allText.slice(0, incorrectGuessCount + 1);
             updateImageButtons();
             displayCurrentImage(incorrectGuessCount + 1);
-            let guessString = (maxIncorrectGuesses - incorrectGuessCount == 1) ? "1 guess" : `${maxIncorrectGuesses - incorrectGuessCount} guesses`;
-            document.getElementById('textDisplay').innerHTML = `<a style="text-decoration:none; color:white;" target="_blank">You skipped! You have ${guessString} left. Switch between reviews to get more info!</a>`;
+            let guessString = (maxIncorrectGuesses - incorrectGuessCount === 1) ? "1 guess" : `${maxIncorrectGuesses - incorrectGuessCount} guesses`;
+            document.getElementById('textDisplay').innerHTML = `<a style="text-decoration:none; color:white;" target="_blank">
+                You skipped! You have ${guessString} left. Switch between reviews to get more info!
+            </a>`;
         } else {
             const correctMovie = moviesData.find(movie => movie.movieID === correctMovieID);
-            document.getElementById('textDisplay').innerHTML = `<a href="https://letterboxd.com/film/${correctMovieID}" style="text-decoration:none; color:white;" target="_blank">You lost! The correct movie is ${correctMovie.title} (${correctMovie.year}).</a>`;
+            document.getElementById('textDisplay').innerHTML = `<a href="https://letterboxd.com/film/${correctMovieID}" style="text-decoration:none; color:white;" target="_blank">
+                You lost! The correct movie is ${correctMovie.title} (${correctMovie.year}).
+            </a>`;
             finishGame();
         }
     }
@@ -281,7 +300,6 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
         if (hasGameBeenPlayed(correctMovieID, globalGameStats)) {
             console.log("Game has been played before");
             finishGame();
-            statsDisplay.innerHTML = `<a style="color:white;">You have played ${globalGameStats.totalPlayed} games and won ${globalGameStats.totalWon} of them.</a>`;
         } else {
             const textDisplay = document.getElementById('textDisplay');
             textDisplay.innerHTML = `<a style="color:white;">You have ${maxIncorrectGuesses} tries to guess the movie. For every incorrect guess, you'll get a new review. You can switch between reviews. Search and click on a movie to submit it. Good luck!</a>`;
