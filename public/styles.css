@@ -15,14 +15,117 @@
     --movieHoverBackground: var(--letterboxdBackground);
 }
 
-*{
-    font-family:  'Familjen Grotesk', sans-serif, bold !important;
-    text-shadow: 0.5px 0.5px 0 rgba(0,0,0,0.1);
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    z-index: 1000;
+    /* Make sure it's on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgba(10, 10, 10, 0.65);
+    /* Black with opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    color: var(--currentBackground);
+    background-color: var(--bonewhite);
+    margin: 10% auto;
+    /* 10% from top and centered */
+    padding: 20px;
+    max-width: 50%;
+    max-height: 50%;
+    border-radius: 5px;
+    position: relative;
+    text-align: center;
+    overflow-y: auto;
+}
+
+.modal-content::-webkit-scrollbar {
+    width: 8px;
+    /* Adjust width */
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0);
+    /* Slight transparency on hover */
+    border: 3px solid var(--letterboxdBackground);
+    border-radius: 5px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+    background: var(--letterboxdBackground);
+    /* Scrollbar color */
+    border-radius: 5px;
+}
+
+.close-button {
+    color: var(--currentBackground);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.close-button:hover {
+    opacity: 0.5; /* Makes the X slightly transparent */
+}
+
+#header {
+    background-color: var(--letterboxdBackground);
+    /* Matches footer background */
+    color: var(--bonewhite);
+    /* Matches footer text color */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+}
+
+/* Style the button to appear clean and transparent */
+.display-stats-button, .display-history-button {
+    background: transparent;
+    color: var(--bonewhite);
+    font-size: 1.2rem;
+    cursor: pointer;
+    border: none;
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
+.display-stats-button:hover, .display-history-button:hover {
+    color: var(--currentBackground);
+}
+
+.display-stats-button:active, .display-history-button:active {
+    text-decoration: underline;
 
 }
-  
+.active-button {
+    text-decoration: underline;
+    opacity: 1 !important;
+}
+
+
+* {
+    font-family: 'Familjen Grotesk', sans-serif, bold !important;
+    text-shadow: 0.5px 0.5px 0 rgba(0, 0, 0, 0.1);
+
+}
+
 body {
     background-color: var(--currentBackground);
+    margin: 0;
+    padding: 0;
+
 }
 
 #multi-button {
@@ -111,9 +214,8 @@ img {
 }
 
 #imageButtons {
-    margin-right: 30px;
+    margin-right: 20px;
 }
-
 
 #imageButtons button {
     background-color: var(--inactiveButtonBackground);
@@ -134,12 +236,14 @@ img {
 }
 
 #content-wrap {
-    padding-bottom: 2.5rem; /* MUST BE SAME AS HEIGHT OF FOOTER */
+    padding-bottom: 2.5rem;
+    /* MUST BE SAME AS HEIGHT OF FOOTER */
 }
 
 #footer {
     width: 100%;
-    height: 2.5rem; /* MUST BE SAME AS PADDING-BOTTOM OF CONTENT WRAP */
+    height: 2.5rem;
+    /* MUST BE SAME AS PADDING-BOTTOM OF CONTENT WRAP */
     position: fixed;
     bottom: 0;
     left: 0;
@@ -147,7 +251,7 @@ img {
     color: var(--bonewhite);
     display: flex;
     align-items: center;
-    justify-content: center; 
+    justify-content: center;
 }
 
 #footerItem {
@@ -155,8 +259,8 @@ img {
     padding-left: 0.25%;
 }
 
-#footerItem:hover{
-    color: var(--bonewhite)  !important;
+#footerItem:hover {
+    color: var(--bonewhite) !important;
 }
 
 #footerIcon {
@@ -185,9 +289,11 @@ img {
     width: 100%;
     margin-top: 5px;
 }
+
 #movie_poster {
     display: inline-block;
 }
+
 #movie_poster img {
     display: block;
     max-width: 100%;
@@ -201,18 +307,18 @@ img {
     padding: 0 !important;
     margin: -1px !important;
     overflow: hidden !important;
-    clip: rect(0, 0, 0, 0) !important; 
-    white-space: nowrap !important; 
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
     border: 0 !important;
-  }
+}
 
 .footer-image {
     padding-right: 10px;
     /* Base image is loaded in HTML (src="LBColorLogo.png") */
-  }
-  a:hover .footer-image,
-  a:focus .footer-image {
-    content: url("LBBWLogo.png");
-    
 }
-  
+
+a:hover .footer-image,
+a:focus .footer-image {
+    content: url("LBBWLogo.png");
+
+}

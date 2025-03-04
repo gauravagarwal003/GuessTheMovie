@@ -4,11 +4,11 @@
 <head>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-P9S92SGST0"></script>
     <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-    gtag('config', 'G-P9S92SGST0');
+        gtag('config', 'G-P9S92SGST0');
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,12 +24,19 @@
         window.scrollTo(0, 0);
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3181134485510321"
-    crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script>
 
 </head>
 
 <body>
     <main id="page-container">
+        <header id="header">
+            <button id="displayStatsButton" class="display-stats-button" onclick="displayStats()">Your Stats</button>
+            <img src="logo.png" alt="Guess the Movie Logo" class="logo" />
+            <button id="displayHistoryButton" class="display-history-button" onclick="displayHistory()">Game
+                History</button>
+        </header>
+
         <div id="content-wrap">
             <div id="statsDisplay"></div>
             <h1 id="textDisplay" role="status" aria-live="polite"></h1>
@@ -44,25 +51,31 @@
                 <input type="text" id="search" placeholder="Search" onkeyup="filterMovies()" autocomplete="off">
             </div>
             <ul id="movieList" class="movie-list"></ul>
-            <div class="image-container" id = "movie_container">
+            <div class="image-container" id="movie_container">
                 <a id="movie_poster">
                 </a>
             </div>
-        
+
             <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
             <script src="script.js"></script>
 
         </div>
         <footer id="footer">
-            <a id="footerIcon" href="https://letterboxd.com/gaurava/"  target="_blank">
+            <a id="footerIcon" href="https://letterboxd.com/gaurava/" target="_blank">
                 <img src="LBColorLogo.png" alt="Letterboxd Profile" class="footer-image" />
             </a>
 
             <a href="https://buymeacoffee.com/gprojects" style="text-decoration: none;">☕</a>
-            <a id="footerItem" href = "https://buymeacoffee.com/gprojects " >Buy Me a Coffee</a>
+            <a id="footerItem" href="https://buymeacoffee.com/gprojects ">Buy Me a Coffee</a>
 
         </footer>
     </main>
+    <div id="Modal" class="modal">
+        <div class="modal-content">
+            <span id="closeModal" class="close-button">&times;</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
 
 </body>
 
