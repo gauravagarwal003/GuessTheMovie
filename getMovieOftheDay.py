@@ -56,8 +56,6 @@ def download_from_dropbox(dbx, dropbox_path, local_path, target_folder):
         response = dbx.files_list_folder(dropbox_path)
 
         for entry in response.entries:
-            print(type(entry.name))
-            print(type(target_folder))
             if entry.name == target_folder:
                 print('a')
                 # Build the local path for the target
