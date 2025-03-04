@@ -1,3 +1,4 @@
+// Global variables and constants
 let moviesData = [];
 let correctMovieID = '';
 let incorrectGuessCount = 0;
@@ -5,18 +6,32 @@ let reviewImages = [];
 let reviewTexts = [];
 let allImages = [];
 let allText = [];   
+let collectedGuessesArray = [];
 let currentImageIndex = 1;
 let gameOver = false;
+let correctMovieDate = '';
+
 const maxMoviesToShow = 10;
 const selectedColumns = ['title', 'year', 'movieID', 'posterLink']; // Columns to select from the CSV file
 const maxIncorrectGuesses = 5;
 
 const imageButtonsContainer = document.getElementById('imageButtons');
 const multiButton = document.querySelector('button[id="multi-button"]');
-const textDisplay = document.getElementById('textDisplay');
-textDisplay.innerHTML = `<a style="color:white;">You have ${maxIncorrectGuesses} tries to guess the movie. For every incorrect guess, you'll get a new review. You can switch between reviews. Search and click on a movie to submit it. Good luck!</a>`;
+const statsDisplay = document.getElementById('statsDisplay');
 
-// Function to filter movies based on search input
+// Global game stats from localStorage
+var globalGameStats = JSON.parse(localStorage.getItem('gameStats')) || {
+    games: [],
+    totalPlayed: 0,
+    totalWon: 0
+};
+
+function hasGameBeenPlayed(correctMovieID, stats) {
+    if (!stats) return false;
+    console.log("Checking for game:", correctMovieID);
+    return stats.games.some(game => game.correctMovieID === correctMovieID);
+}
+
 function filterMovies() {
     const searchQuery = document.getElementById('search').value.toLowerCase();
     if (searchQuery === '') {
@@ -30,7 +45,6 @@ function filterMovies() {
     displayMovieList(filteredMovies);
 }
 
-// Function to display movie list
 function displayMovieList(movies) {
     const movieListElement = document.getElementById('movieList');
     movieListElement.innerHTML = '';
@@ -42,24 +56,19 @@ function displayMovieList(movies) {
     });
 }
 
-// Function to handle movie selection
 function selectMovie(guessedMovieID) {
+    collectedGuessesArray.push(guessedMovieID);
     const guessedMovie = moviesData.find(movie => movie.movieID === guessedMovieID);
     const correctMovie = moviesData.find(movie => movie.movieID === correctMovieID);
     const isCorrectMovie = guessedMovieID === correctMovieID;
-
+    
+    const textDisplay = document.getElementById('textDisplay');
     if (isCorrectMovie) {
         textDisplay.innerHTML = `<a href="https://letterboxd.com/film/${guessedMovieID}" style="text-decoration:none; color:white;" target="_blank">You got it! ${guessedMovie.title} (${guessedMovie.year}) is the correct movie.</a>`;
         finishGame();
     } else {
         incorrectGuessCount++;
-        if (maxIncorrectGuesses - incorrectGuessCount == 1) {
-            guessString = "1 guess"
-        }
-        else{
-            guessString = `${maxIncorrectGuesses - incorrectGuessCount} guesses`
-        }
-
+        let guessString = (maxIncorrectGuesses - incorrectGuessCount == 1) ? "1 guess" : `${maxIncorrectGuesses - incorrectGuessCount} guesses`;
         textDisplay.innerHTML = `<a href="https://letterboxd.com/film/${guessedMovieID}" style="text-decoration:none; color:white;" target="_blank">Wrong! ${guessedMovie.title} (${guessedMovie.year}) is not the correct movie. You have ${guessString} left. Switch between reviews to get more info!</a>`;
         clearSearchAndMovieList();
         if (incorrectGuessCount < maxIncorrectGuesses) {
@@ -75,13 +84,29 @@ function selectMovie(guessedMovieID) {
             history.scrollRestoration = 'manual';
         }
         window.scrollTo(0, 0);
-
     }
+}
+
+function updateGameStats(currentGame) {
+    console.log('Updating game stats');
+    let stats = localStorage.getItem('gameStats');
+    stats = stats ? JSON.parse(stats) : {
+      games: [],
+      totalPlayed: 0,
+      totalWon: 0
+    };
+
+    stats.games.push(currentGame);
+    stats.totalPlayed += 1;
+    if (currentGame.won) {
+        stats.totalWon += 1;
+    }
+    localStorage.setItem('gameStats', JSON.stringify(stats));
 }
 
 function finishGame() {
     clearSearchAndMovieList();
-    if(incorrectGuessCount < maxIncorrectGuesses){
+    if (incorrectGuessCount < maxIncorrectGuesses) {
         reviewImages = allImages.slice(0, maxIncorrectGuesses);
         reviewTexts = allText.slice(0, maxIncorrectGuesses);
         updateImageButtons();
@@ -103,20 +128,29 @@ function finishGame() {
         console.error('Div with specified ID not found.');
     }
     existingDiv.setAttribute("href", "https://letterboxd.com/film/" + correctMovieID);
-    existingDiv.setAttribute("target", "_blank"); // Add this line to open in a new tab
+    existingDiv.setAttribute("target", "_blank");
+
     const parent = document.getElementById('content-wrap');
-    // const orderDivs = ["reviewContainer", "allButtons","movie_container", "textDisplay"];
-    // for (let i = 0; i < orderDivs.length; i++) {
-    //     let current_div = document.getElementById(orderDivs[i]);
-    //     parent.prepend(current_div);
-    // }
     const div1 = document.getElementById('movie_container');
     parent.appendChild(div1);
-    const search_row = document.getElementById('search-row');
-    search_row.style.margin = "0px";
+    document.getElementById('search-row').style.margin = "0px";
+
+    // Update game stats if not already played
+    if (!hasGameBeenPlayed(correctMovieID, globalGameStats)) {
+        const currentGame = {
+            correctMovieID: correctMovieID,
+            won: (incorrectGuessCount < maxIncorrectGuesses),
+            guessCount: collectedGuessesArray.length, 
+            guesses: collectedGuessesArray, 
+            date: new Date().toISOString().split('T')[0],
+            title: correctMovie.title,
+            year: correctMovie.year,
+            posterLink: correctMovie.posterLink
+        };
+        updateGameStats(currentGame);
+    }
 }
 
-// Function to skip guess 
 function pressButton() {
     if ('scrollRestoration' in history) {
         history.scrollRestoration = 'manual';
@@ -132,69 +166,57 @@ function pressButton() {
             reviewTexts = allText.slice(0, incorrectGuessCount + 1);
             updateImageButtons();
             displayCurrentImage(incorrectGuessCount + 1);
-            if (maxIncorrectGuesses - incorrectGuessCount == 1) {
-                guessString = "1 guess"
-            }
-            else{
-                guessString = `${maxIncorrectGuesses - incorrectGuessCount} guesses`
-            }
-            textDisplay.innerHTML = `<a style="text-decoration:none; color:white;" target="_blank">You skipped! You have ${guessString} left. Switch between reviews to get more info!</a>`;
+            let guessString = (maxIncorrectGuesses - incorrectGuessCount == 1) ? "1 guess" : `${maxIncorrectGuesses - incorrectGuessCount} guesses`;
+            document.getElementById('textDisplay').innerHTML = `<a style="text-decoration:none; color:white;" target="_blank">You skipped! You have ${guessString} left. Switch between reviews to get more info!</a>`;
         } else {
             const correctMovie = moviesData.find(movie => movie.movieID === correctMovieID);
-            textDisplay.innerHTML = `<a href="https://letterboxd.com/film/${correctMovieID}" style="text-decoration:none; color:white;" target="_blank">You lost! The correct movie is ${correctMovie.title} (${correctMovie.year}).</a>`;
+            document.getElementById('textDisplay').innerHTML = `<a href="https://letterboxd.com/film/${correctMovieID}" style="text-decoration:none; color:white;" target="_blank">You lost! The correct movie is ${correctMovie.title} (${correctMovie.year}).</a>`;
             finishGame();
         }
     }
 }
 
-// Function to clear search input and movie list
 function clearSearchAndMovieList() {
     document.getElementById('search').value = '';
     document.getElementById('movieList').innerHTML = '';
 }
 
-// Function to display all images from the reviews folder
-async function fetchImages(movieName, index) {
+async function fetchImages(movieID, date, index) {
     try {
-        const response1 = await fetch(`/images?name=${movieName}&index=${index}`);
-        const response2 = await fetch(`/text?name=${movieName}&index=${index}`);
-        if (response2.status === 404) return;
-        if (response1.status === 404) return;
+        const response1 = await fetch(`/images?date=${date}&name=${movieID}&index=${index}`);
+        const response2 = await fetch(`/text?date=${date}&name=${movieID}&index=${index}`);
+        if (response1.status === 404 || response2.status === 404) return;
         const blob1 = await response1.blob();
         const blob2 = await response2.text();
         const imageUrl = URL.createObjectURL(blob1);
         allImages.push(imageUrl);
         allText.push(blob2);
-        if (index == 0) {
+        if (index === 0) {
             reviewImages.push(imageUrl);
             reviewTexts.push(blob2);
         }
-
         updateImageButtons();
         displayCurrentImage();
     } catch (error) {
-        console.error('Error fetching random image:', error);
+        console.error('Error fetching image/text:', error);
     }
 }
 
-async function fetchAllImagesSequentially(movieID) {
+async function fetchAllImagesSequentially(movieID, date) {
     for (let i = 0; i < maxIncorrectGuesses; i++) {
-        await fetchImages(movieID, i);
+        await fetchImages(movieID, date, i);
     }
 }
 
-
-// Function to display the current image in the reviewImages array
 function displayCurrentImage(index = 1) {
     const reviewContainer = document.getElementById('reviewContainer');
-    reviewContainer.innerHTML = ''; // Clear any existing content
+    reviewContainer.innerHTML = '';
     if (reviewImages.length > 0) {
         const img = document.createElement('img');
         const correctMovie = moviesData.find(movie => movie.movieID === correctMovieID);
         img.alt = `Review: ${reviewTexts[index - 1]}`;
         img.id = 'reviewImage';
         img.src = reviewImages[index - 1];
-        img
         reviewContainer.appendChild(img);
     }
 }
@@ -202,17 +224,12 @@ function displayCurrentImage(index = 1) {
 function makeButtonActive(index) {
     const buttons = document.querySelectorAll('#imageButtons button');
     buttons.forEach(button => {
-        if (button.textContent == index) {
-            button.classList.toggle('active', true);
-        } else {
-            button.classList.toggle('active', false);
-        }
+        button.classList.toggle('active', button.textContent == index);
     });
 }
 
-// Function to update image navigation buttons
 function updateImageButtons() {
-    imageButtonsContainer.innerHTML = ''; // Clear any existing buttons
+    imageButtonsContainer.innerHTML = '';
     reviewImages.forEach((image, index) => {
         const button = document.createElement('button');
         button.textContent = index + 1;
@@ -225,11 +242,15 @@ function updateImageButtons() {
     makeButtonActive(incorrectGuessCount + 1);
 }
 
-// Load the CSV file and parse it
-fetch('movies.csv')
-    .then(response => response.text())
-    .then(data => {
-        Papa.parse(data, {
+// ---------------------------
+// Initialize the game (all starter logic here)
+// ---------------------------
+document.addEventListener('DOMContentLoaded', async function initializeGame() {
+    try {
+        // Load CSV file and parse movie data
+        const csvResponse = await fetch('movies.csv');
+        const csvText = await csvResponse.text();
+        Papa.parse(csvText, {
             header: true,
             complete: results => {
                 moviesData = results.data
@@ -240,25 +261,32 @@ fetch('movies.csv')
                         });
                         return selectedRow;
                     })
-                    .filter(row => 
+                    .filter(row =>
                         Object.values(row).every(value => value !== undefined && value !== null && value !== "")
                     );
             }
         });
-    });
 
-
-// Fetch and display a random movie on page load
-fetch('/random-movie')
-    .then(response => {
+        // Fetch movie info
+        const response = await fetch('/get-movie');
         if (!response.ok) throw new Error('Network response was not ok');
-        return response.json();
-    })
-    .then(data => {
+        const data = await response.json();
         correctMovieID = data.movie;
-        const existingDiv = document.getElementById('movie_poster');
-        fetchAllImagesSequentially(correctMovieID);
-    })
-    .catch(error => console.error('Error fetching random movie:', error));
+        correctMovieDate = data.date;
 
+        // Fetch all images and text for the movie
+        await fetchAllImagesSequentially(correctMovieID, correctMovieDate);
 
+        // Check if this game has already been played.
+        if (hasGameBeenPlayed(correctMovieID, globalGameStats)) {
+            console.log("Game has been played before");
+            finishGame();
+            statsDisplay.innerHTML = `<a style="color:white;">You have played ${globalGameStats.totalPlayed} games and won ${globalGameStats.totalWon} of them.</a>`;
+        } else {
+            const textDisplay = document.getElementById('textDisplay');
+            textDisplay.innerHTML = `<a style="color:white;">You have ${maxIncorrectGuesses} tries to guess the movie. For every incorrect guess, you'll get a new review. You can switch between reviews. Search and click on a movie to submit it. Good luck!</a>`;
+        }
+    } catch (error) {
+        console.error('Error during initialization:', error);
+    }
+});

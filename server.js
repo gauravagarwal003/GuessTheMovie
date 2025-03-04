@@ -24,61 +24,67 @@ app.get('/check-folder', (req, res) => {
 
 // Endpoint to get all the text for reviews of a movie
 app.get('/text', (req, res) => {
-    const folderName = req.query.name;
+    const date = req.query.date;
+    const movieID = req.query.name;
     const index = parseInt(req.query.index, 10);
-    const reviewsPath = path.join(__dirname, 'text', folderName);
+    const reviewsPath = path.join(__dirname, 'movie', date, movieID, 'text');
 
     fs.readdir(reviewsPath, (err, files) => {
         if (err || files.length === 0) {
             res.status(404).json({ error: 'No text found or an error occurred' });
             return;
         }
-
         if (index >= 0 && index < files.length) {
             const textPath = path.join(reviewsPath, files[index]);
             res.sendFile(textPath);
-          } else {
+        } else {
             res.status(404).json({ error: 'Text not found' });
-          }
-      
+        }
     });
 });
 
 
 // Endpoint to get all images from the reviews folder of a movie
 app.get('/images', (req, res) => {
-    const folderName = req.query.name;
+    const date = req.query.date;
+    const movieID = req.query.name;
     const index = parseInt(req.query.index, 10);
-    const reviewsPath = path.join(__dirname, 'images', folderName);
+    const reviewsPath = path.join(__dirname, 'movie', date, movieID, 'images');
 
     fs.readdir(reviewsPath, (err, files) => {
         if (err || files.length === 0) {
             res.status(404).json({ error: 'No images found or an error occurred' });
             return;
         }
-
         if (index >= 0 && index < files.length) {
             const imagePath = path.join(reviewsPath, files[index]);
             res.sendFile(imagePath);
-          } else {
+        } else {
             res.status(404).json({ error: 'Image not found' });
-          }
-      
+        }
     });
 });
 
-// Endpoint to get a random movie
-app.get('/random-movie', (req, res) => {
-    const imagesPath = path.join(__dirname, 'images');
-
-    fs.readdir(imagesPath, (err, folders) => {
-        if (err || folders.length === 0) {
-            res.status(404).json({ error: 'No folders found or an error occurred' });
+// Endpoint to get the selected movie from the "movie" folder
+app.get('/get-movie', (req, res) => {
+    const movieDir = path.join(__dirname, 'movie');
+    fs.readdir(movieDir, (err, dateFolders) => {
+        if (err || dateFolders.length === 0) {
+            res.status(404).json({ error: 'No date folders found or an error occurred' });
             return;
         }
-
-        const randomFolder = folders[Math.floor(Math.random() * folders.length)];
-        res.json({ movie: randomFolder });
+        // Assume there's only one date folder (e.g. today's date)
+        const dateFolder = dateFolders[0];
+        const movieFolderPath = path.join(movieDir, dateFolder);
+        fs.readdir(movieFolderPath, (err, movieFolders) => {
+            if (err || movieFolders.length === 0) {
+                res.status(404).json({ error: 'No movie folders found or an error occurred' });
+                return;
+            }
+            // Assume there's only one movie folder
+            const movieID = movieFolders[0];
+            res.json({ movie: movieID, date: dateFolder });
+        });
     });
 });
 
