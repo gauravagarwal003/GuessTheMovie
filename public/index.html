@@ -13,6 +13,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guess the Movie</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+    <link rel="icon" type="image/x-icon" href="just_logo.png">
     <link rel="stylesheet" href="styles.css?v=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,10 +34,24 @@
 <body>
     <main id="page-container">
         <header id="header">
-            <button id="displayStatsButton" class="display-stats-button" onclick="displayStats()">Your Stats</button>
-            <img src="logo.png" alt="Guess the Movie Logo" class="logo" />
-            <button id="displayHistoryButton" class="display-history-button" onclick="displayHistory()">Game
-                History</button>
+            <div class="header-content">
+                <!-- Logo -->
+                <img src="logo_and_text.png" alt="Guess the Movie Logo" class="logo">
+
+                <!-- Buttons -->
+                <button id="displayStatsButton" class="display-stats-button" onclick="displayStats()">
+                    <i class="fa-solid fa-chart-simple icon" id = "statsIcon"></i>
+                    Your Stats</button>
+                    
+                <button id="displayHistoryButton" class="display-history-button" onclick="displayHistory()">
+                    <i class="fa-solid fa-clock-rotate-left icon" id ="historyIcon"></i> 
+                        Game History
+                </button>
+                <button id="instructionsButton" class="instructions-button" onclick="displayInstructions()">
+                    <i class="fa-solid fa-question icon" id = "instructionsIcon"></i>
+                        How to Play
+                </button>
+            </div>
         </header>
 
         <div id="content-wrap">

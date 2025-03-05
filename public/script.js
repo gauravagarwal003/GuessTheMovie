@@ -10,7 +10,6 @@ let collectedGuessesArray = [];
 let currentImageIndex = 1;
 let gameOver = false;
 let correctMovieDate = '';
-
 const maxMoviesToShow = 10;
 const selectedColumns = ['title', 'year', 'movieID', 'posterLink']; // Columns to select from the CSV file
 const maxIncorrectGuesses = 5;
@@ -18,6 +17,48 @@ const maxIncorrectGuesses = 5;
 const imageButtonsContainer = document.getElementById('imageButtons');
 const multiButton = document.querySelector('button[id="multi-button"]');
 const statsDisplay = document.getElementById('statsDisplay');
+
+const historyButton = document.getElementById('displayHistoryButton');
+const historyIcon = document.getElementById('historyIcon');
+
+// When the mouse enters, add a class (or change the class)
+historyButton.addEventListener('mouseenter', () => {
+    historyIcon.classList.add('fa-spin', 'fa-spin-reverse');
+});
+
+// When the mouse leaves, revert back to the original class
+historyButton.addEventListener('mouseleave', () => {
+    historyIcon.classList.remove('fa-spin', 'fa-spin-reverse');
+});
+
+const statsButton = document.getElementById('displayStatsButton');
+const statsIcon = document.getElementById('statsIcon');
+
+// When the mouse enters, add a class (or change the class)
+statsButton.addEventListener('mouseenter', () => {
+    statsIcon.classList.add('fa-flip');
+});
+
+// When the mouse leaves, revert back to the original class
+statsButton.addEventListener('mouseleave', () => {
+    statsIcon.classList.remove('fa-flip');
+});
+
+const instructionsButton = document.getElementById('instructionsButton');
+const instructionsIcon = document.getElementById('instructionsIcon');
+
+// When the mouse enters, add a class (or change the class)
+instructionsButton.addEventListener('mouseenter', () => {
+    instructionsIcon.classList.add('fa-bounce');
+});
+
+// When the mouse leaves, revert back to the original class
+instructionsButton.addEventListener('mouseleave', () => {
+    instructionsIcon.classList.remove('fa-bounce');
+});
+
+
+
 
 
 var globalGameStats = {
@@ -766,19 +807,62 @@ function generateGameHTML(game) {
     `;
 }
 
-function setActiveButton(activeButtonID) {
-    // Select all buttons inside the header
-    const buttons = document.querySelectorAll("#header button");
+function setActiveButton(buttonID) {
+    const button = document.getElementById(buttonID);   
+    button.classList.add("active-button");
+    if (buttonID == "displayStatsButton") {
+        console.log('Adding active-stats');
+        document.getElementById('displayStatsButton').classList.add("active-stats");
+    }
+    else if (buttonID == "displayHistoryButton") {
+        document.getElementById('displayHistoryButton').classList.add("active-history");
+    }
+    else if (buttonID == "instructionsButton") {
+        document.getElementById('instructionsButton').classList.add("active-instructions");
+    }
 
-    buttons.forEach(button => {
-        if (button.id === activeButtonID) {
-            button.classList.add("active-button");
-        } else {
-            button.classList.remove("active-button");
-        }
-    });
 }
 
+function deactivateButton(buttonID) {
+    const button = document.getElementById(buttonID);   
+    button.classList.remove("active-button");
+    makeButtonActive(currentImageIndex);
+    if (buttonID == "displayStatsButton") {
+        document.getElementById('displayStatsButton').classList.remove("active-stats");
+    }
+    else if (buttonID == "displayHistoryButton") {
+        document.getElementById('displayHistoryButton').classList.remove("active-history");
+    }
+    else if (buttonID == "instructionsButton") {
+        document.getElementById('instructionsButton').classList.remove("active-instructions");
+    }
+
+}
+
+function displayInstructions() {
+    const modalContentDiv = document.getElementById('modalContent');
+
+    modalContentDiv.innerHTML = `<h2>How to Play</h2>`;
+    setActiveButton("instructionsButton");
+
+    // Display the modal
+    const modal = document.getElementById('Modal');
+    modal.style.display = "block";
+
+    document.getElementById('closeModal').onclick = function () {
+        modal.style.display = "none";
+        deactivateButton("instructionsButton");
+    };
+
+    // Close the modal if user clicks anywhere outside the modal content
+    window.onclick = function (event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+            deactivateButton("instructionsButton");
+        }
+    };
+
+}
 
 function displayHistory() {
     const modalContentDiv = document.getElementById('modalContent');
@@ -800,14 +884,14 @@ function displayHistory() {
 
     document.getElementById('closeModal').onclick = function () {
         modal.style.display = "none";
-        setActiveButton(null);
+        deactivateButton("displayHistoryButton");
     };
 
     // Close the modal if user clicks anywhere outside the modal content
     window.onclick = function (event) {
         if (event.target === modal) {
             modal.style.display = "none";
-            setActiveButton(null);
+            deactivateButton("displayHistoryButton");
         }
     };
 
@@ -818,7 +902,7 @@ function displayStats() {
     makeButtonActive('displayHistoryButton');
     const modalContentDiv = document.getElementById('modalContent');
     modalContentDiv.innerHTML = `<h2>Your Stats</h2>`;
-
+    setActiveButton("displayStatsButton");
     if (globalGameStats.games.length === 0) {
         modalContentDiv.innerHTML += `<p>You have not played any games yet!</p>`;
     }
@@ -837,7 +921,6 @@ function displayStats() {
 
         }
     }
-    setActiveButton("displayStatsButton");
 
     // Display the modal
     const modal = document.getElementById('Modal');
@@ -845,7 +928,7 @@ function displayStats() {
 
     document.getElementById('closeModal').onclick = function () {
         modal.style.display = "none";
-        setActiveButton(null);
+        deactivateButton("displayStatsButton");
 
     };
 
@@ -853,7 +936,7 @@ function displayStats() {
     window.onclick = function (event) {
         if (event.target === modal) {
             modal.style.display = "none";
-            setActiveButton(null);
+            deactivateButton("displayStatsButton");
         }
     };
 }
@@ -1118,7 +1201,7 @@ function displayCurrentImage(index = 1) {
 }
 
 function makeButtonActive(index) {
-    const buttons = document.querySelectorAll('#imageButtons button');
+    const buttons = document.querySelectorAll('button');
     buttons.forEach(button => {
         button.classList.toggle('active', button.textContent == index);
     });
@@ -1132,10 +1215,12 @@ function updateImageButtons() {
         button.onclick = () => {
             displayCurrentImage(button.textContent);
             makeButtonActive(button.textContent);
+            currentImageIndex = button.textContent;
         };
         imageButtonsContainer.appendChild(button);
     });
     makeButtonActive(incorrectGuessCount + 1);
+    currentImageIndex = incorrectGuessCount + 1;
 }
 
 // ---------------------------

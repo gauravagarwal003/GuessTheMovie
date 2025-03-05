@@ -15,6 +15,85 @@
     --movieHoverBackground: var(--letterboxdBackground);
 }
 
+.middle_footer {
+    max-width: 720px;
+}
+
+.logo {
+    max-width: 200px;
+    display: inline-block;
+}
+
+#header {
+    background: var(--letterboxdBackground);
+    color: var(--bonewhite);
+    display: flex;
+    justify-content: center;  /* Center everything */
+    align-items: center; /* Align items vertically */
+    gap: 20px; /* Space between elements */
+    width: 100%;
+    padding: 10px 0;
+}
+
+/* Container for logo and buttons */
+.header-content {
+    display: flex;
+    gap: 20px; /* Space between logo and buttons */
+}
+
+/* Adjust logo */
+.logo {
+    float: left;
+    max-width: 150px; /* Adjust size */
+    height: auto;
+}
+
+/* Button styling */
+.display-stats-button, .display-history-button, .instructions-button {
+    background: transparent;
+    color: var(--bonewhite);
+    font-size: 1.2rem;
+    cursor: pointer;
+    border: none;
+}
+
+.display-stats-button:hover{
+    color: var(--letterboxdOrange) !important;
+}
+
+.display-history-button:hover{
+    color: var(--letterboxdGreen) !important;
+
+}
+
+.instructions-button:hover {
+    color: var(--letterboxdBlue) !important;
+}
+
+.active-stats{
+    text-decoration: underline;
+    color: var(--letterboxdOrange) !important;
+
+}
+
+.active-history{
+    text-decoration: underline;
+    color: var(--letterboxdGreen) !important;
+} 
+
+
+.active-instructions{
+    text-decoration: underline;
+    color: var(--letterboxdBlue) !important;
+}
+
+.active-button {
+    text-decoration: underline;
+    font-weight: bold;
+    opacity: 1 !important;
+}
+
+
 .modal {
     display: none;
     /* Hidden by default */
@@ -45,6 +124,8 @@
     text-align: center;
     overflow-y: auto;
 }
+
+
 
 .modal-content::-webkit-scrollbar {
     width: 8px;
@@ -77,48 +158,10 @@
     opacity: 0.5; /* Makes the X slightly transparent */
 }
 
-#header {
-    background-color: var(--letterboxdBackground);
-    /* Matches footer background */
-    color: var(--bonewhite);
-    /* Matches footer text color */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding-top: 0.5%;
-    padding-bottom: 0.5%;
-}
 
-/* Style the button to appear clean and transparent */
-.display-stats-button, .display-history-button {
-    background: transparent;
-    color: var(--bonewhite);
-    font-size: 1.2rem;
-    cursor: pointer;
-    border: none;
-    margin-left: 1%;
-    margin-right: 1%;
-}
-
-.display-stats-button:hover, .display-history-button:hover {
-    color: var(--currentBackground);
-}
-
-.display-stats-button:active, .display-history-button:active {
-    text-decoration: underline;
-
-}
-.active-button {
-    text-decoration: underline;
-    opacity: 1 !important;
-}
-
-
-* {
+*:not(.icon) {
     font-family: 'Familjen Grotesk', sans-serif, bold !important;
     text-shadow: 0.5px 0.5px 0 rgba(0, 0, 0, 0.1);
-
 }
 
 body {
@@ -185,8 +228,6 @@ body {
 
 img {
     display: block;
-    margin-top: 20px;
-    max-width: 100%;
 }
 
 #reviewContainer {
@@ -204,7 +245,7 @@ img {
 #textDisplay {
     margin-top: 10px;
     font-size: 20px;
-    max-width: 740px;
+    max-width: 720px;
 }
 
 #allButtons {
