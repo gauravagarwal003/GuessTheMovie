@@ -30,21 +30,55 @@
     display: flex;
     justify-content: center;  /* Center everything */
     align-items: center; /* Align items vertically */
-    gap: 20px; /* Space between elements */
     width: 100%;
     padding: 10px 0;
 }
 
 /* Container for logo and buttons */
 .header-content {
+    max-width: 720px;
     display: flex;
-    gap: 20px; /* Space between logo and buttons */
+    gap: 2%; /* Space between logo and buttons */
+    align-items: center;
+    justify-content: space-between;
+
 }
+@media (max-width: 480px) {
+    #textDisplay {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  
+    .header-content {
+        max-width: 100%;
+        padding: 0 10px;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+    }
+    .header-content span {
+        font-size: 1rem;
+    }
+    .icon {
+        font-size: 1rem;
+    }
+    .logo{
+        max-width: 31% !important; 
+    }
+    .full {
+        display: none !important;
+      }
+      .short {
+        display: inline !important;
+      }
+    
+    
+}
+
 
 /* Adjust logo */
 .logo {
     float: left;
-    max-width: 150px; /* Adjust size */
+    max-width: 25%; /* Adjust size */
     height: auto;
 }
 
@@ -226,10 +260,6 @@ body {
     width: fit-content;
 }
 
-img {
-    display: block;
-}
-
 #reviewContainer {
     margin: 10px auto;
     max-width: fit-content;
@@ -295,18 +325,42 @@ img {
     justify-content: center;
 }
 
-#footerItem {
+.short{
+    display: none;  
+}
+  
+#footerItemCoffee{
     color: #6f4e37 !important;
-    padding-left: 0.25%;
+    padding-left: 0.20%;
 }
 
-#footerItem:hover {
+#footerItemCoffee:hover, #footerItemCoffee.hover {
     color: var(--bonewhite) !important;
 }
 
+#coffeeIcon {
+    color: #6f4e37;
+}
+
+#coffeeIcon:hover, #coffeeIcon.hover {
+    color: var(--bonewhite);
+}
+
+#footerItemLetterboxd{
+    color: var(--letterboxdOrange) !important;
+    padding-left: 0.3%;
+    padding-right: 1%;
+}
+
+#footerItemLetterboxd:hover, #footerItemLetterboxd.hover {
+    color: var(--bonewhite) !important;
+}   
+
 #footerIcon {
+    padding-top: 0.5%;
     font-size: 1.3rem;
     color: #6e5494;
+    margin-right: -0.5%;
 }
 
 .fa-brands.fa-github:hover {
@@ -323,6 +377,7 @@ img {
     color: var(--bonewhite);
 }
 
+
 .image-container {
     display: flex;
     justify-content: center;
@@ -333,6 +388,12 @@ img {
 
 #movie_poster {
     display: inline-block;
+}
+
+.movie-poster-img {
+    display: block;
+    margin-top: 3%;
+    max-width: 100%;
 }
 
 #movie_poster img {
@@ -353,13 +414,8 @@ img {
     border: 0 !important;
 }
 
-.footer-image {
-    padding-right: 10px;
-    /* Base image is loaded in HTML (src="LBColorLogo.png") */
-}
 
 a:hover .footer-image,
 a:focus .footer-image {
     content: url("LBBWLogo.png");
-
 }

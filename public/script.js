@@ -10,56 +10,11 @@ let collectedGuessesArray = [];
 let currentImageIndex = 1;
 let gameOver = false;
 let correctMovieDate = '';
-const maxMoviesToShow = 10;
+const maxMoviesToShow = 5;
 const selectedColumns = ['title', 'year', 'movieID', 'posterLink']; // Columns to select from the CSV file
 const maxIncorrectGuesses = 5;
-
 const imageButtonsContainer = document.getElementById('imageButtons');
 const multiButton = document.querySelector('button[id="multi-button"]');
-const statsDisplay = document.getElementById('statsDisplay');
-
-const historyButton = document.getElementById('displayHistoryButton');
-const historyIcon = document.getElementById('historyIcon');
-
-// When the mouse enters, add a class (or change the class)
-historyButton.addEventListener('mouseenter', () => {
-    historyIcon.classList.add('fa-spin', 'fa-spin-reverse');
-});
-
-// When the mouse leaves, revert back to the original class
-historyButton.addEventListener('mouseleave', () => {
-    historyIcon.classList.remove('fa-spin', 'fa-spin-reverse');
-});
-
-const statsButton = document.getElementById('displayStatsButton');
-const statsIcon = document.getElementById('statsIcon');
-
-// When the mouse enters, add a class (or change the class)
-statsButton.addEventListener('mouseenter', () => {
-    statsIcon.classList.add('fa-flip');
-});
-
-// When the mouse leaves, revert back to the original class
-statsButton.addEventListener('mouseleave', () => {
-    statsIcon.classList.remove('fa-flip');
-});
-
-const instructionsButton = document.getElementById('instructionsButton');
-const instructionsIcon = document.getElementById('instructionsIcon');
-
-// When the mouse enters, add a class (or change the class)
-instructionsButton.addEventListener('mouseenter', () => {
-    instructionsIcon.classList.add('fa-bounce');
-});
-
-// When the mouse leaves, revert back to the original class
-instructionsButton.addEventListener('mouseleave', () => {
-    instructionsIcon.classList.remove('fa-bounce');
-});
-
-
-
-
 
 var globalGameStats = {
     "games": [
@@ -842,7 +797,14 @@ function deactivateButton(buttonID) {
 function displayInstructions() {
     const modalContentDiv = document.getElementById('modalContent');
 
-    modalContentDiv.innerHTML = `<h2>How to Play</h2>`;
+    modalContentDiv.innerHTML = `
+    <h2>How to Play</h2>
+    <p>You have 5 tries to guess the movie. Each guess or skip will reveal an additional review to help you.</p>
+    <p>Every day features a new movie, and you can only play once per day.</p>
+    <p>Your stats ands history are logged automatically and can be viewed whenever.</p>
+    <p>Good luck and have fun!</p>
+  `;
+  
     setActiveButton("instructionsButton");
 
     // Display the modal
@@ -1095,6 +1057,7 @@ function finishGame() {
 
     const img = document.createElement('img');
     const correctMovie = moviesData.find(movie => movie.movieID === correctMovieID);
+    img.classList.add('movie-poster-img');
     img.src = correctMovie.posterLink;
     img.alt = `${correctMovie.title} (${correctMovie.year}) movie poster`;
     const existingDiv = document.getElementById('movie_poster');
@@ -1192,7 +1155,7 @@ function displayCurrentImage(index = 1) {
     reviewContainer.innerHTML = '';
     if (reviewImages.length > 0) {
         const img = document.createElement('img');
-        const correctMovie = moviesData.find(movie => movie.movieID === correctMovieID);
+        img.classList.add('movie-poster-img');
         img.alt = `Review: ${reviewTexts[index - 1]}`;
         img.id = 'reviewImage';
         img.src = reviewImages[index - 1];
@@ -1223,9 +1186,86 @@ function updateImageButtons() {
     currentImageIndex = incorrectGuessCount + 1;
 }
 
-// ---------------------------
-// Initialize the game (all starter logic here)
-// ---------------------------
+function hoverCoffee() {
+    const coffeeText = document.getElementById('footerItemCoffee');
+    const coffeeIcon = document.getElementById('coffeeIcon');
+
+    // Add event listeners for hover and focus
+    coffeeText.addEventListener('pointerenter', function() {
+        coffeeIcon.classList.add('hover');// // Change to the new image
+    });
+
+    coffeeText.addEventListener('pointerleave', function() {
+        coffeeIcon.classList.remove('hover'); // Change back to the original image
+    });
+
+    coffeeIcon.addEventListener('pointerenter', function() {
+        coffeeText.classList.add('hover');// Change to the new image
+    });
+
+    coffeeIcon.addEventListener('pointerleave', function() {
+        coffeeText.classList.remove('hover'); // Change back to the original image
+    });
+}
+
+function hoverLetterboxd() {
+    const footerItemLetterboxd = document.getElementById('footerItemLetterboxd');
+    const footerImage = document.querySelector('.footer-image');
+
+    // Add event listeners for hover and focus
+    footerItemLetterboxd.addEventListener('pointerenter', function() {
+        footerImage.src = 'LBBWLogo.png'; // Change to the new image
+    });
+
+    footerItemLetterboxd.addEventListener('pointerleave', function() {
+        footerImage.src = 'LBColorLogo.png'; // Change back to the original image
+    });
+
+    footerImage.addEventListener('pointerenter', function() {
+        footerItemLetterboxd.classList.add('hover');// Change to the new image
+    });
+
+    footerImage.addEventListener('pointerleave', function() {
+        footerItemLetterboxd.classList.remove('hover'); // Change back to the original image
+    });
+}
+
+function hoverHistory() {   
+    const historyButton = document.getElementById('displayHistoryButton');
+    const historyIcon = document.getElementById('historyIcon');
+    historyButton.addEventListener('pointerenter', () => {
+        historyIcon.classList.add('fa-spin', 'fa-spin-reverse');
+    });
+    historyButton.addEventListener('pointerleave', () => {
+        historyIcon.classList.remove('fa-spin', 'fa-spin-reverse');
+    });
+}
+
+function hoverStats() {
+    const statsButton = document.getElementById('displayStatsButton');
+    const statsIcon = document.getElementById('statsIcon');
+    statsButton.addEventListener('pointerenter', () => {
+        statsIcon.classList.add('fa-flip');
+    });
+    statsButton.addEventListener('pointerleave', () => {
+        statsIcon.classList.remove('fa-flip');
+    });    
+}
+
+function hoverInstructions() {
+    const instructionsButton = document.getElementById('instructionsButton');
+    const instructionsIcon = document.getElementById('instructionsIcon');
+
+    instructionsButton.addEventListener('pointerenter', () => {
+        instructionsIcon.classList.add('fa-bounce');
+    });
+    instructionsButton.addEventListener('pointerleave', () => {
+        instructionsIcon.classList.remove('fa-bounce');
+    });
+}
+
+
+
 document.addEventListener('DOMContentLoaded', async function initializeGame() {
     try {
         // Load CSV file and parse movie data
@@ -1261,10 +1301,14 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
         // Check if this game has already been played.
         if (hasGameBeenPlayed(correctMovieID, globalGameStats)) {
             finishGame();
-        } else {
-            const textDisplay = document.getElementById('textDisplay');
-            textDisplay.innerHTML = `<a style="color:white;">You have ${maxIncorrectGuesses} tries to guess the movie. For every incorrect guess, you'll get a new review. You can switch between reviews. Search and click on a movie to submit it. Good luck!</a>`;
-        }
+        } 
+
+        hoverCoffee();
+        hoverLetterboxd();
+        hoverHistory();
+        hoverStats();
+        hoverInstructions();
+
     } catch (error) {
         console.error('Error during initialization:', error);
     }

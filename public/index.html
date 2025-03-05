@@ -13,7 +13,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guess the Movie</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css">
 
     <link rel="icon" type="image/x-icon" href="just_logo.png">
     <link rel="stylesheet" href="styles.css?v=1.0">
@@ -41,16 +41,25 @@
                 <!-- Buttons -->
                 <button id="displayStatsButton" class="display-stats-button" onclick="displayStats()">
                     <i class="fa-solid fa-chart-simple icon" id = "statsIcon"></i>
-                    Your Stats</button>
-                    
-                <button id="displayHistoryButton" class="display-history-button" onclick="displayHistory()">
-                    <i class="fa-solid fa-clock-rotate-left icon" id ="historyIcon"></i> 
-                        Game History
-                </button>
-                <button id="instructionsButton" class="instructions-button" onclick="displayInstructions()">
+                    <span class="stats-button-text full">Your Stats</span>
+                    <span class="stats-button-text short">Stats</span>
+                  </button>
+
+                  <button id="displayHistoryButton" class="display-history-button" onclick="displayHistory()">
+                    <i class="fa-solid fa-clock-rotate-left icon" id = "historyIcon"></i>
+                    <span class="history-button-text full">Game History</span>
+                    <span class="history-button-text short">History</span>
+
+                  </button>
+
+                  <button id="instructionsButton" class="instructions-button" onclick="displayInstructions()">
                     <i class="fa-solid fa-question icon" id = "instructionsIcon"></i>
-                        How to Play
-                </button>
+                    <span class="instructions-button-text full">How to Play</span>
+                    <span class="instructions-button-text short">Guide</span>
+
+                  </button>
+
+                                      
             </div>
         </header>
 
@@ -81,10 +90,10 @@
             <a id="footerIcon" href="https://letterboxd.com/gaurava/" target="_blank">
                 <img src="LBColorLogo.png" alt="Letterboxd Profile" class="footer-image" />
             </a>
+            <a id="footerItemLetterboxd" href="https://letterboxd.com/gaurava/">My Letterboxd</a>
 
-            <a href="https://buymeacoffee.com/gprojects" style="text-decoration: none;">☕</a>
-            <a id="footerItem" href="https://buymeacoffee.com/gprojects ">Buy Me a Coffee</a>
-
+            <i style="text-decoration: none;" href="https://buymeacoffee.com/gprojects" class="fa-solid fa-mug-hot icon" id = "coffeeIcon"></i>
+            <a id="footerItemCoffee" href="https://buymeacoffee.com/gprojects ">Buy Me a Coffee</a>
         </footer>
     </main>
     <div id="Modal" class="modal">
