@@ -28,7 +28,7 @@
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3181134485510321"
         crossorigin="anonymous"></script>
-
+        
 </head>
 
 <body>
@@ -40,32 +40,36 @@
 
                 <!-- Buttons -->
                 <button id="displayStatsButton" class="display-stats-button" onclick="displayStats()">
-                    <i class="fa-solid fa-chart-simple icon" id = "statsIcon"></i>
+                    <i class="fa-solid fa-chart-simple icon" id="statsIcon"></i>
                     <span class="stats-button-text full">Your Stats</span>
                     <span class="stats-button-text short">Stats</span>
-                  </button>
+                </button>
 
-                  <button id="displayHistoryButton" class="display-history-button" onclick="displayHistory()">
-                    <i class="fa-solid fa-clock-rotate-left icon" id = "historyIcon"></i>
+                <button id="displayHistoryButton" class="display-history-button" onclick="displayHistory()">
+                    <i class="fa-solid fa-clock-rotate-left icon" id="historyIcon"></i>
                     <span class="history-button-text full">Game History</span>
                     <span class="history-button-text short">History</span>
 
-                  </button>
+                </button>
 
-                  <button id="instructionsButton" class="instructions-button" onclick="displayInstructions()">
-                    <i class="fa-solid fa-question icon" id = "instructionsIcon"></i>
+                <button id="instructionsButton" class="instructions-button" onclick="displayInstructions()">
+                    <i class="fa-solid fa-question icon" id="instructionsIcon"></i>
                     <span class="instructions-button-text full">How to Play</span>
                     <span class="instructions-button-text short">Guide</span>
 
-                  </button>
+                </button>
 
-                                      
+
             </div>
         </header>
 
         <div id="content-wrap">
             <div id="statsDisplay"></div>
-            <h1 id="textDisplay" role="status" aria-live="polite"></h1>
+            <div id="textDisplay">
+                <span class="message"></span>
+                <a class="movie-link"></a>
+                <span class="message"></span>
+            </div>
             <div id="reviewContainer"></div>
             <nav id="allButtons">
                 <div id="imageButtons"></div>
@@ -92,7 +96,8 @@
             </a>
             <a id="footerItemLetterboxd" href="https://letterboxd.com/gaurava/">My Letterboxd</a>
 
-            <i style="text-decoration: none;" href="https://buymeacoffee.com/gprojects" class="fa-solid fa-mug-hot icon" id = "coffeeIcon"></i>
+            <i style="text-decoration: none;" href="https://buymeacoffee.com/gprojects" class="fa-solid fa-mug-hot icon"
+                id="coffeeIcon"></i>
             <a id="footerItemCoffee" href="https://buymeacoffee.com/gprojects ">Buy Me a Coffee</a>
         </footer>
     </main>

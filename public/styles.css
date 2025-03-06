@@ -25,11 +25,14 @@
 }
 
 #header {
+    background: none;
     background: var(--letterboxdBackground);
     color: var(--bonewhite);
     display: flex;
-    justify-content: center;  /* Center everything */
-    align-items: center; /* Align items vertically */
+    justify-content: center;
+    /* Center everything */
+    align-items: center;
+    /* Align items vertically */
     width: 100%;
     padding: 10px 0;
 }
@@ -38,52 +41,61 @@
 .header-content {
     max-width: 720px;
     display: flex;
-    gap: 2%; /* Space between logo and buttons */
+    gap: 2%;
+    /* Space between logo and buttons */
     align-items: center;
     justify-content: space-between;
 
 }
+
 @media (max-width: 480px) {
     #textDisplay {
-      padding-left: 10px;
-      padding-right: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
     }
-  
+
     .header-content {
         max-width: 100%;
         padding: 0 10px;
         flex-wrap: nowrap;
         justify-content: space-between;
     }
+
     .header-content span {
         font-size: 1rem;
     }
+
     .icon {
         font-size: 1rem;
     }
-    .logo{
-        max-width: 31% !important; 
+
+    .logo {
+        max-width: 31% !important;
     }
+
     .full {
         display: none !important;
-      }
-      .short {
+    }
+
+    .short {
         display: inline !important;
-      }
-    
-    
+    }
+
 }
 
 
 /* Adjust logo */
 .logo {
     float: left;
-    max-width: 25%; /* Adjust size */
+    max-width: 25%;
+    /* Adjust size */
     height: auto;
 }
 
 /* Button styling */
-.display-stats-button, .display-history-button, .instructions-button {
+.display-stats-button,
+.display-history-button,
+.instructions-button {
     background: transparent;
     color: var(--bonewhite);
     font-size: 1.2rem;
@@ -91,11 +103,11 @@
     border: none;
 }
 
-.display-stats-button:hover{
+.display-stats-button:hover {
     color: var(--letterboxdOrange) !important;
 }
 
-.display-history-button:hover{
+.display-history-button:hover {
     color: var(--letterboxdGreen) !important;
 
 }
@@ -104,19 +116,19 @@
     color: var(--letterboxdBlue) !important;
 }
 
-.active-stats{
+.active-stats {
     text-decoration: underline;
     color: var(--letterboxdOrange) !important;
 
 }
 
-.active-history{
+.active-history {
     text-decoration: underline;
     color: var(--letterboxdGreen) !important;
-} 
+}
 
 
-.active-instructions{
+.active-instructions {
     text-decoration: underline;
     color: var(--letterboxdBlue) !important;
 }
@@ -189,7 +201,8 @@
 }
 
 .close-button:hover {
-    opacity: 0.5; /* Makes the X slightly transparent */
+    opacity: 0.5;
+    /* Makes the X slightly transparent */
 }
 
 
@@ -245,6 +258,8 @@ body {
     color: var(--movieListText);
     max-width: fit-content;
     margin: auto;
+    text-align: center;
+
 }
 
 .movie-list li {
@@ -252,6 +267,7 @@ body {
     padding: 10px;
     width: fit-content;
     margin: auto;
+    max-width: 700px;
 }
 
 .movie-list li:hover {
@@ -272,10 +288,15 @@ body {
     text-align: center;
 }
 
+.movie-link{
+    color: var(--bonewhite) ;
+}
+
 #textDisplay {
     margin-top: 10px;
     font-size: 20px;
     max-width: 720px;
+    color: var(--bonewhite);
 }
 
 #allButtons {
@@ -325,16 +346,17 @@ body {
     justify-content: center;
 }
 
-.short{
-    display: none;  
+.short {
+    display: none;
 }
-  
-#footerItemCoffee{
+
+#footerItemCoffee {
     color: #6f4e37 !important;
     padding-left: 0.20%;
 }
 
-#footerItemCoffee:hover, #footerItemCoffee.hover {
+#footerItemCoffee:hover,
+#footerItemCoffee.hover {
     color: var(--bonewhite) !important;
 }
 
@@ -342,19 +364,21 @@ body {
     color: #6f4e37;
 }
 
-#coffeeIcon:hover, #coffeeIcon.hover {
+#coffeeIcon:hover,
+#coffeeIcon.hover {
     color: var(--bonewhite);
 }
 
-#footerItemLetterboxd{
+#footerItemLetterboxd {
     color: var(--letterboxdOrange) !important;
     padding-left: 0.3%;
     padding-right: 1%;
 }
 
-#footerItemLetterboxd:hover, #footerItemLetterboxd.hover {
+#footerItemLetterboxd:hover,
+#footerItemLetterboxd.hover {
     color: var(--bonewhite) !important;
-}   
+}
 
 #footerIcon {
     padding-top: 0.5%;
