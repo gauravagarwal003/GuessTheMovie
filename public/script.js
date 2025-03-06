@@ -19,706 +19,706 @@ const maxIncorrectGuesses = 5;
 const imageButtonsContainer = document.getElementById('imageButtons');
 const multiButton = document.querySelector('button[id="multi-button"]');
 
-// var globalGameStats = {
-//     "games": [
-//       {
-//         "correctMovieID": "men-2022",
-//         "won": false,
-//         "guessCount": 5,
-//         "guesses": [
-//           "the-vast-of-night",
-//           "fracture",
-//           "monte-carlo",
-//           "thelma-louise",
-//           "the-return-of-the-living-dead"
-//         ],
-//         "date": "2025-01-02",
-//         "title": "Men",
-//         "year": 2022,
-//         "posterLink": "https://a.ltrbxd.com/resized/film-poster/6/9/9/2/9/8/699298-men-0-230-0-345-crop.jpg?v=5065da5191"
-//       },
-//       {
-//         "correctMovieID": "harry-potter-and-the-deathly-hallows-part-2",
-//         "won": true,
-//         "guessCount": 4,
-//         "guesses": [
-//           "the-bad-guys-2022",
-//           "cars-3",
-//           "the-hangover-part-ii",
-//           "harry-potter-and-the-deathly-hallows-part-2"
-//         ],
-//         "date": "2022-05-13",
-//         "title": "Harry Potter and the Deathly Hallows: Part 2",
-//         "year": 2011,
-//         "posterLink": "https://a.ltrbxd.com/resized/film-poster/4/4/5/8/0/44580-harry-potter-and-the-deathly-hallows-part-2-0-230-0-345-crop.jpg?v=66f3769773"
-//       },
-//       {
-//         "correctMovieID": "frankenweenie-2012",
-//         "won": true,
-//         "guessCount": 3,
-//         "guesses": [
-//           "the-beekeeper-2024",
-//           "halloween-1978",
-//           "frankenweenie-2012"
-//         ],
-//         "date": "2022-05-22",
-//         "title": "Frankenweenie",
-//         "year": 2012,
-//         "posterLink": "https://a.ltrbxd.com/resized/sm/upload/w7/w9/ex/7w/zMFJ0Uy9y0Oy3KPbgtRic6IYzRk-0-230-0-345-crop.jpg?v=e838af3efa"
-//       },
-//       {
-//         "correctMovieID": "the-age-of-innocence",
-//         "won": true,
-//         "guessCount": 2,
-//         "guesses": [
-//           "the-princess-diaries-2-royal-engagement",
-//           "the-age-of-innocence"
-//         ],
-//         "date": "2024-07-22",
-//         "title": "The Age of Innocence",
-//         "year": 1993,
-//         "posterLink": "https://a.ltrbxd.com/resized/sm/upload/ya/m4/xj/mi/36euuWA31TtH5E8TRZJRvdZ9pP-0-230-0-345-crop.jpg?v=fad43e88d7"
-//       },
-//       {
-//         "correctMovieID": "ip-man",
-//         "won": true,
-//         "guessCount": 2,
-//         "guesses": [
-//           "resident-evil",
-//           "ip-man"
-//         ],
-//         "date": "2023-07-15",
-//         "title": "Ip Man",
-//         "year": 2008,
-//         "posterLink": "https://a.ltrbxd.com/resized/film-poster/4/2/8/4/1/42841-ip-man-0-230-0-345-crop.jpg?v=a2770708db"
-//       },
-//       {
-//         "correctMovieID": "like-stars-on-earth",
-//         "won": true,
-//         "guessCount": 2,
-//         "guesses": [
-//           "ida",
-//           "like-stars-on-earth"
-//         ],
-//         "date": "2023-11-18",
-//         "title": "Like Stars on Earth",
-//         "year": 2007,
-//         "posterLink": "https://a.ltrbxd.com/resized/film-poster/4/8/0/0/4/48004-taare-zameen-par-0-230-0-345-crop.jpg?v=21e4e3906b"
-//       },
-//       {
-//         "correctMovieID": "rush-2013",
-//         "won": true,
-//         "guessCount": 2,
-//         "guesses": [
-//           "overlord-2018",
-//           "rush-2013"
-//         ],
-//         "date": "2021-11-09",
-//         "title": "Rush",
-//         "year": 2013,
-//         "posterLink": "https://a.ltrbxd.com/resized/film-poster/7/9/7/8/7/79787-rush-0-230-0-345-crop.jpg?v=ca082886e5"
-//       },
-//       {
-//         "correctMovieID": "skyscraper-2018",
-//         "won": false,
-//         "guessCount": 4,
-//         "guesses": [
-//           "the-birds",
-//           "hero-2002",
-//           "anchorman-2-the-legend-continues",
-//           "wicked-2024"
-//         ],
-//         "date": "2023-07-03",
-//         "title": "Skyscraper",
-//         "year": 2018,
-//         "posterLink": "https://a.ltrbxd.com/resized/film-poster/3/7/9/5/6/5/379565-skyscraper-0-230-0-345-crop.jpg?v=beaa313187"
-//       },
-//       {
-//         "correctMovieID": "cruel-intentions",
-//         "won": false,
-//         "guessCount": 5,
-//         "guesses": [
-//           "a-walk-to-remember",
-//           "rush-hour-2",
-//           "hard-eight",
-//           "bad-santa",
-//           "salt-2010"
-//         ],
-//         "date": "2024-11-10",
-//         "title": "Cruel Intentions",
-//         "year": 1999,
-//         "posterLink": "https://a.ltrbxd.com/resized/film-poster/5/1/3/5/6/51356-cruel-intentions-0-230-0-345-crop.jpg?v=2f669d4209"
-//       },
-//       {
-//         "correctMovieID": "apostle-2018",
-//         "won": true,
-//         "guessCount": 3,
-//         "guesses": [
-//           "fighting-with-my-family",
-//           "let-the-right-one-in",
-//           "apostle-2018"
-//         ],
-//         "date": "2024-04-13",
-//         "title": "Apostle",
-//         "year": 2018,
-//         "posterLink": "https://a.ltrbxd.com/resized/film-poster/3/5/7/6/6/8/357668-apostle-0-230-0-345-crop.jpg?v=5de87356f8"
-//       },
-//       {
-//         "correctMovieID": "autumn-sonata",
-//         "won": true,
-//         "guessCount": 4,
-//         "guesses": [
-//           "crank-high-voltage",
-//           "the-color-purple-2023",
-//           "i-feel-pretty",
-//           "autumn-sonata"
-//         ],
-//         "date": "2024-02-04",
-//         "title": "Autumn Sonata",
-//         "year": 1978,
-//         "posterLink": "https://a.ltrbxd.com/resized/sm/upload/dr/d3/nw/gv/m4I32itPMlRWqWJamFAwFDbrBXp-0-230-0-345-crop.jpg?v=45433653ca"
-//       },
-//       {
-//         "correctMovieID": "palo-alto",
-//         "won": false,
-//         "guessCount": 2,
-//         "guesses": [
-//           "the-ides-of-march",
-//           "1917"
-//         ],
-//         "date": "2022-03-26",
-//         "title": "Palo Alto",
-//         "year": 2013,
-//         "posterLink": "https://a.ltrbxd.com/resized/sm/upload/7h/k3/fj/g0/sScjrGWtCw7OvsmoVUwjhEcGNWs-0-230-0-345-crop.jpg?v=6c5acbd4c8"
-//       },
-//       {
-//         "correctMovieID": "creature-from-the-black-lagoon",
-//         "won": true,
-//         "guessCount": 1,
-//         "guesses": [
-//           "creature-from-the-black-lagoon"
-//         ],
-//         "date": "2024-06-01",
-//         "title": "Creature from the Black Lagoon",
-//         "year": 1954,
-//         "posterLink": "https://a.ltrbxd.com/resized/sm/upload/dw/3f/dq/c6/hQ3k0gAh2Hv2uqrMff0gqxZDJKy-0-230-0-345-crop.jpg?v=4b95b672a1"
-//       },
-//       {
-//         "correctMovieID": "unfriended",
-//         "won": true,
-//         "guessCount": 5,
-//         "guesses": [
-//           "the-gentlemen",
-//           "chicken-little-2005",
-//           "freaks",
-//           "godzilla",
-//           "unfriended"
-//         ],
-//         "date": "2023-09-23",
-//         "title": "Unfriended",
-//         "year": 2014,
-//         "posterLink": "https://a.ltrbxd.com/resized/sm/upload/2s/t4/di/18/hfEBlhvVWFt61EWjNbjlKdDilBI-0-230-0-345-crop.jpg?v=592f643b3a"
-//       },
-//       {
-//         "correctMovieID": "the-usual-suspects",
-//         "won": true,
-//         "guessCount": 4,
-//         "guesses": [
-//           "mishima-a-life-in-four-chapters",
-//           "his-house",
-//           "annie",
-//           "the-usual-suspects"
-//         ],
-//         "date": "2021-03-01",
-//         "title": "The Usual Suspects",
-//         "year": 1995,
-//         "posterLink": "https://a.ltrbxd.com/resized/film-poster/5/1/4/9/5/51495-the-usual-suspects-0-230-0-345-crop.jpg?v=c02dce5b81"
-//       },
-//       {
-//         "correctMovieID": "2-guns",
-//         "won": true,
-//         "guessCount": 5,
-//         "guesses": [
-//           "nanny-mcphee",
-//           "the-prom-2020",
-//           "dream-scenario",
-//           "the-other-woman-2014",
-//           "2-guns"
-//         ],
-//         "date": "2021-03-08",
-//         "title": "2 Guns",
-//         "year": 2013,
-//         "posterLink": "https://a.ltrbxd.com/resized/film-poster/1/0/4/7/8/2/104782-2-guns-0-230-0-345-crop.jpg?v=b096cdac25"
-//       },
-//       {
-//         "correctMovieID": "a-beautiful-day-in-the-neighborhood",
-//         "won": false,
-//         "guessCount": 5,
-//         "guesses": [
-//           "the-karate-kid-part-ii",
-//           "death-note-2017",
-//           "the-social-network",
-//           "hocus-pocus-2",
-//           "power-rangers"
-//         ],
-//         "date": "2023-10-14",
-//         "title": "A Beautiful Day in the Neighborhood",
-//         "year": 2019,
-//         "posterLink": "https://a.ltrbxd.com/resized/film-poster/4/3/1/8/7/7/431877-a-beautiful-day-in-the-neighborhood-0-230-0-345-crop.jpg?v=80d455b968"
-//       },
-//       {
-//         "correctMovieID": "tootsie",
-//         "won": true,
-//         "guessCount": 3,
-//         "guesses": [
-//           "big",
-//           "countdown-2019",
-//           "tootsie"
-//         ],
-//         "date": "2023-05-04",
-//         "title": "Tootsie",
-//         "year": 1982,
-//         "posterLink": "https://a.ltrbxd.com/resized/sm/upload/gq/ho/hi/3v/ngyCzZwb9y5sMUCig5JQT4Y33Q-0-230-0-345-crop.jpg?v=950beaf70e"
-//       },
-//       {
-//         "correctMovieID": "meet-the-parents",
-//         "won": true,
-//         "guessCount": 4,
-//         "guesses": [
-//           "doctor-strange-in-the-multiverse-of-madness",
-//           "wallace-gromit-vengeance-most-fowl",
-//           "hercules-1997",
-//           "meet-the-parents"
-//         ],
-//         "date": "2021-11-18",
-//         "title": "Meet the Parents",
-//         "year": 2000,
-//         "posterLink": "https://a.ltrbxd.com/resized/film-poster/5/0/9/3/7/50937-meet-the-parents-0-230-0-345-crop.jpg?v=238ab9236a"
-//       },
-//       {
-//         "correctMovieID": "tully-2018",
-//         "won": true,
-//         "guessCount": 3,
-//         "guesses": [
-//           "the-prestige",
-//           "cruel-intentions",
-//           "tully-2018"
-//         ],
-//         "date": "2021-01-03",
-//         "title": "Tully",
-//         "year": 2018,
-//         "posterLink": "https://a.ltrbxd.com/resized/film-poster/3/3/5/3/2/2/335322-tully-0-230-0-345-crop.jpg?v=f899c17c7e"
-//       },
-//       {
-//         "correctMovieID": "columbus-2017",
-//         "won": true,
-//         "guessCount": 2,
-//         "guesses": [
-//           "a-haunting-in-venice",
-//           "columbus-2017"
-//         ],
-//         "date": "2022-01-09",
-//         "title": "Columbus",
-//         "year": 2017,
-//         "posterLink": "https://a.ltrbxd.com/resized/sm/upload/l1/zo/7p/wc/3ZE5Wl3CdfUH4BkWRmyMKPHkWHx-0-230-0-345-crop.jpg?v=800e4a6439"
-//       },
-//       {
-//         "correctMovieID": "a-star-is-born-2018",
-//         "won": true,
-//         "guessCount": 3,
-//         "guesses": [
-//           "moonfall",
-//           "on-the-waterfront",
-//           "a-star-is-born-2018"
-//         ],
-//         "date": "2023-03-28",
-//         "title": "A Star Is Born",
-//         "year": 2018,
-//         "posterLink": "https://a.ltrbxd.com/resized/film-poster/2/6/1/1/0/8/261108-a-star-is-born-0-230-0-345-crop.jpg?v=29d345083a"
-//       },
-//       {
-//         "correctMovieID": "what-lies-beneath",
-//         "won": true,
-//         "guessCount": 2,
-//         "guesses": [
-//           "one-cut-of-the-dead",
-//           "what-lies-beneath"
-//         ],
-//         "date": "2022-09-13",
-//         "title": "What Lies Beneath",
-//         "year": 2000,
-//         "posterLink": "https://a.ltrbxd.com/resized/film-poster/5/0/1/6/5/50165-what-lies-beneath-0-230-0-345-crop.jpg?v=38a13e010e"
-//       },
-//       {
-//         "correctMovieID": "holidate",
-//         "won": false,
-//         "guessCount": 4,
-//         "guesses": [
-//           "maid-in-manhattan",
-//           "anora",
-//           "jungle-cruise",
-//           "a-clockwork-orange"
-//         ],
-//         "date": "2021-09-20",
-//         "title": "Holidate",
-//         "year": 2020,
-//         "posterLink": "https://a.ltrbxd.com/resized/film-poster/5/4/2/4/6/4/542464-holidate-0-230-0-345-crop.jpg?v=77e889de60"
-//       },
-//       {
-//         "correctMovieID": "the-adventures-of-tintin",
-//         "won": true,
-//         "guessCount": 4,
-//         "guesses": [
-//           "the-witches-of-eastwick",
-//           "elephant-2003",
-//           "cats-2019",
-//           "the-adventures-of-tintin"
-//         ],
-//         "date": "2024-04-11",
-//         "title": "The Adventures of Tintin",
-//         "year": 2011,
-//         "posterLink": "https://a.ltrbxd.com/resized/sm/upload/tx/v5/nk/lz/rLsuszK65hQRl4KHmOtCNYV4kyD-0-230-0-345-crop.jpg?v=9bb0de40a2"
-//       },
-//       {
-//         "correctMovieID": "why-him",
-//         "won": false,
-//         "guessCount": 1,
-//         "guesses": [
-//           "the-death-of-stalin"
-//         ],
-//         "date": "2024-11-12",
-//         "title": "Why Him?",
-//         "year": 2016,
-//         "posterLink": "https://a.ltrbxd.com/resized/film-poster/2/8/7/5/0/9/287509-why-him--0-230-0-345-crop.jpg?v=92e9a917a2"
-//       },
-//       {
-//         "correctMovieID": "three-amigos",
-//         "won": true,
-//         "guessCount": 5,
-//         "guesses": [
-//           "stuart-little-2",
-//           "the-card-counter",
-//           "nerve-2016",
-//           "braindead-1992",
-//           "three-amigos"
-//         ],
-//         "date": "2022-05-22",
-//         "title": "\u00a1Three Amigos!",
-//         "year": 1986,
-//         "posterLink": "https://a.ltrbxd.com/resized/film-poster/4/7/7/5/9/47759-three-amigos--0-230-0-345-crop.jpg?v=2a2281ab0f"
-//       },
-//       {
-//         "correctMovieID": "grease",
-//         "won": false,
-//         "guessCount": 1,
-//         "guesses": [
-//           "austin-powers-in-goldmember"
-//         ],
-//         "date": "2022-07-13",
-//         "title": "Grease",
-//         "year": 1978,
-//         "posterLink": "https://a.ltrbxd.com/resized/sm/upload/uw/jl/ie/y3/grease-0-230-0-345-crop.jpg?v=1e90cafd49"
-//       },
-//       {
-//         "correctMovieID": "twilight-2008",
-//         "won": false,
-//         "guessCount": 2,
-//         "guesses": [
-//           "maxxxine",
-//           "miss-congeniality-2-armed-and-fabulous"
-//         ],
-//         "date": "2023-10-08",
-//         "title": "Twilight",
-//         "year": 2008,
-//         "posterLink": "https://a.ltrbxd.com/resized/film-poster/4/7/4/6/9/47469-twilight-0-230-0-345-crop.jpg?v=f347bd6a28"
-//       },
-//       {
-//         "correctMovieID": "dawn-of-the-planet-of-the-apes",
-//         "won": true,
-//         "guessCount": 3,
-//         "guesses": [
-//           "sherlock-holmes-a-game-of-shadows",
-//           "dune-2021",
-//           "dawn-of-the-planet-of-the-apes"
-//         ],
-//         "date": "2023-05-24",
-//         "title": "Dawn of the Planet of the Apes",
-//         "year": 2014,
-//         "posterLink": "https://a.ltrbxd.com/resized/film-poster/9/4/3/9/4/94394-dawn-of-the-planet-of-the-apes-0-230-0-345-crop.jpg?v=29a00ba752"
-//       },
-//       {
-//         "correctMovieID": "chungking-express",
-//         "won": true,
-//         "guessCount": 1,
-//         "guesses": [
-//           "chungking-express"
-//         ],
-//         "date": "2022-05-26",
-//         "title": "Chungking Express",
-//         "year": 1994,
-//         "posterLink": "https://a.ltrbxd.com/resized/film-poster/4/5/6/0/2/45602-chungking-express-0-230-0-345-crop.jpg?v=9475abb05b"
-//       },
-//       {
-//         "correctMovieID": "brave-2012",
-//         "won": true,
-//         "guessCount": 1,
-//         "guesses": [
-//           "brave-2012"
-//         ],
-//         "date": "2022-07-30",
-//         "title": "Brave",
-//         "year": 2012,
-//         "posterLink": "https://a.ltrbxd.com/resized/sm/upload/ct/de/cg/m1/tZhun7eLdyGv9nMJS9YTyOXeOCb-0-230-0-345-crop.jpg?v=31b29a5693"
-//       },
-//       {
-//         "correctMovieID": "iron-man-2008",
-//         "won": false,
-//         "guessCount": 3,
-//         "guesses": [
-//           "theater-camp-2023",
-//           "chappie",
-//           "my-neighbor-totoro"
-//         ],
-//         "date": "2024-05-01",
-//         "title": "Iron Man",
-//         "year": 2008,
-//         "posterLink": "https://a.ltrbxd.com/resized/film-poster/5/0/8/2/5/50825-iron-man-0-230-0-345-crop.jpg?v=f03c15122c"
-//       },
-//       {
-//         "correctMovieID": "five-feet-apart",
-//         "won": false,
-//         "guessCount": 2,
-//         "guesses": [
-//           "downfall",
-//           "the-iron-claw-2023"
-//         ],
-//         "date": "2024-08-26",
-//         "title": "Five Feet Apart",
-//         "year": 2019,
-//         "posterLink": "https://a.ltrbxd.com/resized/film-poster/4/5/6/8/9/5/456895-five-feet-apart-0-230-0-345-crop.jpg?v=4c06370676"
-//       },
-//       {
-//         "correctMovieID": "lion",
-//         "won": true,
-//         "guessCount": 3,
-//         "guesses": [
-//           "insidious-chapter-2",
-//           "night-at-the-museum",
-//           "lion"
-//         ],
-//         "date": "2022-12-10",
-//         "title": "Lion",
-//         "year": 2016,
-//         "posterLink": "https://a.ltrbxd.com/resized/film-poster/2/6/3/2/2/2/263222-lion-0-230-0-345-crop.jpg?v=1311804f8d"
-//       },
-//       {
-//         "correctMovieID": "deadpool",
-//         "won": false,
-//         "guessCount": 4,
-//         "guesses": [
-//           "honey-boy",
-//           "the-polar-express",
-//           "fallen-angels",
-//           "were-the-millers"
-//         ],
-//         "date": "2021-07-18",
-//         "title": "Deadpool",
-//         "year": 2016,
-//         "posterLink": "https://a.ltrbxd.com/resized/film-poster/2/2/0/5/7/5/220575-deadpool-0-230-0-345-crop.jpg?v=2f726ea9b3"
-//       },
-//       {
-//         "correctMovieID": "iron-man-2",
-//         "won": true,
-//         "guessCount": 3,
-//         "guesses": [
-//           "lol-2012",
-//           "annabelle-comes-home",
-//           "iron-man-2"
-//         ],
-//         "date": "2023-02-25",
-//         "title": "Iron Man 2",
-//         "year": 2010,
-//         "posterLink": "https://a.ltrbxd.com/resized/film-poster/4/6/5/1/1/46511-iron-man-2-0-230-0-345-crop.jpg?v=67e856ad63"
-//       },
-//       {
-//         "correctMovieID": "secret-window",
-//         "won": false,
-//         "guessCount": 5,
-//         "guesses": [
-//           "tooth-fairy-2010",
-//           "close-up",
-//           "watcher",
-//           "tinker-tailor-soldier-spy",
-//           "black-panther"
-//         ],
-//         "date": "2021-10-31",
-//         "title": "Secret Window",
-//         "year": 2004,
-//         "posterLink": "https://a.ltrbxd.com/resized/film-poster/5/0/9/4/8/50948-secret-window-0-230-0-345-crop.jpg?v=9897cd805f"
-//       },
-//       {
-//         "correctMovieID": "the-sandlot",
-//         "won": true,
-//         "guessCount": 1,
-//         "guesses": [
-//           "the-sandlot"
-//         ],
-//         "date": "2022-09-06",
-//         "title": "The Sandlot",
-//         "year": 1993,
-//         "posterLink": "https://a.ltrbxd.com/resized/film-poster/4/5/2/2/0/45220-the-sandlot-0-230-0-345-crop.jpg?v=ab0f1f010f"
-//       },
-//       {
-//         "correctMovieID": "steve-jobs",
-//         "won": false,
-//         "guessCount": 5,
-//         "guesses": [
-//           "shaolin-soccer",
-//           "ponyo",
-//           "an-education",
-//           "the-boogeyman",
-//           "the-cabin-in-the-woods"
-//         ],
-//         "date": "2023-08-18",
-//         "title": "Steve Jobs",
-//         "year": 2015,
-//         "posterLink": "https://a.ltrbxd.com/resized/sm/upload/ql/1g/sz/63/7SUaf2UgoY0ZRGbQtRlfDkLDBCb-0-230-0-345-crop.jpg?v=867f24dae3"
-//       },
-//       {
-//         "correctMovieID": "herbie-fully-loaded",
-//         "won": true,
-//         "guessCount": 2,
-//         "guesses": [
-//           "30-days-of-night",
-//           "herbie-fully-loaded"
-//         ],
-//         "date": "2024-08-01",
-//         "title": "Herbie Fully Loaded",
-//         "year": 2005,
-//         "posterLink": "https://a.ltrbxd.com/resized/film-poster/4/5/2/9/1/45291-herbie-fully-loaded-0-230-0-345-crop.jpg?v=5afd3c32f9"
-//       },
-//       {
-//         "correctMovieID": "the-book-thief",
-//         "won": true,
-//         "guessCount": 2,
-//         "guesses": [
-//           "chip-n-dale-rescue-rangers",
-//           "the-book-thief"
-//         ],
-//         "date": "2024-08-05",
-//         "title": "The Book Thief",
-//         "year": 2013,
-//         "posterLink": "https://a.ltrbxd.com/resized/film-poster/1/4/5/8/9/1/145891-the-book-thief-0-230-0-345-crop.jpg?v=0051588bae"
-//       },
-//       {
-//         "correctMovieID": "venom-let-there-be-carnage",
-//         "won": false,
-//         "guessCount": 5,
-//         "guesses": [
-//           "babylon-2022",
-//           "hot-fuzz",
-//           "guns-akimbo",
-//           "milk-2008",
-//           "allied"
-//         ],
-//         "date": "2021-11-17",
-//         "title": "Venom: Let There Be Carnage",
-//         "year": 2021,
-//         "posterLink": "https://a.ltrbxd.com/resized/film-poster/5/0/8/6/3/8/508638-venom-let-there-be-carnage-0-230-0-345-crop.jpg?v=553c604246"
-//       },
-//       {
-//         "correctMovieID": "transporter-2",
-//         "won": true,
-//         "guessCount": 1,
-//         "guesses": [
-//           "transporter-2"
-//         ],
-//         "date": "2024-01-18",
-//         "title": "Transporter 2",
-//         "year": 2005,
-//         "posterLink": "https://a.ltrbxd.com/resized/film-poster/4/7/2/5/9/47259-transporter-2-0-230-0-345-crop.jpg?v=09524b8073"
-//       },
-//       {
-//         "correctMovieID": "flubber",
-//         "won": true,
-//         "guessCount": 2,
-//         "guesses": [
-//           "beasts-of-no-nation",
-//           "flubber"
-//         ],
-//         "date": "2024-01-15",
-//         "title": "Flubber",
-//         "year": 1997,
-//         "posterLink": "https://a.ltrbxd.com/resized/film-poster/4/7/0/2/6/47026-flubber-0-230-0-345-crop.jpg?v=66fcbe71a8"
-//       },
-//       {
-//         "correctMovieID": "ghost-in-the-shell",
-//         "won": true,
-//         "guessCount": 5,
-//         "guesses": [
-//           "monster-2023",
-//           "back-to-black",
-//           "my-old-ass",
-//           "time-cut",
-//           "ghost-in-the-shell"
-//         ],
-//         "date": "2022-12-23",
-//         "title": "Ghost in the Shell",
-//         "year": 1995,
-//         "posterLink": "https://a.ltrbxd.com/resized/film-poster/4/7/2/7/0/47270-ghost-in-the-shell-0-230-0-345-crop.jpg?v=c837d80ee1"
-//       },
-//       {
-//         "correctMovieID": "can-you-ever-forgive-me",
-//         "won": true,
-//         "guessCount": 1,
-//         "guesses": [
-//           "can-you-ever-forgive-me"
-//         ],
-//         "date": "2022-09-26",
-//         "title": "Can You Ever Forgive Me?",
-//         "year": 2018,
-//         "posterLink": "https://a.ltrbxd.com/resized/film-poster/3/3/6/5/5/5/336555-can-you-ever-forgive-me--0-230-0-345-crop.jpg?v=f17a8927c9"
-//       },
-//       {
-//         "correctMovieID": "dances-with-wolves",
-//         "won": true,
-//         "guessCount": 5,
-//         "guesses": [
-//           "the-love-witch",
-//           "cloud-atlas",
-//           "v-h-s",
-//           "the-twilight-saga-eclipse",
-//           "dances-with-wolves"
-//         ],
-//         "date": "2024-08-10",
-//         "title": "Dances with Wolves",
-//         "year": 1990,
-//         "posterLink": "https://a.ltrbxd.com/resized/film-poster/5/1/5/3/9/51539-dances-with-wolves-0-230-0-345-crop.jpg?v=655e740f9b"
-//       },
-//       {
-//         "correctMovieID": "heathers",
-//         "won": true,
-//         "guessCount": 4,
-//         "guesses": [
-//           "safe-house-2012",
-//           "the-lorax-2012",
-//           "monsters-university",
-//           "heathers"
-//         ],
-//         "date": "2022-04-23",
-//         "title": "Heathers",
-//         "year": 1989,
-//         "posterLink": "https://a.ltrbxd.com/resized/film-poster/5/0/1/7/7/50177-heathers-0-230-0-345-crop.jpg?v=dbd1f7062c"
-//       }    ],
-//     "totalPlayed": 49,
-//     "totalWon": 34
-//   };
+var globalGameStats = {
+    "games": [
+      {
+        "correctMovieID": "men-2022",
+        "won": false,
+        "guessCount": 5,
+        "guesses": [
+          "the-vast-of-night",
+          "fracture",
+          "monte-carlo",
+          "thelma-louise",
+          "the-return-of-the-living-dead"
+        ],
+        "date": "2025-01-02",
+        "title": "Men",
+        "year": 2022,
+        "posterLink": "https://a.ltrbxd.com/resized/film-poster/6/9/9/2/9/8/699298-men-0-230-0-345-crop.jpg?v=5065da5191"
+      },
+      {
+        "correctMovieID": "harry-potter-and-the-deathly-hallows-part-2",
+        "won": true,
+        "guessCount": 4,
+        "guesses": [
+          "the-bad-guys-2022",
+          "cars-3",
+          "the-hangover-part-ii",
+          "harry-potter-and-the-deathly-hallows-part-2"
+        ],
+        "date": "2022-05-13",
+        "title": "Harry Potter and the Deathly Hallows: Part 2",
+        "year": 2011,
+        "posterLink": "https://a.ltrbxd.com/resized/film-poster/4/4/5/8/0/44580-harry-potter-and-the-deathly-hallows-part-2-0-230-0-345-crop.jpg?v=66f3769773"
+      },
+      {
+        "correctMovieID": "frankenweenie-2012",
+        "won": true,
+        "guessCount": 3,
+        "guesses": [
+          "the-beekeeper-2024",
+          "halloween-1978",
+          "frankenweenie-2012"
+        ],
+        "date": "2022-05-22",
+        "title": "Frankenweenie",
+        "year": 2012,
+        "posterLink": "https://a.ltrbxd.com/resized/sm/upload/w7/w9/ex/7w/zMFJ0Uy9y0Oy3KPbgtRic6IYzRk-0-230-0-345-crop.jpg?v=e838af3efa"
+      },
+      {
+        "correctMovieID": "the-age-of-innocence",
+        "won": true,
+        "guessCount": 2,
+        "guesses": [
+          "the-princess-diaries-2-royal-engagement",
+          "the-age-of-innocence"
+        ],
+        "date": "2024-07-22",
+        "title": "The Age of Innocence",
+        "year": 1993,
+        "posterLink": "https://a.ltrbxd.com/resized/sm/upload/ya/m4/xj/mi/36euuWA31TtH5E8TRZJRvdZ9pP-0-230-0-345-crop.jpg?v=fad43e88d7"
+      },
+      {
+        "correctMovieID": "ip-man",
+        "won": true,
+        "guessCount": 2,
+        "guesses": [
+          "resident-evil",
+          "ip-man"
+        ],
+        "date": "2023-07-15",
+        "title": "Ip Man",
+        "year": 2008,
+        "posterLink": "https://a.ltrbxd.com/resized/film-poster/4/2/8/4/1/42841-ip-man-0-230-0-345-crop.jpg?v=a2770708db"
+      },
+      {
+        "correctMovieID": "like-stars-on-earth",
+        "won": true,
+        "guessCount": 2,
+        "guesses": [
+          "ida",
+          "like-stars-on-earth"
+        ],
+        "date": "2023-11-18",
+        "title": "Like Stars on Earth",
+        "year": 2007,
+        "posterLink": "https://a.ltrbxd.com/resized/film-poster/4/8/0/0/4/48004-taare-zameen-par-0-230-0-345-crop.jpg?v=21e4e3906b"
+      },
+      {
+        "correctMovieID": "rush-2013",
+        "won": true,
+        "guessCount": 2,
+        "guesses": [
+          "overlord-2018",
+          "rush-2013"
+        ],
+        "date": "2021-11-09",
+        "title": "Rush",
+        "year": 2013,
+        "posterLink": "https://a.ltrbxd.com/resized/film-poster/7/9/7/8/7/79787-rush-0-230-0-345-crop.jpg?v=ca082886e5"
+      },
+      {
+        "correctMovieID": "skyscraper-2018",
+        "won": false,
+        "guessCount": 4,
+        "guesses": [
+          "the-birds",
+          "hero-2002",
+          "anchorman-2-the-legend-continues",
+          "wicked-2024"
+        ],
+        "date": "2023-07-03",
+        "title": "Skyscraper",
+        "year": 2018,
+        "posterLink": "https://a.ltrbxd.com/resized/film-poster/3/7/9/5/6/5/379565-skyscraper-0-230-0-345-crop.jpg?v=beaa313187"
+      },
+      {
+        "correctMovieID": "cruel-intentions",
+        "won": false,
+        "guessCount": 5,
+        "guesses": [
+          "a-walk-to-remember",
+          "rush-hour-2",
+          "hard-eight",
+          "bad-santa",
+          "salt-2010"
+        ],
+        "date": "2024-11-10",
+        "title": "Cruel Intentions",
+        "year": 1999,
+        "posterLink": "https://a.ltrbxd.com/resized/film-poster/5/1/3/5/6/51356-cruel-intentions-0-230-0-345-crop.jpg?v=2f669d4209"
+      },
+      {
+        "correctMovieID": "apostle-2018",
+        "won": true,
+        "guessCount": 3,
+        "guesses": [
+          "fighting-with-my-family",
+          "let-the-right-one-in",
+          "apostle-2018"
+        ],
+        "date": "2024-04-13",
+        "title": "Apostle",
+        "year": 2018,
+        "posterLink": "https://a.ltrbxd.com/resized/film-poster/3/5/7/6/6/8/357668-apostle-0-230-0-345-crop.jpg?v=5de87356f8"
+      },
+      {
+        "correctMovieID": "autumn-sonata",
+        "won": true,
+        "guessCount": 4,
+        "guesses": [
+          "crank-high-voltage",
+          "the-color-purple-2023",
+          "i-feel-pretty",
+          "autumn-sonata"
+        ],
+        "date": "2024-02-04",
+        "title": "Autumn Sonata",
+        "year": 1978,
+        "posterLink": "https://a.ltrbxd.com/resized/sm/upload/dr/d3/nw/gv/m4I32itPMlRWqWJamFAwFDbrBXp-0-230-0-345-crop.jpg?v=45433653ca"
+      },
+      {
+        "correctMovieID": "palo-alto",
+        "won": false,
+        "guessCount": 2,
+        "guesses": [
+          "the-ides-of-march",
+          "1917"
+        ],
+        "date": "2022-03-26",
+        "title": "Palo Alto",
+        "year": 2013,
+        "posterLink": "https://a.ltrbxd.com/resized/sm/upload/7h/k3/fj/g0/sScjrGWtCw7OvsmoVUwjhEcGNWs-0-230-0-345-crop.jpg?v=6c5acbd4c8"
+      },
+      {
+        "correctMovieID": "creature-from-the-black-lagoon",
+        "won": true,
+        "guessCount": 1,
+        "guesses": [
+          "creature-from-the-black-lagoon"
+        ],
+        "date": "2024-06-01",
+        "title": "Creature from the Black Lagoon",
+        "year": 1954,
+        "posterLink": "https://a.ltrbxd.com/resized/sm/upload/dw/3f/dq/c6/hQ3k0gAh2Hv2uqrMff0gqxZDJKy-0-230-0-345-crop.jpg?v=4b95b672a1"
+      },
+      {
+        "correctMovieID": "unfriended",
+        "won": true,
+        "guessCount": 5,
+        "guesses": [
+          "the-gentlemen",
+          "chicken-little-2005",
+          "freaks",
+          "godzilla",
+          "unfriended"
+        ],
+        "date": "2023-09-23",
+        "title": "Unfriended",
+        "year": 2014,
+        "posterLink": "https://a.ltrbxd.com/resized/sm/upload/2s/t4/di/18/hfEBlhvVWFt61EWjNbjlKdDilBI-0-230-0-345-crop.jpg?v=592f643b3a"
+      },
+      {
+        "correctMovieID": "the-usual-suspects",
+        "won": true,
+        "guessCount": 4,
+        "guesses": [
+          "mishima-a-life-in-four-chapters",
+          "his-house",
+          "annie",
+          "the-usual-suspects"
+        ],
+        "date": "2021-03-01",
+        "title": "The Usual Suspects",
+        "year": 1995,
+        "posterLink": "https://a.ltrbxd.com/resized/film-poster/5/1/4/9/5/51495-the-usual-suspects-0-230-0-345-crop.jpg?v=c02dce5b81"
+      },
+      {
+        "correctMovieID": "2-guns",
+        "won": true,
+        "guessCount": 5,
+        "guesses": [
+          "nanny-mcphee",
+          "the-prom-2020",
+          "dream-scenario",
+          "the-other-woman-2014",
+          "2-guns"
+        ],
+        "date": "2021-03-08",
+        "title": "2 Guns",
+        "year": 2013,
+        "posterLink": "https://a.ltrbxd.com/resized/film-poster/1/0/4/7/8/2/104782-2-guns-0-230-0-345-crop.jpg?v=b096cdac25"
+      },
+      {
+        "correctMovieID": "a-beautiful-day-in-the-neighborhood",
+        "won": false,
+        "guessCount": 5,
+        "guesses": [
+          "the-karate-kid-part-ii",
+          "death-note-2017",
+          "the-social-network",
+          "hocus-pocus-2",
+          "power-rangers"
+        ],
+        "date": "2023-10-14",
+        "title": "A Beautiful Day in the Neighborhood",
+        "year": 2019,
+        "posterLink": "https://a.ltrbxd.com/resized/film-poster/4/3/1/8/7/7/431877-a-beautiful-day-in-the-neighborhood-0-230-0-345-crop.jpg?v=80d455b968"
+      },
+      {
+        "correctMovieID": "tootsie",
+        "won": true,
+        "guessCount": 3,
+        "guesses": [
+          "big",
+          "countdown-2019",
+          "tootsie"
+        ],
+        "date": "2023-05-04",
+        "title": "Tootsie",
+        "year": 1982,
+        "posterLink": "https://a.ltrbxd.com/resized/sm/upload/gq/ho/hi/3v/ngyCzZwb9y5sMUCig5JQT4Y33Q-0-230-0-345-crop.jpg?v=950beaf70e"
+      },
+      {
+        "correctMovieID": "meet-the-parents",
+        "won": true,
+        "guessCount": 4,
+        "guesses": [
+          "doctor-strange-in-the-multiverse-of-madness",
+          "wallace-gromit-vengeance-most-fowl",
+          "hercules-1997",
+          "meet-the-parents"
+        ],
+        "date": "2021-11-18",
+        "title": "Meet the Parents",
+        "year": 2000,
+        "posterLink": "https://a.ltrbxd.com/resized/film-poster/5/0/9/3/7/50937-meet-the-parents-0-230-0-345-crop.jpg?v=238ab9236a"
+      },
+      {
+        "correctMovieID": "tully-2018",
+        "won": true,
+        "guessCount": 3,
+        "guesses": [
+          "the-prestige",
+          "cruel-intentions",
+          "tully-2018"
+        ],
+        "date": "2021-01-03",
+        "title": "Tully",
+        "year": 2018,
+        "posterLink": "https://a.ltrbxd.com/resized/film-poster/3/3/5/3/2/2/335322-tully-0-230-0-345-crop.jpg?v=f899c17c7e"
+      },
+      {
+        "correctMovieID": "columbus-2017",
+        "won": true,
+        "guessCount": 2,
+        "guesses": [
+          "a-haunting-in-venice",
+          "columbus-2017"
+        ],
+        "date": "2022-01-09",
+        "title": "Columbus",
+        "year": 2017,
+        "posterLink": "https://a.ltrbxd.com/resized/sm/upload/l1/zo/7p/wc/3ZE5Wl3CdfUH4BkWRmyMKPHkWHx-0-230-0-345-crop.jpg?v=800e4a6439"
+      },
+      {
+        "correctMovieID": "a-star-is-born-2018",
+        "won": true,
+        "guessCount": 3,
+        "guesses": [
+          "moonfall",
+          "on-the-waterfront",
+          "a-star-is-born-2018"
+        ],
+        "date": "2023-03-28",
+        "title": "A Star Is Born",
+        "year": 2018,
+        "posterLink": "https://a.ltrbxd.com/resized/film-poster/2/6/1/1/0/8/261108-a-star-is-born-0-230-0-345-crop.jpg?v=29d345083a"
+      },
+      {
+        "correctMovieID": "what-lies-beneath",
+        "won": true,
+        "guessCount": 2,
+        "guesses": [
+          "one-cut-of-the-dead",
+          "what-lies-beneath"
+        ],
+        "date": "2022-09-13",
+        "title": "What Lies Beneath",
+        "year": 2000,
+        "posterLink": "https://a.ltrbxd.com/resized/film-poster/5/0/1/6/5/50165-what-lies-beneath-0-230-0-345-crop.jpg?v=38a13e010e"
+      },
+      {
+        "correctMovieID": "holidate",
+        "won": false,
+        "guessCount": 4,
+        "guesses": [
+          "maid-in-manhattan",
+          "anora",
+          "jungle-cruise",
+          "a-clockwork-orange"
+        ],
+        "date": "2021-09-20",
+        "title": "Holidate",
+        "year": 2020,
+        "posterLink": "https://a.ltrbxd.com/resized/film-poster/5/4/2/4/6/4/542464-holidate-0-230-0-345-crop.jpg?v=77e889de60"
+      },
+      {
+        "correctMovieID": "the-adventures-of-tintin",
+        "won": true,
+        "guessCount": 4,
+        "guesses": [
+          "the-witches-of-eastwick",
+          "elephant-2003",
+          "cats-2019",
+          "the-adventures-of-tintin"
+        ],
+        "date": "2024-04-11",
+        "title": "The Adventures of Tintin",
+        "year": 2011,
+        "posterLink": "https://a.ltrbxd.com/resized/sm/upload/tx/v5/nk/lz/rLsuszK65hQRl4KHmOtCNYV4kyD-0-230-0-345-crop.jpg?v=9bb0de40a2"
+      },
+      {
+        "correctMovieID": "why-him",
+        "won": false,
+        "guessCount": 1,
+        "guesses": [
+          "the-death-of-stalin"
+        ],
+        "date": "2024-11-12",
+        "title": "Why Him?",
+        "year": 2016,
+        "posterLink": "https://a.ltrbxd.com/resized/film-poster/2/8/7/5/0/9/287509-why-him--0-230-0-345-crop.jpg?v=92e9a917a2"
+      },
+      {
+        "correctMovieID": "three-amigos",
+        "won": true,
+        "guessCount": 5,
+        "guesses": [
+          "stuart-little-2",
+          "the-card-counter",
+          "nerve-2016",
+          "braindead-1992",
+          "three-amigos"
+        ],
+        "date": "2022-05-22",
+        "title": "\u00a1Three Amigos!",
+        "year": 1986,
+        "posterLink": "https://a.ltrbxd.com/resized/film-poster/4/7/7/5/9/47759-three-amigos--0-230-0-345-crop.jpg?v=2a2281ab0f"
+      },
+      {
+        "correctMovieID": "grease",
+        "won": false,
+        "guessCount": 1,
+        "guesses": [
+          "austin-powers-in-goldmember"
+        ],
+        "date": "2022-07-13",
+        "title": "Grease",
+        "year": 1978,
+        "posterLink": "https://a.ltrbxd.com/resized/sm/upload/uw/jl/ie/y3/grease-0-230-0-345-crop.jpg?v=1e90cafd49"
+      },
+      {
+        "correctMovieID": "twilight-2008",
+        "won": false,
+        "guessCount": 2,
+        "guesses": [
+          "maxxxine",
+          "miss-congeniality-2-armed-and-fabulous"
+        ],
+        "date": "2023-10-08",
+        "title": "Twilight",
+        "year": 2008,
+        "posterLink": "https://a.ltrbxd.com/resized/film-poster/4/7/4/6/9/47469-twilight-0-230-0-345-crop.jpg?v=f347bd6a28"
+      },
+      {
+        "correctMovieID": "dawn-of-the-planet-of-the-apes",
+        "won": true,
+        "guessCount": 3,
+        "guesses": [
+          "sherlock-holmes-a-game-of-shadows",
+          "dune-2021",
+          "dawn-of-the-planet-of-the-apes"
+        ],
+        "date": "2023-05-24",
+        "title": "Dawn of the Planet of the Apes",
+        "year": 2014,
+        "posterLink": "https://a.ltrbxd.com/resized/film-poster/9/4/3/9/4/94394-dawn-of-the-planet-of-the-apes-0-230-0-345-crop.jpg?v=29a00ba752"
+      },
+      {
+        "correctMovieID": "chungking-express",
+        "won": true,
+        "guessCount": 1,
+        "guesses": [
+          "chungking-express"
+        ],
+        "date": "2022-05-26",
+        "title": "Chungking Express",
+        "year": 1994,
+        "posterLink": "https://a.ltrbxd.com/resized/film-poster/4/5/6/0/2/45602-chungking-express-0-230-0-345-crop.jpg?v=9475abb05b"
+      },
+      {
+        "correctMovieID": "brave-2012",
+        "won": true,
+        "guessCount": 1,
+        "guesses": [
+          "brave-2012"
+        ],
+        "date": "2022-07-30",
+        "title": "Brave",
+        "year": 2012,
+        "posterLink": "https://a.ltrbxd.com/resized/sm/upload/ct/de/cg/m1/tZhun7eLdyGv9nMJS9YTyOXeOCb-0-230-0-345-crop.jpg?v=31b29a5693"
+      },
+      {
+        "correctMovieID": "iron-man-2008",
+        "won": false,
+        "guessCount": 3,
+        "guesses": [
+          "theater-camp-2023",
+          "chappie",
+          "my-neighbor-totoro"
+        ],
+        "date": "2024-05-01",
+        "title": "Iron Man",
+        "year": 2008,
+        "posterLink": "https://a.ltrbxd.com/resized/film-poster/5/0/8/2/5/50825-iron-man-0-230-0-345-crop.jpg?v=f03c15122c"
+      },
+      {
+        "correctMovieID": "five-feet-apart",
+        "won": false,
+        "guessCount": 2,
+        "guesses": [
+          "downfall",
+          "the-iron-claw-2023"
+        ],
+        "date": "2024-08-26",
+        "title": "Five Feet Apart",
+        "year": 2019,
+        "posterLink": "https://a.ltrbxd.com/resized/film-poster/4/5/6/8/9/5/456895-five-feet-apart-0-230-0-345-crop.jpg?v=4c06370676"
+      },
+      {
+        "correctMovieID": "lion",
+        "won": true,
+        "guessCount": 3,
+        "guesses": [
+          "insidious-chapter-2",
+          "night-at-the-museum",
+          "lion"
+        ],
+        "date": "2022-12-10",
+        "title": "Lion",
+        "year": 2016,
+        "posterLink": "https://a.ltrbxd.com/resized/film-poster/2/6/3/2/2/2/263222-lion-0-230-0-345-crop.jpg?v=1311804f8d"
+      },
+      {
+        "correctMovieID": "deadpool",
+        "won": false,
+        "guessCount": 4,
+        "guesses": [
+          "honey-boy",
+          "the-polar-express",
+          "fallen-angels",
+          "were-the-millers"
+        ],
+        "date": "2021-07-18",
+        "title": "Deadpool",
+        "year": 2016,
+        "posterLink": "https://a.ltrbxd.com/resized/film-poster/2/2/0/5/7/5/220575-deadpool-0-230-0-345-crop.jpg?v=2f726ea9b3"
+      },
+      {
+        "correctMovieID": "iron-man-2",
+        "won": true,
+        "guessCount": 3,
+        "guesses": [
+          "lol-2012",
+          "annabelle-comes-home",
+          "iron-man-2"
+        ],
+        "date": "2023-02-25",
+        "title": "Iron Man 2",
+        "year": 2010,
+        "posterLink": "https://a.ltrbxd.com/resized/film-poster/4/6/5/1/1/46511-iron-man-2-0-230-0-345-crop.jpg?v=67e856ad63"
+      },
+      {
+        "correctMovieID": "secret-window",
+        "won": false,
+        "guessCount": 5,
+        "guesses": [
+          "tooth-fairy-2010",
+          "close-up",
+          "watcher",
+          "tinker-tailor-soldier-spy",
+          "black-panther"
+        ],
+        "date": "2021-10-31",
+        "title": "Secret Window",
+        "year": 2004,
+        "posterLink": "https://a.ltrbxd.com/resized/film-poster/5/0/9/4/8/50948-secret-window-0-230-0-345-crop.jpg?v=9897cd805f"
+      },
+      {
+        "correctMovieID": "the-sandlot",
+        "won": true,
+        "guessCount": 1,
+        "guesses": [
+          "the-sandlot"
+        ],
+        "date": "2022-09-06",
+        "title": "The Sandlot",
+        "year": 1993,
+        "posterLink": "https://a.ltrbxd.com/resized/film-poster/4/5/2/2/0/45220-the-sandlot-0-230-0-345-crop.jpg?v=ab0f1f010f"
+      },
+      {
+        "correctMovieID": "steve-jobs",
+        "won": false,
+        "guessCount": 5,
+        "guesses": [
+          "shaolin-soccer",
+          "ponyo",
+          "an-education",
+          "the-boogeyman",
+          "the-cabin-in-the-woods"
+        ],
+        "date": "2023-08-18",
+        "title": "Steve Jobs",
+        "year": 2015,
+        "posterLink": "https://a.ltrbxd.com/resized/sm/upload/ql/1g/sz/63/7SUaf2UgoY0ZRGbQtRlfDkLDBCb-0-230-0-345-crop.jpg?v=867f24dae3"
+      },
+      {
+        "correctMovieID": "herbie-fully-loaded",
+        "won": true,
+        "guessCount": 2,
+        "guesses": [
+          "30-days-of-night",
+          "herbie-fully-loaded"
+        ],
+        "date": "2024-08-01",
+        "title": "Herbie Fully Loaded",
+        "year": 2005,
+        "posterLink": "https://a.ltrbxd.com/resized/film-poster/4/5/2/9/1/45291-herbie-fully-loaded-0-230-0-345-crop.jpg?v=5afd3c32f9"
+      },
+      {
+        "correctMovieID": "the-book-thief",
+        "won": true,
+        "guessCount": 2,
+        "guesses": [
+          "chip-n-dale-rescue-rangers",
+          "the-book-thief"
+        ],
+        "date": "2024-08-05",
+        "title": "The Book Thief",
+        "year": 2013,
+        "posterLink": "https://a.ltrbxd.com/resized/film-poster/1/4/5/8/9/1/145891-the-book-thief-0-230-0-345-crop.jpg?v=0051588bae"
+      },
+      {
+        "correctMovieID": "venom-let-there-be-carnage",
+        "won": false,
+        "guessCount": 5,
+        "guesses": [
+          "babylon-2022",
+          "hot-fuzz",
+          "guns-akimbo",
+          "milk-2008",
+          "allied"
+        ],
+        "date": "2021-11-17",
+        "title": "Venom: Let There Be Carnage",
+        "year": 2021,
+        "posterLink": "https://a.ltrbxd.com/resized/film-poster/5/0/8/6/3/8/508638-venom-let-there-be-carnage-0-230-0-345-crop.jpg?v=553c604246"
+      },
+      {
+        "correctMovieID": "transporter-2",
+        "won": true,
+        "guessCount": 1,
+        "guesses": [
+          "transporter-2"
+        ],
+        "date": "2024-01-18",
+        "title": "Transporter 2",
+        "year": 2005,
+        "posterLink": "https://a.ltrbxd.com/resized/film-poster/4/7/2/5/9/47259-transporter-2-0-230-0-345-crop.jpg?v=09524b8073"
+      },
+      {
+        "correctMovieID": "flubber",
+        "won": true,
+        "guessCount": 2,
+        "guesses": [
+          "beasts-of-no-nation",
+          "flubber"
+        ],
+        "date": "2024-01-15",
+        "title": "Flubber",
+        "year": 1997,
+        "posterLink": "https://a.ltrbxd.com/resized/film-poster/4/7/0/2/6/47026-flubber-0-230-0-345-crop.jpg?v=66fcbe71a8"
+      },
+      {
+        "correctMovieID": "ghost-in-the-shell",
+        "won": true,
+        "guessCount": 5,
+        "guesses": [
+          "monster-2023",
+          "back-to-black",
+          "my-old-ass",
+          "time-cut",
+          "ghost-in-the-shell"
+        ],
+        "date": "2022-12-23",
+        "title": "Ghost in the Shell",
+        "year": 1995,
+        "posterLink": "https://a.ltrbxd.com/resized/film-poster/4/7/2/7/0/47270-ghost-in-the-shell-0-230-0-345-crop.jpg?v=c837d80ee1"
+      },
+      {
+        "correctMovieID": "can-you-ever-forgive-me",
+        "won": true,
+        "guessCount": 1,
+        "guesses": [
+          "can-you-ever-forgive-me"
+        ],
+        "date": "2022-09-26",
+        "title": "Can You Ever Forgive Me?",
+        "year": 2018,
+        "posterLink": "https://a.ltrbxd.com/resized/film-poster/3/3/6/5/5/5/336555-can-you-ever-forgive-me--0-230-0-345-crop.jpg?v=f17a8927c9"
+      },
+      {
+        "correctMovieID": "dances-with-wolves",
+        "won": true,
+        "guessCount": 5,
+        "guesses": [
+          "the-love-witch",
+          "cloud-atlas",
+          "v-h-s",
+          "the-twilight-saga-eclipse",
+          "dances-with-wolves"
+        ],
+        "date": "2024-08-10",
+        "title": "Dances with Wolves",
+        "year": 1990,
+        "posterLink": "https://a.ltrbxd.com/resized/film-poster/5/1/5/3/9/51539-dances-with-wolves-0-230-0-345-crop.jpg?v=655e740f9b"
+      },
+      {
+        "correctMovieID": "heathers",
+        "won": true,
+        "guessCount": 4,
+        "guesses": [
+          "safe-house-2012",
+          "the-lorax-2012",
+          "monsters-university",
+          "heathers"
+        ],
+        "date": "2022-04-23",
+        "title": "Heathers",
+        "year": 1989,
+        "posterLink": "https://a.ltrbxd.com/resized/film-poster/5/0/1/7/7/50177-heathers-0-230-0-345-crop.jpg?v=dbd1f7062c"
+      }    ],
+    "totalPlayed": 49,
+    "totalWon": 34
+  };
   
-var globalGameStats = JSON.parse(localStorage.getItem('gameStats')) || {
-    games: [],
-    totalPlayed: 0,
-    totalWon: 0
-};
+// var globalGameStats = JSON.parse(localStorage.getItem('gameStats')) || {
+//     games: [],
+//     totalPlayed: 0,
+//     totalWon: 0
+// };
 
 function hasGameBeenPlayed(correctMovieID, stats) {
     if (!stats) return false;
@@ -768,14 +768,14 @@ function generateGameHTML(game) {
 
     if (formattedGuesses.length > 0) {
         return `
-        <p style="margin-bottom:-1em">On ${formattedDate}, the movie was ${game.title} (${game.year}).</p> 
-        <p style="margin-bottom:7px">You ${resultText} and guessed ${game.guessCount} ${guessText}: ${formattedGuesses.join(', ')}.</p>
+        <p class = "historyFirstLine">On ${formattedDate}, the movie was ${game.title} (${game.year}).</p> 
+        <p class = "historySecondLine">You ${resultText} and guessed ${game.guessCount} ${guessText}: ${formattedGuesses.join(', ')}.</p>
     `;
     }
     else {
         return `
-        <p style="margin-bottom:-1em">On ${formattedDate}, the movie was ${game.title} (${game.year}).</p> 
-        <p style="margin-bottom:7px">You ${resultText} and did not guess any movies.</p>
+        <p class = "historyFirstLine">On ${formattedDate}, the movie was ${game.title} (${game.year}).</p> 
+        <p class = "historySecondLine">You ${resultText} and did not guess any movies.</p>
     `;
     }
 
@@ -974,7 +974,7 @@ function selectMovie(guessedMovieID) {
     } else {
         incorrectGuessCount++;
         let guessString = (maxIncorrectGuesses - incorrectGuessCount === 1) ? "1 guess" : `${maxIncorrectGuesses - incorrectGuessCount} guesses`;
-        textDisplay.innerHTML = `<a href="https://letterboxd.com/film/${guessedMovieID}" style="text-decoration:none; color:white;" target="_blank">
+        textDisplay.innerHTML = `<a href="https://letterboxd.com/film/${guessedMovieID}" class = "movie-link" target="_blank">
             Wrong! ${guessedMovie.title} (${guessedMovie.year}) is not the correct movie. You have ${guessString} left. Switch between reviews to get more info!
         </a>`;
         clearSearchAndMovieList();
