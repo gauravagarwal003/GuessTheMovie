@@ -26,7 +26,7 @@
 
 #header {
     background: none;
-    /* background: var(--letterboxdBackground); */
+    background: var(--letterboxdBackground);
     color: var(--bonewhite);
     display: flex;
     justify-content: center;
@@ -62,7 +62,7 @@
     }
 
     .header-content span {
-        font-size: 1rem;
+        font-size: 90%;
     }
 
     .icon {
@@ -79,14 +79,15 @@
 
     .short {
         display: inline !important;
-    }  
+    }
 }
+
 .historyFirstLine {
-    margin-bottom:-1em;
+    margin-bottom: -1em;
 }
 
 .historySecondLine {
-    margin-bottom:7px;
+    margin-bottom: 7px;
 }
 
 /* Adjust logo */
@@ -176,8 +177,6 @@
     overflow-y: auto;
 }
 
-
-
 .modal-content::-webkit-scrollbar {
     width: 8px;
     /* Adjust width */
@@ -199,7 +198,7 @@
 .close-button {
     color: var(--currentBackground);
     float: right;
-    font-size: 28px;
+    font-size: 1.5rem;
     font-weight: bold;
     cursor: pointer;
     transition: opacity 0.3s ease;
@@ -207,7 +206,6 @@
 
 .close-button:hover {
     opacity: 0.5;
-    /* Makes the X slightly transparent */
 }
 
 
@@ -220,17 +218,16 @@ body {
     background-color: var(--currentBackground);
     margin: 0;
     padding: 0;
-
 }
 
-#multi-button {
+#skip-button {
     background-color: transparent;
     color: var(--bonewhite);
     outline: none;
     border: none;
 }
 
-#multi-button:hover {
+#skip-button:hover {
     color: var(--letterboxdBackground);
 }
 
@@ -249,7 +246,7 @@ body {
     outline: none;
     padding: 10px;
     border-radius: 20px;
-    font-size: 16px;
+    font-size: 1.1rem;
 }
 
 #search::placeholder {
@@ -264,19 +261,18 @@ body {
     max-width: fit-content;
     margin: auto;
     text-align: center;
-
 }
 
 .movie-list li {
-    font-size: 18px;
+    font-size: 1.25rem;
     padding: 10px;
     width: fit-content;
     margin: auto;
     max-width: 700px;
 }
 
-.movie-list li:hover {
-    font-size: 20px;
+.movie-list li.selected {
+    font-size: 1.5rem;
     background-color: var(--movieHoverBackground);
     width: fit-content;
 }
@@ -293,13 +289,13 @@ body {
     text-align: center;
 }
 
-.movie-link{
-    color: var(--bonewhite) ;
+.movie-link {
+    color: var(--bonewhite);
 }
 
 #textDisplay {
     margin-top: 10px;
-    font-size: 20px;
+    font-size: 110%;
     max-width: 720px;
     color: var(--bonewhite);
 }
@@ -319,7 +315,7 @@ body {
     color: var(--inactiveButtonText);
     border: none;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 110%;
 }
 
 #imageButtons button.active {
@@ -405,7 +401,6 @@ body {
 .footer-image:hover {
     color: var(--bonewhite);
 }
-
 
 .image-container {
     display: flex;
