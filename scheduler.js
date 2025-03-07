@@ -1,63 +1,147 @@
-// Load environment variables from a .env file (make sure to add this file to your project root)
+// scheduler.js
+
+// For local testing only; remove or comment out for production
 require('dotenv').config();
 
 const cron = require('node-cron');
 const fs = require('fs');
 const path = require('path');
+const fetch = require('node-fetch'); // Used for HTTP requests
 const { Dropbox } = require('dropbox');
-const fetch = require('node-fetch'); // Dropbox SDK needs a fetch implementation
 
-// Function to get the Dropbox access token from env variables.
-// If you need to refresh tokens, you can add that logic here.
-async function getDropboxAccessToken() {
-  const accessToken = process.env.DROPBOX_ACCESS_TOKEN;
-  if (!accessToken) {
-    throw new Error('Missing DROPBOX_ACCESS_TOKEN environment variable.');
+// --- Utility Functions ---
+
+// Refresh the Dropbox access token using your refresh token
+async function refreshAccessToken(appKey, appSecret, refreshToken) {
+  const url = "https://api.dropboxapi.com/oauth2/token";
+  const params = new URLSearchParams();
+  params.append("grant_type", "refresh_token");
+  params.append("refresh_token", refreshToken);
+  params.append("client_id", appKey);
+  params.append("client_secret", appSecret);
+  
+  const response = await fetch(url, {
+    method: "POST",
+    body: params
+  });
+  
+  if (!response.ok) {
+    throw new Error(`Failed to refresh access token: ${await response.text()}`);
   }
-  return accessToken;
+  
+  const data = await response.json();
+  return data.access_token;
 }
 
-// Function to download the movie data from Dropbox.
-// This example assumes that your Dropbox folder is named "/movies"
-// and that each day's file is named with today's date (e.g., "2025-03-06.json").
+// Clears all files and folders in the given local folder
+function clearLocalFolder(localFolder) {
+  if (!fs.existsSync(localFolder)) return;
+  const files = fs.readdirSync(localFolder);
+  for (const file of files) {
+    const filePath = path.join(localFolder, file);
+    try {
+      if (fs.lstatSync(filePath).isDirectory()) {
+        fs.rmdirSync(filePath, { recursive: true });
+      } else {
+        fs.unlinkSync(filePath);
+      }
+    } catch (err) {
+      console.error(`Failed to delete ${filePath}. Reason: ${err}`);
+    }
+  }
+}
+
+// Recursively download all files and subfolders from a Dropbox folder
+async function downloadFolderContents(dbx, dropboxFolderPath, localPath) {
+  if (!fs.existsSync(localPath)) {
+    fs.mkdirSync(localPath, { recursive: true });
+  }
+  
+  const response = await dbx.filesListFolder({ path: dropboxFolderPath });
+  for (const entry of response.result.entries) {
+    const localEntryPath = path.join(localPath, entry.name);
+    if (entry['.tag'] === 'file') {
+      const downloadResult = await dbx.filesDownload({ path: entry.path_lower });
+      fs.writeFileSync(localEntryPath, downloadResult.result.fileBinary, 'binary');
+      console.log(`Downloaded file: ${entry.path_lower} to ${localEntryPath}`);
+    } else if (entry['.tag'] === 'folder') {
+      await downloadFolderContents(dbx, entry.path_lower, localEntryPath);
+    } else {
+      console.log(`Skipping unsupported entry: ${entry.name}`);
+    }
+  }
+}
+
+// Download only the file/folder with a name equal to targetFolder from dropboxPath
+async function downloadFromDropbox(dbx, dropboxPath, localPath, targetFolder) {
+  try {
+    // Ensure the local directory exists (or clear it if it does)
+    if (fs.existsSync(localPath)) {
+      clearLocalFolder(localPath);
+    } else {
+      fs.mkdirSync(localPath, { recursive: true });
+    }
+    
+    // List contents of the specified Dropbox folder
+    const response = await dbx.filesListFolder({ path: dropboxPath });
+    for (const entry of response.result.entries) {
+      if (entry.name === targetFolder) {
+        const localEntryPath = path.join(localPath, entry.name);
+        if (entry['.tag'] === 'file') {
+          const downloadResult = await dbx.filesDownload({ path: entry.path_lower });
+          fs.writeFileSync(localEntryPath, downloadResult.result.fileBinary, 'binary');
+          console.log(`Downloaded file: ${entry.path_lower} to ${localEntryPath}`);
+        } else if (entry['.tag'] === 'folder') {
+          await downloadFolderContents(dbx, entry.path_lower, localEntryPath);
+          console.log(`Downloaded folder: ${entry.path_lower} to ${localEntryPath}`);
+        }
+        return; // Exit after processing the target entry
+      }
+    }
+    console.log(`No folder or file named '${targetFolder}' found in ${dropboxPath}`);
+  } catch (error) {
+    console.error('Error in downloadFromDropbox:', error);
+  }
+}
+
+// --- Main Function ---
+
+// Refresh the access token and download today's movie file/folder from Dropbox
 async function downloadMoviesData() {
   try {
-    const accessToken = await getDropboxAccessToken();
-    const dbx = new Dropbox({ accessToken, fetch });
-
-    // Format today's date (YYYY-MM-DD)
-    const today = new Date().toISOString().split('T')[0];
-    // Construct the Dropbox file path (adjust file extension and folder if needed)
-    const dropboxFilePath = `/movies/${today}.json`;
-    console.log(`Attempting to download file from Dropbox: ${dropboxFilePath}`);
-
-    // Download the file from Dropbox
-    const result = await dbx.filesDownload({ path: dropboxFilePath });
-
-    if (result.result && result.result.fileBinary) {
-      // Save the downloaded file locally
-      const localFilePath = path.join(__dirname, 'moviesData.json');
-      fs.writeFileSync(localFilePath, result.result.fileBinary, 'binary');
-      console.log(`Downloaded ${dropboxFilePath} to ${localFilePath}`);
-    } else {
-      console.log(`File ${dropboxFilePath} not found or is empty.`);
+    const appKey = process.env.DROPBOX_APP_KEY;
+    const appSecret = process.env.DROPBOX_APP_SECRET;
+    const refreshToken = process.env.DROPBOX_REFRESH_TOKEN;
+    if (!appKey || !appSecret || !refreshToken) {
+      throw new Error("Missing Dropbox configuration in environment variables.");
     }
+    
+    // Refresh the access token
+    const accessToken = await refreshAccessToken(appKey, appSecret, refreshToken);
+    console.log("Access token refreshed.");
+    
+    const dbx = new Dropbox({ accessToken, fetch });
+    
+    // Define Dropbox and local paths (adjust these as needed)
+    const dropboxFolderPath = "/movies";
+    const localDownloadPath = path.join(__dirname, "movie");
+    const currentDate = new Date().toISOString().split('T')[0]; // e.g., "2025-03-06"
+    
+    await downloadFromDropbox(dbx, dropboxFolderPath, localDownloadPath, currentDate);
   } catch (error) {
-    console.error('Error downloading movies data:', error);
+    console.error("Error in downloadMoviesData:", error);
   }
 }
 
-// Schedule the cron job to run every day at midnight.
-// Adjust the timezone (e.g., "America/New_York") via an environment variable or directly in the code.
-cron.schedule('0 0 * * *', async () => {
-  console.log('Cron job triggered at midnight.');
+// --- Scheduler ---
+// Cron expression "35 23 * * *" runs every day at 11:35 PM.
+// Timezone set to "America/Los_Angeles" for PST.
+cron.schedule('35 23 * * *', async () => {
+  console.log("Cron job triggered at 11:35 PM PST.");
   await downloadMoviesData();
 }, {
   scheduled: true,
-  timezone: process.env.TIMEZONE || 'America/New_York'
+  timezone: "America/Los_Angeles"
 });
 
-// Optionally, run the download on startup.
-downloadMoviesData();
-
-console.log('Scheduler started. Waiting for next scheduled run...');
+console.log("Scheduler started. Waiting for next scheduled run...");
