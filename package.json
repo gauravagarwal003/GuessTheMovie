@@ -4,8 +4,10 @@
   "description": "Movie guessing game",
   "main": "server.js",
   "scripts": {
-    "start": "concurrently \"node server.js\" \"node scheduler.js\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "cross-env NODE_ENV=production concurrently \"node server.js\" \"node scheduler.js\"",
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
   },
   "engines": {
     "node": ">=18.x"
@@ -14,8 +16,13 @@
     "concurrently": "^8.2.0",
     "dotenv": "^16.4.7",
     "dropbox": "^10.34.0",
-    "express": "^4.19.2",
+    "express": "^4.21.2",
     "node-cron": "^3.0.3",
-    "node-fetch": "^2.7.0"
+    "node-fetch": "^2.7.0",
+    "vite-express": "^0.20.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "vite": "^6.2.1"
   }
 }

@@ -441,5 +441,5 @@ body {
 
 a:hover .footer-image,
 a:focus .footer-image {
-    content: url("LBBWLogo.png");
+    content: url("/LBBWLogo.png");
 }

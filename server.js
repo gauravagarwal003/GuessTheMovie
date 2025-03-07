@@ -1,148 +1,147 @@
+// server.js
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const ViteExpress = require('vite-express');
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Serve static files from the "public" directory
-// Using setHeaders to update Cache-Control and Last-Modified headers.
-app.use(express.static(path.join(__dirname, 'public'), {
-  setHeaders: (res, filePath, stat) => {
-    // Set Cache-Control header to prevent caching.
-    res.set('Cache-Control', 'no-cache, must-revalidate');
-    // Set Last-Modified header to the file's actual modified time.
-    res.set('Last-Modified', stat.mtime.toUTCString());
-  }
-}));
-
-// The rest of your endpoints remain unchanged
-
-// Endpoint to check if a folder exists in "images" directory
-app.get('/check-folder', (req, res) => {
-  const folderName = req.query.name;
-  const folderPath = path.join(__dirname, 'images', folderName);
-
-  fs.access(folderPath, fs.constants.F_OK, (err) => {
-    if (err) {
-      res.json({ exists: false });
-    } else {
-      res.json({ exists: true });
-    }
-  });
-});
-
-// Endpoint to get all the text for reviews of a movie
-app.get('/text', (req, res) => {
-  const date = req.query.date;
-  const movieID = req.query.name;
-  const index = parseInt(req.query.index, 10);
+/* 
+  API endpoint to get all the text for reviews of a movie
+  (expects query parameters: date, name, and index)
+*/
+app.get('/api/text', (req, res) => {
+  const { date, name: movieID, index } = req.query;
   const reviewsPath = path.join(__dirname, 'movie', date, movieID, 'text');
 
   fs.readdir(reviewsPath, (err, files) => {
     if (err) {
-      res.status(404).json({ error: 'Error reading text directory' });
-      return;
+      return res.status(404).json({ error: 'Error reading text directory' });
     }
-    files = files.filter(file => !file.startsWith('.'));
-    if (files.length === 0) {
-      res.status(404).json({ error: 'No text found or an error occurred' });
-      return;
+    const validFiles = files.filter(file => !file.startsWith('.'));
+    if (validFiles.length === 0) {
+      return res.status(404).json({ error: 'No text found or an error occurred' });
     }
-    if (index >= 0 && index < files.length) {
-      const textPath = path.join(reviewsPath, files[index]);
-      res.sendFile(textPath);
-    } else {
-      res.status(404).json({ error: 'Text not found' });
+    const idx = parseInt(index, 10);
+    if (idx >= 0 && idx < validFiles.length) {
+      const textPath = path.join(reviewsPath, validFiles[idx]);
+      return res.sendFile(textPath);
     }
+    return res.status(404).json({ error: 'Text not found' });
   });
 });
 
-// Endpoint to get all the links for reviews of a movie
-app.get('/links', (req, res) => {
-  const date = req.query.date;
-  const movieID = req.query.name;
-  const index = parseInt(req.query.index, 10);
+/* 
+  API endpoint to get all the links for reviews of a movie 
+*/
+app.get('/api/links', (req, res) => {
+  const { date, name: movieID, index } = req.query;
   const reviewsPath = path.join(__dirname, 'movie', date, movieID, 'links');
 
   fs.readdir(reviewsPath, (err, files) => {
     if (err) {
-      res.status(404).json({ error: 'Error reading links directory' });
-      return;
+      return res.status(404).json({ error: 'Error reading links directory' });
     }
-    files = files.filter(file => !file.startsWith('.'));
-    if (files.length === 0) {
-      res.status(404).json({ error: 'No links found or an error occurred' });
-      return;
+    const validFiles = files.filter(file => !file.startsWith('.'));
+    if (validFiles.length === 0) {
+      return res.status(404).json({ error: 'No links found or an error occurred' });
     }
-    if (index >= 0 && index < files.length) {
-      const linkPath = path.join(reviewsPath, files[index]);
-      res.sendFile(linkPath);
-    } else {
-      res.status(404).json({ error: 'Link not found' });
+    const idx = parseInt(index, 10);
+    if (idx >= 0 && idx < validFiles.length) {
+      const linkPath = path.join(reviewsPath, validFiles[idx]);
+      return res.sendFile(linkPath);
     }
+    return res.status(404).json({ error: 'Link not found' });
   });
 });
 
-// Endpoint to get all images from the reviews folder of a movie
-app.get('/images', (req, res) => {
-  const date = req.query.date;
-  const movieID = req.query.name;
-  const index = parseInt(req.query.index, 10);
+/* 
+  API endpoint to get all images from the reviews folder of a movie 
+*/
+app.get('/api/images', (req, res) => {
+  const { date, name: movieID, index } = req.query;
   const reviewsPath = path.join(__dirname, 'movie', date, movieID, 'images');
 
   fs.readdir(reviewsPath, (err, files) => {
     if (err) {
-      res.status(404).json({ error: 'Error reading images directory' });
-      return;
+      return res.status(404).json({ error: 'Error reading images directory' });
     }
-    files = files.filter(file => !file.startsWith('.'));
-    if (files.length === 0) {
-      res.status(404).json({ error: 'No images found or an error occurred' });
-      return;
+    const validFiles = files.filter(file => !file.startsWith('.'));
+    if (validFiles.length === 0) {
+      return res.status(404).json({ error: 'No images found or an error occurred' });
     }
-    if (index >= 0 && index < files.length) {
-      const imagePath = path.join(reviewsPath, files[index]);
-      res.sendFile(imagePath);
-    } else {
-      res.status(404).json({ error: 'Image not found' });
+    const idx = parseInt(index, 10);
+    if (idx >= 0 && idx < validFiles.length) {
+      const imagePath = path.join(reviewsPath, validFiles[idx]);
+      return res.sendFile(imagePath);
     }
+    return res.status(404).json({ error: 'Image not found' });
   });
 });
 
-// Updated endpoint to get the selected movie from the "movie" folder.
-app.get('/get-movie', (req, res) => {
+/* 
+  API endpoint to get the selected movie from the "movie" folder 
+*/
+app.get('/api/get-movie', (req, res) => {
   const movieDir = path.join(__dirname, 'movie');
   fs.readdir(movieDir, (err, dateFolders) => {
     if (err) {
-      console.error("Error reading movie directory:", err);
-      res.status(404).json({ error: 'Error reading movie directory' });
-      return;
+      console.error('Error reading movie directory:', err);
+      return res.status(404).json({ error: 'Error reading movie directory' });
     }
-    dateFolders = dateFolders.filter(folder => !folder.startsWith('.'));
-    if (dateFolders.length === 0) {
-      res.status(404).json({ error: 'No valid date folders found' });
-      return;
+    const validDateFolders = dateFolders.filter(folder => !folder.startsWith('.'));
+    if (validDateFolders.length === 0) {
+      return res.status(404).json({ error: 'No valid date folders found' });
     }
-    const dateFolder = dateFolders[0];
+    const dateFolder = validDateFolders[0];
     const movieFolderPath = path.join(movieDir, dateFolder);
     fs.readdir(movieFolderPath, (err, movieFolders) => {
       if (err) {
-        console.error("Error reading movie folder:", err);
-        res.status(404).json({ error: 'Error reading movie folder' });
-        return;
+        console.error('Error reading movie folder:', err);
+        return res.status(404).json({ error: 'Error reading movie folder' });
       }
-      movieFolders = movieFolders.filter(movie => !movie.startsWith('.'));
-      if (movieFolders.length === 0) {
-        res.status(404).json({ error: 'No valid movie folders found' });
-        return;
+      const validMovieFolders = movieFolders.filter(movie => !movie.startsWith('.'));
+      if (validMovieFolders.length === 0) {
+        return res.status(404).json({ error: 'No valid movie folders found' });
       }
-      const movieID = movieFolders[0];
-      res.json({ movie: movieID, date: dateFolder });
+      const movieID = validMovieFolders[0];
+      return res.json({ movie: movieID, date: dateFolder });
     });
   });
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
+/* 
+  Serve static files and handle client-side routing:
+  - In production, serve from the "dist" folder (built by Vite).
+  - In development, serve directly from the "public" folder.
+*/
+console.log('NODE_ENV:', process.env.NODE_ENV);
+if (process.env.NODE_ENV == 'production') {
+  // Production: serve built assets from the "dist" directory.
+  app.use(express.static(path.join(__dirname, 'dist')));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+  });
+} else {
+  // Development: serve static assets from the "public" directory.
+  app.use(express.static(path.join(__dirname, 'public')));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  });
+}
+
+/*
+  Start the server:
+  - In development, use ViteExpress to enable features like HMR.
+  - In production, simply start the Express server.
+*/
+if (process.env.NODE_ENV == 'production') {
+  app.listen(port, () => {
+    console.log(`Server is running in production on http://localhost:${port}`);
+  });
+} else {
+  ViteExpress.listen(app, port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+  });
+}

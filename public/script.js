@@ -507,9 +507,9 @@ function clearSearchAndMovieList() {
 
 async function fetchImages(movieID, date, index) {
   try {
-    const response1 = await fetch(`/images?date=${date}&name=${movieID}&index=${index}`);
-    const response2 = await fetch(`/text?date=${date}&name=${movieID}&index=${index}`);
-    const response3 = await fetch(`/links?date=${date}&name=${movieID}&index=${index}`);
+    const response1 = await fetch(`/api/images?date=${date}&name=${movieID}&index=${index}`);
+    const response2 = await fetch(`/api/text?date=${date}&name=${movieID}&index=${index}`);
+    const response3 = await fetch(`/api/links?date=${date}&name=${movieID}&index=${index}`);
     if (response1.status === 404 || response2.status === 404 || response3.staus === 404) return;
     const blob1 = await response1.blob();
     const blob2 = await response2.text();
@@ -606,11 +606,11 @@ function hoverLetterboxd() {
 
   // Add event listeners for hover and focus
   footerItemLetterboxd.addEventListener('pointerenter', function () {
-    footerImage.src = 'LBBWLogo.png'; // Change to the new image
+    footerImage.src = '/LBBWLogo.png'; // Change to the new image
   });
 
   footerItemLetterboxd.addEventListener('pointerleave', function () {
-    footerImage.src = 'LBColorLogo.png'; // Change back to the original image
+    footerImage.src = '/LBColorLogo.png'; // Change back to the original image
   });
 
   footerImage.addEventListener('pointerenter', function () {
@@ -764,7 +764,7 @@ function displayMovieList(movies) {
 document.addEventListener('DOMContentLoaded', async function initializeGame() {
   try {
     // Load CSV file and parse movie data
-    const csvResponse = await fetch('movies.csv');
+    const csvResponse = await fetch('/movies.csv');
     const csvText = await csvResponse.text();
     Papa.parse(csvText, {
       header: true,
@@ -784,7 +784,7 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
     });
 
     // Fetch movie info
-    const response = await fetch('/get-movie');
+    const response = await fetch('/api/get-movie');
     if (!response.ok) throw new Error('Network response was not ok');
     const data = await response.json();
     correctMovieID = data.movie;
