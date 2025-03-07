@@ -134,14 +134,14 @@ async function downloadMoviesData() {
 }
 
 // --- Scheduler ---
-// Cron expression "35 23 * * *" runs every day at 11:35 PM.
-// Timezone set to "America/Los_Angeles" for PST.
-cron.schedule('35 23 * * *', async () => {
-  console.log("Cron job triggered at 11:35 PM PST.");
+// Cron expression "00 05 * * *" runs every day at 12:00 AM EST.
+// Timezone set to "America/New_York" for EST.
+cron.schedule('00 05 * * *', async () => {
+  console.log("Cron job triggered at 12:00 AM EST.");
   await downloadMoviesData();
 }, {
   scheduled: true,
-  timezone: "America/Los_Angeles"
+  timezone: "America/New_York"
 });
 
 console.log("Scheduler started. Waiting for next scheduled run...");
