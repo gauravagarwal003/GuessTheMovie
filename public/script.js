@@ -285,7 +285,7 @@ function selectMovie(guessedMovieID) {
     incorrectGuessCount++;
     let guessString = (maxIncorrectGuesses - incorrectGuessCount === 1) ? "1 guess" : `${maxIncorrectGuesses - incorrectGuessCount} guesses`;
     textDisplay.innerHTML = `<div id="textDisplay"><span class="message">Wrong. </span>
-    <a href="https://letterboxd.com/film/${correctMovieID}" class="movie-link" target="_blank">
+    <a href="https://letterboxd.com/film/${guessedMovieID}" class="movie-link" target="_blank">
     ${guessedMovie.title} (${guessedMovie.year})</a>
     <span class="message"> is not the correct movie. You have ${guessString} left. Switch between reviews to get more info!
         </a>`;
