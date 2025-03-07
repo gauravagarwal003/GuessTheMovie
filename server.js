@@ -7,6 +7,11 @@ const port = process.env.PORT || 3000;
 
 // Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname, 'public')));
+app.use((req, res, next) => {
+    res.set('Cache-Control', 'no-cache, must-revalidate');
+    next();
+  });
+  
 
 // Endpoint to check if a folder exists in "images" directory
 app.get('/check-folder', (req, res) => {
