@@ -11,7 +11,9 @@
     "node": ">=18.x"
   },
   "dependencies": {
+    "dropbox": "^10.34.0",
     "express": "^4.19.2",
+    "node-cron": "^3.0.3",
     "node-fetch": "^2.7.0"
   }
 }
