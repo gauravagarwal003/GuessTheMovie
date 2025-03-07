@@ -127,7 +127,7 @@ function displayInstructions() {
     <h2>How to Play</h2>
     <p>You have ${maxIncorrectGuesses} tries to guess the movie. Each guess (or skip) will reveal an additional review to help you.</p>
     <p>To guess, click the search bar and begin typing. You can click on the movie or use the up, down, and enter buttons to submit one. You can also use the left and right buttons to toggle between available reviews.</p>
-    <p>Every day features a new movie, and you can only play once per day. But, your stats ands history are logged automatically and can be viewed at any time.</p>
+    <p>Every day features a new movie (added at 12AM EST), and you can only play once per day. But, your stats ands history are logged automatically and can be viewed at any time.</p>
     <p>Once the game is over, you can click on the review photos to go to that review.</p>
     <p>Good luck and have fun!</p>
   `;
