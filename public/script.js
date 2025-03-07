@@ -49,8 +49,9 @@ function getOrdinalSuffix(day) {
 }
 
 function formatDate(isoDate) {
-  const date = new Date(isoDate);
-  const month = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(date);
+  const localDateString = isoDate.replace(/-/g, '/');
+  const date = new Date(localDateString);
+   const month = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(date);
   const day = date.getDate();
   const year = date.getFullYear();
   return `${month} ${day}${getOrdinalSuffix(day)}, ${year}`;
@@ -465,7 +466,7 @@ function finishGame(wonGame) {
       won: (incorrectGuessCount < maxIncorrectGuesses),
       guessCount: collectedGuessesArray.length,
       guesses: collectedGuessesArray,
-      date: new Date().toISOString().split('T')[0],
+      date: correctMovieDate,
       title: correctMovie.title,
       year: correctMovie.year,
       posterLink: correctMovie.posterLink
