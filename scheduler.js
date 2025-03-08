@@ -133,7 +133,7 @@ async function downloadMoviesData() {
 // --- Scheduler ---
 // Cron expression "00 05 * * *" runs every day at 12:00 AM EST.
 // Timezone set to "America/New_York" for EST.
-cron.schedule('02 3 * * *', async () => {
+cron.schedule('00 5 * * *', async () => {
   console.log("Cron job triggered at " + new Date().toLocaleString());
   try {
     await downloadMoviesData();
