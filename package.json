@@ -6,7 +6,8 @@
   "scripts": {
     "dev:server": "nodemon server.js",
     "dev:client": "vite",
-    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:scheduler": "nodemon scheduler.js",
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\" \"npm run dev:scheduler\"",
     "build": "vite build",
     "serve": "vite preview",
     "start": "concurrently \"node server.js\" \"node scheduler.js\""
