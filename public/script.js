@@ -535,6 +535,7 @@ function displayCurrentImage(index = 1) {
     img.alt = `Review: ${reviewTexts[index - 1]}`;
     img.id = 'reviewImage';
     img.src = reviewImages[index - 1];
+
     if (gameOver) {
       const link = document.createElement('a');
       link.href = links[index - 1]; // Replace with your desired URL
@@ -785,6 +786,8 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
 
     // Fetch all images, text, and links for the movie
     await fetchAllImagesSequentially(correctMovieID, correctMovieDate);
+    document.getElementById('loading-overlay').style.display = 'none';
+  
 
     // Check if this game has already been played.
     if (hasGameBeenPlayed(correctMovieID, globalGameStats)) {
