@@ -4,7 +4,7 @@
   "description": "Movie guessing game",
   "main": "server.js",
   "scripts": {
-    "dev:server": "NODE_ENV=development nodemon server.js",
+    "dev:server": "nodemon server.js",
     "dev:client": "vite",
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
     "build": "vite build",
@@ -21,8 +21,8 @@
     "express": "^4.21.2",
     "node-cron": "^3.0.3",
     "node-fetch": "^2.7.0",
+    "nodemon": "^3.1.9",
     "vite": "^6.2.1",
-    "vite-express": "^0.20.0",
-    "nodemon": "^3.1.9"
+    "vite-express": "^0.20.0"
   }
 }

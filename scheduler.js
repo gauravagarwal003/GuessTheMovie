@@ -1,6 +1,3 @@
-// scheduler.js
-
-// For local testing only; remove or comment out for production
 require('dotenv').config();
 
 const cron = require('node-cron');
