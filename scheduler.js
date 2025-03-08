@@ -133,12 +133,16 @@ async function downloadMoviesData() {
 // --- Scheduler ---
 // Cron expression "00 05 * * *" runs every day at 12:00 AM EST.
 // Timezone set to "America/New_York" for EST.
-cron.schedule('00 05 * * *', async () => {
-  console.log("Cron job triggered at 12:00 AM EST.");
-  await downloadMoviesData();
+cron.schedule('50 2 * * *', async () => {
+  console.log("Cron job triggered at " + new Date().toLocaleString());
+  try {
+    await downloadMoviesData();
+  } catch (err) {
+    console.error("Error in cron job:", err);
+  }
 }, {
   scheduled: true,
-  timezone: "America/New_York"
+  timezone: "America/Los_Angeles"
 });
 
 console.log("Scheduler started. Waiting for next scheduled run...");
