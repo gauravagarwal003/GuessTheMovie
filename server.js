@@ -117,7 +117,6 @@ app.get('/api/get-movie', (req, res) => {
   - In production, serve from the "dist" folder (built by Vite).
   - In development, serve directly from the "public" folder.
 */
-console.log('NODE_ENV:', process.env.NODE_ENV);
 if (process.env.NODE_ENV == 'production') {
   // Production: serve built assets from the "dist" directory.
   app.use(express.static(path.join(__dirname, 'dist')));
