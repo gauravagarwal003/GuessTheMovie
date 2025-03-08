@@ -264,22 +264,11 @@ function filterMovies(event) {
   displayMovieList(filteredMovies);
 }
 
-// function displayMovieList(movies) {
-//   const movieListElement = document.getElementById('movieList');
-//   movieListElement.innerHTML = '';
-//   movies.slice(0, maxMoviesToShow).forEach(movie => {
-//     const listItem = document.createElement('li');
-//     listItem.textContent = `${movie.title} (${movie.year})`;
-//     listItem.onclick = () => selectMovie(movie.movieID);
-//     movieListElement.appendChild(listItem);
-//   });
-// }
-
 function selectMovie(guessedMovieID) {
   collectedGuessesArray.push(guessedMovieID);
   const guessedMovie = moviesData.find(movie => movie.movieID === guessedMovieID);
   const isCorrectMovie = guessedMovieID === correctMovieID;
-
+  textDisplay = document.getElementById('textDisplay');
   if (isCorrectMovie) {
     finishGame(true);
   } else {
