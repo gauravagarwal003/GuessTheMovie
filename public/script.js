@@ -418,17 +418,9 @@ function updateGameStats(currentGame) {
 function finishGame(wonGame) {
   gameOver = true;
   const textDisplay = document.getElementById('textDisplay');
-  if (wonGame) {
-    textDisplay.innerHTML = `<div id="textDisplay"><span class="message">You got it! </span>
-        <a href="https://letterboxd.com/film/${correctMovieID}" class="movie-link" target="_blank">
-        ${correctMovie.title} (${correctMovie.year})</a>
-        <span class="message"> is the correct movie.</span></div>`;
-  } else {
-    textDisplay.innerHTML = `<div id="textDisplay"><span class="message">You lost. </span>
-        <a href="https://letterboxd.com/film/${correctMovieID}" class="movie-link" target="_blank">
-        ${correctMovie.title} (${correctMovie.year})</a>
-        <span class="message"> is the correct movie.</span></div>`;
-  }
+  gameOverMessage = wonGame ? "You got it! " : "You lost. ";
+  textDisplay.innerHTML = `<div id="textDisplay">${gameOverMessage}<span class="message"></span><a href="https://letterboxd.com/film/${correctMovieID}" class="movie-link" target="_blank">${correctMovie.title} (${correctMovie.year})</a><span class="message"> is the correct movie.</span><br><span class="message"> Come back tomorrow to play again!</span></div>`;
+
 
   clearSearchAndMovieList();
   if (incorrectGuessCount < maxIncorrectGuesses) {
