@@ -15,6 +15,7 @@ let correctMovieDate = '';
 let correctMovie = '';
 let currentSelectionIndex = -1;
 
+const SKIPPED_GUESS = '__SKIPPED__'; // Sentinel value to indicate a skipped guess
 const maxMoviesToShow = 7;
 const selectedColumns = ['title', 'year', 'movieID', 'posterLink']; // Columns to select from the CSV file
 const maxIncorrectGuesses = 5;
@@ -62,30 +63,44 @@ function generateGameHTML(game) {
   const formattedDate = formatDate(game.date);
   const resultText = game.won ? 'won' : 'lost';
 
-
+  let realGuessCount = 0;
   // Create a copy of guesses to avoid modifying the original data
-  let formattedGuesses = game.guesses.map(guessID => {
-    const movie = moviesData.find(movie => movie.movieID === guessID);
-    return movie ? `${movie.title} (${movie.year})` : guessID; // Fallback to ID if not found
-  });
-  let guessText = `time`;
-  if (formattedGuesses.length > 1) {
-    guessText += `s`;
+  let plural = `review`;
+  if (game.guessCount > 1) {
+    plural += `s`;
+  }
+  let guessText = ``;
+
+  for (let i = 0; i < game.guesses.length; i++) {
+    if (i == game.guesses.length - 1) {
+      guessText += `and `;
+    } 
+    if (game.guesses[i] === SKIPPED_GUESS){ 
+      guessText += `skipped, `;
+    } 
+    else{
+      const foundMovie = moviesData.find(movie => movie.movieID === game.guesses[i]);
+      realGuessCount++;
+      guessText += `guessed ${foundMovie.title} (${foundMovie.year}), `;
+    }
+  }
+  // Remove the last two characters (", ") from guessText
+  if (guessText.endsWith(', ')) {
+    guessText = guessText.slice(0, -2);
   }
 
-  if (formattedGuesses.length > 0) {
+  if (realGuessCount <= 0){
     return `
-        <p class = "historyFirstLine">On ${formattedDate}, the movie was ${game.title} (${game.year}).</p> 
-        <p class = "historySecondLine">You ${resultText} and guessed ${game.guessCount} ${guessText}: ${formattedGuesses.join(', ')}.</p>
+    <p class = "historyFirstLine">On ${formattedDate}, the movie was ${game.title} (${game.year}).</p> 
+    <p class = "historySecondLine">You ${resultText} and did not guess any movies.</p>
     `;
   }
-  else {
+  else{
     return `
         <p class = "historyFirstLine">On ${formattedDate}, the movie was ${game.title} (${game.year}).</p> 
-        <p class = "historySecondLine">You ${resultText} and did not guess any movies.</p>
+        <p class = "historySecondLine">You ${resultText} with ${game.guessCount} ${plural}: ${guessText}.</p>
     `;
   }
-
 
 }
 
@@ -387,7 +402,9 @@ function totalUniqueMoviesGuessed(stats) {
   const guessedMovies = new Set();
   for (const game of stats.games) {
     for (const guess of game.guesses) {
-      guessedMovies.add(guess);
+      if (guess !== SKIPPED_GUESS){
+        guessedMovies.add(guess);
+      }
     }
   }
   return guessedMovies.size;
@@ -457,7 +474,8 @@ function finishGame(wonGame) {
   displayCurrentImage(currentImageIndex);
 }
 
-function pressButton() {
+function pressSkipButton() {
+  collectedGuessesArray.push(SKIPPED_GUESS);
   if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
   }
