@@ -5,6 +5,8 @@ const fs = require('fs');
 const path = require('path');
 const fetch = require('node-fetch'); // Used for HTTP requests
 const { Dropbox } = require('dropbox');
+const { exec } = require('child_process'); // For running Git commands
+
 
 // --- Utility Functions ---
 
@@ -101,6 +103,36 @@ async function downloadFromDropbox(dbx, dropboxPath, localPath, targetFolder) {
   }
 }
 
+function pushChanges(commitMessage) {
+  return new Promise((resolve, reject) => {
+    const githubToken = process.env.GITHUB_TOKEN;
+    if (!githubToken) {
+      return reject(new Error("Missing GITHUB_TOKEN environment variable."));
+    }
+    
+    // Update the remote URL to use the token for authentication.
+    const remoteUrl = `https://${githubToken}@github.com/gauravagarwal003/LBGuessMovie.git`;
+    exec(`git remote set-url origin ${remoteUrl}`, (err, stdout, stderr) => {
+      if (err) {
+        console.error("Error updating remote URL:", err);
+        return reject(err);
+      }
+      console.log("Remote URL updated with GITHUB_TOKEN.");
+      
+      // Stage, commit, and push changes.
+      exec(`git add . && git commit -m "${commitMessage}" && git push origin main`, (err, stdout, stderr) => {
+        if (err) {
+          console.error("Error pushing changes:", err);
+          return reject(err);
+        }
+        console.log("Changes pushed successfully:\n", stdout);
+        resolve(stdout);
+      });
+    });
+  });
+}
+
+
 // --- Main Function ---
 
 // Refresh the access token and download today's movie file/folder from Dropbox
@@ -134,6 +166,9 @@ cron.schedule('0 21 * * *', async () => {
   console.log("Cron job triggered at " + new Date().toLocaleString());
   try {
     await downloadMoviesData();
+    const commitMessage = `Update movie data for ${new Date().toLocaleDateString()}`;
+    await pushChanges(commitMessage);
+
   } catch (err) {
     console.error("Error in cron job:", err);
   }
