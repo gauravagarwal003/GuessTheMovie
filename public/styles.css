@@ -15,6 +15,10 @@
     --movieHoverBackground: var(--letterboxdBackground);
 }
 
+html {
+    scrollbar-gutter: stable;
+  }  
+
 .middle_footer {
     max-width: 720px;
 }
