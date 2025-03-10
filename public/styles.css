@@ -15,9 +15,10 @@
     --movieHoverBackground: var(--letterboxdBackground);
 }
 
-html {
-    scrollbar-gutter: stable;
-  }  
+html, body {
+    overflow-x: hidden;
+}
+
 
 .middle_footer {
     max-width: 720px;
@@ -38,6 +39,7 @@ html {
     align-items: center;
     /* Align items vertically */
     width: 100%;
+    right: 0;
     padding: 10px 0;
 }
 
@@ -377,7 +379,7 @@ body {
 #footerItemLetterboxd {
     color: var(--letterboxdOrange) !important;
     padding-left: 0.3%;
-    padding-right: 1%;
+    padding-right: 15px;
 }
 
 #footerItemLetterboxd:hover,
