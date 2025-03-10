@@ -16,7 +16,7 @@ let correctMovie = '';
 let currentSelectionIndex = -1;
 
 const SKIPPED_GUESS = '__SKIPPED__'; // Sentinel value to indicate a skipped guess
-const maxMoviesToShow = 7;
+const maxMoviesToShow = 10;
 const selectedColumns = ['title', 'year', 'movieID', 'posterLink']; // Columns to select from the CSV file
 const maxIncorrectGuesses = 5;
 const imageButtonsContainer = document.getElementById('imageButtons');
@@ -307,7 +307,11 @@ function selectMovie(guessedMovieID) {
     if ('scrollRestoration' in history) {
       history.scrollRestoration = 'manual';
     }
-    window.scrollTo(0, 0);
+    setTimeout(() => window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth' // or 'auto'
+    }), 100);
   }
 }
 
@@ -479,7 +483,11 @@ function pressSkipButton() {
   if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
   }
-  window.scrollTo(0, 0);
+  setTimeout(() => window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: 'smooth' // or 'auto'
+  }), 100);
 
   incorrectGuessCount++;
   clearSearchAndMovieList();
