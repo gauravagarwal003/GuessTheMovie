@@ -119,14 +119,25 @@ function pushChanges(commitMessage) {
       }
       console.log("Remote URL updated with GITHUB_TOKEN.");
       
-      // Stage, commit, and push changes.
-      exec(`git add . && git commit -m "${commitMessage}" && git push origin main`, (err, stdout, stderr) => {
+      // Configure Git identity locally for this repository.
+      const gitConfigCommand = `git config user.email "gagarwal003@gmail.com" && git config user.name "gauravagarwal003"`;
+      exec(gitConfigCommand, (err, stdout, stderr) => {
         if (err) {
-          console.error("Error pushing changes:", err);
+          console.error("Error configuring Git user identity:", err);
           return reject(err);
         }
-        console.log("Changes pushed successfully:\n", stdout);
-        resolve(stdout);
+        console.log("Git user identity configured.");
+        
+        // Stage, commit, and push changes.
+        const gitPushCommand = `git add . && git commit -m "${commitMessage}" && git push origin main`;
+        exec(gitPushCommand, (err, stdout, stderr) => {
+          if (err) {
+            console.error("Error pushing changes:", err);
+            return reject(err);
+          }
+          console.log("Changes pushed successfully:\n", stdout);
+          resolve(stdout);
+        });
       });
     });
   });
