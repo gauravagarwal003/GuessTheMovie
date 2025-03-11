@@ -112,7 +112,7 @@ function pushChanges(commitMessage) {
     
     // Update the remote URL to use the token for authentication.
     const remoteUrl = `https://${githubToken}@github.com/gauravagarwal003/LBGuessMovie.git`;
-    exec(`git remote set-url origin ${remoteUrl}`, (err, stdout, stderr) => {
+    exec(`git remote set-url origin ${remoteUrl}`, (err) => {
       if (err) {
         console.error("Error updating remote URL:", err);
         return reject(err);
@@ -121,22 +121,32 @@ function pushChanges(commitMessage) {
       
       // Configure Git identity locally for this repository.
       const gitConfigCommand = `git config user.email "gagarwal003@gmail.com" && git config user.name "gauravagarwal003"`;
-      exec(gitConfigCommand, (err, stdout, stderr) => {
+      exec(gitConfigCommand, (err) => {
         if (err) {
           console.error("Error configuring Git user identity:", err);
           return reject(err);
         }
         console.log("Git user identity configured.");
         
-        // Stage, commit, and push changes.
-        const gitPushCommand = `git add . && git commit -m "${commitMessage}" && git push origin main`;
-        exec(gitPushCommand, (err, stdout, stderr) => {
+        // Checkout the correct branch before committing.
+        const checkoutCommand = `git checkout one_movie_per_day`;
+        exec(checkoutCommand, (err) => {
           if (err) {
-            console.error("Error pushing changes:", err);
+            console.error("Error checking out branch one_movie_per_day:", err);
             return reject(err);
           }
-          console.log("Changes pushed successfully:\n", stdout);
-          resolve(stdout);
+          console.log("Checked out branch one_movie_per_day.");
+          
+          // Stage, commit, and push changes to the one_movie_per_day branch.
+          const gitPushCommand = `git add . && git commit -m "${commitMessage}" && git push origin one_movie_per_day`;
+          exec(gitPushCommand, (err, stdout) => {
+            if (err) {
+              console.error("Error pushing changes:", err);
+              return reject(err);
+            }
+            console.log("Changes pushed successfully:\n", stdout);
+            resolve(stdout);
+          });
         });
       });
     });
