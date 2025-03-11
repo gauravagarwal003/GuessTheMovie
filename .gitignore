@@ -28,3 +28,5 @@ coverage/
 
 # Optional: if you use cache directories for bundlers or others
 .cache/
+
+movie/
