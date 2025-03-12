@@ -72,7 +72,7 @@ function generateGameHTML(game) {
   let guessText = ``;
 
   for (let i = 0; i < game.guesses.length; i++) {
-    if (i == game.guesses.length - 1) {
+    if (i == game.guesses.length - 1 && game.guesses.length > 1) {
       guessText += `and `;
     } 
     if (game.guesses[i] === SKIPPED_GUESS){ 

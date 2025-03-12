@@ -57,7 +57,6 @@ def download_from_dropbox(dbx, dropbox_path, local_path, target_folder):
 
         for entry in response.entries:
             if entry.name == target_folder:
-                print('a')
                 # Build the local path for the target
                 local_entry_path = os.path.join(local_path, entry.name)
 
@@ -117,7 +116,7 @@ dbx = dropbox.Dropbox(access_token)
 # Define Dropbox and local paths
 dropbox_folder_path = "/movies"
 local_download_path = "./movie"
-current_date = "2025-3-10"
+current_date = "2025-03-12"
 #current_date = str(datetime.datetime.now().date())
 
 # Start the download process
