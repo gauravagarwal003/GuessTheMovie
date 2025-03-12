@@ -201,4 +201,5 @@ cron.schedule('0 21 * * *', async () => {
   timezone: "America/Los_Angeles"
 });
 
+module.exports = { pushChanges };
 console.log("Scheduler started. Waiting for next scheduled run...");
