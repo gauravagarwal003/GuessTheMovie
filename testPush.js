@@ -54,4 +54,4 @@ function pushChanges(commitMessage) {
     });
   }
 
-testPush(`Pushing changes from testPush.js`);
+pushChanges(`Pushing changes from testPush.js`);
