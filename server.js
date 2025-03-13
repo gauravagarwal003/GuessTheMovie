@@ -139,14 +139,16 @@ if (process.env.NODE_ENV === 'production') {
   - In production, simply start the Express server.
 */
 if (process.env.NODE_ENV === 'production') {
+  // Production mode: simply start the Express server.
   app.listen(port, () => {
     console.log(`Server is running in production on http://localhost:${port}`);
   });
 } else {
+  // Development mode: start server with ViteExpress and initialize ngrok.
   ViteExpress.listen(app, port, () => {
     console.log(`Server is running on http://localhost:${port}`);
     
-    // Automatically start ngrok tunnel in development mode
+    // Automatically start ngrok tunnel in development mode.
     (async () => {
       try {
         const url = await ngrok.connect({
@@ -159,10 +161,8 @@ if (process.env.NODE_ENV === 'production') {
       }
     })();
   });
-}
-
-// In development mode, add graceful shutdown handlers to disconnect ngrok on restart.
-if (process.env.NODE_ENV !== 'production') {
+  
+  // Add graceful shutdown handlers to disconnect ngrok on process exit or restart.
   async function cleanupAndExit() {
     try {
       await ngrok.disconnect();
