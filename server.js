@@ -4,7 +4,10 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const ViteExpress = require('vite-express');
-const ngrok = require('ngrok');
+
+if (process.env.NODE_ENV !== 'production') {
+  ngrok = require('ngrok');
+}
 
 const app = express();
 const port = process.env.PORT || 3000;
