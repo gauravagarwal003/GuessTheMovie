@@ -14,13 +14,14 @@ let gameOver = false;
 let correctMovieDate = '';
 let correctMovie = '';
 let currentSelectionIndex = -1;
+let gameWon = false;
 
 const SKIPPED_GUESS = '__SKIPPED__'; // Sentinel value to indicate a skipped guess
 const maxMoviesToShow = 10;
 const selectedColumns = ['title', 'year', 'movieID', 'posterLink']; // Columns to select from the CSV file
 const maxIncorrectGuesses = 5;
 const imageButtonsContainer = document.getElementById('imageButtons');
-const skipButton = document.querySelector('button[id="skip-button"]');
+const multiButton = document.querySelector('button[id="multi-button"]');
 
 var globalGameStats = JSON.parse(localStorage.getItem('gameStats')) || {
     games: [],
@@ -434,6 +435,7 @@ function updateGameStats(currentGame) {
 
 function finishGame(wonGame) {
   gameOver = true;
+  gameWon = wonGame;
   const textDisplay = document.getElementById('textDisplay');
   gameOverMessage = wonGame ? "You got it! " : "You lost. ";
   textDisplay.innerHTML = `<div id="textDisplay">${gameOverMessage}<span class="message"></span><a href="https://letterboxd.com/film/${correctMovieID}" class="movie-link" target="_blank">${correctMovie.title} (${correctMovie.year})</a><span class="message"> is the correct movie.</span><br><span class="message"> Come back tomorrow to play again!</span></div>`;
@@ -446,8 +448,8 @@ function finishGame(wonGame) {
     links = allLinks.slice(0, maxIncorrectGuesses);
     updateImageButtons();
   }
-
-  skipButton.remove();
+  multiButton.textContent = "Share";
+  multiButton.onclick = pressShare;
   imageButtonsContainer.style.marginRight = "0px";
   document.getElementById('search').remove();
 
@@ -512,6 +514,38 @@ function pressSkipButton() {
   else {
     finishGame(false);
   }
+}
+
+function pressShare() {
+  
+  let shareText = ''
+  if (gameWon) {
+    shareText = `I played "Guess The Movie" and got it in ${collectedGuessesArray.length} guesses! Can you do better?`;
+  }
+  else{
+    shareText = `I played "Guess The Movie" but wasn't able to get it. Can you do better?`;
+  }
+  const shareData = {
+    text: shareText,
+    url: window.location.href,
+  };
+  if (navigator.share && navigator.canShare(shareData)) {
+    navigator.share(shareData)
+ } else {
+  shareText += ` Play now at ${window.location.href}`;
+  navigator.clipboard.writeText(shareText)
+    .then(() => {
+
+      multiButton.textContent = "Copied";
+      setTimeout(() => {
+        multiButton.textContent = "Share";
+      }, 4000);
+    })
+    .catch((err) => {
+      console.error("Failed to copy text: ", err);
+    });
+   }
+
 }
 
 function clearSearchAndMovieList() {

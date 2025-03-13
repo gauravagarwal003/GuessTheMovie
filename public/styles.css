@@ -226,14 +226,14 @@ body {
     padding: 0;
 }
 
-#skip-button {
+#multi-button {
     background-color: transparent;
     color: var(--bonewhite);
     outline: none;
     border: none;
 }
 
-#skip-button:hover {
+#multi-button:hover {
     color: var(--letterboxdBackground);
 }
 
