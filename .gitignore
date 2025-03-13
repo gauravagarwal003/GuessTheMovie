@@ -31,4 +31,4 @@ coverage/
 
 .heroku/
 .npm/
-profile.d/
+.profile.d/
