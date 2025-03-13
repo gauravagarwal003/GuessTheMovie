@@ -4,6 +4,7 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const ViteExpress = require('vite-express');
+const ngrok = require('ngrok');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -115,16 +116,14 @@ app.get('/api/get-movie', (req, res) => {
 /* 
   Serve static files and handle client-side routing:
   - In production, serve from the "dist" folder (built by Vite).
-  - In development, serve directly from the "public" folder.
+  - In development, serve from the "public" folder.
 */
-if (process.env.NODE_ENV == 'production') {
-  // Production: serve built assets from the "dist" directory.
+if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'dist')));
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
   });
 } else {
-  // Development: serve static assets from the "public" directory.
   app.use(express.static(path.join(__dirname, 'public')));
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
@@ -136,12 +135,47 @@ if (process.env.NODE_ENV == 'production') {
   - In development, use ViteExpress to enable features like HMR.
   - In production, simply start the Express server.
 */
-if (process.env.NODE_ENV == 'production') {
+if (process.env.NODE_ENV === 'production') {
   app.listen(port, () => {
     console.log(`Server is running in production on http://localhost:${port}`);
   });
 } else {
   ViteExpress.listen(app, port, () => {
     console.log(`Server is running on http://localhost:${port}`);
+    
+    // Automatically start ngrok tunnel in development mode
+    (async () => {
+      try {
+        const url = await ngrok.connect({
+          addr: port,
+          hostname: 'virtually-alive-cockatoo.ngrok-free.app'
+        });
+        console.log(`ngrok tunnel established at: ${url}`);
+      } catch (err) {
+        console.error('Error starting ngrok:', err);
+      }
+    })();
+  });
+}
+
+// In development mode, add graceful shutdown handlers to disconnect ngrok on restart.
+if (process.env.NODE_ENV !== 'production') {
+  async function cleanupAndExit() {
+    try {
+      await ngrok.disconnect();
+      console.log('ngrok tunnel disconnected.');
+    } catch (err) {
+      console.error('Error disconnecting ngrok:', err);
+    } finally {
+      process.exit();
+    }
+  }
+  
+  process.once('SIGINT', cleanupAndExit);
+  process.once('SIGTERM', cleanupAndExit);
+  // nodemon emits SIGUSR2 on restart
+  process.once('SIGUSR2', async () => {
+    await cleanupAndExit();
+    process.kill(process.pid, 'SIGUSR2');
   });
 }
