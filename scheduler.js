@@ -109,13 +109,9 @@ function pushChanges(commitMessage) {
     if (!githubTokenRaw) {
       return reject(new Error("Missing GITHUB_TOKEN environment variable."));
     }
-    // Trim the token to remove any extra whitespace or newlines
     const githubToken = githubTokenRaw.trim();
 
-    // Use the recommended URL format with the "x-access-token" prefix.
     const remoteUrl = `https://x-access-token:${githubToken}@github.com/gauravagarwal003/LBGuessMovie.git`;
-    // Alternatively, if issues persist, try this:
-    // const remoteUrl = `https://${githubToken}@github.com/gauravagarwal003/LBGuessMovie.git`;
 
     const envOptions = { ...process.env, GIT_TERMINAL_PROMPT: '0' };
 
@@ -126,7 +122,7 @@ function pushChanges(commitMessage) {
       }
       console.log("Remote URL updated with GITHUB_TOKEN.");
 
-      // Configure Git identity locally for this repository.
+      // Configure Git identity locally
       const gitConfigCommand = `git config user.email "gagarwal003@gmail.com" && git config user.name "gauravagarwal003"`;
       exec(gitConfigCommand, { env: envOptions }, (err) => {
         if (err) {
@@ -136,16 +132,16 @@ function pushChanges(commitMessage) {
         console.log("Git user identity configured.");
 
         // Checkout the correct branch before committing.
-        const checkoutCommand = `git checkout one_movie_per_day`;
+        const checkoutCommand = `git checkout main`;
         exec(checkoutCommand, { env: envOptions }, (err) => {
           if (err) {
-            console.error("Error checking out branch one_movie_per_day:", err);
+            console.error("Error checking out branch main:", err);
             return reject(err);
           }
-          console.log("Checked out branch one_movie_per_day.");
+          console.log("Checked out branch main.");
 
-          // Stage, commit, and push changes to the one_movie_per_day branch.
-          const gitPushCommand = `git add . && git commit -m "${commitMessage}" && git push origin one_movie_per_day`;
+          // Stage, commit, and push changes to the main branch.
+          const gitPushCommand = `git add . && git commit -m "${commitMessage}" && git push origin main`;
           exec(gitPushCommand, { env: envOptions }, (err, stdout) => {
             if (err) {
               console.error("Error pushing changes:", err);
@@ -159,6 +155,7 @@ function pushChanges(commitMessage) {
     });
   });
 }
+
 
 
 // --- Main Function ---
