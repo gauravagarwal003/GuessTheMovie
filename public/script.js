@@ -209,7 +209,6 @@ function displayHistory() {
 }
 
 function displayStats() {
-  makeButtonActive('displayHistoryButton');
   const modalContentDiv = document.getElementById('modalContent');
   modalContentDiv.innerHTML = `<h2>Your Stats</h2>`;
   setActiveButton("displayStatsButton");
@@ -489,6 +488,8 @@ function finishGame(wonGame) {
 
 function pressSkipButton() {
   collectedGuessesArray.push(SKIPPED_GUESS);
+  multiButton.blur();
+
   if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
   }
@@ -605,9 +606,14 @@ function displayCurrentImage(index = 1) {
 }
 
 function makeButtonActive(index) {
-  const buttons = document.querySelectorAll('button');
+  const buttons = imageButtonsContainer.querySelectorAll('button');
   buttons.forEach(button => {
-    button.classList.toggle('active', button.textContent == index);
+    if (parseInt(button.textContent) === index) {
+      button.classList.add('active');
+    } else {
+      button.classList.remove('active');
+      button.blur()
+    }
   });
 }
 
@@ -617,9 +623,10 @@ function updateImageButtons() {
     const button = document.createElement('button');
     button.textContent = index + 1;
     button.onclick = () => {
-      displayCurrentImage(button.textContent);
-      makeButtonActive(button.textContent);
-      currentImageIndex = button.textContent;
+      numReview = parseInt(button.textContent, 10)
+      displayCurrentImage(numReview);
+      makeButtonActive(numReview);
+      currentImageIndex = parseInt(numReview);
     };
     imageButtonsContainer.appendChild(button);
   });
