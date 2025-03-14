@@ -271,10 +271,12 @@ function filterMovies(event) {
   const allowedRegex = /^[a-zA-Z0-9 !@#$%ﬂ&*()_+\-=\~`{}\|:"<>?\[\]\\;',.\/]$/;
   
   // Only process if the key pressed matches allowed characters.
-  if (event.key !== "Backspace" && !allowedRegex.test(event.key)) {
+  if (event.key !== undefined && event.key !== "Backspace" && !allowedRegex.test(event.key)) {
     return;
   }
-  const searchQuery = document.getElementById('search').value.toLowerCase();
+  
+  const searchQuery = document.getElementById('search').value.toLowerCase();  
+
   if (searchQuery === '') {
     clearSearchAndMovieList();
     return;
