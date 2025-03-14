@@ -872,7 +872,7 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
   }
   if ('serviceWorker' in navigator) {
     console.log('ServiceWorker is supported');
-    navigator.serviceWorker.register('/sw.js')
+    navigator.serviceWorker.register('./sw.js')
       .then(registration => {
         console.log('ServiceWorker registration successful with scope:', registration.scope);
       })

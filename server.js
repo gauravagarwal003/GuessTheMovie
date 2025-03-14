@@ -125,7 +125,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'dist')));
 
   // Explicitly serve sw.js from the dist folder
-  app.get('/sw.js', (req, res) => {
+  app.get('./sw.js', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'sw.js'));
   });
 
@@ -155,6 +155,7 @@ if (process.env.NODE_ENV === 'production') {
   app.listen(port, () => {
     console.log(`Server is running in production on http://localhost:${port}`);
   });
+  
 } else {
   // Development mode: start server with ViteExpress and initialize ngrok.
   ViteExpress.listen(app, port, () => {
