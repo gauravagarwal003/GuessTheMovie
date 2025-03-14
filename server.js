@@ -123,11 +123,23 @@ app.get('/api/get-movie', (req, res) => {
 */
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'dist')));
+
+  // Explicitly serve sw.js from the dist folder
+  app.get('/sw.js', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dist', 'sw.js'));
+  });
+
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
   });
 } else {
   app.use(express.static(path.join(__dirname, 'public')));
+
+  // Explicitly serve sw.js from the public folder
+  app.get('/sw.js', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'sw.js'));
+  });
+
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
   });

@@ -1,18 +1,18 @@
 :root {
-    --letterboxdOrange: #ef8733;
-    --letterboxdGreen: #66dd67;
-    --letterboxdBlue: #66b9ef;
-    --letterboxdBackground: rgb(25, 25, 30);
+    --LOrange: #ef8733;
+    --LGreen: #66dd67;
+    --LBlue: #66b9ef;
+    --LBackground: rgb(25, 25, 30);
     --bonewhite: rgb(249, 246, 238);
     --currentBackground: rgb(46, 52, 63);
     --searchbarBackground: var(--bonewhite);
     --searchbarText: rgb(100, 110, 130);
     --movieListText: var(--bonewhite);
-    --activeButtonBackground: var(--letterboxdBackground);
+    --activeButtonBackground: var(--LBackground);
     --activeButtonText: var(--bonewhite);
     --inactiveButtonBackground: transparent;
     --inactiveButtonText: rgb(150, 170, 190);
-    --movieHoverBackground: var(--letterboxdBackground);
+    --movieHoverBackground: var(--LBackground);
 }
 
 html, body {
@@ -31,7 +31,7 @@ html, body {
 
 #header {
     background: none;
-    background: var(--letterboxdBackground);
+    background: var(--LBackground);
     color: var(--bonewhite);
     display: flex;
     justify-content: center;
@@ -116,33 +116,33 @@ html, body {
 }
 
 .display-stats-button:hover {
-    color: var(--letterboxdOrange) !important;
+    color: var(--LOrange) !important;
 }
 
 .display-history-button:hover {
-    color: var(--letterboxdGreen) !important;
+    color: var(--LGreen) !important;
 
 }
 
 .instructions-button:hover {
-    color: var(--letterboxdBlue) !important;
+    color: var(--LBlue) !important;
 }
 
 .active-stats {
     text-decoration: underline;
-    color: var(--letterboxdOrange) !important;
+    color: var(--LOrange) !important;
 
 }
 
 .active-history {
     text-decoration: underline;
-    color: var(--letterboxdGreen) !important;
+    color: var(--LGreen) !important;
 }
 
 
 .active-instructions {
     text-decoration: underline;
-    color: var(--letterboxdBlue) !important;
+    color: var(--LBlue) !important;
 }
 
 .active-button {
@@ -191,12 +191,12 @@ html, body {
 .modal-content::-webkit-scrollbar-thumb {
     background: rgba(0, 0, 0, 0);
     /* Slight transparency on hover */
-    border: 3px solid var(--letterboxdBackground);
+    border: 3px solid var(--LBackground);
     border-radius: 5px;
 }
 
 .modal-content::-webkit-scrollbar-thumb:hover {
-    background: var(--letterboxdBackground);
+    background: var(--LBackground);
     /* Scrollbar color */
     border-radius: 5px;
 }
@@ -234,7 +234,7 @@ body {
 }
 
 #multi-button:hover {
-    color: var(--letterboxdBackground);
+    color: var(--LBackground);
 }
 
 #search-row {
@@ -346,7 +346,7 @@ body {
     position: fixed;
     bottom: 0;
     left: 0;
-    background-color: var(--letterboxdBackground);
+    background-color: var(--LBackground);
     color: var(--bonewhite);
     display: flex;
     align-items: center;
@@ -377,7 +377,7 @@ body {
 }
 
 #footerItemLetterboxd {
-    color: var(--letterboxdOrange) !important;
+    color: var(--LOrange) !important;
     padding-left: 0.3%;
     padding-right: 15px;
 }
@@ -456,7 +456,7 @@ a:focus .footer-image {
     height: 5rem;
     border: 5px solid var(--bonewhite);
     border-radius: 50%;
-    border-top-color: var(--letterboxdOrange);
+    border-top-color: var(--LOrange);
     animation: spin 1s ease-in-out infinite;
     -webkit-animation: spin 1s ease-in-out infinite;
 }
