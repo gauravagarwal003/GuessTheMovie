@@ -870,19 +870,6 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
   } catch (error) {
     console.error('Error during initialization:', error);
   }
-  if ('serviceWorker' in navigator) {
-    console.log('ServiceWorker is supported');
-    navigator.serviceWorker.register('./sw.js')
-      .then(registration => {
-        console.log('ServiceWorker registration successful with scope:', registration.scope);
-      })
-      .catch(error => {
-        console.error('ServiceWorker registration failed:', error);
-      });
-  }
-  else{
-    console.error('ServiceWorker is not supported');
-  }
 
 });
 
