@@ -2,9 +2,9 @@
     --LOrange: #ef8733;
     --LGreen: #66dd67;
     --LBlue: #66b9ef;
-    --LBackground: rgb(15, 15, 20);
+    --LBackground: rgb(20, 20,25);
     --bonewhite: rgb(249, 246, 238);
-    --currentBackground: rgb(46, 52, 63);
+    --currentBackground: rgb(60,60,75);
     --searchbarBackground: var(--bonewhite);
     --searchbarText: rgb(100, 110, 130);
     --movieListText: var(--bonewhite);
