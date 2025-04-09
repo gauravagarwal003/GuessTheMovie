@@ -176,6 +176,111 @@ function displayInstructions() {
 
 }
 
+function displayPolicies() {
+  const modalContentDiv = document.getElementById('modalContent');
+
+  modalContentDiv.innerHTML = `
+
+    <!-- Navigation Tabs -->
+    <div class="tab-nav">
+      <a href="#" id="termsTab" class="active">Terms of Service</a>
+      <a href="#" id="privacyTab">Privacy Policy</a>
+      <a href="#" id="cookieTab">Cookie Policy</a>
+    </div>
+
+    <!-- Content Sections -->
+    <div id="termsContent" class="policy-content">
+      <h1>Terms of Service</h1>
+      <p>Last updated: April 09, 2025</p>
+      <p>By accessing or using the "Guess The Movie" game (the Game), you agree to comply with and be bound by these Terms of Service. If you do not agree with these terms, please do not use the Game.</p>
+      <p>This Game is intended for personal, non-commercial use. You are responsible for maintaining the confidentiality of your session, and for all activities that occur on your session.</p>
+      <p>We reserve the right to modify or discontinue the Game at any time. We may also modify these Terms of Service at any time, with or without notice. Your continued use of the Game after any such changes constitutes your acceptance of the new Terms of Service.</p>
+      <p>Any dispute arising out of or in connection with the Game shall be governed by the laws of the jurisdiction in which we operate, and you agree to submit to the exclusive jurisdiction of the courts in that jurisdiction.</p>
+    </div>
+    
+    <div id="privacyContent" class="policy-content" style="display: none;">
+      <h1>Privacy Policy</h1>
+      <p>Last updated: April 09, 2025</p>
+      <p>This Privacy Policy outlines how we collect, use, and protect your personal data when you use the "Guess The Movie" game (the Game). By using the Game, you consent to the collection and use of information in accordance with this policy.</p>
+      <p>We collect personal information when you register for the Game or voluntarily provide it. This may include your name, email address, and gameplay data. We use this information to personalize your experience and to improve the Game.</p>
+      <p>We do not share your personal information with third parties, except as required by law or to facilitate our business operations (such as processing payments or providing customer support).</p>
+      <p>We take appropriate security measures to protect your personal data, but no method of transmission over the internet is completely secure. We cannot guarantee the security of your information transmitted to the Game.</p>
+      <p>You have the right to access, update, or delete your personal information. If you wish to exercise any of these rights, please contact us through the provided contact details.</p>
+    </div>
+    
+    <div id="cookieContent" class="policy-content" style="display: none;">
+      <h1>Cookie Policy</h1>
+      <p>Last updated: April 09, 2025</p>
+      <p>This Cookie Policy explains how the "Guess The Movie" game (the Game) uses cookies and similar technologies to collect information when you interact with the Game. By using the Game, you consent to our use of cookies in accordance with this policy.</p>
+      <p>Cookies are small files that are placed on your device when you access the Game. We use cookies to enhance your user experience by remembering your preferences, tracking your activity, and analyzing usage trends.</p>
+      <p>We use two types of cookies: session cookies, which expire when you close your browser, and persistent cookies, which remain on your device for a specified period. These cookies help us understand how you interact with the Game and allow us to improve its functionality.</p>
+      <p>You can control cookie settings in your browser to accept or reject cookies. Please note that rejecting cookies may affect the functionality of the Game, and you may not be able to use certain features.</p>
+      <p>We may also use third-party services, such as analytics tools, which may place cookies on your device. These third-party cookies are subject to the privacy policies of the respective providers.</p>
+    </div>
+  `;
+
+  // Tab navigation logic
+  const termsTab = document.getElementById('termsTab');
+  const privacyTab = document.getElementById('privacyTab');
+  const cookieTab = document.getElementById('cookieTab');
+  
+  const termsContent = document.getElementById('termsContent');
+  const privacyContent = document.getElementById('privacyContent');
+  const cookieContent = document.getElementById('cookieContent');
+
+  // Switch tabs
+  function switchTab(activeTab, contentToShow) {
+    // Remove active class from all tabs and hide all content sections
+    document.querySelectorAll('.tab-nav a').forEach(tab => tab.classList.remove('active'));
+    document.querySelectorAll('.policy-content').forEach(content => content.style.display = 'none');
+    
+    // Add active class to the clicked tab and show corresponding content
+    activeTab.classList.add('active');
+    contentToShow.style.display = 'block';
+  }
+
+  termsTab.addEventListener('click', () => switchTab(termsTab, termsContent));
+  privacyTab.addEventListener('click', () => switchTab(privacyTab, privacyContent));
+  cookieTab.addEventListener('click', () => switchTab(cookieTab, cookieContent));
+
+  // Display the modal
+  const modal = document.getElementById('Modal');
+  modal.style.display = "block";
+
+  document.getElementById('closeModal').onclick = function () {
+    modal.style.display = "none";
+  };
+
+  // Close the modal if user clicks anywhere outside the modal content
+  window.onclick = function (event) {
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  };
+
+  // Set default tab and content to Terms of Service
+  switchTab(termsTab, termsContent);
+}
+
+function displayContactInfo(){
+  const modalContentDiv = document.getElementById('modalContent');
+  modalContentDiv.innerHTML = `<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf1QkFlmLqevhyPgnqCRA-nj3yLsb0lQxgA_BGFtxbZySnNVA/viewform?embedded=true" width="640" height="915" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>`;
+  const modal = document.getElementById('Modal');
+  modal.style.display = "block";
+
+  document.getElementById('closeModal').onclick = function () {
+    modal.style.display = "none";
+  };
+
+  // Close the modal if user clicks anywhere outside the modal content
+  window.onclick = function (event) {
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  };
+
+}
+
 function displayHistory() {
   const modalContentDiv = document.getElementById('modalContent');
 
@@ -658,6 +763,52 @@ function hoverCoffee() {
   });
 }
 
+function hoverContactUs() {
+  const contactUsText = document.getElementById('footerItemContactUs');
+  const contactUsIcon = document.getElementById('contactUsIcon');
+
+  // Add event listeners for hover and focus
+  contactUsText.addEventListener('pointerenter', function () {
+    contactUsIcon.classList.add('hover');// // Change to the new image
+  });
+
+  contactUsText.addEventListener('pointerleave', function () {
+    contactUsIcon.classList.remove('hover'); // Change back to the original image
+  });
+
+  contactUsIcon.addEventListener('pointerenter', function () {
+    contactUsText.classList.add('hover');// Change to the new image
+  });
+
+  contactUsIcon.addEventListener('pointerleave', function () {
+    contactUsText.classList.remove('hover'); // Change back to the original image
+  });
+}
+
+
+function hoverPolicies() {
+  const policyText = document.getElementById('footerItemPolicies');
+  const policiesIcon = document.getElementById('policiesIcon');
+
+  // Add event listeners for hover and focus
+  policyText.addEventListener('pointerenter', function () {
+    policiesIcon.classList.add('hover');// // Change to the new image
+  });
+
+  policyText.addEventListener('pointerleave', function () {
+    policiesIcon.classList.remove('hover'); // Change back to the original image
+  });
+
+  policiesIcon.addEventListener('pointerenter', function () {
+    policyText.classList.add('hover');// Change to the new image
+  });
+
+  policiesIcon.addEventListener('pointerleave', function () {
+    policyText.classList.remove('hover'); // Change back to the original image
+  });
+}
+
+
 function hoverLetterboxd() {
   const footerItemLetterboxd = document.getElementById('footerItemLetterboxd');
   const footerImage = document.querySelector('.footer-image');
@@ -866,6 +1017,8 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
     hoverHistory();
     hoverStats();
     hoverInstructions();
+    hoverPolicies();
+    hoverContactUs();
 
   } catch (error) {
     console.error('Error during initialization:', error);

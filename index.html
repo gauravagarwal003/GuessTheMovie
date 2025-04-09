@@ -32,7 +32,6 @@
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3181134485510321"
         crossorigin="anonymous"></script>
-        
 </head>
 
 <body>
@@ -64,10 +63,7 @@
                     <i class="fa-solid fa-question icon" id="instructionsIcon"></i>
                     <span class="instructions-button-text full">How to Play</span>
                     <span class="instructions-button-text short">Guide</span>
-
                 </button>
-
-
             </div>
         </header>
 
@@ -102,12 +98,28 @@
             <a id="footerIcon" href="https://letterboxd.com/gaurava/" target="_blank">
                 <img src="/LBColorLogo.png" alt="Letterboxd Profile" class="footer-image" />
             </a>
-            <a id="footerItemLetterboxd" href="https://letterboxd.com/gaurava/" target="_blank">My Letterboxd</a>
+            <a id="footerItemLetterboxd" href="https://letterboxd.com/gaurava/" target="_blank" class="full">My Letterboxd</a>
+            <a id="footerItemLetterboxd" href="https://letterboxd.com/gaurava/" target="_blank" class="short">My LB</a>
+
 
             <i style="text-decoration: none;" href="https://buymeacoffee.com/gprojects" class="fa-solid fa-mug-hot icon"
                 id="coffeeIcon" target="_blank"></i>
-            <a id="footerItemCoffee" href="https://buymeacoffee.com/gprojects" target="_blank">Buy Me a Coffee</a>
+            <a id="footerItemCoffee" href="https://buymeacoffee.com/gprojects" target="_blank" class="full">Buy Me a Coffee</a>
+            <a id="footerItemCoffee" href="https://buymeacoffee.com/gprojects" target="_blank" class="short">Support</a>
+
+
+            <i id="policiesIcon" style="text-decoration: none;" class="fa-solid fa-info icon" onclick="displayPolicies()"></i>
+            <a id = "footerItemPolicies" class="policies-button-text full" onclick="displayPolicies()">Policies</a>
+            <a id = "footerItemPolicies" class="policies-button-text short" onclick="displayPolicies()">Policies</a>
+
+
+            <i id="contactUsIcon" style="text-decoration: none;" class="fa-solid fa-paper-plane icon" onclick="displayContactInfo()"></i>
+            <a id = "footerItemContactUs" class="contact-button-text full" onclick="displayContactInfo()">Contact Us</a>
+            <a id = "footerItemContactUs" class="contact-button-text short" onclick="displayContactInfo()">Contact</a>
+
+
         </footer>
+        
     </main>
     <div id="Modal" class="modal">
         <div class="modal-content">
