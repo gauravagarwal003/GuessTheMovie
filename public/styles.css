@@ -432,6 +432,7 @@ body {
     color: rgb(165, 135, 110) !important;
     padding-left: 0.20%;
     padding-right: 1%;
+    text-decoration: underline;
 }
 
 #footerItemCoffee:hover,
@@ -452,6 +453,7 @@ body {
     color: var(--LOrange) !important;
     padding-left: 0.3%;
     padding-right: 1%;
+    text-decoration: underline;
 }
 
 #footerItemLetterboxd:hover,
