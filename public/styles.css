@@ -15,7 +15,8 @@
     --movieHoverBackground: var(--LBackground);
 }
 
-html,body {
+html,
+body {
     overflow-x: hidden;
     overscroll-behavior: none;
 }
@@ -241,6 +242,7 @@ html,body {
 .close-button:hover {
     opacity: 0.5;
 }
+
 .tab-nav a:hover {
     color: gray !important;
 }
@@ -316,7 +318,6 @@ body {
 #reviewContainer {
     margin: 10px auto;
     max-width: 720px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.35);
 }
 
 #textDisplay,
@@ -402,6 +403,7 @@ body {
 #policiesIcon {
     color: var(--LGreen);
 }
+
 #policiesIcon:hover,
 #policiesIcon.hover {
     color: var(--bonewhite);
@@ -422,6 +424,7 @@ body {
 #contactUsIcon {
     color: var(--LBlue);
 }
+
 #contactUsIcon:hover,
 #contactUsIcon.hover {
     color: var(--bonewhite);
@@ -563,4 +566,88 @@ a:focus .footer-image {
     justify-content: center;
     z-index: 9999;
     /* Make sure it’s on top */
+}
+
+/* Container for the entire review card */
+.review-card {
+    background-color: var(--bonewhite);
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px auto;
+    max-width: 500px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Profile photo styling */
+.review-profile-photo {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 8px;
+}
+
+/* Username styling */
+.review-username {
+    margin: -15px 0 8px;
+    font-size: 25px;
+    color: var(--LBackground);
+}
+
+/* Rating styling */
+.review-rating {
+    margin: 4px 0;
+    color: var(--LGreen);
+}
+
+.liked {
+    color: var(--LOrange);
+}
+
+/* Review text styling */
+.review-text {
+    margin: 4px 0;
+    color: var(--currentBackground);
+    line-height: 1.4;
+    font-size: 20px;
+}
+
+/* Link styling */
+.review-link {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 6px 12px;
+    background-color: #0077cc;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.review-link:hover {
+    background-color: #005fa3;
+}
+
+/* Date, comments, and likes styling */
+.review-date,
+.review-comments,
+.likes-comments {
+    margin: 4px 0;
+    color:#777;
+    font-size: 14px;
+}
+
+.review-date{
+    margin-top: -10px;
+}
+
+.review-username-container {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* space between image and text */
+    margin-bottom: 8px;
+}
+
+.review-username-text {
+    display: flex;
+    flex-direction: column;
 }

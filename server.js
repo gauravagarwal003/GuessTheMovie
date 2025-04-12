@@ -13,80 +13,46 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 /* 
-  API endpoint to get all the text for reviews of a movie
-  (expects query parameters: date, name, and index)
+  API endpoint to get JSON review files from the movie folder.
+  It reads files ending in ".json" from movie/{date}/{movieID}
+  and returns the parsed JSON content of the file at the provided index.
 */
-app.get('/api/text', (req, res) => {
+app.get('/api/json', (req, res) => {
   const { date, name: movieID, index } = req.query;
-  const reviewsPath = path.join(__dirname, 'movie', date, movieID, 'text');
+  const reviewsPath = path.join(__dirname, 'movie', date, movieID);
 
   fs.readdir(reviewsPath, (err, files) => {
     if (err) {
-      return res.status(404).json({ error: 'Error reading text directory' });
+      return res.status(404).json({ error: 'Error reading directory' });
     }
-    const validFiles = files.filter(file => !file.startsWith('.'));
+    // Filter to include only JSON files
+    const validFiles = files.filter(file => file.endsWith('.json'));
     if (validFiles.length === 0) {
-      return res.status(404).json({ error: 'No text found or an error occurred' });
+      return res.status(404).json({ error: 'No JSON files found' });
     }
     const idx = parseInt(index, 10);
     if (idx >= 0 && idx < validFiles.length) {
-      const textPath = path.join(reviewsPath, validFiles[idx]);
-      return res.sendFile(textPath);
+      const jsonPath = path.join(reviewsPath, validFiles[idx]);
+      fs.readFile(jsonPath, 'utf8', (err, data) => {
+        if (err) {
+          return res.status(500).json({ error: 'Error reading JSON file' });
+        }
+        try {
+          const jsonData = JSON.parse(data);
+          return res.json(jsonData);
+        } catch (parseErr) {
+          return res.status(500).json({ error: 'Error parsing JSON file' });
+        }
+      });
+    } else {
+      return res.status(404).json({ error: 'JSON file not found' });
     }
-    return res.status(404).json({ error: 'Text not found' });
   });
 });
 
 /* 
-  API endpoint to get all the links for reviews of a movie 
-*/
-app.get('/api/links', (req, res) => {
-  const { date, name: movieID, index } = req.query;
-  const reviewsPath = path.join(__dirname, 'movie', date, movieID, 'links');
-
-  fs.readdir(reviewsPath, (err, files) => {
-    if (err) {
-      return res.status(404).json({ error: 'Error reading links directory' });
-    }
-    const validFiles = files.filter(file => !file.startsWith('.'));
-    if (validFiles.length === 0) {
-      return res.status(404).json({ error: 'No links found or an error occurred' });
-    }
-    const idx = parseInt(index, 10);
-    if (idx >= 0 && idx < validFiles.length) {
-      const linkPath = path.join(reviewsPath, validFiles[idx]);
-      return res.sendFile(linkPath);
-    }
-    return res.status(404).json({ error: 'Link not found' });
-  });
-});
-
-/* 
-  API endpoint to get all images from the reviews folder of a movie 
-*/
-app.get('/api/images', (req, res) => {
-  const { date, name: movieID, index } = req.query;
-  const reviewsPath = path.join(__dirname, 'movie', date, movieID, 'images');
-
-  fs.readdir(reviewsPath, (err, files) => {
-    if (err) {
-      return res.status(404).json({ error: 'Error reading images directory' });
-    }
-    const validFiles = files.filter(file => !file.startsWith('.'));
-    if (validFiles.length === 0) {
-      return res.status(404).json({ error: 'No images found or an error occurred' });
-    }
-    const idx = parseInt(index, 10);
-    if (idx >= 0 && idx < validFiles.length) {
-      const imagePath = path.join(reviewsPath, validFiles[idx]);
-      return res.sendFile(imagePath);
-    }
-    return res.status(404).json({ error: 'Image not found' });
-  });
-});
-
-/* 
-  API endpoint to get the selected movie from the "movie" folder 
+  API endpoint to get the selected movie from the "movie" folder.
+  It retrieves the first available date folder and movie folder found.
 */
 app.get('/api/get-movie', (req, res) => {
   const movieDir = path.join(__dirname, 'movie');
@@ -141,16 +107,12 @@ if (process.env.NODE_ENV === 'production') {
   - In production, simply start the Express server.
 */
 if (process.env.NODE_ENV === 'production') {
-  // Production mode: simply start the Express server.
   app.listen(port, () => {
     console.log(`Server is running in production on http://localhost:${port}`);
   });
-  
 } else {
-  // Development mode: start server with ViteExpress and initialize ngrok.
   ViteExpress.listen(app, port, () => {
     console.log(`Server is running on http://localhost:${port}`);
-    
     // Automatically start ngrok tunnel in development mode.
     (async () => {
       try {
@@ -179,7 +141,6 @@ if (process.env.NODE_ENV === 'production') {
   
   process.once('SIGINT', cleanupAndExit);
   process.once('SIGTERM', cleanupAndExit);
-  // nodemon emits SIGUSR2 on restart
   process.once('SIGUSR2', async () => {
     await cleanupAndExit();
     process.kill(process.pid, 'SIGUSR2');

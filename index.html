@@ -3,7 +3,7 @@
 
 <head>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3181134485510321"
-     crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-P9S92SGST0"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -15,7 +15,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guess the Movie</title>
-    <meta name="description" content="Guess The Movie is your daily interactive film challenge. Test your movie knowledge by reading reviews and guessing the featured film. Play now and join the fun!">
+    <meta name="description"
+        content="Guess The Movie is your daily interactive film challenge. Test your movie knowledge by reading reviews and guessing the featured film. Play now and join the fun!">
     <meta name="keywords" content="movies, movie game, film challenge, movie reviews, guess the movie, daily game">
     <meta name="author" content="Gaurav">
 
@@ -39,8 +40,8 @@
 <body>
     <div id="loading-overlay">
         <div id="loading-spinner"></div>
-      </div>
-      
+    </div>
+
     <main id="page-container">
         <header id="header">
             <div class="header-content">
@@ -76,7 +77,29 @@
                 <a class="movie-link"></a>
                 <span class="message"></span>
             </div>
-            <div id="reviewContainer"></div>
+            <div id="reviewContainer">
+                <div id="reviewCard" class="review-card" style="display: none;">
+                    <div class="review-username-container">
+                        <img id="reviewProfilePhoto" class="review-profile-photo" />
+                        <div class="review-username-text">
+                            <p id="reviewUsername" class="review-username"></p>
+                            <p id="reviewDate" class="review-date"></p>
+                        </div>
+                    </div>
+                    <span id="reviewRating" class="review-rating"></span>
+                    <i id="reviewLiked" class="fa-solid fa-heart liked icon" style="display: none;"></i>
+                    <p id="reviewText" class="review-text"></p>
+                    <p id="likesComments" class="likes-comments">
+                        <i class="fa-solid fa-heart icon"></i>
+                        <span id="likesCount">0</span>
+                        &nbsp;&nbsp;
+                        <i class="fa-solid fa-comment icon"></i>
+                        <span id="commentsCount">0</span>
+                    </p>
+                    <a id="reviewLink" class="review-link" target="_blank" style="display: none;">View on Letterboxd</a>
+                </div>
+            </div>
+
             <nav id="allButtons">
                 <div id="imageButtons"></div>
                 <button onclick="pressSkipButton()" id="multi-button">Skip Guess</button>
@@ -84,7 +107,8 @@
 
             <div id="search-row">
                 <label for="search" class="visually-hidden">Search for a movie</label>
-                <input type="text" id="search" placeholder="Search" oninput="filterMovies(event)" autocorrect="off" autocomplete="off" autocapitalize="off" spellcheck="false">
+                <input type="text" id="search" placeholder="Search" oninput="filterMovies(event)" autocorrect="off"
+                    autocomplete="off" autocapitalize="off" spellcheck="false">
             </div>
             <ul id="movieList" class="movie-list"></ul>
             <div class="image-container" id="movie_container">
@@ -100,28 +124,32 @@
             <a id="footerIcon" href="https://letterboxd.com/gaurava/" target="_blank">
                 <img src="/LBColorLogo.png" alt="Letterboxd Profile" class="footer-image" />
             </a>
-            <a id="footerItemLetterboxd" href="https://letterboxd.com/gaurava/" target="_blank" class="full">My Letterboxd</a>
+            <a id="footerItemLetterboxd" href="https://letterboxd.com/gaurava/" target="_blank" class="full">My
+                Letterboxd</a>
             <a id="footerItemLetterboxd" href="https://letterboxd.com/gaurava/" target="_blank" class="short">My LB</a>
 
 
             <i style="text-decoration: none;" href="https://buymeacoffee.com/gprojects" class="fa-solid fa-mug-hot icon"
                 id="coffeeIcon" target="_blank"></i>
-            <a id="footerItemCoffee" href="https://buymeacoffee.com/gprojects" target="_blank" class="full">Buy Me a Coffee</a>
+            <a id="footerItemCoffee" href="https://buymeacoffee.com/gprojects" target="_blank" class="full">Buy Me a
+                Coffee</a>
             <a id="footerItemCoffee" href="https://buymeacoffee.com/gprojects" target="_blank" class="short">Support</a>
 
 
-            <i id="policiesIcon" style="text-decoration: none;" class="fa-solid fa-info icon" onclick="displayPolicies()"></i>
-            <a id = "footerItemPolicies" class="policies-button-text full" onclick="displayPolicies()">Policies</a>
-            <a id = "footerItemPolicies" class="policies-button-text short" onclick="displayPolicies()">Policies</a>
+            <i id="policiesIcon" style="text-decoration: none;" class="fa-solid fa-info icon"
+                onclick="displayPolicies()"></i>
+            <a id="footerItemPolicies" class="policies-button-text full" onclick="displayPolicies()">Policies</a>
+            <a id="footerItemPolicies" class="policies-button-text short" onclick="displayPolicies()">Policies</a>
 
 
-            <i id="contactUsIcon" style="text-decoration: none;" class="fa-solid fa-paper-plane icon" onclick="displayContactInfo()"></i>
-            <a id = "footerItemContactUs" class="contact-button-text full" onclick="displayContactInfo()">Contact Us</a>
-            <a id = "footerItemContactUs" class="contact-button-text short" onclick="displayContactInfo()">Contact</a>
+            <i id="contactUsIcon" style="text-decoration: none;" class="fa-solid fa-paper-plane icon"
+                onclick="displayContactInfo()"></i>
+            <a id="footerItemContactUs" class="contact-button-text full" onclick="displayContactInfo()">Contact Us</a>
+            <a id="footerItemContactUs" class="contact-button-text short" onclick="displayContactInfo()">Contact</a>
 
 
         </footer>
-        
+
     </main>
     <div id="Modal" class="modal">
         <div class="modal-content">

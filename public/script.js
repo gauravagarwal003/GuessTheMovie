@@ -2,12 +2,6 @@
 let moviesData = [];
 let correctMovieID = '';
 let incorrectGuessCount = 0;
-let reviewImages = [];
-let reviewTexts = [];
-let allLinks = [];
-let links = [];
-let allImages = [];
-let allText = [];
 let collectedGuessesArray = [];
 let currentImageIndex = 1;
 let gameOver = false;
@@ -15,6 +9,8 @@ let correctMovieDate = '';
 let correctMovie = '';
 let currentSelectionIndex = -1;
 let gameWon = false;
+let allReviewJSONs = []; // Array to store all review JSONs
+let currentReviewJSONs = []; // Array to store the subset of review JSONs
 
 const SKIPPED_GUESS = '__SKIPPED__'; // Sentinel value to indicate a skipped guess
 const maxMoviesToShow = 10;
@@ -24,9 +20,9 @@ const imageButtonsContainer = document.getElementById('imageButtons');
 const multiButton = document.querySelector('button[id="multi-button"]');
 
 var globalGameStats = JSON.parse(localStorage.getItem('gameStats')) || {
-    games: [],
-    totalPlayed: 0,
-    totalWon: 0
+  games: [],
+  totalPlayed: 0,
+  totalWon: 0
 };
 
 function hasGameBeenPlayed(correctMovieID, stats) {
@@ -53,7 +49,7 @@ function getOrdinalSuffix(day) {
 function formatDate(isoDate) {
   const localDateString = isoDate.replace(/-/g, '/');
   const date = new Date(localDateString);
-   const month = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(date);
+  const month = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(date);
   const day = date.getDate();
   const year = date.getFullYear();
   return `${month} ${day}${getOrdinalSuffix(day)}, ${year}`;
@@ -75,15 +71,15 @@ function generateGameHTML(game) {
   for (let i = 0; i < game.guesses.length; i++) {
     if (i == game.guesses.length - 1 && game.guesses.length > 1) {
       guessText += `and `;
-    } 
-    if (game.guesses[i] === SKIPPED_GUESS){ 
+    }
+    if (game.guesses[i] === SKIPPED_GUESS) {
       guessText += `skipped, `;
-    } 
-    else{
+    }
+    else {
       const foundMovie = moviesData.find(movie => movie.movieID === game.guesses[i]);
       realGuessCount++;
       console.log(game.guesses[i]);
-      if (game.guesses[i] === game.correctMovieID){
+      if (game.guesses[i] === game.correctMovieID) {
         guessText += ` correctly guessed ${foundMovie.title} (${foundMovie.year}), `;
       }
       else {
@@ -96,13 +92,13 @@ function generateGameHTML(game) {
     guessText = guessText.slice(0, -2);
   }
 
-  if (realGuessCount <= 0){
+  if (realGuessCount <= 0) {
     return `
     <p class = "historyFirstLine">On ${formattedDate}, the movie was ${game.title} (${game.year}).</p> 
     <p class = "historySecondLine">You ${resultText} and did not guess any movies.</p>
     `;
   }
-  else{
+  else {
     return `
         <p class = "historyFirstLine">On ${formattedDate}, the movie was ${game.title} (${game.year}).</p> 
         <p class = "historySecondLine">You ${resultText} with ${game.guessCount} ${plural}: ${guessText}.</p>
@@ -223,7 +219,7 @@ function displayPolicies() {
   const termsTab = document.getElementById('termsTab');
   const privacyTab = document.getElementById('privacyTab');
   const cookieTab = document.getElementById('cookieTab');
-  
+
   const termsContent = document.getElementById('termsContent');
   const privacyContent = document.getElementById('privacyContent');
   const cookieContent = document.getElementById('cookieContent');
@@ -233,7 +229,7 @@ function displayPolicies() {
     // Remove active class from all tabs and hide all content sections
     document.querySelectorAll('.tab-nav a').forEach(tab => tab.classList.remove('active'));
     document.querySelectorAll('.policy-content').forEach(content => content.style.display = 'none');
-    
+
     // Add active class to the clicked tab and show corresponding content
     activeTab.classList.add('active');
     contentToShow.style.display = 'block';
@@ -262,7 +258,7 @@ function displayPolicies() {
   switchTab(termsTab, termsContent);
 }
 
-function displayContactInfo(){
+function displayContactInfo() {
   const modalContentDiv = document.getElementById('modalContent');
   modalContentDiv.innerHTML = `<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf1QkFlmLqevhyPgnqCRA-nj3yLsb0lQxgA_BGFtxbZySnNVA/viewform?embedded=true" width="640" height="915" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>`;
   const modal = document.getElementById('Modal');
@@ -374,13 +370,13 @@ function displayStats() {
 
 function filterMovies(event) {
   const allowedRegex = /^[a-zA-Z0-9 !@#$%ﬂ&*()_+\-=\~`{}\|:"<>?\[\]\\;',.\/]$/;
-  
+
   // Only process if the key pressed matches allowed characters.
   if (event.key !== undefined && event.key !== "Backspace" && !allowedRegex.test(event.key)) {
     return;
   }
-  
-  const searchQuery = document.getElementById('search').value.toLowerCase();  
+
+  const searchQuery = document.getElementById('search').value.toLowerCase();
 
   if (searchQuery === '') {
     clearSearchAndMovieList();
@@ -410,11 +406,9 @@ function selectMovie(guessedMovieID) {
         </a>`;
     clearSearchAndMovieList();
     if (incorrectGuessCount < maxIncorrectGuesses) {
-      reviewImages = allImages.slice(0, incorrectGuessCount + 1);
-      reviewTexts = allText.slice(0, incorrectGuessCount + 1);
-      links = allLinks.slice(0, incorrectGuessCount + 1);
+      currentReviewJSONs = allReviewJSONs.slice(0, incorrectGuessCount + 1);
       updateImageButtons();
-      displayCurrentImage(incorrectGuessCount + 1);
+      displayCurrentReview(incorrectGuessCount + 1);
     } else {
       finishGame(false);
     }
@@ -520,7 +514,7 @@ function totalUniqueMoviesGuessed(stats) {
   const guessedMovies = new Set();
   for (const game of stats.games) {
     for (const guess of game.guesses) {
-      if (guess !== SKIPPED_GUESS){
+      if (guess !== SKIPPED_GUESS) {
         guessedMovies.add(guess);
       }
     }
@@ -549,9 +543,7 @@ function finishGame(wonGame) {
 
   clearSearchAndMovieList();
   if (incorrectGuessCount < maxIncorrectGuesses) {
-    reviewImages = allImages.slice(0, maxIncorrectGuesses);
-    reviewTexts = allText.slice(0, maxIncorrectGuesses);
-    links = allLinks.slice(0, maxIncorrectGuesses);
+    currentReviewJSONs = allReviewJSONs.slice(0, maxIncorrectGuesses);
     updateImageButtons();
   }
   multiButton.textContent = "Share";
@@ -590,7 +582,7 @@ function finishGame(wonGame) {
     };
     updateGameStats(currentGame);
   }
-  displayCurrentImage(currentImageIndex);
+  displayCurrentReview(currentImageIndex);
 }
 
 function pressSkipButton() {
@@ -609,28 +601,26 @@ function pressSkipButton() {
   incorrectGuessCount++;
   clearSearchAndMovieList();
   if (incorrectGuessCount < maxIncorrectGuesses) {
-    reviewImages = allImages.slice(0, incorrectGuessCount + 1);
-    reviewTexts = allText.slice(0, incorrectGuessCount + 1);
-    links = allLinks.slice(0, incorrectGuessCount + 1);
+    currentReviewJSONs = allReviewJSONs.slice(0, incorrectGuessCount + 1);
     updateImageButtons();
-    displayCurrentImage(incorrectGuessCount + 1);
+    displayCurrentReview(incorrectGuessCount + 1);
     let guessString = (maxIncorrectGuesses - incorrectGuessCount === 1) ? "1 guess" : `${maxIncorrectGuesses - incorrectGuessCount} guesses`;
     document.getElementById('textDisplay').innerHTML = `<a style="text-decoration:none; color:white;" target="_blank">
               You skipped! You have ${guessString} left. Switch between reviews to get more info!
           </a>`;
-  } 
+  }
   else {
     finishGame(false);
   }
 }
 
 function pressShare() {
-  
+
   let shareText = ''
   if (gameWon) {
     shareText = `I played "Guess The Movie" and got it in ${collectedGuessesArray.length} guesses! Can you do better?`;
   }
-  else{
+  else {
     shareText = `I played "Guess The Movie" but wasn't able to get it. Can you do better?`;
   }
   const shareData = {
@@ -639,20 +629,20 @@ function pressShare() {
   };
   if (navigator.share && navigator.canShare(shareData)) {
     navigator.share(shareData)
- } else {
-  shareText += ` Play now at ${window.location.href}`;
-  navigator.clipboard.writeText(shareText)
-    .then(() => {
+  } else {
+    shareText += ` Play now at ${window.location.href}`;
+    navigator.clipboard.writeText(shareText)
+      .then(() => {
 
-      multiButton.textContent = "Copied";
-      setTimeout(() => {
-        multiButton.textContent = "Share";
-      }, 4000);
-    })
-    .catch((err) => {
-      console.error("Failed to copy text: ", err);
-    });
-   }
+        multiButton.textContent = "Copied";
+        setTimeout(() => {
+          multiButton.textContent = "Share";
+        }, 4000);
+      })
+      .catch((err) => {
+        console.error("Failed to copy text: ", err);
+      });
+  }
 
 }
 
@@ -661,54 +651,85 @@ function clearSearchAndMovieList() {
   document.getElementById('movieList').innerHTML = '';
 }
 
-async function fetchImages(movieID, date, index) {
+async function fetchData(movieID, date, index) {
   try {
-    const response1 = await fetch(`/api/images?date=${date}&name=${movieID}&index=${index}`);
-    const response2 = await fetch(`/api/text?date=${date}&name=${movieID}&index=${index}`);
-    const response3 = await fetch(`/api/links?date=${date}&name=${movieID}&index=${index}`);
-    if (response1.status === 404 || response2.status === 404 || response3.staus === 404) return;
-    const blob1 = await response1.blob();
-    const blob2 = await response2.text();
-    const blob3 = await response3.text();
-    const imageUrl = URL.createObjectURL(blob1);
-    allImages.push(imageUrl);
-    allText.push(blob2);
-    allLinks.push(blob3);
+    const response = await fetch(`/api/json?date=${date}&name=${movieID}&index=${index}`);
+    if (response.status === 404) return;
+    const jsonData = await response.json();
+    allReviewJSONs.push(jsonData);
     if (index === 0) {
-      reviewImages.push(imageUrl);
-      reviewTexts.push(blob2);
-      links.push(blob3);
+      currentReviewJSONs.push(jsonData);
     }
+
   } catch (error) {
-    console.error('Error fetching image, text, or link:', error);
+    console.error('Error fetching JSONs:', error);
   }
 }
 
-async function fetchAllImagesSequentially(movieID, date) {
+async function fetchAllReviewsSequentially(movieID, date) {
   for (let i = 0; i < maxIncorrectGuesses; i++) {
-    await fetchImages(movieID, date, i);
+    await fetchData(movieID, date, i);
   }
 }
 
-function displayCurrentImage(index = 1) {
-  const reviewContainer = document.getElementById('reviewContainer');
-  reviewContainer.innerHTML = '';
-  if (reviewImages.length > 0) {
-    const img = document.createElement('img');
-    img.classList.add('movie-poster-img');
-    img.alt = `Review: ${reviewTexts[index - 1]}`;
-    img.id = 'reviewImage';
-    img.src = reviewImages[index - 1];
+function displayCurrentReview(index = 1) {
+  const review = currentReviewJSONs[index - 1];
+  const reviewCard = document.getElementById('reviewCard');
+  if (!review || currentReviewJSONs.length === 0) {
+    reviewCard.style.display = 'none';
+    return;
+  }
 
-    if (gameOver) {
-      const link = document.createElement('a');
-      link.href = links[index - 1]; // Replace with your desired URL
-      link.target = '_blank'; // Opens the link in a new tab
-      link.appendChild(img);
-      reviewContainer.appendChild(link);
-    } else {
-      reviewContainer.appendChild(img);
+  // Show card
+  reviewCard.style.display = 'block';
+
+  // Profile photo
+  const profileImg = document.getElementById('reviewProfilePhoto');
+  profileImg.src = review.profilePhotoLink;
+  profileImg.alt = `${review.username}'s profile photo`;
+
+  // Username
+  document.getElementById('reviewUsername').textContent = review.username;
+
+  // Date
+  document.getElementById('reviewDate').textContent = review.date;
+
+  // Rating
+  const ratingContainer = document.getElementById('reviewRating');
+  ratingContainer.innerHTML = '';
+  if (review.rating !== '') {
+    const ratingDecimal = parseFloat(review.rating);
+    for (let i = 0; i < 5; i++) {
+      let star = document.createElement('i');
+      if (i < Math.floor(ratingDecimal)) {
+        star.classList.add('fa-solid', 'fa-star', 'star', 'icon');
+      } else if (i < ratingDecimal) {
+        star.classList.add('fa-solid', 'fa-star-half-stroke', 'star', 'icon');
+      } else {
+        star.classList.add('fa-regular', 'fa-star', 'star', 'icon');
+      }
+      ratingContainer.appendChild(star);
     }
+  }
+
+  // Liked
+  const likedIcon = document.getElementById('reviewLiked');
+  likedIcon.style.display = review.liked ? 'inline-block' : 'none';
+
+  // Review text
+  document.getElementById('reviewText').textContent = review.text;
+
+  // Likes and comments
+  document.getElementById('likesCount').textContent = Number(review.numLikes).toLocaleString();
+  document.getElementById('commentsCount').textContent = Number(review.num_comments).toLocaleString();
+    
+  // Link
+  const reviewLink = document.getElementById('reviewLink');
+  if (gameOver) {
+    reviewLink.href = review.link;
+    reviewLink.style.display = 'inline-block';
+  } else {
+    reviewLink.style.display = 'none';
   }
 }
 
@@ -726,12 +747,12 @@ function makeButtonActive(index) {
 
 function updateImageButtons() {
   imageButtonsContainer.innerHTML = '';
-  reviewImages.forEach((image, index) => {
+  currentReviewJSONs.forEach((image, index) => {
     const button = document.createElement('button');
     button.textContent = index + 1;
     button.onclick = () => {
       numReview = parseInt(button.textContent, 10)
-      displayCurrentImage(numReview);
+      displayCurrentReview(numReview);
       makeButtonActive(numReview);
       currentImageIndex = parseInt(numReview);
     };
@@ -895,7 +916,7 @@ function addMouseListeners() {
 }
 
 // Keydown listener for keyboard navigation.
-window.addEventListener('keydown', (event) => {  
+window.addEventListener('keydown', (event) => {
   if (event.key === 'ArrowDown') {
     const items = document.querySelectorAll('.movie-list li');
     if (items.length === 0) return;
@@ -909,10 +930,10 @@ window.addEventListener('keydown', (event) => {
       // Otherwise, move to the next item (with wrapping).
       if (currentSelectionIndex < items.length - 1) {
         currentSelectionIndex++;
-      } 
+      }
     }
     updateSelectedItem();
-  } 
+  }
   else if (event.key === 'ArrowUp') {
     const items = document.querySelectorAll('.movie-list li');
     if (items.length === 0) return;
@@ -922,15 +943,15 @@ window.addEventListener('keydown', (event) => {
     // Only handle ArrowUp if focus is NOT in the search box.
     if (currentSelectionIndex > 0) {
       currentSelectionIndex--;
-    } 
+    }
     updateSelectedItem();
-  } 
+  }
   else if (event.key === 'Enter') {
     const items = document.querySelectorAll('.movie-list li');
     if (items.length === 0) return;
     const activeElement = document.activeElement;
     if (activeElement.id === 'search' && currentSelectionIndex === -1) {
-      currentSelectionIndex = 0;  
+      currentSelectionIndex = 0;
       updateSelectedItem();
     }
     // Trigger a click on the currently selected movie.
@@ -939,15 +960,15 @@ window.addEventListener('keydown', (event) => {
     }
   }
   else if (event.key === 'ArrowRight') {
-    if (currentImageIndex < reviewImages.length){
-      displayCurrentImage(currentImageIndex + 1);
+    if (currentImageIndex < currentReviewJSONs.length) {
+      displayCurrentReview(currentImageIndex + 1);
       makeButtonActive(currentImageIndex + 1);
       currentImageIndex = currentImageIndex + 1;
     }
   }
   else if (event.key === 'ArrowLeft') {
-    if (currentImageIndex > 1){
-      displayCurrentImage(currentImageIndex - 1);
+    if (currentImageIndex > 1) {
+      displayCurrentReview(currentImageIndex - 1);
       makeButtonActive(currentImageIndex - 1);
       currentImageIndex = currentImageIndex - 1;
     }
@@ -1001,16 +1022,16 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
     correctMovie = moviesData.find(movie => movie.movieID === correctMovieID);
 
     // Fetch all images, text, and links for the movie
-    await fetchAllImagesSequentially(correctMovieID, correctMovieDate);
+    await fetchAllReviewsSequentially(correctMovieID, correctMovieDate);
     document.getElementById('loading-overlay').style.display = 'none';
-  
+
 
     // Check if this game has already been played.
     if (hasGameBeenPlayed(correctMovieID, globalGameStats)) {
       finishGame(hasGameBeenWon(correctMovieID, globalGameStats));
     }
     updateImageButtons();
-    displayCurrentImage();
+    displayCurrentReview();
 
     hoverCoffee();
     hoverLetterboxd();
