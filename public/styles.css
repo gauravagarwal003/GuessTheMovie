@@ -624,7 +624,7 @@ a:focus .footer-image {
 }
 
 .review-link:hover {
-    background-color: #005fa3;
+    background-color: var(--LBlue);
 }
 
 /* Date, comments, and likes styling */
