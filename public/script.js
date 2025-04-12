@@ -1036,6 +1036,11 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
     if (hasGameBeenPlayed(correctMovieID, globalGameStats)) {
       finishGame(hasGameBeenWon(correctMovieID, globalGameStats));
     }
+    else{
+      textDisplay = document.getElementById('textDisplay');
+      textDisplay.innerHTML = `<div id="textDisplay"><span class="message">Welcome to Guess the Movie! You get 5 reviews (one at a time) to guess the movie. You can skip if you don't have a guess. Click on "How To Play" to learn more and check your history and stats once you've played a few times. The movie updates every day at 12AM EST. Have fun!</span>`;
+
+    }
     updateImageButtons();
     displayCurrentReview();
 
