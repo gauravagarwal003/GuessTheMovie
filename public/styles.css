@@ -651,3 +651,11 @@ a:focus .footer-image {
     display: flex;
     flex-direction: column;
 }
+
+.truncated-label {
+    font-size: 0.85em;
+    color: gray;
+    font-style: italic;
+    margin-top: 4px;
+  }
+  

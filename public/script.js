@@ -717,7 +717,13 @@ function displayCurrentReview(index = 1) {
   likedIcon.style.display = review.liked ? 'inline-block' : 'none';
 
   // Review text
-  document.getElementById('reviewText').textContent = review.text;
+  if (review.collapsed){
+    document.getElementById('reviewText').innerHTML = review.text + '<p class="truncated-label">Review Truncated</p>';
+  }
+  else{
+    document.getElementById('reviewText').innerHTML = review.text;
+  }
+  
 
   // Likes and comments
   document.getElementById('likesCount').textContent = Number(review.numLikes).toLocaleString();
