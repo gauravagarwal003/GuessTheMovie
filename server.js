@@ -12,20 +12,14 @@ if (process.env.NODE_ENV !== 'production') {
 const app = express();
 const port = process.env.PORT || 3000;
 
-/* 
-  API endpoint to get JSON review files from the movie folder.
-  It reads files ending in ".json" from movie/{date}/{movieID}
-  and returns the parsed JSON content of the file at the provided index.
-*/
 app.get('/api/json', (req, res) => {
   const { date, name: movieID, index } = req.query;
-  const reviewsPath = path.join(__dirname, 'movie', date, movieID);
+  const reviewsPath = path.join(__dirname, 'movies', date, movieID);
 
   fs.readdir(reviewsPath, (err, files) => {
     if (err) {
       return res.status(404).json({ error: 'Error reading directory' });
     }
-    // Filter to include only JSON files
     const validFiles = files.filter(file => file.endsWith('.json'));
     if (validFiles.length === 0) {
       return res.status(404).json({ error: 'No JSON files found' });
@@ -50,62 +44,67 @@ app.get('/api/json', (req, res) => {
   });
 });
 
-/* 
-  API endpoint to get the selected movie from the "movie" folder.
-  It retrieves the first available date folder and movie folder found.
-*/
 app.get('/api/get-movie', (req, res) => {
-  const movieDir = path.join(__dirname, 'movie');
+  const { date: requestedDate } = req.query;
+  const movieDir = path.join(__dirname, 'movies');
+
   fs.readdir(movieDir, (err, dateFolders) => {
     if (err) {
       console.error('Error reading movie directory:', err);
       return res.status(404).json({ error: 'Error reading movie directory' });
     }
-    const validDateFolders = dateFolders.filter(folder => !folder.startsWith('.'));
+
+    const validDateFolders = dateFolders
+      .filter(folder => !folder.startsWith('.'))
+      .sort();
+
     if (validDateFolders.length === 0) {
       return res.status(404).json({ error: 'No valid date folders found' });
     }
-    const dateFolder = validDateFolders[0];
+
+    let dateFolder;
+    if (requestedDate) {
+      if (validDateFolders.includes(requestedDate)) {
+        dateFolder = requestedDate;
+      } else {
+        return res.status(404).json({ error: 'Requested date not found' });
+      }
+    } else {
+      dateFolder = validDateFolders[validDateFolders.length - 1];
+    }
+
     const movieFolderPath = path.join(movieDir, dateFolder);
     fs.readdir(movieFolderPath, (err, movieFolders) => {
       if (err) {
         console.error('Error reading movie folder:', err);
         return res.status(404).json({ error: 'Error reading movie folder' });
       }
-      const validMovieFolders = movieFolders.filter(movie => !movie.startsWith('.'));
+
+      const validMovieFolders = movieFolders
+        .filter(movie => !movie.startsWith('.'));
+
       if (validMovieFolders.length === 0) {
         return res.status(404).json({ error: 'No valid movie folders found' });
       }
+
       const movieID = validMovieFolders[0];
       return res.json({ movie: movieID, date: dateFolder });
     });
   });
 });
 
-/* 
-  Serve static files and handle client-side routing:
-  - In production, serve from the "dist" folder (built by Vite).
-  - In development, serve from the "public" folder.
-*/
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'dist')));
-
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
   });
 } else {
   app.use(express.static(path.join(__dirname, 'public')));
-
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
   });
 }
 
-/*
-  Start the server:
-  - In development, use ViteExpress to enable features like HMR.
-  - In production, simply start the Express server.
-*/
 if (process.env.NODE_ENV === 'production') {
   app.listen(port, () => {
     console.log(`Server is running in production on http://localhost:${port}`);
@@ -113,7 +112,6 @@ if (process.env.NODE_ENV === 'production') {
 } else {
   ViteExpress.listen(app, port, () => {
     console.log(`Server is running on http://localhost:${port}`);
-    // Automatically start ngrok tunnel in development mode.
     (async () => {
       try {
         const url = await ngrok.connect({
@@ -127,7 +125,6 @@ if (process.env.NODE_ENV === 'production') {
     })();
   });
   
-  // Add graceful shutdown handlers to disconnect ngrok on process exit or restart.
   async function cleanupAndExit() {
     try {
       await ngrok.disconnect();

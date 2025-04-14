@@ -115,7 +115,7 @@ dbx = dropbox.Dropbox(access_token)
 
 # Define Dropbox and local paths
 dropbox_folder_path = "/movies"
-local_download_path = "./movie"
+local_download_path = "./movies"
 current_date = str(datetime.datetime.now().date())
 
 # Start the download process

@@ -178,7 +178,7 @@ async function downloadMoviesData() {
     
     // Define Dropbox and local paths (adjust these as needed)
     const dropboxFolderPath = "/movies";
-    const localDownloadPath = path.join(__dirname, "movie");
+    const localDownloadPath = path.join(__dirname, "movies");
     const currentDate = new Date().toISOString().split('T')[0]; // e.g., "2025-03-06"
     
     await downloadFromDropbox(dbx, dropboxFolderPath, localDownloadPath, currentDate);
