@@ -26,11 +26,6 @@ body {
     max-width: 720px;
 }
 
-.logo {
-    max-width: 200px;
-    display: inline-block;
-}
-
 #header {
     background: none;
     background: var(--LBackground);
@@ -101,7 +96,7 @@ body {
 /* Adjust logo */
 .logo {
     float: left;
-    max-width: 25%;
+    max-width: 160px;
     /* Adjust size */
     height: auto;
 }
@@ -109,7 +104,8 @@ body {
 /* Button styling */
 .display-stats-button,
 .display-history-button,
-.instructions-button {
+.instructions-button,
+.archive-button {
     background: transparent;
     color: var(--bonewhite);
     font-size: 1.2rem;
@@ -130,6 +126,10 @@ body {
     color: var(--LBlue) !important;
 }
 
+.archive-button:hover {
+    color: rgb(165, 135, 110) !important;
+}
+
 .active-stats {
     text-decoration: underline;
     color: var(--LOrange) !important;
@@ -145,6 +145,11 @@ body {
 .active-instructions {
     text-decoration: underline;
     color: var(--LBlue) !important;
+}
+
+.active-archive {
+    text-decoration: underline;
+    color: rgb(165, 135, 110) !important;
 }
 
 .active-button {
@@ -434,7 +439,7 @@ body {
 #footerItemCoffee {
     color: rgb(165, 135, 110) !important;
     padding-left: 0.20%;
-    padding-right: 1%;
+    padding-right: 0.5%;
     text-decoration: underline;
 }
 

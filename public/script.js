@@ -12,6 +12,14 @@ let gameWon = false;
 let allReviewJSONs = []; // Array to store all review JSONs
 let currentReviewJSONs = []; // Array to store the subset of review JSONs
 
+const isArchivePage = window.location.pathname.startsWith('/archive');
+const archiveDate = isArchivePage 
+  ? window.location.pathname.split('/')[2] 
+  : null;
+console.log(isArchivePage);
+console.log(`Archive date: ${archiveDate}`);
+
+
 const SKIPPED_GUESS = '__SKIPPED__'; // Sentinel value to indicate a skipped guess
 const maxMoviesToShow = 10;
 const selectedColumns = ['title', 'year', 'movieID', 'posterLink']; // Columns to select from the CSV file
@@ -119,6 +127,9 @@ function setActiveButton(buttonID) {
   else if (buttonID == "instructionsButton") {
     document.getElementById('instructionsButton').classList.add("active-instructions");
   }
+  else if (buttonID == "archiveButton") {
+    document.getElementById('archiveButton').classList.add("active-archive");
+  }
 
 }
 
@@ -134,6 +145,9 @@ function deactivateButton(buttonID) {
   }
   else if (buttonID == "instructionsButton") {
     document.getElementById('instructionsButton').classList.remove("active-instructions");
+  }
+  else if (buttonID == "archiveButton") {
+    document.getElementById('archiveButton').classList.remove("active-archive");
   }
 
 }
@@ -666,12 +680,6 @@ async function fetchData(movieID, date, index) {
   }
 }
 
-async function fetchAllReviewsSequentially(movieID, date) {
-  for (let i = 0; i < maxIncorrectGuesses; i++) {
-    await fetchData(movieID, date, i);
-  }
-}
-
 function displayCurrentReview(index = 1) {
   const review = currentReviewJSONs[index - 1];
   const reviewCard = document.getElementById('reviewCard');
@@ -892,6 +900,19 @@ function hoverInstructions() {
   });
 }
 
+function hoverArchive() {
+  const archiveButton = document.getElementById('archiveButton');
+  const archiveIcon = document.getElementById('archiveIcon');
+
+  archiveButton.addEventListener('pointerenter', () => {
+    archiveIcon.classList.add('fa-beat');
+  });
+  archiveButton.addEventListener('pointerleave', () => {
+    archiveIcon.classList.remove('fa-beat');
+  });
+}
+
+
 // Function to update the "selected" class on list items.
 function updateSelectedItem() {
   const items = document.querySelectorAll('.movie-list li');
@@ -1025,12 +1046,16 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
     const data = await response.json();
     correctMovieID = data.movie;
     correctMovieDate = data.date;
+    console.log("Correct Movie ID: " + correctMovieID);
+    console.log("Correct Movie Date: " + correctMovieDate);
     correctMovie = moviesData.find(movie => movie.movieID === correctMovieID);
 
     // Fetch all images, text, and links for the movie
-    await fetchAllReviewsSequentially(correctMovieID, correctMovieDate);
+    for (let i = 0; i < maxIncorrectGuesses; i++) {
+      await fetchData(correctMovieID, correctMovieDate, i);
+    }
+  
     document.getElementById('loading-overlay').style.display = 'none';
-
 
     // Check if this game has already been played.
     if (hasGameBeenPlayed(correctMovieID, globalGameStats)) {
@@ -1051,6 +1076,7 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
     hoverInstructions();
     hoverPolicies();
     hoverContactUs();
+    hoverArchive();
 
   } catch (error) {
     console.error('Error during initialization:', error);

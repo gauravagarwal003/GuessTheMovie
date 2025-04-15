@@ -12,6 +12,21 @@ if (process.env.NODE_ENV !== 'production') {
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.get('/archive', (req, res) => {
+  const filePath = process.env.NODE_ENV === 'production'
+    ? path.join(__dirname, 'dist', 'archive.html')
+    : path.join(__dirname, 'public', 'archive.html');
+  res.sendFile(filePath);
+});
+
+app.get('/archive/:date?', (req, res) => {
+  const filePath = process.env.NODE_ENV === 'production'
+    ? path.join(__dirname, 'dist', 'archive.html')
+    : path.join(__dirname, 'public', 'archive.html');
+    
+  res.sendFile(filePath);
+});
+
 app.get('/api/json', (req, res) => {
   const { date, name: movieID, index } = req.query;
   const reviewsPath = path.join(__dirname, 'movies', date, movieID);
@@ -93,6 +108,7 @@ app.get('/api/get-movie', (req, res) => {
   });
 });
 
+
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'dist')));
   app.get('*', (req, res) => {
@@ -104,6 +120,8 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.join(__dirname, 'index.html'));
   });
 }
+
+
 
 if (process.env.NODE_ENV === 'production') {
   app.listen(port, () => {

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3181134485510321"
+        crossorigin="anonymous"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-P9S92SGST0"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-P9S92SGST0');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the Movie | Archive</title>
+    <meta name="description"
+        content="Guess The Movie is your daily interactive film challenge. Test your movie knowledge by reading reviews and guessing the featured film. Play now and join the fun!">
+    <meta name="keywords" content="movies, movie game, film challenge, movie reviews, guess the movie, daily game">
+    <meta name="author" content="Gaurav">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css">
+
+    <link rel="icon" type="image/x-icon" href="/just_logo.png">
+    <link rel="stylesheet" href="/styles.css?v=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@700&display=swap" rel="stylesheet">
+    <script>
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        window.scrollTo(0, 0);
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3181134485510321"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div id="loading-overlay">
+        <div id="loading-spinner"></div>
+    </div>
+
+    <main id="page-container">
+        <header id="header">
+            <div class="header-content">
+                <!-- Logo -->
+                <img src="/logo_and_text.png" alt="Guess the Movie Logo" class="logo">
+
+                <!-- Buttons -->
+                <button id="archiveButton" class="archive-button" onclick="location.href='/'">
+                    <i class="fa-solid fa-backward icon" id="archiveIcon"></i>
+                    <span class="archive-button-text full">Today's Movie</span>
+                    <span class="archive-button-text short">Today</span>
+                </button>
+
+
+                <button id="instructionsButton" class="instructions-button" onclick="displayInstructions()">
+                    <i class="fa-solid fa-question icon" id="instructionsIcon"></i>
+                    <span class="instructions-button-text full">How to Play</span>
+                    <span class="instructions-button-text short">Guide</span>
+                </button>
+
+                <button id="displayStatsButton" class="display-stats-button" onclick="displayStats()">
+                    <i class="fa-solid fa-chart-simple icon" id="statsIcon"></i>
+                    <span class="stats-button-text full">Your Stats</span>
+                    <span class="stats-button-text short">Stats</span>
+                </button>
+
+                <button id="displayHistoryButton" class="display-history-button" onclick="displayHistory()">
+                    <i class="fa-solid fa-clock-rotate-left icon" id="historyIcon"></i>
+                    <span class="history-button-text full">Game History</span>
+                    <span class="history-button-text short">History</span>
+
+                </button>
+
+            </div>
+        </header>
+
+        <div id="content-wrap">
+            <div id="statsDisplay"></div>
+            <div id="textDisplay">
+                <span class="message"></span>
+                <a class="movie-link"></a>
+                <span class="message"></span>
+            </div>
+            <div id="reviewContainer">
+                <div id="reviewCard" class="review-card" style="display: none;">
+                    <div class="review-username-container">
+                        <img id="reviewProfilePhoto" class="review-profile-photo" />
+                        <div class="review-username-text">
+                            <p id="reviewUsername" class="review-username"></p>
+                            <p id="reviewDate" class="review-date"></p>
+                        </div>
+                    </div>
+                    <span id="reviewRating" class="review-rating"></span>
+                    <i id="reviewLiked" class="fa-solid fa-heart liked icon" style="display: none;"></i>
+                    <div id="reviewText" class="review-text"></div>
+                    <p id="likesComments" class="likes-comments">
+                        <i class="fa-solid fa-heart icon"></i>
+                        <span id="likesCount">0</span>
+                        &nbsp;&nbsp;
+                        <i class="fa-solid fa-comment icon"></i>
+                        <span id="commentsCount">0</span>
+                    </p>
+                    <a id="reviewLink" class="review-link" target="_blank" style="display: none;">View on Letterboxd</a>
+                </div>
+            </div>
+
+            <nav id="allButtons">
+                <div id="imageButtons"></div>
+                <button onclick="pressSkipButton()" id="multi-button">Skip Guess</button>
+            </nav>
+
+            <div id="search-row">
+                <label for="search" class="visually-hidden">Search for a movie</label>
+                <input type="text" id="search" placeholder="Search" oninput="filterMovies(event)" autocorrect="off"
+                    autocomplete="off" autocapitalize="off" spellcheck="false">
+            </div>
+            <ul id="movieList" class="movie-list"></ul>
+            <div class="image-container" id="movie_container">
+                <a id="movie_poster">
+                </a>
+            </div>
+
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+            <script src="/script.js"></script>
+
+        </div>
+        <footer id="footer">
+            <a id="footerIcon" href="https://letterboxd.com/gaurava/" target="_blank">
+                <img src="/LBColorLogo.png" alt="Letterboxd Profile" class="footer-image" />
+            </a>
+            <a id="footerItemLetterboxd" href="https://letterboxd.com/gaurava/" target="_blank" class="full">My
+                Letterboxd</a>
+            <a id="footerItemLetterboxd" href="https://letterboxd.com/gaurava/" target="_blank" class="short">My LB</a>
+
+
+            <i style="text-decoration: none;" href="https://buymeacoffee.com/gprojects" class="fa-solid fa-mug-hot icon"
+                id="coffeeIcon" target="_blank"></i>
+            <a id="footerItemCoffee" href="https://buymeacoffee.com/gprojects" target="_blank" class="full">Buy Me a
+                Coffee</a>
+            <a id="footerItemCoffee" href="https://buymeacoffee.com/gprojects" target="_blank" class="short">Support</a>
+
+
+            <i id="policiesIcon" style="text-decoration: none;" class="fa-solid fa-info icon"
+                onclick="displayPolicies()"></i>
+            <a id="footerItemPolicies" class="policies-button-text full" onclick="displayPolicies()">Policies</a>
+            <a id="footerItemPolicies" class="policies-button-text short" onclick="displayPolicies()">Policies</a>
+
+
+            <i id="contactUsIcon" style="text-decoration: none;" class="fa-solid fa-paper-plane icon"
+                onclick="displayContactInfo()"></i>
+            <a id="footerItemContactUs" class="contact-button-text full" onclick="displayContactInfo()">Contact Us</a>
+            <a id="footerItemContactUs" class="contact-button-text short" onclick="displayContactInfo()">Contact</a>
+
+
+        </footer>
+
+    </main>
+    <div id="Modal" class="modal">
+        <div class="modal-content">
+            <span id="closeModal" class="close-button">&times;</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+</body>
+
+</html>
