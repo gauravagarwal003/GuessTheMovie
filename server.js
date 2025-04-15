@@ -21,10 +21,22 @@ app.get('/archive', (req, res) => {
 
 app.get('/archive/:date?', (req, res) => {
   const filePath = process.env.NODE_ENV === 'production'
-    ? path.join(__dirname, 'dist', 'archive.html')
-    : path.join(__dirname, 'public', 'archive.html');
-    
+    ? path.join(__dirname, 'dist', 'index.html')
+    : path.join(__dirname, 'index.html'); // index.html is in the root folder
   res.sendFile(filePath);
+});
+
+app.get('/api/dates', (req, res) => {
+  const moviesDir = path.join(__dirname, 'movies');
+  fs.readdir(moviesDir, { withFileTypes: true }, (err, items) => {
+    if (err) {
+      return res.status(404).json({ error: 'Error reading movies directory' });
+    }
+    const dateFolders = items
+      .filter(dirent => dirent.isDirectory() && /^\d{4}-\d{2}-\d{2}$/.test(dirent.name))
+      .map(dirent => dirent.name);
+    res.json({ dates: dateFolders });
+  });
 });
 
 app.get('/api/json', (req, res) => {

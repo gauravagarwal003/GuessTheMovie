@@ -105,7 +105,8 @@ body {
 .display-stats-button,
 .display-history-button,
 .instructions-button,
-.archive-button {
+.archive-button,
+.today-button {
     background: transparent;
     color: var(--bonewhite);
     font-size: 1.2rem;
@@ -126,7 +127,7 @@ body {
     color: var(--LBlue) !important;
 }
 
-.archive-button:hover {
+.archive-button:hover, .today-button:hover {
     color: rgb(165, 135, 110) !important;
 }
 
@@ -147,7 +148,7 @@ body {
     color: var(--LBlue) !important;
 }
 
-.active-archive {
+.active-archive, .active-today {
     text-decoration: underline;
     color: rgb(165, 135, 110) !important;
 }
@@ -252,7 +253,7 @@ body {
     color: gray !important;
 }
 
-*:not(.icon, .loading-spinner) {
+*:not(.icon) {
     font-family: 'Familjen Grotesk', sans-serif, bold !important;
     text-shadow: 0.5px 0.5px 0 rgba(0, 0, 0, 0.1);
 }
@@ -532,45 +533,6 @@ body {
 a:hover .footer-image,
 a:focus .footer-image {
     content: url("/LBBWLogo.png");
-}
-
-/* Spinner styling (your existing code, adjusted if needed) */
-#loading-spinner {
-    width: 5rem;
-    height: 5rem;
-    border: 5px solid var(--bonewhite);
-    border-radius: 50%;
-    border-top-color: var(--LOrange);
-    animation: spin 1s ease-in-out infinite;
-    -webkit-animation: spin 1s ease-in-out infinite;
-}
-
-@keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-@-webkit-keyframes spin {
-    to {
-        -webkit-transform: rotate(360deg);
-    }
-}
-
-/* Overlay styling */
-#loading-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    /* Dim background */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-    /* Make sure it’s on top */
 }
 
 /* Container for the entire review card */

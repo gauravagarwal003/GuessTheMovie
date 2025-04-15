@@ -38,10 +38,6 @@
 </head>
 
 <body>
-    <div id="loading-overlay">
-        <div id="loading-spinner"></div>
-    </div>
-
     <main id="page-container">
         <header id="header">
             <div class="header-content">
@@ -49,6 +45,12 @@
                 <img src="/logo_and_text.png" alt="Guess the Movie Logo" class="logo">
 
                 <!-- Buttons -->
+                <button id="todayButton" class="today-button" onclick="location.href='/'">
+                    <i class="fa-solid fa-forward icon" id="todayIcon"></i>
+                    <span class="today-button-text full">Today's Movie</span>
+                    <span class="today-button-text short">Today</span>
+                </button>
+
                 <button id="archiveButton" class="archive-button" onclick="location.href='/archive'">
                     <i class="fa-solid fa-box-archive icon" id="archiveIcon"></i>
                     <span class="archive-button-text full">Past Movies</span>

@@ -11,13 +11,8 @@ let currentSelectionIndex = -1;
 let gameWon = false;
 let allReviewJSONs = []; // Array to store all review JSONs
 let currentReviewJSONs = []; // Array to store the subset of review JSONs
-
-const isArchivePage = window.location.pathname.startsWith('/archive');
-const archiveDate = isArchivePage 
-  ? window.location.pathname.split('/')[2] 
-  : null;
-console.log(isArchivePage);
-console.log(`Archive date: ${archiveDate}`);
+let isArchivePage = '';
+let archiveDate = '';
 
 
 const SKIPPED_GUESS = '__SKIPPED__'; // Sentinel value to indicate a skipped guess
@@ -912,6 +907,17 @@ function hoverArchive() {
   });
 }
 
+function hoverToday() {
+  const todayButton = document.getElementById('todayButton');
+  const todayIcon = document.getElementById('todayIcon');
+
+  todayButton.addEventListener('pointerenter', () => {
+    todayIcon.classList.add('fa-beat');
+  });
+  todayButton.addEventListener('pointerleave', () => {
+    todayIcon.classList.remove('fa-beat');
+  });
+}
 
 // Function to update the "selected" class on list items.
 function updateSelectedItem() {
@@ -1039,9 +1045,23 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
           );
       }
     });
+    isArchivePage = window.location.pathname.startsWith('/archive');
+    archiveDate = isArchivePage 
+      ? window.location.pathname.split('/')[2] 
+      : null;
+    console.log(`Archive date: ${archiveDate}`);
 
-    // Fetch movie info
-    const response = await fetch('/api/get-movie');
+    let response = '';
+    if (isArchivePage && archiveDate) {
+      document.getElementById('archiveButton').style.display = 'none';
+      response = await fetch('/api/get-movie?date='+archiveDate);
+    }
+    else{
+      document.getElementById('todayButton').style.display = 'none';
+      response = await fetch('/api/get-movie');
+    }
+
+    
     if (!response.ok) throw new Error('Network response was not ok');
     const data = await response.json();
     correctMovieID = data.movie;
@@ -1055,7 +1075,6 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
       await fetchData(correctMovieID, correctMovieDate, i);
     }
   
-    document.getElementById('loading-overlay').style.display = 'none';
 
     // Check if this game has already been played.
     if (hasGameBeenPlayed(correctMovieID, globalGameStats)) {
@@ -1077,6 +1096,7 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
     hoverPolicies();
     hoverContactUs();
     hoverArchive();
+    hoverToday();
 
   } catch (error) {
     console.error('Error during initialization:', error);
