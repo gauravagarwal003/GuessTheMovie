@@ -74,14 +74,19 @@ async function downloadFolderContents(dbx, dropboxFolderPath, localPath) {
 // Download only the file/folder with a name equal to targetFolder from dropboxPath
 async function downloadFromDropbox(dbx, dropboxPath, localPath, targetFolder) {
   try {
-    // Ensure the local directory exists (or clear it if it does)
-    if (fs.existsSync(localPath)) {
-      clearLocalFolder(localPath);
-    } else {
+    // Ensure the local base directory exists.
+    if (!fs.existsSync(localPath)) {
       fs.mkdirSync(localPath, { recursive: true });
     }
     
-    // List contents of the specified Dropbox folder
+    // Check if the target day's folder already exists locally.
+    const targetLocalFolder = path.join(localPath, targetFolder);
+    if (fs.existsSync(targetLocalFolder)) {
+      console.log(`Local folder for ${targetFolder} already exists. Skipping download.`);
+      return;
+    }
+    
+    // List contents of the specified Dropbox folder.
     const response = await dbx.filesListFolder({ path: dropboxPath });
     for (const entry of response.result.entries) {
       if (entry.name === targetFolder) {
@@ -94,7 +99,7 @@ async function downloadFromDropbox(dbx, dropboxPath, localPath, targetFolder) {
           await downloadFolderContents(dbx, entry.path_lower, localEntryPath);
           console.log(`Downloaded folder: ${entry.path_lower} to ${localEntryPath}`);
         }
-        return; // Exit after processing the target entry
+        return; // Exit after processing the target entry.
       }
     }
     console.log(`No folder or file named '${targetFolder}' found in ${dropboxPath}`);
@@ -187,7 +192,7 @@ async function downloadMoviesData() {
   }
 }
 
-cron.schedule('0 21 * * *', async () => {
+cron.schedule('41 22 * * *', async () => {
   console.log("Cron job triggered at " + new Date().toLocaleString());
   try {
     await downloadMoviesData();
