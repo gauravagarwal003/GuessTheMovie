@@ -594,9 +594,6 @@ function finishGame(wonGame) {
   }
   existingDiv.setAttribute("href", "https://letterboxd.com/film/" + correctMovieID);
   existingDiv.setAttribute("target", "_blank");
-  const parent = document.getElementById('content-wrap');
-  const div1 = document.getElementById('movie_container');
-  parent.appendChild(div1);
   document.getElementById('search-row').style.margin = "0px";
 
   if (!hasGameBeenPlayed(correctMovieID, globalGameStats)) {
