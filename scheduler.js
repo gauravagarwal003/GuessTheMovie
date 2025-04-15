@@ -18,16 +18,16 @@ async function refreshAccessToken(appKey, appSecret, refreshToken) {
   params.append("refresh_token", refreshToken);
   params.append("client_id", appKey);
   params.append("client_secret", appSecret);
-  
+
   const response = await fetch(url, {
     method: "POST",
     body: params
   });
-  
+
   if (!response.ok) {
     throw new Error(`Failed to refresh access token: ${await response.text()}`);
   }
-  
+
   const data = await response.json();
   return data.access_token;
 }
@@ -55,7 +55,7 @@ async function downloadFolderContents(dbx, dropboxFolderPath, localPath) {
   if (!fs.existsSync(localPath)) {
     fs.mkdirSync(localPath, { recursive: true });
   }
-  
+
   const response = await dbx.filesListFolder({ path: dropboxFolderPath });
   for (const entry of response.result.entries) {
     const localEntryPath = path.join(localPath, entry.name);
@@ -78,14 +78,14 @@ async function downloadFromDropbox(dbx, dropboxPath, localPath, targetFolder) {
     if (!fs.existsSync(localPath)) {
       fs.mkdirSync(localPath, { recursive: true });
     }
-    
+
     // Check if the target day's folder already exists locally.
     const targetLocalFolder = path.join(localPath, targetFolder);
     if (fs.existsSync(targetLocalFolder)) {
       console.log(`Local folder for ${targetFolder} already exists. Skipping download.`);
       return;
     }
-    
+
     // List contents of the specified Dropbox folder.
     const response = await dbx.filesListFolder({ path: dropboxPath });
     for (const entry of response.result.entries) {
@@ -174,18 +174,18 @@ async function downloadMoviesData() {
     if (!appKey || !appSecret || !refreshToken) {
       throw new Error("Missing Dropbox configuration in environment variables.");
     }
-    
+
     // Refresh the access token
     const accessToken = await refreshAccessToken(appKey, appSecret, refreshToken);
     console.log("Access token refreshed.");
-    
+
     const dbx = new Dropbox({ accessToken, fetch });
-    
+
     // Define Dropbox and local paths (adjust these as needed)
     const dropboxFolderPath = "/movies";
     const localDownloadPath = path.join(__dirname, "movies");
     const currentDate = new Date().toISOString().split('T')[0]; // e.g., "2025-03-06"
-    
+
     await downloadFromDropbox(dbx, dropboxFolderPath, localDownloadPath, currentDate);
   } catch (error) {
     console.error("Error in downloadMoviesData:", error);

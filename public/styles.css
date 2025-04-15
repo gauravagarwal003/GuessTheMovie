@@ -56,6 +56,7 @@ body {
         padding-left: 10px;
         padding-right: 10px;
     }
+
     #dateDisplay {
         padding-left: 10px;
         padding-right: 10px;
@@ -131,7 +132,8 @@ body {
     color: var(--LBlue) !important;
 }
 
-.archive-button:hover, .today-button:hover {
+.archive-button:hover,
+.today-button:hover {
     color: rgb(165, 135, 110) !important;
 }
 
@@ -152,7 +154,8 @@ body {
     color: var(--LBlue) !important;
 }
 
-.active-archive, .active-today {
+.active-archive,
+.active-today {
     text-decoration: underline;
     color: rgb(165, 135, 110) !important;
 }
@@ -610,18 +613,19 @@ a:focus .footer-image {
 .review-comments,
 .likes-comments {
     margin: 4px 0;
-    color:#777;
+    color: #777;
     font-size: 14px;
 }
 
-.review-date{
+.review-date {
     margin-top: -10px;
 }
 
 .review-username-container {
     display: flex;
     align-items: center;
-    gap: 12px; /* space between image and text */
+    gap: 12px;
+    /* space between image and text */
     margin-bottom: 8px;
 }
 
@@ -635,5 +639,4 @@ a:focus .footer-image {
     color: gray;
     font-style: italic;
     margin-top: 4px;
-  }
-  
+}

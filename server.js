@@ -154,7 +154,7 @@ if (process.env.NODE_ENV === 'production') {
       }
     })();
   });
-  
+
   async function cleanupAndExit() {
     try {
       await ngrok.disconnect();
@@ -165,7 +165,7 @@ if (process.env.NODE_ENV === 'production') {
       process.exit();
     }
   }
-  
+
   process.once('SIGINT', cleanupAndExit);
   process.once('SIGTERM', cleanupAndExit);
   process.once('SIGUSR2', async () => {

@@ -76,8 +76,8 @@ function formatDate(isoDate) {
 function generateGameHTML(game) {
   const formattedDate = formatDate(game.date);
   // Bold and color the result text: green if won, red if lost
-  const resultText = game.won 
-    ? '<strong style="color: green;">won</strong>' 
+  const resultText = game.won
+    ? '<strong style="color: green;">won</strong>'
     : '<strong style="color: red;">lost</strong>';
 
   let realGuessCount = 0;
@@ -303,7 +303,7 @@ function displayContactInfo() {
 function displayHistory() {
   const modalContentDiv = document.getElementById('modalContent');
   modalContentDiv.innerHTML = `<h2>Your Game History</h2>`;
-  
+
   if (globalGameStats.games.length === 0) {
     modalContentDiv.innerHTML += `<p>You have not played any games yet!</p>`;
   } else {
@@ -562,10 +562,10 @@ function finishGame(wonGame) {
   gameWon = wonGame;
   const textDisplay = document.getElementById('textDisplay');
   gameOverMessage = wonGame ? "You got it! " : "You lost. ";
-  if (!archiveDate){
+  if (!archiveDate) {
     textDisplay.innerHTML = `<div id="textDisplay">${gameOverMessage}<span class="message"></span><a href="https://letterboxd.com/film/${correctMovieID}" class="movie-link" target="_blank">${correctMovie.title} (${correctMovie.year})</a><span class="message"> is the correct movie.</span><br><span class="message"> Come back tomorrow to play again!</span></div>`;
   }
-  else{
+  else {
     textDisplay.innerHTML = `<div id="textDisplay">${gameOverMessage}<span class="message"></span><a href="https://letterboxd.com/film/${correctMovieID}" class="movie-link" target="_blank">${correctMovie.title} (${correctMovie.year})</a><span class="message"> is the correct movie.</span><br></div>`;
 
   }
@@ -1085,7 +1085,7 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
         month: 'long',   // displays full month name (e.g. "February")
         day: 'numeric'   // displays day without leading zeros (e.g. "2")
       });
-            console.log("Correct Movie ID: " + correctMovieID);
+      console.log("Correct Movie ID: " + correctMovieID);
       console.log("Correct Movie Date: " + movieDate);
       correctMovie = moviesData.find(movie => movie.movieID === correctMovieID);
 
@@ -1094,7 +1094,7 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
         await fetchData(correctMovieID, movieDate, i);
       }
 
-      if(archiveDate){
+      if (archiveDate) {
         document.title += " | Archive";
         dateDisplay.innerHTML = `<h2>Archive for ${movieDateString}</h2>`;
       }
@@ -1112,7 +1112,7 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
           dateDisplay.innerHTML = `<h2>Archive for ${movieDateString}</h2>`;
           textDisplay.innerHTML = `<div id="textDisplay"><span class="message">You get 5 reviews (one at a time) to guess the movie. You can skip if you don't have a guess. Check your history and stats once you've played a few times. Have fun!</span>`;
         }
-        else{
+        else {
           dateDisplay.innerHTML = `<h2>Today's movie for ${movieDateString}</h2>`;
           textDisplay.innerHTML = `<div id="textDisplay"><h2></h2><span class="message">Welcome to Guess the Movie! You get 5 reviews (one at a time) to guess the movie. You can skip if you don't have a guess. Click on "How To Play" to learn more and check your history and stats once you've played a few times. The movie updates every day at 12AM EST. Have fun!</span>`;
         }
