@@ -5,15 +5,28 @@ let incorrectGuessCount = 0;
 let collectedGuessesArray = [];
 let currentImageIndex = 1;
 let gameOver = false;
-let correctMovieDate = '';
+let movieDate = '';
 let correctMovie = '';
 let currentSelectionIndex = -1;
 let gameWon = false;
 let allReviewJSONs = []; // Array to store all review JSONs
 let currentReviewJSONs = []; // Array to store the subset of review JSONs
-let isArchivePage = '';
-let archiveDate = '';
+let movieDateString = '';
 
+const pathSegments = window.location.pathname.split('/').filter(Boolean);
+let isArchivePage = (pathSegments[0] === 'archive' && pathSegments.length === 1);
+let archiveDate = (pathSegments[0] === 'archive' && pathSegments.length > 1)
+  ? pathSegments[1]
+  : null;
+if (isArchivePage) {
+  console.log('Archive page with no date');
+}
+else if (archiveDate) {
+  console.log('Archive page loaded with date:', archiveDate);
+}
+else {
+  console.log('Main page loaded');
+}
 
 const SKIPPED_GUESS = '__SKIPPED__'; // Sentinel value to indicate a skipped guess
 const maxMoviesToShow = 10;
@@ -21,6 +34,7 @@ const selectedColumns = ['title', 'year', 'movieID', 'posterLink']; // Columns t
 const maxIncorrectGuesses = 5;
 const imageButtonsContainer = document.getElementById('imageButtons');
 const multiButton = document.querySelector('button[id="multi-button"]');
+const dateDisplay = document.getElementById('dateDisplayMessage');
 
 var globalGameStats = JSON.parse(localStorage.getItem('gameStats')) || {
   games: [],
@@ -61,10 +75,12 @@ function formatDate(isoDate) {
 // Main function: generate HTML for a given game record
 function generateGameHTML(game) {
   const formattedDate = formatDate(game.date);
-  const resultText = game.won ? 'won' : 'lost';
+  // Bold and color the result text: green if won, red if lost
+  const resultText = game.won 
+    ? '<strong style="color: green;">won</strong>' 
+    : '<strong style="color: red;">lost</strong>';
 
   let realGuessCount = 0;
-  // Create a copy of guesses to avoid modifying the original data
   let plural = `review`;
   if (game.guessCount > 1) {
     plural += `s`;
@@ -72,7 +88,7 @@ function generateGameHTML(game) {
   let guessText = ``;
 
   for (let i = 0; i < game.guesses.length; i++) {
-    if (i == game.guesses.length - 1 && game.guesses.length > 1) {
+    if (i === game.guesses.length - 1 && game.guesses.length > 1) {
       guessText += `and `;
     }
     if (game.guesses[i] === SKIPPED_GUESS) {
@@ -81,33 +97,32 @@ function generateGameHTML(game) {
     else {
       const foundMovie = moviesData.find(movie => movie.movieID === game.guesses[i]);
       realGuessCount++;
-      console.log(game.guesses[i]);
+      // Underline the movie title
       if (game.guesses[i] === game.correctMovieID) {
-        guessText += ` correctly guessed ${foundMovie.title} (${foundMovie.year}), `;
+        guessText += ` correctly guessed <u>${foundMovie.title} (${foundMovie.year})</u>, `;
       }
       else {
-        guessText += ` incorrectly guessed ${foundMovie.title} (${foundMovie.year}), `;
+        guessText += ` incorrectly guessed <u>${foundMovie.title} (${foundMovie.year})</u>, `;
       }
     }
   }
-  // Remove the last two characters (", ") from guessText
+  // Remove the trailing comma and space, if any.
   if (guessText.endsWith(', ')) {
     guessText = guessText.slice(0, -2);
   }
 
   if (realGuessCount <= 0) {
     return `
-    <p class = "historyFirstLine">On ${formattedDate}, the movie was ${game.title} (${game.year}).</p> 
-    <p class = "historySecondLine">You ${resultText} and did not guess any movies.</p>
+      <h3 class="historyFirstLine"><strong>${formattedDate}: ${game.title} (${game.year}).</strong></h3> 
+      <p class="historySecondLine">You ${resultText} and did not guess any movies.</p>
     `;
   }
   else {
     return `
-        <p class = "historyFirstLine">On ${formattedDate}, the movie was ${game.title} (${game.year}).</p> 
-        <p class = "historySecondLine">You ${resultText} with ${game.guessCount} ${plural}: ${guessText}.</p>
+      <h3 class="historyFirstLine"><strong>${formattedDate}: ${game.title} (${game.year}).</strong></h3> 
+      <p class="historySecondLine">You ${resultText} with ${game.guessCount} ${plural}: ${guessText}.</p>
     `;
   }
-
 }
 
 function setActiveButton(buttonID) {
@@ -131,7 +146,6 @@ function setActiveButton(buttonID) {
 function deactivateButton(buttonID) {
   const button = document.getElementById(buttonID);
   button.classList.remove("active-button");
-  makeButtonActive(currentImageIndex);
   if (buttonID == "displayStatsButton") {
     document.getElementById('displayStatsButton').classList.remove("active-stats");
   }
@@ -288,13 +302,14 @@ function displayContactInfo() {
 
 function displayHistory() {
   const modalContentDiv = document.getElementById('modalContent');
-
   modalContentDiv.innerHTML = `<h2>Your Game History</h2>`;
-  if (globalGameStats.games.length == 0) {
+  
+  if (globalGameStats.games.length === 0) {
     modalContentDiv.innerHTML += `<p>You have not played any games yet!</p>`;
-  }
-  else {
-    for (const game of globalGameStats.games) {
+  } else {
+    // Create a shallow copy and sort in ascending order by date (oldest first)
+    const sortedGames = globalGameStats.games.slice().sort((a, b) => new Date(a.date) - new Date(b.date));
+    for (const game of sortedGames) {
       modalContentDiv.innerHTML += generateGameHTML(game);
     }
   }
@@ -547,7 +562,13 @@ function finishGame(wonGame) {
   gameWon = wonGame;
   const textDisplay = document.getElementById('textDisplay');
   gameOverMessage = wonGame ? "You got it! " : "You lost. ";
-  textDisplay.innerHTML = `<div id="textDisplay">${gameOverMessage}<span class="message"></span><a href="https://letterboxd.com/film/${correctMovieID}" class="movie-link" target="_blank">${correctMovie.title} (${correctMovie.year})</a><span class="message"> is the correct movie.</span><br><span class="message"> Come back tomorrow to play again!</span></div>`;
+  if (!archiveDate){
+    textDisplay.innerHTML = `<div id="textDisplay">${gameOverMessage}<span class="message"></span><a href="https://letterboxd.com/film/${correctMovieID}" class="movie-link" target="_blank">${correctMovie.title} (${correctMovie.year})</a><span class="message"> is the correct movie.</span><br><span class="message"> Come back tomorrow to play again!</span></div>`;
+  }
+  else{
+    textDisplay.innerHTML = `<div id="textDisplay">${gameOverMessage}<span class="message"></span><a href="https://letterboxd.com/film/${correctMovieID}" class="movie-link" target="_blank">${correctMovie.title} (${correctMovie.year})</a><span class="message"> is the correct movie.</span><br></div>`;
+
+  }
 
 
   clearSearchAndMovieList();
@@ -584,10 +605,10 @@ function finishGame(wonGame) {
       won: (incorrectGuessCount < maxIncorrectGuesses),
       guessCount: collectedGuessesArray.length,
       guesses: collectedGuessesArray,
-      date: correctMovieDate,
+      date: movieDate,
       title: correctMovie.title,
       year: correctMovie.year,
-      posterLink: correctMovie.posterLink
+      posterLink: correctMovie.posterLink,
     };
     updateGameStats(currentGame);
   }
@@ -720,18 +741,18 @@ function displayCurrentReview(index = 1) {
   likedIcon.style.display = review.liked ? 'inline-block' : 'none';
 
   // Review text
-  if (review.collapsed){
+  if (review.collapsed) {
     document.getElementById('reviewText').innerHTML = review.text + '<p class="truncated-label">Review Truncated</p>';
   }
-  else{
+  else {
     document.getElementById('reviewText').innerHTML = review.text;
   }
-  
+
 
   // Likes and comments
   document.getElementById('likesCount').textContent = Number(review.numLikes).toLocaleString();
   document.getElementById('commentsCount').textContent = Number(review.num_comments).toLocaleString();
-    
+
   // Link
   const reviewLink = document.getElementById('reviewLink');
   if (gameOver) {
@@ -1045,48 +1066,168 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
           );
       }
     });
-    isArchivePage = window.location.pathname.startsWith('/archive');
-    archiveDate = isArchivePage 
-      ? window.location.pathname.split('/')[2] 
-      : null;
-    console.log(`Archive date: ${archiveDate}`);
+    if (!isArchivePage) {
+      let response = '';
+      if (archiveDate) {
+        response = await fetch('/api/get-movie?date=' + archiveDate);
+      }
+      else if (!isArchivePage) {
+        document.getElementById('todayButton').style.display = 'none';
+        response = await fetch('/api/get-movie');
+      }
 
-    let response = '';
-    if (isArchivePage && archiveDate) {
-      document.getElementById('archiveButton').style.display = 'none';
-      response = await fetch('/api/get-movie?date='+archiveDate);
-    }
-    else{
-      document.getElementById('todayButton').style.display = 'none';
-      response = await fetch('/api/get-movie');
-    }
+      if (!response.ok) throw new Error('Network response was not ok');
+      const data = await response.json();
+      correctMovieID = data.movie;
+      movieDate = data.date;
+      movieDateString = new Date(movieDate).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',   // displays full month name (e.g. "February")
+        day: 'numeric'   // displays day without leading zeros (e.g. "2")
+      });
+            console.log("Correct Movie ID: " + correctMovieID);
+      console.log("Correct Movie Date: " + movieDate);
+      correctMovie = moviesData.find(movie => movie.movieID === correctMovieID);
 
-    
-    if (!response.ok) throw new Error('Network response was not ok');
-    const data = await response.json();
-    correctMovieID = data.movie;
-    correctMovieDate = data.date;
-    console.log("Correct Movie ID: " + correctMovieID);
-    console.log("Correct Movie Date: " + correctMovieDate);
-    correctMovie = moviesData.find(movie => movie.movieID === correctMovieID);
+      // Fetch all images, text, and links for the movie
+      for (let i = 0; i < maxIncorrectGuesses; i++) {
+        await fetchData(correctMovieID, movieDate, i);
+      }
 
-    // Fetch all images, text, and links for the movie
-    for (let i = 0; i < maxIncorrectGuesses; i++) {
-      await fetchData(correctMovieID, correctMovieDate, i);
-    }
-  
+      if(archiveDate){
+        document.title += " | Archive";
+        dateDisplay.innerHTML = `<h2>Archive for ${movieDateString}</h2>`;
+      }
+      else if (!isArchivePage) {
+        dateDisplay.innerHTML = `<h2>Today's movie for ${movieDateString}</h2>`;
+      }
 
-    // Check if this game has already been played.
-    if (hasGameBeenPlayed(correctMovieID, globalGameStats)) {
-      finishGame(hasGameBeenWon(correctMovieID, globalGameStats));
+      // Check if this game has already been played.
+      if (hasGameBeenPlayed(correctMovieID, globalGameStats)) {
+        finishGame(hasGameBeenWon(correctMovieID, globalGameStats));
+      }
+      else {
+        textDisplay = document.getElementById('textDisplay');
+        if (archiveDate) {
+          dateDisplay.innerHTML = `<h2>Archive for ${movieDateString}</h2>`;
+          textDisplay.innerHTML = `<div id="textDisplay"><span class="message">You get 5 reviews (one at a time) to guess the movie. You can skip if you don't have a guess. Check your history and stats once you've played a few times. Have fun!</span>`;
+        }
+        else{
+          dateDisplay.innerHTML = `<h2>Today's movie for ${movieDateString}</h2>`;
+          textDisplay.innerHTML = `<div id="textDisplay"><h2></h2><span class="message">Welcome to Guess the Movie! You get 5 reviews (one at a time) to guess the movie. You can skip if you don't have a guess. Click on "How To Play" to learn more and check your history and stats once you've played a few times. The movie updates every day at 12AM EST. Have fun!</span>`;
+        }
+      }
+      updateImageButtons();
+      displayCurrentReview();
     }
-    else{
-      textDisplay = document.getElementById('textDisplay');
-      textDisplay.innerHTML = `<div id="textDisplay"><span class="message">Welcome to Guess the Movie! You get 5 reviews (one at a time) to guess the movie. You can skip if you don't have a guess. Click on "How To Play" to learn more and check your history and stats once you've played a few times. The movie updates every day at 12AM EST. Have fun!</span>`;
+    else {
+      document.title += " | Archive";
+      fetch('/api/dates')
+        .then(response => response.json())
+        .then(data => {
+          const movieDates = new Set(data.dates);
+          // Retrieve user game stats (assumed stored as JSON under 'gameStats')
+          let userGames = [];
+          try {
+            const storedData = localStorage.getItem('gameStats');
+            if (storedData) {
+              const parsed = JSON.parse(storedData);
+              if (parsed.games) userGames = parsed.games;
+            }
+          } catch (e) {
+            console.error(e);
+          }
+          const completedDates = new Set(userGames.map(game => game.date));
+
+          // Calendar variables
+          let currentDate = new Date();
+          let currentMonth = currentDate.getMonth();
+          let currentYear = currentDate.getFullYear();
+
+          const monthYearSpan = document.getElementById("month-year");
+          const calendarGrid = document.getElementById("calendar-grid");
+          const prevBtn = document.getElementById("prev-month");
+          const nextBtn = document.getElementById("next-month");
+
+          function renderCalendar(month, year) {
+            calendarGrid.innerHTML = "";
+
+            // Display month and year
+            const monthNames = ["January", "February", "March", "April", "May", "June",
+              "July", "August", "September", "October", "November", "December"];
+            monthYearSpan.textContent = monthNames[month] + " " + year;
+
+            // Get the day of the week the month starts on (0=Sunday)
+            const firstDay = new Date(year, month, 1).getDay();
+            // Number of days in the month
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+            // Add empty cells for days before the first day of the month
+            for (let i = 0; i < firstDay; i++) {
+              let emptyCell = document.createElement("div");
+              emptyCell.classList.add("calendar-cell", "empty");
+              calendarGrid.appendChild(emptyCell);
+            }
+
+            // Create cells for each day
+            for (let day = 1; day <= daysInMonth; day++) {
+              let cell = document.createElement("div");
+              cell.classList.add("calendar-cell");
+
+              let dayStr = day < 10 ? "0" + day : day;
+              let monthStr = (month + 1) < 10 ? "0" + (month + 1) : (month + 1);
+              let dateStr = year + "-" + monthStr + "-" + dayStr;
+
+              // If there is a movie for this date, create a clickable link; otherwise, create plain text.
+              if (movieDates.has(dateStr)) {
+                let link = document.createElement("a");
+                link.href = "/archive/" + dateStr;
+                link.textContent = day;  // Display the day number
+                cell.appendChild(link);
+              } else {
+                let span = document.createElement("span");
+                span.textContent = day;
+                cell.appendChild(span);
+              }
+
+              // Set cell color based on movie availability and user completion
+              if (movieDates.has(dateStr)) {
+                if (completedDates.has(dateStr)) {
+                  cell.classList.add("completed");
+                } else {
+                  cell.classList.add("available");
+                }
+              } else {
+                cell.classList.add("no-movie");
+              }
+
+              calendarGrid.appendChild(cell);
+            }
+          }
+
+          prevBtn.addEventListener("click", function () {
+            currentMonth--;
+            if (currentMonth < 0) {
+              currentMonth = 11;
+              currentYear--;
+            }
+            renderCalendar(currentMonth, currentYear);
+          });
+
+          nextBtn.addEventListener("click", function () {
+            currentMonth++;
+            if (currentMonth > 11) {
+              currentMonth = 0;
+              currentYear++;
+            }
+            renderCalendar(currentMonth, currentYear);
+          });
+
+          renderCalendar(currentMonth, currentYear);
+        })
+        .catch(err => console.error(err));
 
     }
-    updateImageButtons();
-    displayCurrentReview();
 
     hoverCoffee();
     hoverLetterboxd();
@@ -1095,10 +1236,13 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
     hoverInstructions();
     hoverPolicies();
     hoverContactUs();
-    hoverArchive();
+    if (!isArchivePage) {
+      hoverArchive();
+    }
     hoverToday();
 
-  } catch (error) {
+  }
+  catch (error) {
     console.error('Error during initialization:', error);
   }
 

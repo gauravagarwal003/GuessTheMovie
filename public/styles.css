@@ -56,6 +56,10 @@ body {
         padding-left: 10px;
         padding-right: 10px;
     }
+    #dateDisplay {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
 
     .header-content {
         max-width: 100%;
@@ -327,7 +331,8 @@ body {
 }
 
 #textDisplay,
-#allButtons {
+#allButtons,
+#dateDisplay {
     margin: 0 auto;
     text-align: center;
 }
@@ -339,6 +344,12 @@ body {
 #textDisplay {
     margin-top: 10px;
     font-size: 110%;
+    max-width: 720px;
+    color: var(--bonewhite);
+}
+
+#dateDisplay {
+    margin-top: 10px;
     max-width: 720px;
     color: var(--bonewhite);
 }
