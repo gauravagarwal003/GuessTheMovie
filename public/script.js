@@ -1081,27 +1081,19 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
       correctMovieID = data.movie;
       movieDate = data.date;
       movieDateString = new Date(movieDate).toLocaleDateString('en-US', {
+        timeZone: 'UTC',  // Set timezone to UTC to ignore local timezones
         year: 'numeric',
-        month: 'long',   // displays full month name (e.g. "February")
-        day: 'numeric'   // displays day without leading zeros (e.g. "2")
+        month: 'long',     // Full month name (e.g. "February")
+        day: 'numeric'     // Day without leading zeros (e.g. "2")
       });
       console.log("Correct Movie ID: " + correctMovieID);
-      console.log("Correct Movie Date: " + movieDate);
+      console.log("Correct Movie Date: " + movieDateString);
       correctMovie = moviesData.find(movie => movie.movieID === correctMovieID);
 
       // Fetch all images, text, and links for the movie
       for (let i = 0; i < maxIncorrectGuesses; i++) {
         await fetchData(correctMovieID, movieDate, i);
       }
-
-      if (archiveDate) {
-        document.title += " | Archive";
-        dateDisplay.innerHTML = `<h2>Archive for ${movieDateString}</h2>`;
-      }
-      else if (!isArchivePage) {
-        dateDisplay.innerHTML = `<h2>Today's movie for ${movieDateString}</h2>`;
-      }
-
       // Check if this game has already been played.
       if (hasGameBeenPlayed(correctMovieID, globalGameStats)) {
         finishGame(hasGameBeenWon(correctMovieID, globalGameStats));
@@ -1109,14 +1101,19 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
       else {
         textDisplay = document.getElementById('textDisplay');
         if (archiveDate) {
-          dateDisplay.innerHTML = `<h2>Archive for ${movieDateString}</h2>`;
           textDisplay.innerHTML = `<div id="textDisplay"><span class="message">You get 5 reviews (one at a time) to guess the movie. You can skip if you don't have a guess. Check your history and stats once you've played a few times. Have fun!</span>`;
         }
         else {
-          dateDisplay.innerHTML = `<h2>Today's movie for ${movieDateString}</h2>`;
           textDisplay.innerHTML = `<div id="textDisplay"><h2></h2><span class="message">Welcome to Guess the Movie! You get 5 reviews (one at a time) to guess the movie. You can skip if you don't have a guess. Click on "How To Play" to learn more and check your history and stats once you've played a few times. The movie updates every day at 12AM EST. Have fun!</span>`;
         }
       }
+      if (archiveDate) {
+        dateDisplay.innerHTML = `<h2>Archive for ${movieDateString}</h2>`;
+      }
+      else{
+        dateDisplay.innerHTML = `<h2>Today's movie for ${movieDateString}</h2>`;
+      }
+
       updateImageButtons();
       displayCurrentReview();
     }
