@@ -126,6 +126,10 @@ body {
 .historySecondLine {
     margin-bottom: 7px;
 }
+.history-link{
+    color: var(--currentBackground);
+    text-decoration: none;
+}
 
 /* Adjust logo */
 .logo {

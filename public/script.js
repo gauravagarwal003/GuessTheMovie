@@ -141,30 +141,32 @@ function generateGameHTML(game) {
       realGuessCount++;
       // Underline the movie title
       if (game.guesses[i] === game.correctMovieID) {
-        guessText += ` correctly guessed <u>${foundMovie.title} (${foundMovie.year})</u>, `;
+        guessText += `correctly`;
       }
       else {
-        guessText += ` incorrectly guessed <u>${foundMovie.title} (${foundMovie.year})</u>, `;
+        guessText += `incorrectly`;
       }
+      guessText += ` guessed <a href="https://letterboxd.com/film/${foundMovie.movieID}/" target="_blank" class="history-link"><u>${foundMovie.title} (${foundMovie.year})</u></a>, `;
     }
   }
   // Remove the trailing comma and space, if any.
   if (guessText.endsWith(', ')) {
     guessText = guessText.slice(0, -2);
   }
-
+  const historyCorrectMovie = moviesData.find(movie => movie.movieID === game.correctMovieID);
+  let returnString = ``;  
+  returnString += `      <h3 class="historyFirstLine"><strong>${formattedDate}: <a href="https://letterboxd.com/film/${historyCorrectMovie.movieID}/" target="_blank" class="history-link"><u>${game.title} (${game.year})</u></a></strong></h3> `;
   if (realGuessCount <= 0) {
-    return `
-      <h3 class="historyFirstLine"><strong>${formattedDate}: ${game.title} (${game.year}).</strong></h3> 
-      <p class="historySecondLine">You ${resultText} and did not guess any movies.</p>
+    returnString += `
+      <p class="historySecondLine">You ${resultText} and did not guess any movies</p>
     `;
   }
   else {
-    return `
-      <h3 class="historyFirstLine"><strong>${formattedDate}: ${game.title} (${game.year}).</strong></h3> 
+    returnString += `
       <p class="historySecondLine">You ${resultText} with ${game.guessCount} ${plural}: ${guessText}.</p>
     `;
   }
+  return returnString;
 }
 
 function setActiveButton(buttonID) {
@@ -209,9 +211,8 @@ function displayInstructions() {
   modalContentDiv.innerHTML = `
     <h2>How to Play</h2>
     <p>You have ${maxIncorrectGuesses} tries to guess the movie. Each guess (or skip) will reveal an additional review to help you.</p>
-    <p>To guess, click the search bar and begin typing. You can use the up and down buttons or cursor to select between reviews and the enter button or to submit one. You can also use the left and right buttons to toggle between available reviews.</p>
-    <p>Once the game is over, you can click on the photos to go to that review.</p>
-    <p>Every day features a new movie (added at 12AM EST), and you can only play once per day.</p>
+    <p>To guess, click the search bar and begin typing. You can use the up/down buttons or cursor to select movies and the enter button or to submit one. You can also use the left/right buttons to toggle between available reviews.</p>
+    <p>Every day features a new movie (added at 12AM EST), but you can use the archive to play previous days. On each day, a gray background means it doesn't have a movie, white background means it does have a movie and you can play it, and green background means you've played it already</p>
     <p>To save your stats and history and access them at any time, please play using the same browser and device and avoid using incognito or private browsing modes.</p>
     <p>Good luck and have fun!</p>
   `;
