@@ -148,7 +148,7 @@ function generateGameHTML(game) {
     guessText = guessText.slice(0, -2);
   }
   const historyCorrectMovie = moviesData.find(movie => movie.movieID === game.correctMovieID);
-  let returnString = ``;  
+  let returnString = ``;
   returnString += `      <h3 class="historyFirstLine"><strong>${formattedDate}: <a href="https://letterboxd.com/film/${historyCorrectMovie.movieID}/" target="_blank" class="history-link"><u>${game.title} (${game.year})</u></a></strong></h3> `;
   if (realGuessCount <= 0) {
     returnString += `
@@ -1144,7 +1144,7 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
       if (archiveDate) {
         dateDisplay.innerHTML = `<h2>Archive (${movieDateString})</h2>`;
       }
-      else{
+      else {
         dateDisplay.innerHTML = `<h2>Today's movie (${movieDateString})</h2>`;
       }
 

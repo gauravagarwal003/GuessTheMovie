@@ -126,7 +126,8 @@ body {
 .historySecondLine {
     margin-bottom: 7px;
 }
-.history-link{
+
+.history-link {
     color: var(--currentBackground);
     text-decoration: none;
 }
@@ -799,25 +800,28 @@ a:focus .footer-image {
     color: var(--bonewhite);
 }
 
-.available{
+.available {
     background-color: var(--bonewhite);
 }
-.available:hover{
+
+.available:hover {
     text-decoration: underline !important;
 }
 
-.available a{
+.available a {
     text-decoration: none !important;
     color: black !important;
 }
 
-.completed{
+.completed {
     background-color: green;
 }
-.completed:hover{
+
+.completed:hover {
     background-color: var(--LGreen);
 }
-.completed a{
+
+.completed a {
     text-decoration: none !important;
     color: black !important;
 }
@@ -830,41 +834,42 @@ a:focus .footer-image {
     font-weight: bold;
     color: var(--bonewhite);
     font-size: 1rem;
-  }
-  
-  #calendar-days-header div {
-    padding: 5px;
-  }
-  
+}
 
-  @media (max-width: 320px) {
+#calendar-days-header div {
+    padding: 5px;
+}
+
+
+@media (max-width: 320px) {
+
     /* Reduce margins and padding for a smaller container */
     #calendar-container {
-      margin: 10px auto;
-      padding: 0 5px;
+        margin: 10px auto;
+        padding: 0 5px;
     }
-    
+
     /* Adjust the grid: ensure cells have a minimum size, but share available space */
     #calendar-grid {
-      gap: 2px;
-      grid-template-columns: repeat(7, minmax(20px, 1fr));
+        gap: 2px;
+        grid-template-columns: repeat(7, minmax(20px, 1fr));
     }
-    
+
     /* Make cell content smaller and reduce inner padding */
     .calendar-cell {
-      padding: 5px;
-      font-size: 0.8rem;
+        padding: 5px;
+        font-size: 0.8rem;
     }
-    
+
     /* Optionally adjust the day-of-week header font too */
     .calendar-day-header {
-      font-size: 0.8rem;
-      padding: 3px 0;
+        font-size: 0.8rem;
+        padding: 3px 0;
     }
-    
+
     /* Reduce header font size */
     #month-year {
-      font-size: 1rem;
+        font-size: 1rem;
     }
 
     .day-long {
@@ -876,5 +881,4 @@ a:focus .footer-image {
     }
 
 
-  }
-  
+}
