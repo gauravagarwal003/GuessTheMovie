@@ -18,14 +18,8 @@ let isArchivePage = (pathSegments[0] === 'archive' && pathSegments.length === 1)
 let archiveDate = (pathSegments[0] === 'archive' && pathSegments.length > 1)
   ? pathSegments[1]
   : null;
-if (isArchivePage) {
-  console.log('Archive page with no date');
-}
-else if (archiveDate) {
-  console.log('Archive page loaded with date:', archiveDate);
-}
-else {
-  console.log('Main page loaded');
+if (archiveDate) {
+  document.title = "Guess The Movie | Archive";
 }
 
 const SKIPPED_GUESS = '__SKIPPED__'; // Sentinel value to indicate a skipped guess
@@ -1158,7 +1152,6 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
       displayCurrentReview();
     }
     else {
-      document.title += " | Archive";
       fetch('/api/dates')
         .then(response => response.json())
         .then(data => {
