@@ -21,57 +21,10 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css">
     <link rel="icon" type="image/x-icon" href="/just_logo.png">
-    <link rel="stylesheet" href="/styles.css?v=1.0">
+    <link rel="stylesheet" href="/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@700&display=swap" rel="stylesheet">
-
-    <!-- Inline styles for the calendar -->
-    <style>
-        #calendar-container {
-            max-width: 500px;
-            margin: 20px auto;
-            text-align: center;
-        }
-
-        #calendar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        #calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 5px;
-        }
-
-        .calendar-cell {
-            padding: 10px;
-            border: 1px solid #ddd;
-        }
-
-        .calendar-cell.empty {
-            background-color: transparent;
-            border: none;
-        }
-
-        .no-movie {
-            background-color: gray;
-            color: white;
-        }
-
-        .available {
-            background-color: white;
-            color: black;
-        }
-
-        .completed {
-            background-color: green;
-            color: white;
-        }
-    </style>
 
     <script>
         if ('scrollRestoration' in history) {
@@ -124,12 +77,31 @@
             <!-- Calendar container -->
             <div id="calendar-container">
                 <div id="calendar-header">
-                    <button id="prev-month">&laquo;</button>
+                    <button id="prev-month"><i class="fa-solid fa-arrow-left icon" id="arrowLeftIcon"></i></button>
                     <span id="month-year"></span>
-                    <button id="next-month">&raquo;</button>
+                    <button id="next-month"> <i class="fa-solid fa-arrow-right icon" id="arrowRightIcon"></i>
+                    </button>
                 </div>
+                <div id="calendar-days-header">
+                    <div class="day-long">Sun</div>
+                    <div class="day-short">S</div>
+                    <div class="day-long">Mon</div>
+                    <div class="day-short">M</div>
+                    <div class="day-long">Tue</div>
+                    <div class="day-short">T</div>
+                    <div class="day-long">Wed</div>
+                    <div class="day-short">W</div>
+                    <div class="day-long">Thu</div>
+                    <div class="day-short">T</div>
+                    <div class="day-long">Fri</div>
+                    <div class="day-short">F</div>
+                    <div class="day-long">Sat</div>
+                    <div class="day-short">S</div>
+                  </div>
+                
                 <div id="calendar-grid"></div>
             </div>
+  
 
             <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
         </div>

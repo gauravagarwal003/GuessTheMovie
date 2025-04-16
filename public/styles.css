@@ -68,23 +68,23 @@ body {
         gap: 1%;
     }
 
-    #displayHistoryButton{
+    #displayHistoryButton {
         padding: 0;
     }
 
-    #todayButton{
+    #todayButton {
         padding: 0;
     }
 
-    #archiveButton{
+    #archiveButton {
         padding: 0;
     }
 
-    #displayStatsButton{
+    #displayStatsButton {
         padding: 0;
     }
 
-    #instructionsButton{
+    #instructionsButton {
         padding: 0;
     }
 
@@ -110,11 +110,14 @@ body {
 
     .header-content button {
         display: flex;
-        flex-direction: column; /* Stacks icon on top and text below */
-        align-items: center;    /* Centers both horizontally */
-        gap: 2px;               /* Adjust this value to decrease/increase vertical space */
-      }
-      }
+        flex-direction: column;
+        /* Stacks icon on top and text below */
+        align-items: center;
+        /* Centers both horizontally */
+        gap: 2px;
+        /* Adjust this value to decrease/increase vertical space */
+    }
+}
 
 .historyFirstLine {
     margin-bottom: -1em;
@@ -132,11 +135,12 @@ body {
     height: auto;
 }
 
-#incorrect_url_text{
-    float:right;
+#incorrect_url_text {
+    float: right;
     color: var(--bonewhite);
 }
-#incorrect_url_text a{
+
+#incorrect_url_text a {
     color: var(--bonewhite) !important;
     text-decoration: underline;
     font-weight: bold;
@@ -298,7 +302,6 @@ body {
 
 *:not(.icon) {
     font-family: 'Familjen Grotesk', sans-serif, bold !important;
-    text-shadow: 0.5px 0.5px 0 rgba(0, 0, 0, 0.1);
 }
 
 body {
@@ -448,7 +451,7 @@ body {
     color: var(--LGreen) !important;
     padding-left: 0.2%;
     text-decoration: underline;
-    padding-right: 2%;
+    padding-right: 1.5%;
 }
 
 #footerItemPolicies:hover,
@@ -469,7 +472,7 @@ body {
     color: var(--LBlue) !important;
     padding-left: 0.2%;
     text-decoration: underline;
-    padding-right: 1%;
+    padding-right: 1.5%;
 }
 
 #footerItemContactUs:hover,
@@ -511,7 +514,7 @@ body {
 #footerItemLetterboxd {
     color: var(--LOrange) !important;
     padding-left: 0.3%;
-    padding-right: 2.5%;
+    padding-right: 1.5%;
     text-decoration: underline;
 }
 
@@ -730,4 +733,144 @@ a:focus .footer-image {
     height: 100% !important;
 }
 
+.day-short {
+    display: none;
+}
 
+
+#calendar-container {
+    max-width: 600px;
+    margin: 30px auto;
+    text-align: center;
+}
+
+#prev-month,
+#next-month {
+    background-color: transparent;
+    color: var(--bonewhite);
+    border-radius: 4px;
+}
+
+#prev-month:hover {
+    background-color: var(--LOrange);
+}
+
+#next-month:hover {
+    background-color: var(--LBlue);
+}
+
+#calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    color: var(--bonewhite);
+    font-size: 1.5rem;
+}
+
+#month-year:hover {
+    color: var(--LGreen);
+    text-decoration: underline;
+}
+
+#calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.calendar-cell {
+    padding: 10px;
+    border: 1px solid var(--LBackground);
+    border-radius: 8px;
+}
+
+.calendar-cell.empty {
+    background-color: transparent;
+    border: none;
+}
+
+.no-movie {
+    background-color: gray;
+    color: var(--bonewhite);
+}
+
+.available{
+    background-color: var(--bonewhite);
+}
+.available:hover{
+    text-decoration: underline !important;
+}
+
+.available a{
+    text-decoration: none !important;
+    color: black !important;
+}
+
+.completed{
+    background-color: green;
+}
+.completed:hover{
+    background-color: var(--LGreen);
+}
+.completed a{
+    text-decoration: none !important;
+    color: black !important;
+}
+
+#calendar-days-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin-bottom: 5px;
+    text-align: center;
+    font-weight: bold;
+    color: var(--bonewhite);
+    font-size: 1rem;
+  }
+  
+  #calendar-days-header div {
+    padding: 5px;
+  }
+  
+
+  @media (max-width: 320px) {
+    /* Reduce margins and padding for a smaller container */
+    #calendar-container {
+      margin: 10px auto;
+      padding: 0 5px;
+    }
+    
+    /* Adjust the grid: ensure cells have a minimum size, but share available space */
+    #calendar-grid {
+      gap: 2px;
+      grid-template-columns: repeat(7, minmax(20px, 1fr));
+    }
+    
+    /* Make cell content smaller and reduce inner padding */
+    .calendar-cell {
+      padding: 5px;
+      font-size: 0.8rem;
+    }
+    
+    /* Optionally adjust the day-of-week header font too */
+    .calendar-day-header {
+      font-size: 0.8rem;
+      padding: 3px 0;
+    }
+    
+    /* Reduce header font size */
+    #month-year {
+      font-size: 1rem;
+    }
+
+    .day-long {
+        display: none !important;
+    }
+
+    .day-short {
+        display: inline !important;
+    }
+
+
+  }
+  
