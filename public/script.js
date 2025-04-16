@@ -52,6 +52,48 @@ function hasGameBeenWon(correctMovieID, stats) {
   return stats.games.some(game => game.correctMovieID === correctMovieID && game.won === true);
 }
 
+// Utility function to determine if an element is visible.
+function isElementVisible(el) {
+  const style = window.getComputedStyle(el);
+  return style.display !== 'none' && style.visibility !== 'hidden';
+}
+
+// Count how many header buttons are visible.
+function countVisibleHeaderItems() {
+  const headerButtons = document.querySelectorAll('#header .header-content button');
+  let visibleCount = 0;
+  headerButtons.forEach(btn => {
+    if (isElementVisible(btn)) {
+      visibleCount++;
+    }
+  });
+  return visibleCount;
+}
+
+// Toggle the logo based on the visible count of header items, only when window.innerWidth < 285px.
+function toggleLogoBasedOnHeaderItems() {
+  const logo = document.querySelector('#header .logo');
+  if (!logo) return;
+
+  // Check if width is less than 285px
+  if (window.innerWidth < 285) {
+    const visibleButtons = countVisibleHeaderItems();
+    if (visibleButtons === 5) {
+      // Hide the logo if all 5 header items are visible.
+      logo.style.display = 'none';
+    } else {
+      // Otherwise, ensure the logo is visible.
+      logo.style.display = '';
+    }
+  } else {
+    // If the window is wider than 285px, show the logo by default.
+    logo.style.display = '';
+  }
+}
+
+// Run the function on initial load and on window resize.
+window.addEventListener('DOMContentLoaded', toggleLogoBasedOnHeaderItems);
+window.addEventListener('resize', toggleLogoBasedOnHeaderItems);
 
 function getOrdinalSuffix(day) {
   if (day > 3 && day < 21) return 'th'; // covers 11th-13th

@@ -47,11 +47,10 @@ body {
     gap: 2%;
     /* Space between logo and buttons */
     align-items: center;
-    justify-content: space-between;
-
+    justify-content: space-around !important;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 560px) {
     #textDisplay {
         padding-left: 10px;
         padding-right: 10px;
@@ -64,21 +63,41 @@ body {
 
     .header-content {
         max-width: 100%;
-        padding: 0 10px;
+        padding: 0 0;
         flex-wrap: nowrap;
-        justify-content: space-between;
+        gap: 1%;
+    }
+
+    #displayHistoryButton{
+        padding: 0;
+    }
+
+    #todayButton{
+        padding: 0;
+    }
+
+    #archiveButton{
+        padding: 0;
+    }
+
+    #displayStatsButton{
+        padding: 0;
+    }
+
+    #instructionsButton{
+        padding: 0;
     }
 
     .header-content span {
-        font-size: 90%;
+        font-size: 70% !important;
     }
 
     .icon {
-        font-size: 1rem;
+        font-size: 1rem !important;
     }
 
     .logo {
-        max-width: 31% !important;
+        max-width: 20% !important;
     }
 
     .full {
@@ -88,7 +107,14 @@ body {
     .short {
         display: inline !important;
     }
-}
+
+    .header-content button {
+        display: flex;
+        flex-direction: column; /* Stacks icon on top and text below */
+        align-items: center;    /* Centers both horizontally */
+        gap: 2px;               /* Adjust this value to decrease/increase vertical space */
+      }
+      }
 
 .historyFirstLine {
     margin-bottom: -1em;
@@ -422,7 +448,7 @@ body {
     color: var(--LGreen) !important;
     padding-left: 0.2%;
     text-decoration: underline;
-    padding-right: 1%;
+    padding-right: 2%;
 }
 
 #footerItemPolicies:hover,
@@ -464,7 +490,7 @@ body {
 #footerItemCoffee {
     color: rgb(165, 135, 110) !important;
     padding-left: 0.20%;
-    padding-right: 0.5%;
+    padding-right: 1%;
     text-decoration: underline;
 }
 
@@ -485,7 +511,7 @@ body {
 #footerItemLetterboxd {
     color: var(--LOrange) !important;
     padding-left: 0.3%;
-    padding-right: 1%;
+    padding-right: 2.5%;
     text-decoration: underline;
 }
 
@@ -508,8 +534,8 @@ body {
 }
 
 .footer-image {
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 1.8rem;
+    height: 2rem;
     margin-top: 0px;
 }
 
@@ -703,4 +729,5 @@ a:focus .footer-image {
     width: 100% !important;
     height: 100% !important;
 }
+
 
