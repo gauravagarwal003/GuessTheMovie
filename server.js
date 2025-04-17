@@ -77,7 +77,7 @@ app.get('/api/get-movie', (req, res) => {
       const validMovieFolders = movieFolders.filter(m => !m.startsWith('.'));
       if (validMovieFolders.length === 0) return res.status(404).json({ error: 'No valid movie folders found' });
 
-      res.json({ movie: validMovieFolders[0], date: dateFolder });
+      res.json({ movieID: validMovieFolders[0], date: dateFolder });
     });
   });
 });
