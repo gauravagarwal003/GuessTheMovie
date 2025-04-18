@@ -35,9 +35,10 @@ const SELECTED_COLUMNS = ['title', 'year', 'movieID', 'posterLink']; // Columns 
 const MAX_GUESSES = 5;
 
 // Frequently used DOM elements
-const imageButtonsContainer = document.getElementById('imageButtons');
+const reviewNumButtons = document.getElementById('imageButtons');
 const multiButton = document.querySelector('button[id="multi-button"]');
 const dateDisplay = document.getElementById('dateDisplayMessage');
+const textDisplay = document.getElementById('textDisplay');
 
 // Fetch user's movie data from local storage
 var globalGameStats = JSON.parse(localStorage.getItem('gameStats')) || {
@@ -63,7 +64,6 @@ function isElementVisible(el) {
   const style = window.getComputedStyle(el);
   return style.display !== 'none' && style.visibility !== 'hidden';
 }
-
 // Count how many header buttons are visible
 function countVisibleHeaderItems() {
   const headerButtons = document.querySelectorAll('#header .header-content button');
@@ -75,7 +75,6 @@ function countVisibleHeaderItems() {
   });
   return visibleCount;
 }
-
 // Removes logo from header when screen width is less than certain amount and all five header items are visible
 function toggleLogoBasedOnHeaderItems() {
   const logo = document.querySelector('#header .logo');
@@ -96,13 +95,13 @@ function toggleLogoBasedOnHeaderItems() {
     logo.style.display = '';
   }
 }
-
 // Run the function on initial load and on window resize.
 window.addEventListener('DOMContentLoaded', toggleLogoBasedOnHeaderItems);
 window.addEventListener('resize', toggleLogoBasedOnHeaderItems);
 
+// Generates ordinal siffux for a given day
 function getOrdinalSuffix(day) {
-  if (day > 3 && day < 21) return 'th'; // covers 11th-13th
+  if (day > 3 && day < 21) return 'th';
   switch (day % 10) {
     case 1: return 'st';
     case 2: return 'nd';
@@ -111,6 +110,7 @@ function getOrdinalSuffix(day) {
   }
 }
 
+// Formats the date to a more readable string format
 function formatDate(isoDate) {
   const localDateString = isoDate.replace(/-/g, '/');
   const date = new Date(localDateString);
@@ -120,7 +120,7 @@ function formatDate(isoDate) {
   return `${month} ${day}${getOrdinalSuffix(day)}, ${year}`;
 }
 
-// Main function: generate HTML for a given game record
+// Generates HTML for history given a game record
 function generateGameHTML(game) {
   const formattedDate = formatDate(game.date);
   // Bold and color the result text: green if won, red if lost
@@ -128,6 +128,7 @@ function generateGameHTML(game) {
     ? '<strong style="color: green;">won</strong>'
     : '<strong style="color: red;">lost</strong>';
 
+  // Counts non-skip guesses
   let realGuessCount = 0;
   let plural = `review`;
   if (game.guessCount > 1) {
@@ -145,17 +146,18 @@ function generateGameHTML(game) {
     else {
       const foundMovie = allMovies.find(movie => movie.movieID === game.guesses[i]);
       realGuessCount++;
-      // Underline the movie title
       if (game.guesses[i] === game.correctMovieID) {
         guessText += `correctly`;
       }
       else {
         guessText += `incorrectly`;
       }
+      // Underline movie title and link to page
       guessText += ` guessed <a href="https://letterboxd.com/film/${foundMovie.movieID}/" target="_blank" class="history-link"><u>${foundMovie.title} (${foundMovie.year})</u></a>, `;
     }
   }
-  // Remove the trailing comma and space, if any.
+
+  // Remove the trailing comma and space if there's one
   if (guessText.endsWith(', ')) {
     guessText = guessText.slice(0, -2);
   }
@@ -163,6 +165,7 @@ function generateGameHTML(game) {
   let returnString = ``;
   returnString += `      <h3 class="historyFirstLine"><strong>${formattedDate}: <a href="https://letterboxd.com/film/${historyCorrectMovie.movieID}/" target="_blank" class="history-link"><u>${game.title} (${game.year})</u></a></strong></h3> `;
   if (realGuessCount <= 0) {
+    // User made no guesses
     returnString += `
       <p class="historySecondLine">You ${resultText} and did not guess any movies</p>
     `;
@@ -175,6 +178,7 @@ function generateGameHTML(game) {
   return returnString;
 }
 
+// Sets the active modal buttons
 function setActiveButton(buttonID) {
   const button = document.getElementById(buttonID);
   button.classList.add("active-button");
@@ -193,6 +197,7 @@ function setActiveButton(buttonID) {
 
 }
 
+// Deactivates the active modal button
 function deactivateButton(buttonID) {
   const button = document.getElementById(buttonID);
   button.classList.remove("active-button");
@@ -208,9 +213,9 @@ function deactivateButton(buttonID) {
   else if (buttonID == "archiveButton") {
     document.getElementById('archiveButton').classList.remove("active-archive");
   }
-
 }
 
+// Displays the instruction modal
 function displayInstructions() {
   const modalContentDiv = document.getElementById('modalContent');
 
@@ -224,26 +229,23 @@ function displayInstructions() {
   `;
 
   setActiveButton("instructionsButton");
-
-  // Display the modal
   const modal = document.getElementById('Modal');
   modal.style.display = "block";
 
+  // If x button is clicked or outside of modal is clicked, close modal
   document.getElementById('closeModal').onclick = function () {
     modal.style.display = "none";
     deactivateButton("instructionsButton");
   };
-
-  // Close the modal if user clicks anywhere outside the modal content
   window.onclick = function (event) {
     if (event.target === modal) {
       modal.style.display = "none";
       deactivateButton("instructionsButton");
     }
   };
-
 }
 
+// Displays the policies modal
 function displayPolicies() {
   const modalContentDiv = document.getElementById('modalContent');
 
@@ -291,7 +293,6 @@ function displayPolicies() {
   const termsTab = document.getElementById('termsTab');
   const privacyTab = document.getElementById('privacyTab');
   const cookieTab = document.getElementById('cookieTab');
-
   const termsContent = document.getElementById('termsContent');
   const privacyContent = document.getElementById('privacyContent');
   const cookieContent = document.getElementById('cookieContent');
@@ -315,11 +316,10 @@ function displayPolicies() {
   const modal = document.getElementById('Modal');
   modal.style.display = "block";
 
+  // If x button is clicked or outside of modal is clicked, close modal
   document.getElementById('closeModal').onclick = function () {
     modal.style.display = "none";
   };
-
-  // Close the modal if user clicks anywhere outside the modal content
   window.onclick = function (event) {
     if (event.target === modal) {
       modal.style.display = "none";
@@ -330,25 +330,25 @@ function displayPolicies() {
   switchTab(termsTab, termsContent);
 }
 
+// Displays the contact info modal
 function displayContactInfo() {
   const modalContentDiv = document.getElementById('modalContent');
   modalContentDiv.innerHTML = `<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf1QkFlmLqevhyPgnqCRA-nj3yLsb0lQxgA_BGFtxbZySnNVA/viewform?embedded=true" width="640" height="915" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>`;
   const modal = document.getElementById('Modal');
   modal.style.display = "block";
 
+    // If x button is clicked or outside of modal is clicked, close modal
   document.getElementById('closeModal').onclick = function () {
     modal.style.display = "none";
   };
-
-  // Close the modal if user clicks anywhere outside the modal content
   window.onclick = function (event) {
     if (event.target === modal) {
       modal.style.display = "none";
     }
   };
-
 }
 
+// Displays the game history modal
 function displayHistory() {
   const modalContentDiv = document.getElementById('modalContent');
   modalContentDiv.innerHTML = `<h2>Your Game History</h2>`;
@@ -368,12 +368,11 @@ function displayHistory() {
   const modal = document.getElementById('Modal');
   modal.style.display = "block";
 
+  // If x button is clicked or outside of modal is clicked, close modal
   document.getElementById('closeModal').onclick = function () {
     modal.style.display = "none";
     deactivateButton("displayHistoryButton");
   };
-
-  // Close the modal if user clicks anywhere outside the modal content
   window.onclick = function (event) {
     if (event.target === modal) {
       modal.style.display = "none";
@@ -382,6 +381,7 @@ function displayHistory() {
   };
 }
 
+// Displays the stats modal
 function displayStats() {
   const modalContentDiv = document.getElementById('modalContent');
   modalContentDiv.innerHTML = `<h2>Your Stats</h2>`;
@@ -426,13 +426,12 @@ function displayStats() {
   const modal = document.getElementById('Modal');
   modal.style.display = "block";
 
+  // If x button is clicked or outside of modal is clicked, close modal
   document.getElementById('closeModal').onclick = function () {
     modal.style.display = "none";
     deactivateButton("displayStatsButton");
 
   };
-
-  // Close the modal if user clicks anywhere outside the modal content
   window.onclick = function (event) {
     if (event.target === modal) {
       modal.style.display = "none";
@@ -441,10 +440,11 @@ function displayStats() {
   };
 }
 
+// Filter movies based on user's input 
 function filterMovies(event) {
   const allowedRegex = /^[a-zA-Z0-9 !@#$%ﬂ&*()_+\-=\~`{}\|:"<>?\[\]\\;',.\/]$/;
 
-  // Only process if the key pressed matches allowed characters.
+  // Only process if the key pressed matches allowed characters
   if (event.key !== undefined && event.key !== "Backspace" && !allowedRegex.test(event.key)) {
     return;
   }
@@ -462,40 +462,21 @@ function filterMovies(event) {
   displayMovieList(filteredMovies);
 }
 
+// Update game based on the movie the user selected
 function selectMovie(guessedMovieID) {
-  collectedGuesses.push(guessedMovieID);
   const guessedMovie = allMovies.find(movie => movie.movieID === guessedMovieID);
   const isCorrectMovie = guessedMovieID === correctMovieID;
-  textDisplay = document.getElementById('textDisplay');
+  
   if (isCorrectMovie) {
+    // Won game
     finishGame(true);
   } else {
-    incorrectGuessCount++;
-    let guessString = (MAX_GUESSES - incorrectGuessCount === 1) ? "1 guess" : `${MAX_GUESSES - incorrectGuessCount} guesses`;
-    textDisplay.innerHTML = `<div id="textDisplay"><span class="message">Wrong. </span>
-    <a href="https://letterboxd.com/film/${guessedMovieID}" class="movie-link" target="_blank">
-    ${guessedMovie.title} (${guessedMovie.year})</a>
-    <span class="message"> is not the correct movie. You have ${guessString} left. Switch between reviews to get more info!
-        </a>`;
-    clearSearchAndMovieList();
-    if (incorrectGuessCount < MAX_GUESSES) {
-      currentReviewJSONs = allReviewJSONs.slice(0, incorrectGuessCount + 1);
-      updateImageButtons();
-      displayCurrentReview(incorrectGuessCount + 1);
-    } else {
-      finishGame(false);
-    }
-    if ('scrollRestoration' in history) {
-      history.scrollRestoration = 'manual';
-    }
-    setTimeout(() => window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'smooth' // or 'auto'
-    }), 100);
+    // Incorrect guess
+    handleGuess(guessedMovie);
   }
 }
 
+// Calculate the user's total win percentage for stats
 function calculateWinPercentage(stats) {
   const total = stats.games.length;
   if (total === 0) return 0;
@@ -506,6 +487,7 @@ function calculateWinPercentage(stats) {
   return (wins / total) * 100;
 }
 
+// Calculate the user's average guess count for stats
 function calculateAverageGuessCount(stats) {
   let totalGuesses = 0;
   let winCount = 0;
@@ -517,15 +499,15 @@ function calculateAverageGuessCount(stats) {
   }
   return winCount === 0 ? 0 : totalGuesses / winCount;
 }
+
+// Calculate the user's current streak for stats
 function calculateCurrentStreak(stats) {
   if (stats.games.length === 0) return { streak: 0, type: "none" };
 
   let streak = 0;
-  // Determine the result (win or loss) of the most recent game.
   const mostRecentResult = stats.games[stats.games.length - 1].won;
   const streakType = mostRecentResult ? "win" : "loss";
 
-  // Traverse the games array backwards.
   for (let i = stats.games.length - 1; i >= 0; i--) {
     if (stats.games[i].won === mostRecentResult) {
       streak++;
@@ -533,10 +515,10 @@ function calculateCurrentStreak(stats) {
       break;
     }
   }
-
   return { streak, type: streakType };
 }
 
+// Get the user's most guessed movie for stats
 function getMostGuessedMovie(stats) {
   const frequency = {};
   let mostGuessed = null;
@@ -555,6 +537,8 @@ function getMostGuessedMovie(stats) {
   if (maxCount === 1 || !mostGuessedMovie) return null;
   return `${mostGuessedMovie.title} (${mostGuessedMovie.year})`;
 }
+
+// Get the fewest guesses in a user's win for stats
 function fewestGuessesInSingleWin(stats) {
   let minGuesses = Infinity;
   for (const game of stats.games) {
@@ -565,6 +549,7 @@ function fewestGuessesInSingleWin(stats) {
   return minGuesses === Infinity ? 0 : minGuesses;
 }
 
+// Get the user's longest winning streak for stats
 function longestWinningStreak(stats) {
   let maxStreak = 0;
   let currentStreak = 0;
@@ -579,10 +564,10 @@ function longestWinningStreak(stats) {
       currentStreak = 0;
     }
   }
-
   return maxStreak;
 }
 
+// Get the total number of unique movies guessed by the user for stats
 function totalUniqueMoviesGuessed(stats) {
   const guessedMovies = new Set();
   for (const game of stats.games) {
@@ -595,8 +580,7 @@ function totalUniqueMoviesGuessed(stats) {
   return guessedMovies.size;
 }
 
-
-
+// Update the game stats in local storage 
 function updateGameStats(currentGame) {
   globalGameStats.games.push(currentGame);
   globalGameStats.totalPlayed += 1;
@@ -606,30 +590,31 @@ function updateGameStats(currentGame) {
   localStorage.setItem('gameStats', JSON.stringify(globalGameStats));
 }
 
+// Finish the game
 function finishGame(wonGame) {
   gameOver = true;
   gameWon = wonGame;
-  const textDisplay = document.getElementById('textDisplay');
   gameOverMessage = wonGame ? "You got it! " : "You lost. ";
   if (!archiveDate) {
     textDisplay.innerHTML = `<div id="textDisplay">${gameOverMessage}<span class="message"></span><a href="https://letterboxd.com/film/${correctMovieID}" class="movie-link" target="_blank">${correctMovieObject.title} (${correctMovieObject.year})</a><span class="message"> is the correct movie.</span><br><span class="message"> Come back tomorrow to play again!</span></div>`;
   }
   else {
     textDisplay.innerHTML = `<div id="textDisplay">${gameOverMessage}<span class="message"></span><a href="https://letterboxd.com/film/${correctMovieID}" class="movie-link" target="_blank">${correctMovieObject.title} (${correctMovieObject.year})</a><span class="message"> is the correct movie.</span><br></div>`;
-
   }
-
 
   clearSearchAndMovieList();
   if (incorrectGuessCount < MAX_GUESSES) {
     currentReviewJSONs = allReviewJSONs.slice(0, MAX_GUESSES);
-    updateImageButtons();
+    updateReviewNumButtons();
   }
+  
+  // Set up share button
   multiButton.textContent = "Share";
   multiButton.onclick = pressShare;
-  imageButtonsContainer.style.marginRight = "0px";
+  reviewNumButtons.style.marginRight = "0px";
   document.getElementById('search').remove();
 
+  // Add movie poster to page
   const img = document.createElement('img');
   img.classList.add('movie-poster-img');
   img.src = correctMovieObject.posterLink;
@@ -639,12 +624,13 @@ function finishGame(wonGame) {
     existingDiv.innerHTML = '';
     existingDiv.appendChild(img);
   } else {
-    console.error('Div with specified ID not found.');
+    console.error('Movie poster div with id movie_poster not found');
   }
   existingDiv.setAttribute("href", "https://letterboxd.com/film/" + correctMovieID);
   existingDiv.setAttribute("target", "_blank");
   document.getElementById('search-row').style.margin = "0px";
 
+  // Set and update game stats only when game is finished
   if (!hasGameBeenPlayed(correctMovieID, globalGameStats)) {
     const currentGame = {
       correctMovieID: correctMovieID,
@@ -661,10 +647,9 @@ function finishGame(wonGame) {
   displayCurrentReview(currentReviewIndex);
 }
 
-function pressSkipButton() {
-  collectedGuesses.push(SKIPPED_GUESS);
-  multiButton.blur();
-
+// Handles the user's guess or skip
+function handleGuess(guess){
+  // Scroll to top of page
   if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
   }
@@ -674,25 +659,40 @@ function pressSkipButton() {
     behavior: 'smooth' // or 'auto'
   }), 100);
 
-  incorrectGuessCount++;
-  clearSearchAndMovieList();
-  if (incorrectGuessCount < MAX_GUESSES) {
-    currentReviewJSONs = allReviewJSONs.slice(0, incorrectGuessCount + 1);
-    updateImageButtons();
-    displayCurrentReview(incorrectGuessCount + 1);
-    let guessString = (MAX_GUESSES - incorrectGuessCount === 1) ? "1 guess" : `${MAX_GUESSES - incorrectGuessCount} guesses`;
-    document.getElementById('textDisplay').innerHTML = `<a style="text-decoration:none; color:white;" target="_blank">
+  // Update the text display with the guess result and add guess to collected guesses
+  let guessString = (MAX_GUESSES - incorrectGuessCount === 1) ? "1 guess" : `${MAX_GUESSES - incorrectGuessCount} guesses`;  
+  if (guess !== null) {
+    collectedGuesses.push(guess.movieID);
+    textDisplay.innerHTML = `<div id="textDisplay"><span class="message">Wrong. </span>
+    <a href="https://letterboxd.com/film/${guess.movieID}" class="movie-link" target="_blank">
+    ${guess.title} (${guess.year})</a>
+    <span class="message"> is not the correct movie. You have ${guessString} left. Switch between reviews to get more info!
+        </a>`;  
+  }
+  else{
+    collectedGuesses.push(SKIPPED_GUESS);
+    multiButton.blur();
+    textDisplay.innerHTML = `<a style="text-decoration:none; color:white;" target="_blank">
               You skipped! You have ${guessString} left. Switch between reviews to get more info!
           </a>`;
   }
-  else {
+
+  // Update the game state
+  clearSearchAndMovieList();
+  incorrectGuessCount++;
+  if (incorrectGuessCount < MAX_GUESSES) {
+    currentReviewJSONs = allReviewJSONs.slice(0, incorrectGuessCount + 1);
+    updateReviewNumButtons();
+    displayCurrentReview(incorrectGuessCount + 1);
+  } else {
     finishGame(false);
   }
 }
 
+// Handles sharing
 function pressShare() {
-
   let shareText = ''
+  // Sets share text 
   if (gameWon) {
     shareText = `I played "Guess The Movie" and got it in ${collectedGuesses.length} guesses! Can you do better?`;
   }
@@ -703,9 +703,11 @@ function pressShare() {
     text: shareText,
     url: window.location.href,
   };
+  // Check if the share API is supported
   if (navigator.share && navigator.canShare(shareData)) {
     navigator.share(shareData)
   } else {
+    // If not, copy to clipboard
     shareText += ` Play now at ${window.location.href}`;
     navigator.clipboard.writeText(shareText)
       .then(() => {
@@ -719,14 +721,15 @@ function pressShare() {
         console.error("Failed to copy text: ", err);
       });
   }
-
 }
 
+// Clear the search input and movie list
 function clearSearchAndMovieList() {
   document.getElementById('search').value = '';
   document.getElementById('movieList').innerHTML = '';
 }
 
+// Fetch the JSON data for the reviews based on the movie ID, date, and review index
 async function fetchData(movieID, date, index) {
   try {
     const response = await fetch(`/api/json?date=${date}&name=${movieID}&index=${index}`);
@@ -742,15 +745,14 @@ async function fetchData(movieID, date, index) {
   }
 }
 
+// Display the current review based on the review index
 function displayCurrentReview(index = 1) {
-  const review = currentReviewJSONs[index - 1];
+  const review = currentReviewJSONs[index - 1]; 
   const reviewCard = document.getElementById('reviewCard');
   if (!review || currentReviewJSONs.length === 0) {
     reviewCard.style.display = 'none';
     return;
   }
-
-  // Show card
   reviewCard.style.display = 'block';
 
   // Profile photo
@@ -794,12 +796,11 @@ function displayCurrentReview(index = 1) {
     document.getElementById('reviewText').innerHTML = review.text;
   }
 
-
-  // Likes and comments
+  // Number of likes and comments
   document.getElementById('likesCount').textContent = Number(review.numLikes).toLocaleString();
   document.getElementById('commentsCount').textContent = Number(review.num_comments).toLocaleString();
 
-  // Link
+  // Link: Only show if game is over
   const reviewLink = document.getElementById('reviewLink');
   if (gameOver) {
     reviewLink.href = review.link;
@@ -809,8 +810,9 @@ function displayCurrentReview(index = 1) {
   }
 }
 
+// Make review number button active 
 function makeButtonActive(index) {
-  const buttons = imageButtonsContainer.querySelectorAll('button');
+  const buttons = reviewNumButtons.querySelectorAll('button');
   buttons.forEach(button => {
     if (parseInt(button.textContent) === index) {
       button.classList.add('active');
@@ -821,23 +823,25 @@ function makeButtonActive(index) {
   });
 }
 
-function updateImageButtons() {
-  imageButtonsContainer.innerHTML = '';
-  currentReviewJSONs.forEach((image, index) => {
+// Update the review number buttons based on the current review JSONs
+function updateReviewNumButtons() {
+  reviewNumButtons.innerHTML = '';
+  currentReviewJSONs.forEach((review, index) => {
     const button = document.createElement('button');
     button.textContent = index + 1;
     button.onclick = () => {
-      numReview = parseInt(button.textContent, 10)
+      let numReview = parseInt(button.textContent, 10)
       displayCurrentReview(numReview);
       makeButtonActive(numReview);
       currentReviewIndex = parseInt(numReview);
     };
-    imageButtonsContainer.appendChild(button);
+    reviewNumButtons.appendChild(button);
   });
   makeButtonActive(incorrectGuessCount + 1);
   currentReviewIndex = incorrectGuessCount + 1;
 }
 
+// Function to handle hover effects for coffee footer item
 function hoverCoffee() {
   const coffeeText = document.getElementById('footerItemCoffee');
   const coffeeIcon = document.getElementById('coffeeIcon');
@@ -860,6 +864,7 @@ function hoverCoffee() {
   });
 }
 
+// Function to handle hover effects for contact us footer item
 function hoverContactUs() {
   const contactUsText = document.getElementById('footerItemContactUs');
   const contactUsIcon = document.getElementById('contactUsIcon');
@@ -882,7 +887,7 @@ function hoverContactUs() {
   });
 }
 
-
+// Function to handle hover effects for policies footer item
 function hoverPolicies() {
   const policyText = document.getElementById('footerItemPolicies');
   const policiesIcon = document.getElementById('policiesIcon');
@@ -905,8 +910,8 @@ function hoverPolicies() {
   });
 }
 
-
-function hoverLetterboxd() {
+// Function to handle hover effects for profile footer item
+function hoverProfile() {
   const footerItemLetterboxd = document.getElementById('footerItemLetterboxd');
   const footerImage = document.querySelector('.footer-image');
 
@@ -928,6 +933,7 @@ function hoverLetterboxd() {
   });
 }
 
+// Function to handle hover effects for history header item
 function hoverHistory() {
   const historyButton = document.getElementById('displayHistoryButton');
   const historyIcon = document.getElementById('historyIcon');
@@ -939,6 +945,7 @@ function hoverHistory() {
   });
 }
 
+// Function to handle hover effects for stats header item
 function hoverStats() {
   const statsButton = document.getElementById('displayStatsButton');
   const statsIcon = document.getElementById('statsIcon');
@@ -950,6 +957,7 @@ function hoverStats() {
   });
 }
 
+// Function to handle hover effects for instructions header item
 function hoverInstructions() {
   const instructionsButton = document.getElementById('instructionsButton');
   const instructionsIcon = document.getElementById('instructionsIcon');
@@ -962,6 +970,7 @@ function hoverInstructions() {
   });
 }
 
+// Function to handle hover effects for archive header item
 function hoverArchive() {
   const archiveButton = document.getElementById('archiveButton');
   const archiveIcon = document.getElementById('archiveIcon');
@@ -974,6 +983,7 @@ function hoverArchive() {
   });
 }
 
+// Function to handle hover effects for today's movie header item
 function hoverToday() {
   const todayButton = document.getElementById('todayButton');
   const todayIcon = document.getElementById('todayIcon');
@@ -986,21 +996,19 @@ function hoverToday() {
   });
 }
 
-// Function to update the "selected" class on list items.
+// Updates the selected movie for styling
 function updateSelectedItem() {
   const items = document.querySelectorAll('.movie-list li');
   items.forEach((item, index) => {
     if (index === currentMovieListIndex) {
       item.classList.add('selected');
-      // Optionally scroll the item into view.
-      //item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     } else {
       item.classList.remove('selected');
     }
   });
 }
 
-// Attach mouseover (and click) listeners to list items so that hovering activates them.
+// Adds mouse listeners to the movie list items so hover and click events select the movie
 function addMouseListeners() {
   const items = document.querySelectorAll('.movie-list li');
   items.forEach((item, index) => {
@@ -1015,7 +1023,7 @@ function addMouseListeners() {
   });
 }
 
-// Keydown listener for keyboard navigation.
+// Keydown listener for keyboard navigation (up/down for movie selection, enter for movie submission, left/right for review navigation)
 window.addEventListener('keydown', (event) => {
   if (event.key === 'ArrowDown') {
     const items = document.querySelectorAll('.movie-list li');
@@ -1023,11 +1031,11 @@ window.addEventListener('keydown', (event) => {
     const activeElement = document.activeElement;
 
     event.preventDefault();
-    // If the search textbox is focused, select the first movie.
+    // If the search textbox is focused, select the first movie
     if (activeElement.id === 'search' && currentMovieListIndex == -1) {
       currentMovieListIndex = 0;
     } else {
-      // Otherwise, move to the next item (with wrapping).
+      // Otherwise, move to the next item (with wrapping)
       if (currentMovieListIndex < items.length - 1) {
         currentMovieListIndex++;
       }
@@ -1040,7 +1048,7 @@ window.addEventListener('keydown', (event) => {
     const activeElement = document.activeElement;
 
     event.preventDefault();
-    // Only handle ArrowUp if focus is NOT in the search box.
+    // Only change index if the search box is not focused
     if (currentMovieListIndex > 0) {
       currentMovieListIndex--;
     }
@@ -1050,11 +1058,12 @@ window.addEventListener('keydown', (event) => {
     const items = document.querySelectorAll('.movie-list li');
     if (items.length === 0) return;
     const activeElement = document.activeElement;
+    // If the search textbox is focused, select the first movie
     if (activeElement.id === 'search' && currentMovieListIndex === -1) {
       currentMovieListIndex = 0;
       updateSelectedItem();
     }
-    // Trigger a click on the currently selected movie.
+    // Select the movie if valid
     else if (currentMovieListIndex >= 0 && currentMovieListIndex < items.length) {
       items[currentMovieListIndex].click();
     }
@@ -1073,10 +1082,9 @@ window.addEventListener('keydown', (event) => {
       currentReviewIndex = currentReviewIndex - 1;
     }
   }
-
 });
 
-// Updated displayMovieList that resets the selection and attaches mouse events.
+// Display the updated movie list 
 function displayMovieList(movies) {
   const movieListElement = document.getElementById('movieList');
   movieListElement.innerHTML = '';
@@ -1086,7 +1094,7 @@ function displayMovieList(movies) {
     listItem.onclick = () => selectMovie(movie.movieID);
     movieListElement.appendChild(listItem);
   });
-  // Reset the selection index on list update.
+  // Reset the selection index on list update and add mouse listeners
   currentMovieListIndex = -1;
   addMouseListeners();
 }
@@ -1143,7 +1151,6 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
         finishGame(hasGameBeenWon(correctMovieID, globalGameStats));
       }
       else {
-        textDisplay = document.getElementById('textDisplay');
         if (archiveDate) {
           textDisplay.innerHTML = `<div id="textDisplay"><span class="message">You get 5 reviews (one at a time) to guess the movie. You can skip if you don't have a guess. Check your history and stats once you've played a few times. Have fun!</span>`;
         }
@@ -1158,7 +1165,7 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
         dateDisplay.innerHTML = `<h2>Today's movie (${formattedMovieDate})</h2>`;
       }
 
-      updateImageButtons();
+      updateReviewNumButtons();
       displayCurrentReview();
     }
     else {
@@ -1270,7 +1277,7 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
     }
 
     hoverCoffee();
-    hoverLetterboxd();
+    hoverProfile();
     hoverHistory();
     hoverStats();
     hoverInstructions();
