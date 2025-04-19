@@ -46,27 +46,27 @@
                 <!-- Buttons -->
                 <button id="todayButton" class="today-button" onclick="location.href='/'">
                     <i class="fa-solid fa-forward icon" id="todayIcon"></i>
-                    <span class="today-button-text full">Today's Movie</span>
-                    <span class="today-button-text short">Today</span>
+                    <span class="today-button-text header-full">Today's Movie</span>
+                    <span class="today-button-text header-short">Today</span>
                 </button>
 
 
                 <button id="displayStatsButton" class="display-stats-button" onclick="displayStats()">
                     <i class="fa-solid fa-chart-simple icon" id="statsIcon"></i>
-                    <span class="stats-button-text full">Your Stats</span>
-                    <span class="stats-button-text short">Stats</span>
+                    <span class="stats-button-text header-full">Your Stats</span>
+                    <span class="stats-button-text header-short">Stats</span>
                 </button>
 
                 <button id="displayHistoryButton" class="display-history-button" onclick="displayHistory()">
                     <i class="fa-solid fa-clock-rotate-left icon" id="historyIcon"></i>
-                    <span class="history-button-text full">Game History</span>
-                    <span class="history-button-text short">History</span>
+                    <span class="history-button-text header-full">Game History</span>
+                    <span class="history-button-text header-short">History</span>
                 </button>
 
                 <button id="instructionsButton" class="instructions-button" onclick="displayInstructions()">
                     <i class="fa-solid fa-question icon" id="instructionsIcon"></i>
-                    <span class="instructions-button-text full">How to Play</span>
-                    <span class="instructions-button-text short">Guide</span>
+                    <span class="instructions-button-text header-full">How to Play</span>
+                    <span class="instructions-button-text header-short">Guide</span>
                 </button>
             </div>
         </header>
@@ -107,28 +107,29 @@
         </div>
 
         <footer id="footer">
-            <i style="text-decoration: none;" href="https://buymeacoffee.com/gprojects" class="fa-solid fa-mug-hot icon"
-                id="coffeeIcon" target="_blank"></i>
-            <a id="footerItemCoffee" href="https://buymeacoffee.com/gprojects" target="_blank" class="full">Buy Me a
-                Coffee</a>
-            <a id="footerItemCoffee" href="https://buymeacoffee.com/gprojects" target="_blank" class="short">Support</a>
-
-            <a id="footerIcon" href="https://letterboxd.com/gaurava/" target="_blank">
-                <img src="/LBColorLogo.png" alt="Letterboxd Profile" class="footer-image" />
+            <a href="https://buymeacoffee.com/gprojects" target="_blank" class="footer-item" id="coffeeItem">
+                <i class="fa-solid fa-mug-hot icon" id="coffeeIcon"></i>
+                <span id="coffeeLabel" class="footer-full">Buy Me a Coffee</span>
+                <span id="coffeeLabel" class="footer-short">Support</span>
             </a>
-            <a id="footerItemLetterboxd" href="https://letterboxd.com/gaurava/" target="_blank" class="full">My
-                Letterboxd</a>
-            <a id="footerItemLetterboxd" href="https://letterboxd.com/gaurava/" target="_blank" class="short">My LB</a>
 
-            <i id="policiesIcon" style="text-decoration: none;" class="fa-solid fa-info icon"
-                onclick="displayPolicies()"></i>
-            <a id="footerItemPolicies" class="policies-button-text full" onclick="displayPolicies()">Policies</a>
-            <a id="footerItemPolicies" class="policies-button-text short" onclick="displayPolicies()">Policies</a>
+            <a href="https://letterboxd.com/gaurava/" target="_blank" class="footer-item" id="profileItem">
+                <img src="/LBColorLogo.png" alt="My Letterboxd Profile" id="profileIcon" class="footer-image"/>
+                <span id="profileLabel" class="footer-full">My Profile</span>
+                <span id="profileLabel" class="footer-short">My LB</span>
+            </a>
 
-            <i id="contactUsIcon" style="text-decoration: none;" class="fa-solid fa-paper-plane icon"
-                onclick="displayContactInfo()"></i>
-            <a id="footerItemContactUs" class="contact-button-text full" onclick="displayContactInfo()">Contact Us</a>
-            <a id="footerItemContactUs" class="contact-button-text short" onclick="displayContactInfo()">Contact</a>
+            <a class="footer-item" id="policiesItem">
+                <i class="fa-solid fa-info icon" id="policiesIcon" onclick="displayPolicies()"></i>
+                <span id="policiesLabel" class="footer-full" onclick="displayPolicies()">Policies</span>
+                <span id="policiesLabel" class="footer-short" onclick="displayPolicies()">Policies</span>
+            </a>
+
+            <a class="footer-item" id="contactItem">
+                <i class="fa-solid fa-paper-plane icon" id="contactIcon" onclick="displayContactInfo()"></i>
+                <span id="contactLabel" class="footer-full" onclick="displayContactInfo()">Contact Me</span>
+                <span id="contactLabel" class="footer-short" onclick="displayContactInfo()">Contact</span>
+            </a>
         </footer>
     </main>
     <div id="Modal" class="modal">

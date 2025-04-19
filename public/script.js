@@ -841,98 +841,6 @@ function updateReviewNumButtons() {
   currentReviewIndex = incorrectGuessCount + 1;
 }
 
-// Function to handle hover effects for coffee footer item
-function hoverCoffee() {
-  const coffeeText = document.getElementById('footerItemCoffee');
-  const coffeeIcon = document.getElementById('coffeeIcon');
-
-  // Add event listeners for hover and focus
-  coffeeText.addEventListener('pointerenter', function () {
-    coffeeIcon.classList.add('hover');// // Change to the new image
-  });
-
-  coffeeText.addEventListener('pointerleave', function () {
-    coffeeIcon.classList.remove('hover'); // Change back to the original image
-  });
-
-  coffeeIcon.addEventListener('pointerenter', function () {
-    coffeeText.classList.add('hover');// Change to the new image
-  });
-
-  coffeeIcon.addEventListener('pointerleave', function () {
-    coffeeText.classList.remove('hover'); // Change back to the original image
-  });
-}
-
-// Function to handle hover effects for contact us footer item
-function hoverContactUs() {
-  const contactUsText = document.getElementById('footerItemContactUs');
-  const contactUsIcon = document.getElementById('contactUsIcon');
-
-  // Add event listeners for hover and focus
-  contactUsText.addEventListener('pointerenter', function () {
-    contactUsIcon.classList.add('hover');// // Change to the new image
-  });
-
-  contactUsText.addEventListener('pointerleave', function () {
-    contactUsIcon.classList.remove('hover'); // Change back to the original image
-  });
-
-  contactUsIcon.addEventListener('pointerenter', function () {
-    contactUsText.classList.add('hover');// Change to the new image
-  });
-
-  contactUsIcon.addEventListener('pointerleave', function () {
-    contactUsText.classList.remove('hover'); // Change back to the original image
-  });
-}
-
-// Function to handle hover effects for policies footer item
-function hoverPolicies() {
-  const policyText = document.getElementById('footerItemPolicies');
-  const policiesIcon = document.getElementById('policiesIcon');
-
-  // Add event listeners for hover and focus
-  policyText.addEventListener('pointerenter', function () {
-    policiesIcon.classList.add('hover');// // Change to the new image
-  });
-
-  policyText.addEventListener('pointerleave', function () {
-    policiesIcon.classList.remove('hover'); // Change back to the original image
-  });
-
-  policiesIcon.addEventListener('pointerenter', function () {
-    policyText.classList.add('hover');// Change to the new image
-  });
-
-  policiesIcon.addEventListener('pointerleave', function () {
-    policyText.classList.remove('hover'); // Change back to the original image
-  });
-}
-
-// Function to handle hover effects for profile footer item
-function hoverProfile() {
-  const footerItemLetterboxd = document.getElementById('footerItemLetterboxd');
-  const footerImage = document.querySelector('.footer-image');
-
-  // Add event listeners for hover and focus
-  footerItemLetterboxd.addEventListener('pointerenter', function () {
-    footerImage.src = '/LBBWLogo.png'; // Change to the new image
-  });
-
-  footerItemLetterboxd.addEventListener('pointerleave', function () {
-    footerImage.src = '/LBColorLogo.png'; // Change back to the original image
-  });
-
-  footerImage.addEventListener('pointerenter', function () {
-    footerItemLetterboxd.classList.add('hover');// Change to the new image
-  });
-
-  footerImage.addEventListener('pointerleave', function () {
-    footerItemLetterboxd.classList.remove('hover'); // Change back to the original image
-  });
-}
-
 // Function to handle hover effects for history header item
 function hoverHistory() {
   const historyButton = document.getElementById('displayHistoryButton');
@@ -1276,13 +1184,9 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
 
     }
 
-    hoverCoffee();
-    hoverProfile();
     hoverHistory();
     hoverStats();
     hoverInstructions();
-    hoverPolicies();
-    hoverContactUs();
     if (!isArchivePage) {
       hoverArchive();
     }
