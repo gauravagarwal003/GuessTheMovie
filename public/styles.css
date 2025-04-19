@@ -535,7 +535,53 @@ a:focus #profileIcon {
 .footer-short {
   white-space: nowrap;    /* prevent wrapping within each label */
 }
-
+@keyframes spin-reverse {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(-360deg); }
+  }
+  .header-history:hover .icon {
+    animation: spin-reverse 1.5s infinite linear;
+  }
+  
+  .header-stats .icon {
+    animation: none;
+    transform: rotateY(0deg);
+  }
+  
+  /* when hovered, spin 0→180 then 180→0, over and over */
+  .header-stats:hover .icon {
+    animation: flip 0.6s linear infinite alternate;
+  }
+  
+  /* your flip keyframes stay the same */
+  @keyframes flip {
+    from { transform: rotateY(0deg); }
+    to   { transform: rotateY(180deg); }
+  }
+    
+  /* Instructions bounce */
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40%                  { transform: translateY(-10px); }
+    60%                  { transform: translateY(-5px); }
+  }
+  .header-instructions:hover .icon {
+    animation: bounce 1s ease infinite;
+  }
+  
+  /* Archive beat */
+  @keyframes beat {
+    0%, 100% { transform: scale(0.9); }
+    50%      { transform: scale(1.1); }
+  }
+  .header-archive:hover .icon {
+    animation: beat 0.8s ease infinite;
+  }
+  
+  .header-today:hover .icon {
+    animation: beat 0.8s ease infinite;
+  }
+  
 #footerItemLetterboxd {
     color: var(--LOrange) !important;
     padding-left: 0.3%;

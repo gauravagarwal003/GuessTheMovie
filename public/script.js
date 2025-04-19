@@ -841,69 +841,6 @@ function updateReviewNumButtons() {
   currentReviewIndex = incorrectGuessCount + 1;
 }
 
-// Function to handle hover effects for history header item
-function hoverHistory() {
-  const historyButton = document.getElementById('displayHistoryButton');
-  const historyIcon = document.getElementById('historyIcon');
-  historyButton.addEventListener('pointerenter', () => {
-    historyIcon.classList.add('fa-spin', 'fa-spin-reverse');
-  });
-  historyButton.addEventListener('pointerleave', () => {
-    historyIcon.classList.remove('fa-spin', 'fa-spin-reverse');
-  });
-}
-
-// Function to handle hover effects for stats header item
-function hoverStats() {
-  const statsButton = document.getElementById('displayStatsButton');
-  const statsIcon = document.getElementById('statsIcon');
-  statsButton.addEventListener('pointerenter', () => {
-    statsIcon.classList.add('fa-flip');
-  });
-  statsButton.addEventListener('pointerleave', () => {
-    statsIcon.classList.remove('fa-flip');
-  });
-}
-
-// Function to handle hover effects for instructions header item
-function hoverInstructions() {
-  const instructionsButton = document.getElementById('instructionsButton');
-  const instructionsIcon = document.getElementById('instructionsIcon');
-
-  instructionsButton.addEventListener('pointerenter', () => {
-    instructionsIcon.classList.add('fa-bounce');
-  });
-  instructionsButton.addEventListener('pointerleave', () => {
-    instructionsIcon.classList.remove('fa-bounce');
-  });
-}
-
-// Function to handle hover effects for archive header item
-function hoverArchive() {
-  const archiveButton = document.getElementById('archiveButton');
-  const archiveIcon = document.getElementById('archiveIcon');
-
-  archiveButton.addEventListener('pointerenter', () => {
-    archiveIcon.classList.add('fa-beat');
-  });
-  archiveButton.addEventListener('pointerleave', () => {
-    archiveIcon.classList.remove('fa-beat');
-  });
-}
-
-// Function to handle hover effects for today's movie header item
-function hoverToday() {
-  const todayButton = document.getElementById('todayButton');
-  const todayIcon = document.getElementById('todayIcon');
-
-  todayButton.addEventListener('pointerenter', () => {
-    todayIcon.classList.add('fa-beat');
-  });
-  todayButton.addEventListener('pointerleave', () => {
-    todayIcon.classList.remove('fa-beat');
-  });
-}
-
 // Updates the selected movie for styling
 function updateSelectedItem() {
   const items = document.querySelectorAll('.movie-list li');
@@ -1183,15 +1120,6 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
         .catch(err => console.error(err));
 
     }
-
-    hoverHistory();
-    hoverStats();
-    hoverInstructions();
-    if (!isArchivePage) {
-      hoverArchive();
-    }
-    hoverToday();
-
   }
   catch (error) {
     console.error('Error during initialization:', error);
