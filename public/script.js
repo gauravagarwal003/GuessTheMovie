@@ -469,6 +469,7 @@ function selectMovie(guessedMovieID) {
   
   if (isCorrectMovie) {
     // Won game
+    collectedGuesses.push(guessedMovie.movieID);
     finishGame(true);
   } else {
     // Incorrect guess
