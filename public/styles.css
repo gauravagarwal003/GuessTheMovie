@@ -21,10 +21,6 @@ body {
     overscroll-behavior: none;
 }
 
-.middle_footer {
-    max-width: 720px;
-}
-
 #header {
     background: none;
     background: var(--LBackground);
@@ -453,21 +449,27 @@ body {
 
 #coffeeItem {
     display: inline-flex;
-    align-items: center;    /* Vertical alignment */
-    gap: 3px;              /* Space between icon and text */
+    align-items: center;
+    /* Vertical alignment */
+    gap: 3px;
+    /* Space between icon and text */
     padding-right: 10px;
-    text-decoration: none; /* Removes default anchor underline */
+    text-decoration: none;
+    /* Removes default anchor underline */
 }
 
 #coffeeLabel {
     color: rgb(165, 135, 110);
-    text-decoration: underline; /* Underline only the text span */
+    text-decoration: underline;
+    /* Underline only the text span */
 }
 
 #coffeeIcon {
-    text-decoration: none !important; /* Ensures icon remains unlined */
+    text-decoration: none !important;
+    /* Ensures icon remains unlined */
     color: rgb(165, 135, 110);
 }
+
 #policiesLabel {
     color: var(--LGreen);
     text-decoration: underline;
@@ -480,8 +482,10 @@ body {
 
 #policiesItem {
     display: inline-flex;
-    align-items: center;    /* vertical‑center icon + text */
-    gap: 3px;             /* space between icon and text */
+    align-items: center;
+    /* vertical‑center icon + text */
+    gap: 3px;
+    /* space between icon and text */
     padding-right: 10px;
 }
 
@@ -500,8 +504,10 @@ body {
 
 #contactItem {
     display: inline-flex;
-    align-items: center;    /* vertical‑center icon + text */
-    gap: 3px;             /* space between icon and text */
+    align-items: center;
+    /* vertical‑center icon + text */
+    gap: 3px;
+    /* space between icon and text */
     padding-right: 10px;
 }
 
@@ -526,72 +532,97 @@ a:focus #profileIcon {
 
 #profileItem {
     display: inline-flex;
-    align-items: center;    /* vertical‑center icon + text */
-    gap: 3px;             /* space between icon and text */
+    align-items: center;
+    /* vertical‑center icon + text */
+    gap: 3px;
+    /* space between icon and text */
     padding-right: 10px;
 }
 
 .footer-full,
 .footer-short {
-  white-space: nowrap;    /* prevent wrapping within each label */
-}
-@keyframes spin-reverse {
-    from { transform: rotate(0deg); }
-    to   { transform: rotate(-360deg); }
-  }
-  .header-history:hover .icon {
-    animation: spin-reverse 1.5s infinite linear;
-  }
-  
-  .header-stats .icon {
-    animation: none;
-    transform: rotateY(0deg);
-  }
-  
-  /* when hovered, spin 0→180 then 180→0, over and over */
-  .header-stats:hover .icon {
-    animation: flip 0.6s linear infinite alternate;
-  }
-  
-  /* your flip keyframes stay the same */
-  @keyframes flip {
-    from { transform: rotateY(0deg); }
-    to   { transform: rotateY(180deg); }
-  }
-    
-  /* Instructions bounce */
-  @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-    40%                  { transform: translateY(-10px); }
-    60%                  { transform: translateY(-5px); }
-  }
-  .header-instructions:hover .icon {
-    animation: bounce 1s ease infinite;
-  }
-  
-  /* Archive beat */
-  @keyframes beat {
-    0%, 100% { transform: scale(0.9); }
-    50%      { transform: scale(1.1); }
-  }
-  .header-archive:hover .icon {
-    animation: beat 0.8s ease infinite;
-  }
-  
-  .header-today:hover .icon {
-    animation: beat 0.8s ease infinite;
-  }
-  
-#footerItemLetterboxd {
-    color: var(--LOrange) !important;
-    padding-left: 0.3%;
-    padding-right: 1.5%;
-    text-decoration: underline;
+    white-space: nowrap;
+    /* prevent wrapping within each label */
 }
 
-#footerItemLetterboxd:hover,
-#footerItemLetterboxd.hover {
-    color: var(--bonewhite) !important;
+@keyframes spin-reverse {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(-360deg);
+    }
+}
+
+.header-history:hover .icon {
+    animation: spin-reverse 1.5s infinite linear;
+}
+
+.header-stats .icon {
+    animation: none;
+    transform: rotateY(0deg);
+}
+
+/* when hovered, spin 0→180 then 180→0, over and over */
+.header-stats:hover .icon {
+    animation: flip 0.6s linear infinite alternate;
+}
+
+/* your flip keyframes stay the same */
+@keyframes flip {
+    from {
+        transform: rotateY(0deg);
+    }
+
+    to {
+        transform: rotateY(180deg);
+    }
+}
+
+/* Instructions bounce */
+@keyframes bounce {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-10px);
+    }
+
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+.header-instructions:hover .icon {
+    animation: bounce 1s ease infinite;
+}
+
+/* Archive beat */
+@keyframes beat {
+
+    0%,
+    100% {
+        transform: scale(0.9);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.header-archive:hover .icon {
+    animation: beat 0.8s ease infinite;
+}
+
+.header-today:hover .icon {
+    animation: beat 0.8s ease infinite;
 }
 
 #footerIcon {
@@ -631,11 +662,12 @@ a:focus #profileIcon {
     max-width: 100%;
     height: auto;
 }
-.footer-item:hover .icon{
+
+.footer-item:hover .icon {
     color: var(--bonewhite) !important;
 }
 
-.footer-item:hover span{
+.footer-item:hover span {
     color: var(--bonewhite) !important;
 }
 
@@ -901,10 +933,11 @@ a:focus #profileIcon {
     padding: 5px;
 }
 
-@media (max-width: 460px){
+@media (max-width: 460px) {
     .footer-full {
         display: none !important;
     }
+
     .footer-short {
         display: inline !important;
     }
