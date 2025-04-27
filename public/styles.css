@@ -13,6 +13,7 @@
     --inactiveButtonBackground: transparent;
     --inactiveButtonText: rgb(150, 170, 190);
     --movieHoverBackground: var(--LBackground);
+    --coffeeColor: var(--coffeeColor);
 }
 
 html,
@@ -174,7 +175,7 @@ body {
 
 .archive-button:hover,
 .today-button:hover {
-    color: rgb(165, 135, 110) !important;
+    color: var(--coffeeColor) var(--coffeeColor) !important;
 }
 
 .active-stats {
@@ -197,7 +198,7 @@ body {
 .active-archive,
 .active-today {
     text-decoration: underline;
-    color: rgb(165, 135, 110) !important;
+    color: var(--coffeeColor) !important;
 }
 
 .active-button {
@@ -459,7 +460,7 @@ body {
 }
 
 #coffeeLabel {
-    color: rgb(165, 135, 110);
+    color: var(--coffeeColor);
     text-decoration: underline;
     /* Underline only the text span */
 }
@@ -467,7 +468,7 @@ body {
 #coffeeIcon {
     text-decoration: none !important;
     /* Ensures icon remains unlined */
-    color: rgb(165, 135, 110);
+    color: var(--coffeeColor);
 }
 
 #policiesLabel {
