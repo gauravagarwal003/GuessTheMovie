@@ -13,7 +13,7 @@
     --inactiveButtonBackground: transparent;
     --inactiveButtonText: rgb(150, 170, 190);
     --movieHoverBackground: var(--LBackground);
-    --coffeeColor: var(--coffeeColor);
+    --coffeeColor: rgb(165, 135, 110);
 }
 
 html,
