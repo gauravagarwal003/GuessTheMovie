@@ -175,7 +175,7 @@ body {
 
 .archive-button:hover,
 .today-button:hover {
-    color: var(--coffeeColor) var(--coffeeColor) !important;
+    color: var(--coffeeColor) !important;
 }
 
 .active-stats {
