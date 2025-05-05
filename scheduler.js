@@ -192,7 +192,7 @@ async function downloadMoviesData() {
   }
 }
 
-cron.schedule('0 21 * * *', async () => {
+cron.schedule('31 10 * * *', async () => {
   console.log("Cron job triggered at " + new Date().toLocaleString());
   try {
     await downloadMoviesData();
