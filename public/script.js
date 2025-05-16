@@ -440,27 +440,44 @@ function displayStats() {
   };
 }
 
-// Filter movies based on user's input 
 function filterMovies(event) {
-  const allowedRegex = /^[a-zA-Z0-9 !@#$%ﬂ&*()_+\-=\~`{}\|:"<>?\[\]\\;',.\/]$/;
+  const allowedRegex = /^[a-zA-Z0-9 !@#$ﬂ&*()_+\-=\~`{}|:"<>?$$\\;',./]$/;
 
   // Only process if the key pressed matches allowed characters
   if (event.key !== undefined && event.key !== "Backspace" && !allowedRegex.test(event.key)) {
     return;
   }
 
-  const searchQuery = document.getElementById('search').value.toLowerCase();
+  const searchQuery = document.getElementById('search').value.trim().toLowerCase();
 
   if (searchQuery === '') {
     clearSearchAndMovieList();
     return;
   }
+
+  // Filter movies based on exact match first, then by popularity
   const filteredMovies = allMovies.filter(movie => {
-    const regex = new RegExp(`\\b${searchQuery}`, 'i');
-    return regex.test(movie.title.toLowerCase());
+    const movieTitle = movie.title.toLowerCase();
+    return movieTitle === searchQuery || movieTitle.includes(searchQuery);
   });
+
+  // Sort by exact match first, then by popularity
+  filteredMovies.sort((a, b) => {
+    const isExactMatchA = a.title.toLowerCase() === searchQuery;
+    const isExactMatchB = b.title.toLowerCase() === searchQuery;
+
+    // Prioritize exact matches
+    if (isExactMatchA !== isExactMatchB) {
+      return isExactMatchA ? -1 : 1;
+    }
+
+    // If both are exact or both are partial, sort by popularity
+    return b.popularity - a.popularity;
+  });
+
   displayMovieList(filteredMovies);
 }
+
 
 // Update game based on the movie the user selected
 function selectMovie(guessedMovieID) {
