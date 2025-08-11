@@ -1089,16 +1089,17 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
               let dateStr = year + "-" + monthStr + "-" + dayStr;
 
               // If there is a movie for this date, create a clickable link; otherwise, create plain text.
-              if (movieDates.has(dateStr)) {
-                let link = document.createElement("a");
-                link.href = "/archive/" + dateStr;
-                link.textContent = day;  // Display the day number
-                cell.appendChild(link);
-              } else {
+                if (movieDates.has(dateStr)) {
+                cell.classList.add("clickable-cell");
+                cell.onclick = function () {
+                  window.location.href = "/archive/" + dateStr;
+                };
+                cell.textContent = day; // Display the day number
+                } else {
                 let span = document.createElement("span");
                 span.textContent = day;
                 cell.appendChild(span);
-              }
+                }
 
               // Set cell color based on movie availability and user completion
               if (movieDates.has(dateStr)) {
