@@ -23,6 +23,18 @@ let archiveDate = (pathSegments[0] === 'archive' && pathSegments.length > 1)
   ? pathSegments[1]
   : null;
 
+// Prevent archiveDate from being set if it's the latest day (today)
+if (archiveDate) {
+  const today = new Date();
+  const yyyy = today.getFullYear();
+  const mm = String(today.getMonth() + 1).padStart(2, '0');
+  const dd = String(today.getDate()).padStart(2, '0');
+  const todayStr = `${yyyy}-${mm}-${dd}`;
+  if (archiveDate === todayStr) {
+    archiveDate = null;
+  }
+}
+
 // Update the title if archive movie
 if (archiveDate) {
   document.title = "Guess The Movie | Archive";
@@ -1091,9 +1103,21 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
               // If there is a movie for this date, create a clickable link; otherwise, create plain text.
                 if (movieDates.has(dateStr)) {
                 cell.classList.add("clickable-cell");
-                cell.onclick = function () {
-                  window.location.href = "/archive/" + dateStr;
-                };
+                // Only show clickable if the date isn't today
+                const today = new Date();
+                const yyyy = today.getFullYear();
+                const mm = String(today.getMonth() + 1).padStart(2, '0');
+                const dd = String(today.getDate()).padStart(2, '0');
+                const todayStr = `${yyyy}-${mm}-${dd}`;
+                if (dateStr !== todayStr) {
+                  cell.onclick = function () {
+                    window.location.href = "/archive/" + dateStr;
+                  };
+                } else {
+                  cell.onclick = function () {
+                    window.location.href = "/";
+                  };
+                }
                 cell.textContent = day; // Display the day number
                 } else {
                 let span = document.createElement("span");
