@@ -352,6 +352,9 @@ body {
     max-width: fit-content;
     margin: auto;
     text-align: center;
+  max-height: 400px;   /* or whatever height looks good */
+  overflow-y: auto;    /* adds scroll bar if list is taller */
+
 }
 
 .movie-list li {

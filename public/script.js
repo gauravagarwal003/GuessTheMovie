@@ -23,6 +23,17 @@ let archiveDate = (pathSegments[0] === 'archive' && pathSegments.length > 1)
   ? pathSegments[1]
   : null;
 
+// Initialize Fuse with options
+let fuse;
+function initializeFuse() {
+  const options = {
+    keys: ["title"],
+    threshold: 0.4, // lower = stricter, higher = fuzzier
+    includeScore: true,
+  };
+  fuse = new Fuse(allMovies, options);
+}
+
 // Prevent archiveDate from being set if it's the latest day (today)
 if (archiveDate) {
   const today = new Date();
@@ -42,7 +53,7 @@ if (archiveDate) {
 
 // Global constants for the game
 const SKIPPED_GUESS = '__SKIPPED__'; // Sentinel value to indicate a skipped guess
-const MAX_NUM_MOVIES_TO_SHOW = 10;
+const MAX_NUM_MOVIES_TO_SHOW = 50;
 const SELECTED_COLUMNS = ['title', 'year', 'movieID', 'posterLink']; // Columns to select from the CSV file
 const MAX_GUESSES = 5;
 
@@ -460,32 +471,20 @@ function filterMovies(event) {
     return;
   }
 
-  const searchQuery = document.getElementById('search').value.trim().toLowerCase();
+  const searchQuery = document.getElementById("search").value.trim().toLowerCase();
 
-  if (searchQuery === '') {
+  if (searchQuery === "") {
     clearSearchAndMovieList();
     return;
   }
 
-  // Filter movies based on exact match first, then by popularity
-  const filteredMovies = allMovies.filter(movie => {
-    const movieTitle = movie.title.toLowerCase();
-    return movieTitle === searchQuery || movieTitle.includes(searchQuery);
-  });
+  // Use Fuse for fuzzy search
+  const results = fuse.search(searchQuery);
 
-  // Sort by exact match first, then by popularity
-  filteredMovies.sort((a, b) => {
-    const isExactMatchA = a.title.toLowerCase() === searchQuery;
-    const isExactMatchB = b.title.toLowerCase() === searchQuery;
-
-    // Prioritize exact matches
-    if (isExactMatchA !== isExactMatchB) {
-      return isExactMatchA ? -1 : 1;
-    }
-
-    // If both are exact or both are partial, sort by popularity
-    return b.popularity - a.popularity;
-  });
+  // Map back to original movie objects
+  const filteredMovies = results
+    .slice(0, MAX_NUM_MOVIES_TO_SHOW)
+    .map(result => result.item);
 
   displayMovieList(filteredMovies);
 }
@@ -995,6 +994,7 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
           );
       }
     });
+    initializeFuse();
     if (!isArchivePage) {
       let response = '';
       if (archiveDate) {
