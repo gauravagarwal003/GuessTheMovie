@@ -107,9 +107,15 @@ body {
     margin-bottom: 7px;
 }
 
-.history-link {
-    color: var(--currentBackground);
-    text-decoration: none;
+.text-link:hover {
+    color: var(--bonewhite);
+} 
+.text-link {
+    color: var(--LBlue);
+}
+
+.history-about-subheading{
+    color: #FFBFAF;
 }
 
 /* Adjust logo */
@@ -154,54 +160,6 @@ body {
 
 #aboutButton.active-header-nav {
     color: var(--LBlue) !important;
-}
-
-.modal {
-    display: none;
-    /* Hidden by default */
-    position: fixed;
-    z-index: 1000;
-    /* Make sure it's on top */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    /* Enable scroll if needed */
-    background-color: rgba(10, 10, 10, 0.65);
-    /* Black with opacity */
-}
-
-.modal-content {
-    color: var(--currentBackground);
-    background-color: var(--bonewhite);
-    margin: 10% auto;
-    /* 10% from top and centered */
-    padding: 20px;
-    max-width: 50%;
-    max-height: 50%;
-    border-radius: 5px;
-    position: relative;
-    text-align: center;
-    overflow-y: auto;
-}
-
-.modal-content::-webkit-scrollbar {
-    width: 8px;
-    /* Adjust width */
-}
-
-.modal-content::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0);
-    /* Slight transparency on hover */
-    border: 3px solid var(--LBackground);
-    border-radius: 5px;
-}
-
-.modal-content::-webkit-scrollbar-thumb:hover {
-    background: var(--LBackground);
-    /* Scrollbar color */
-    border-radius: 5px;
 }
 
 .tab-nav {
@@ -331,13 +289,15 @@ body {
     text-align: center;
 }
 
-.movie-link {
-    color: var(--bonewhite);
-}
-
 #textDisplay {
     margin-top: 10px;
     font-size: 110%;
+    max-width: 720px;
+    color: var(--bonewhite);
+}
+
+#aboutBody, #historyBody {
+    margin-top: 10px;
     max-width: 720px;
     color: var(--bonewhite);
 }
@@ -379,6 +339,11 @@ body {
 #content-wrap {
     padding-bottom: 2.5rem;
     /* MUST BE SAME AS HEIGHT OF FOOTER */
+}
+
+.body-wrapped, .history-wrapped{
+    display: flex;
+    justify-content: center;
 }
 
 #footer {
@@ -432,16 +397,6 @@ body {
     color: var(--LGreen);
 }
 
-#policiesItem {
-    display: inline-flex;
-    align-items: center;
-    /* vertical‑center icon + text */
-    gap: 3px;
-    /* space between icon and text */
-    padding-right: 10px;
-}
-
-
 
 #contactLabel {
     color: var(--LBlue);
@@ -452,15 +407,6 @@ body {
     text-decoration: none !important;
     color: var(--LBlue);
     margin-top: 3px;
-}
-
-#contactItem {
-    display: inline-flex;
-    align-items: center;
-    /* vertical‑center icon + text */
-    gap: 3px;
-    /* space between icon and text */
-    padding-right: 10px;
 }
 
 
@@ -485,10 +431,7 @@ a:focus #profileIcon {
 #profileItem {
     display: inline-flex;
     align-items: center;
-    /* vertical‑center icon + text */
     gap: 3px;
-    /* space between icon and text */
-    padding-right: 10px;
 }
 
 .footer-full,
@@ -927,3 +870,40 @@ a:focus #profileIcon {
 
 
 }
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(10, 10, 10, 0.65);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 10% auto;
+    padding: 20px;
+    max-width: 50%;
+    max-height: 50%;
+    border-radius: 5px;
+    position: relative;
+    text-align: center;
+    overflow-y: auto;
+}
+.close-button {
+    color: black;
+    float: right;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.close-button:hover {
+    opacity: 0.5;
+}
+
