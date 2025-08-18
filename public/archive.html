@@ -65,14 +65,12 @@
                 <button id="aboutButton" class="header-nav" onclick="location.href='/about'">
                     <i class="fa-solid fa-address-card icon" id="aboutIcon"></i>
                     <span class="about-button-text header-full">About & Policies</span>
-                    <span class="about-button-text header-short">About Us</span>
+                    <span class="about-button-text header-short">About Me</span>
                 </button>
             </div>
         </header>
 
         <div id="content-wrap">
-
-
             <!-- Calendar container -->
             <div id="calendar-container">
                 <div id="calendar-header">
@@ -113,32 +111,15 @@
             </a>
 
             <a href="https://letterboxd.com/gaurava/" target="_blank" class="footer-item" id="profileItem">
-                <img src="/LBColorLogo.png" alt="My Letterboxd Profile" id="profileIcon" class="footer-image"/>
+                <img src="/LBColorLogo.png" alt="My Letterboxd Profile" id="profileIcon" class="footer-image" />
                 <span id="profileLabel" class="footer-full">My Profile</span>
                 <span id="profileLabel" class="footer-short">My LB</span>
             </a>
-
-            <a class="footer-item" id="policiesItem">
-                <i class="fa-solid fa-info icon" id="policiesIcon" onclick="displayPolicies()"></i>
-                <span id="policiesLabel" class="footer-full" onclick="displayPolicies()">Policies</span>
-                <span id="policiesLabel" class="footer-short" onclick="displayPolicies()">Policies</span>
-            </a>
-
-            <a class="footer-item" id="contactItem">
-                <i class="fa-solid fa-paper-plane icon" id="contactIcon" onclick="displayContactInfo()"></i>
-                <span id="contactLabel" class="footer-full" onclick="displayContactInfo()">Contact Me</span>
-                <span id="contactLabel" class="footer-short" onclick="displayContactInfo()">Contact</span>
-            </a>
         </footer>
     </main>
-    <div id="Modal" class="modal">
-        <div class="modal-content">
-            <span id="closeModal" class="close-button">&times;</span>
-            <div id="modalContent"></div>
-        </div>
-    </div>
 
-            <script type="module" src="/script.js"></script>
+    <script src="/common.js"></script>
+    <script src="/archive.js"></script>
 </body>
 
 </html>
