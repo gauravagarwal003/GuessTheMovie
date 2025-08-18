@@ -94,8 +94,8 @@ if (process.env.NODE_ENV === 'production') {
 
 function sendIndex(res) {
   const file = process.env.NODE_ENV === 'production'
-    ? path.join(__dirname, 'dist', 'index.html')
-    : path.join(__dirname, 'index.html');
+    ? path.join(__dirname, 'dist', 'today.html')
+    : path.join(__dirname, 'today.html');
   res.sendFile(file);
 }
 
