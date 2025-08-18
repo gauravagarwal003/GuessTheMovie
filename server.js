@@ -121,6 +121,20 @@ app.get('/archive', (req, res) => {
   res.sendFile(file);
 });
 
+app.get('/about', (req, res) => {
+  const file = process.env.NODE_ENV === 'prod`suction'
+    ? path.join(__dirname, 'dist', 'about.html')
+    : path.join(__dirname, 'public', 'about.html');
+  res.sendFile(file);
+});
+
+app.get('/history', (req, res) => {
+  const file = process.env.NODE_ENV === 'production'
+    ? path.join(__dirname, 'dist', 'history.html')
+    : path.join(__dirname, 'public', 'history.html');
+  res.sendFile(file);
+});
+
 // 3) Archive by date
 app.get('/archive/:date', (req, res) => {
   const { date } = req.params;

@@ -1,3 +1,20 @@
+let pageType;
+let latestDate;
+const res = await fetch("/api/get-movie");
+if (!res.ok) throw new Error("Failed to fetch movie");
+const data = await res.json();
+latestDate = data.date; 
+
+let gameTypeArray = window.location.pathname.split('/').filter(Boolean);
+let gameType;
+if (gameTypeArray.length === 0) {
+  gameType = 'today';
+}
+else{
+  gameType = gameTypeArray[0];
+}
+console.log(gameType);
+
 // Global variables and constants
 let gameOver = false; // Indicates if the game is over
 let gameWon = false; // Indicates if the game was won
@@ -208,8 +225,8 @@ function setActiveButton(buttonID) {
   if (buttonID == "displayStatsButton") {
     document.getElementById('displayStatsButton').classList.add("active-stats");
   }
-  else if (buttonID == "displayHistoryButton") {
-    document.getElementById('displayHistoryButton').classList.add("active-history");
+  else if (buttonID == "historyStatsButton") {
+    document.getElementById('historyStatsButton').classList.add("active-history");
   }
   else if (buttonID == "instructionsButton") {
     document.getElementById('instructionsButton').classList.add("active-instructions");
@@ -227,8 +244,8 @@ function deactivateButton(buttonID) {
   if (buttonID == "displayStatsButton") {
     document.getElementById('displayStatsButton').classList.remove("active-stats");
   }
-  else if (buttonID == "displayHistoryButton") {
-    document.getElementById('displayHistoryButton').classList.remove("active-history");
+  else if (buttonID == "historyStatsButton") {
+    document.getElementById('historyStatsButton').classList.remove("active-history");
   }
   else if (buttonID == "instructionsButton") {
     document.getElementById('instructionsButton').classList.remove("active-instructions");
@@ -385,7 +402,7 @@ function displayHistory() {
       modalContentDiv.innerHTML += generateGameHTML(game);
     }
   }
-  setActiveButton("displayHistoryButton");
+  setActiveButton("historyStatsButton");
 
   // Display the modal
   const modal = document.getElementById('Modal');
@@ -394,12 +411,12 @@ function displayHistory() {
   // If x button is clicked or outside of modal is clicked, close modal
   document.getElementById('closeModal').onclick = function () {
     modal.style.display = "none";
-    deactivateButton("displayHistoryButton");
+    deactivateButton("historyStatsButton");
   };
   window.onclick = function (event) {
     if (event.target === modal) {
       modal.style.display = "none";
-      deactivateButton("displayHistoryButton");
+      deactivateButton("historyStatsButton");
     }
   };
 }
@@ -1001,7 +1018,6 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
         response = await fetch('/api/get-movie?date=' + archiveDate);
       }
       else if (!isArchivePage) {
-        document.getElementById('todayButton').style.display = 'none';
         response = await fetch('/api/get-movie');
       }
 

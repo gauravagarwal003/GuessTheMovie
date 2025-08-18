@@ -46,29 +46,28 @@
                 <img src="/logo_and_text.png" alt="Guess the Movie Logo" class="logo">
 
                 <!-- Buttons -->
-                <button id="todayButton" class="today-button header‐item header-today" onclick="location.href='/'">
+                <button id="todayButton" class="header-nav" onclick="location.href='/'">
                     <i class="fa-solid fa-forward icon" id="todayIcon"></i>
                     <span class="today-button-text header-full">Today's Movie</span>
                     <span class="today-button-text header-short">Today</span>
                 </button>
 
-
-                <button id="displayStatsButton" class="display-stats-button header‐item header-stats" onclick="displayStats()">
-                    <i class="fa-solid fa-chart-simple icon" id="statsIcon"></i>
-                    <span class="stats-button-text header-full">Your Stats</span>
-                    <span class="stats-button-text header-short">Stats</span>
+                <button id="archiveButton" class="header-nav active-header-nav" onclick="location.href='/archive'">
+                    <i class="fa-solid fa-box-archive icon" id="archiveIcon"></i>
+                    <span class="archive-button-text header-full">Past Movies</span>
+                    <span class="archive-button-text header-short">Archive</span>
                 </button>
 
-                <button id="displayHistoryButton" class="display-history-button header‐item header-history" onclick="displayHistory()">
+                <button id="historyStatsButton" class="header-nav" onclick="location.href='/history'">
                     <i class="fa-solid fa-clock-rotate-left icon" id="historyIcon"></i>
-                    <span class="history-button-text header-full">Game History</span>
+                    <span class="history-button-text header-full">History & Stats</span>
                     <span class="history-button-text header-short">History</span>
                 </button>
 
-                <button id="instructionsButton" class="instructions-button header‐item header-instructions" onclick="displayInstructions()">
-                    <i class="fa-solid fa-question icon" id="instructionsIcon"></i>
-                    <span class="instructions-button-text header-full">How to Play</span>
-                    <span class="instructions-button-text header-short">Guide</span>
+                <button id="aboutButton" class="header-nav" onclick="location.href='/about'">
+                    <i class="fa-solid fa-address-card icon" id="aboutIcon"></i>
+                    <span class="about-button-text header-full">About & Policies</span>
+                    <span class="about-button-text header-short">About Us</span>
                 </button>
             </div>
         </header>
@@ -141,7 +140,7 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+            <script type="module" src="/script.js"></script>
 </body>
 
 </html>

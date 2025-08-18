@@ -64,23 +64,7 @@ body {
         gap: 1%;
     }
 
-    #displayHistoryButton {
-        padding: 0;
-    }
-
-    #todayButton {
-        padding: 0;
-    }
-
-    #archiveButton {
-        padding: 0;
-    }
-
-    #displayStatsButton {
-        padding: 0;
-    }
-
-    #instructionsButton {
+    .header-nav {
         padding: 0;
     }
 
@@ -148,11 +132,7 @@ body {
 }
 
 /* Button styling */
-.display-stats-button,
-.display-history-button,
-.instructions-button,
-.archive-button,
-.today-button {
+.header-nav {
     background: transparent;
     color: var(--bonewhite);
     font-size: 1.2rem;
@@ -160,53 +140,21 @@ body {
     border: none;
 }
 
-.display-stats-button:hover {
-    color: var(--LOrange) !important;
-}
-
-.display-history-button:hover {
-    color: var(--LGreen) !important;
-
-}
-
-.instructions-button:hover {
-    color: var(--LBlue) !important;
-}
-
-.archive-button:hover,
-.today-button:hover {
+#todayButton.active-header-nav {
     color: var(--coffeeColor) !important;
 }
 
-.active-stats {
-    text-decoration: underline;
+#archiveButton.active-header-nav {
     color: var(--LOrange) !important;
-
 }
 
-.active-history {
-    text-decoration: underline;
+#historyStatsButton.active-header-nav {
     color: var(--LGreen) !important;
 }
 
-
-.active-instructions {
-    text-decoration: underline;
+#aboutButton.active-header-nav {
     color: var(--LBlue) !important;
 }
-
-.active-archive,
-.active-today {
-    text-decoration: underline;
-    color: var(--coffeeColor) !important;
-}
-
-.active-button {
-    text-decoration: underline;
-    font-weight: bold;
-    opacity: 1 !important;
-}
-
 
 .modal {
     display: none;
@@ -559,17 +507,12 @@ a:focus #profileIcon {
     }
 }
 
-.header-history:hover .icon {
+#historyStatsButton:hover .icon {
     animation: spin-reverse 1.5s infinite linear;
 }
 
-.header-stats .icon {
-    animation: none;
-    transform: rotateY(0deg);
-}
-
 /* when hovered, spin 0→180 then 180→0, over and over */
-.header-stats:hover .icon {
+#archiveButton:hover .icon {
     animation: flip 0.6s linear infinite alternate;
 }
 
@@ -604,7 +547,7 @@ a:focus #profileIcon {
     }
 }
 
-.header-instructions:hover .icon {
+#aboutButton:hover .icon {
     animation: bounce 1s ease infinite;
 }
 
@@ -621,11 +564,7 @@ a:focus #profileIcon {
     }
 }
 
-.header-archive:hover .icon {
-    animation: beat 0.8s ease infinite;
-}
-
-.header-today:hover .icon {
+#todayButton:hover .icon {
     animation: beat 0.8s ease infinite;
 }
 
