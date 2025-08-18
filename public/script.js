@@ -1,20 +1,3 @@
-let pageType;
-let latestDate;
-const res = await fetch("/api/get-movie");
-if (!res.ok) throw new Error("Failed to fetch movie");
-const data = await res.json();
-latestDate = data.date; 
-
-let gameTypeArray = window.location.pathname.split('/').filter(Boolean);
-let gameType;
-if (gameTypeArray.length === 0) {
-  gameType = 'today';
-}
-else{
-  gameType = gameTypeArray[0];
-}
-console.log(gameType);
-
 // Global variables and constants
 let gameOver = false; // Indicates if the game is over
 let gameWon = false; // Indicates if the game was won
