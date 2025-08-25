@@ -14,5 +14,10 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist',
+    rollupOptions: {
+      input: {
+        main: './today.html',
+      },
+    },
   },
 });
