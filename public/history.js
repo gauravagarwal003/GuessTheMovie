@@ -167,7 +167,7 @@ function displayHistoryAndStats() {
 
     // --- History ---
     container.innerHTML += `<h2 class="history-about-subheading" >Your Game History</h2>`;
-    const sortedGames = globalGameStats.games.slice().sort((a, b) => new Date(a.date) - new Date(b.date));
+    const sortedGames = globalGameStats.games.slice().sort((a, b) => new Date(b.date) - new Date(a.date));
     sortedGames.forEach(game => container.innerHTML += generateGameHTML(game));
 
     // --- Stats ---
