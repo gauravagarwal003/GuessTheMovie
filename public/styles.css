@@ -64,23 +64,7 @@ body {
         gap: 1%;
     }
 
-    #displayHistoryButton {
-        padding: 0;
-    }
-
-    #todayButton {
-        padding: 0;
-    }
-
-    #archiveButton {
-        padding: 0;
-    }
-
-    #displayStatsButton {
-        padding: 0;
-    }
-
-    #instructionsButton {
+    .header-nav {
         padding: 0;
     }
 
@@ -123,9 +107,15 @@ body {
     margin-bottom: 7px;
 }
 
-.history-link {
-    color: var(--currentBackground);
-    text-decoration: none;
+.text-link:hover {
+    color: var(--bonewhite);
+} 
+.text-link {
+    color: var(--LBlue);
+}
+
+.history-about-subheading{
+    color: #FFBFAF;
 }
 
 /* Adjust logo */
@@ -148,11 +138,7 @@ body {
 }
 
 /* Button styling */
-.display-stats-button,
-.display-history-button,
-.instructions-button,
-.archive-button,
-.today-button {
+.header-nav {
     background: transparent;
     color: var(--bonewhite);
     font-size: 1.2rem;
@@ -160,100 +146,20 @@ body {
     border: none;
 }
 
-.display-stats-button:hover {
-    color: var(--LOrange) !important;
-}
-
-.display-history-button:hover {
-    color: var(--LGreen) !important;
-
-}
-
-.instructions-button:hover {
-    color: var(--LBlue) !important;
-}
-
-.archive-button:hover,
-.today-button:hover {
+#todayButton.active-header-nav {
     color: var(--coffeeColor) !important;
 }
 
-.active-stats {
-    text-decoration: underline;
+#archiveButton.active-header-nav {
     color: var(--LOrange) !important;
-
 }
 
-.active-history {
-    text-decoration: underline;
+#historyStatsButton.active-header-nav {
     color: var(--LGreen) !important;
 }
 
-
-.active-instructions {
-    text-decoration: underline;
+#aboutButton.active-header-nav {
     color: var(--LBlue) !important;
-}
-
-.active-archive,
-.active-today {
-    text-decoration: underline;
-    color: var(--coffeeColor) !important;
-}
-
-.active-button {
-    text-decoration: underline;
-    font-weight: bold;
-    opacity: 1 !important;
-}
-
-
-.modal {
-    display: none;
-    /* Hidden by default */
-    position: fixed;
-    z-index: 1000;
-    /* Make sure it's on top */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    /* Enable scroll if needed */
-    background-color: rgba(10, 10, 10, 0.65);
-    /* Black with opacity */
-}
-
-.modal-content {
-    color: var(--currentBackground);
-    background-color: var(--bonewhite);
-    margin: 10% auto;
-    /* 10% from top and centered */
-    padding: 20px;
-    max-width: 50%;
-    max-height: 50%;
-    border-radius: 5px;
-    position: relative;
-    text-align: center;
-    overflow-y: auto;
-}
-
-.modal-content::-webkit-scrollbar {
-    width: 8px;
-    /* Adjust width */
-}
-
-.modal-content::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0);
-    /* Slight transparency on hover */
-    border: 3px solid var(--LBackground);
-    border-radius: 5px;
-}
-
-.modal-content::-webkit-scrollbar-thumb:hover {
-    background: var(--LBackground);
-    /* Scrollbar color */
-    border-radius: 5px;
 }
 
 .tab-nav {
@@ -383,13 +289,15 @@ body {
     text-align: center;
 }
 
-.movie-link {
-    color: var(--bonewhite);
-}
-
 #textDisplay {
     margin-top: 10px;
     font-size: 110%;
+    max-width: 720px;
+    color: var(--bonewhite);
+}
+
+#aboutBody, #historyBody {
+    margin-top: 10px;
     max-width: 720px;
     color: var(--bonewhite);
 }
@@ -433,6 +341,11 @@ body {
     /* MUST BE SAME AS HEIGHT OF FOOTER */
 }
 
+.body-wrapped, .history-wrapped{
+    display: flex;
+    justify-content: center;
+}
+
 #footer {
     width: 100%;
     height: 2.5rem;
@@ -454,12 +367,9 @@ body {
 #coffeeItem {
     display: inline-flex;
     align-items: center;
-    /* Vertical alignment */
     gap: 3px;
-    /* Space between icon and text */
     padding-right: 10px;
     text-decoration: none;
-    /* Removes default anchor underline */
 }
 
 #coffeeLabel {
@@ -484,16 +394,6 @@ body {
     color: var(--LGreen);
 }
 
-#policiesItem {
-    display: inline-flex;
-    align-items: center;
-    /* vertical‑center icon + text */
-    gap: 3px;
-    /* space between icon and text */
-    padding-right: 10px;
-}
-
-
 
 #contactLabel {
     color: var(--LBlue);
@@ -504,15 +404,6 @@ body {
     text-decoration: none !important;
     color: var(--LBlue);
     margin-top: 3px;
-}
-
-#contactItem {
-    display: inline-flex;
-    align-items: center;
-    /* vertical‑center icon + text */
-    gap: 3px;
-    /* space between icon and text */
-    padding-right: 10px;
 }
 
 
@@ -537,9 +428,7 @@ a:focus #profileIcon {
 #profileItem {
     display: inline-flex;
     align-items: center;
-    /* vertical‑center icon + text */
     gap: 3px;
-    /* space between icon and text */
     padding-right: 10px;
 }
 
@@ -559,17 +448,12 @@ a:focus #profileIcon {
     }
 }
 
-.header-history:hover .icon {
+#historyStatsButton:hover .icon {
     animation: spin-reverse 1.5s infinite linear;
 }
 
-.header-stats .icon {
-    animation: none;
-    transform: rotateY(0deg);
-}
-
 /* when hovered, spin 0→180 then 180→0, over and over */
-.header-stats:hover .icon {
+#archiveButton:hover .icon {
     animation: flip 0.6s linear infinite alternate;
 }
 
@@ -604,7 +488,7 @@ a:focus #profileIcon {
     }
 }
 
-.header-instructions:hover .icon {
+#aboutButton:hover .icon {
     animation: bounce 1s ease infinite;
 }
 
@@ -621,11 +505,7 @@ a:focus #profileIcon {
     }
 }
 
-.header-archive:hover .icon {
-    animation: beat 0.8s ease infinite;
-}
-
-.header-today:hover .icon {
+#todayButton:hover .icon {
     animation: beat 0.8s ease infinite;
 }
 
@@ -986,5 +866,62 @@ a:focus #profileIcon {
         display: inline !important;
     }
 
+
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(10, 10, 10, 0.65);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 10% auto;
+    padding: 20px;
+    max-width: 50%;
+    max-height: 50%;
+    border-radius: 5px;
+    position: relative;
+    text-align: center;
+    overflow-y: auto;
+}
+.close-button {
+    color: black;
+    float: right;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.close-button:hover {
+    opacity: 0.5;
+}
+
+
+#contactLabel {
+    color: var(--LBlue);
+    text-decoration: underline;
+}
+
+#contactIcon {
+    text-decoration: none !important;
+    color: var(--LBlue);
+    margin-top: 3px;
+}
+
+#contactItem {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    padding-right: 10px;
+        text-decoration: none;
 
 }

@@ -11,9 +11,10 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
 
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guess the Movie | Archive</title>
+    <title>Guess the Movie | History & Stats</title>
     <meta name="description"
         content="Guess The Movie is your daily interactive film challenge. Test your movie knowledge by reading reviews and guessing the featured film. Play now and join the fun!">
     <meta name="keywords" content="movies, movie game, film challenge, movie reviews, guess the movie, daily game">
@@ -50,13 +51,13 @@
                     <span class="today-button-text header-short">Today</span>
                 </button>
 
-                <button id="archiveButton" class="header-nav active-header-nav" onclick="location.href='/archive'">
+                <button id="archiveButton" class="header-nav" onclick="location.href='/archive'">
                     <i class="fa-solid fa-box-archive icon" id="archiveIcon"></i>
                     <span class="archive-button-text header-full">Past Movies</span>
                     <span class="archive-button-text header-short">Archive</span>
                 </button>
 
-                <button id="historyStatsButton" class="header-nav" onclick="location.href='/history'">
+                <button id="historyStatsButton" class="header-nav active-header-nav" onclick="location.href='/history'">
                     <i class="fa-solid fa-clock-rotate-left icon" id="historyIcon"></i>
                     <span class="history-button-text header-full">History & Stats</span>
                     <span class="history-button-text header-short">History</span>
@@ -70,37 +71,8 @@
             </div>
         </header>
 
-        <div id="content-wrap">
-            <!-- Calendar container -->
-            <div id="calendar-container">
-                <div id="calendar-header">
-                    <button id="prev-month"><i class="fa-solid fa-arrow-left icon" id="arrowLeftIcon"></i></button>
-                    <span id="month-year"></span>
-                    <button id="next-month"> <i class="fa-solid fa-arrow-right icon" id="arrowRightIcon"></i>
-                    </button>
-                </div>
-                <div id="calendar-days-header">
-                    <div class="day-long">Sun</div>
-                    <div class="day-short">S</div>
-                    <div class="day-long">Mon</div>
-                    <div class="day-short">M</div>
-                    <div class="day-long">Tue</div>
-                    <div class="day-short">T</div>
-                    <div class="day-long">Wed</div>
-                    <div class="day-short">W</div>
-                    <div class="day-long">Thu</div>
-                    <div class="day-short">T</div>
-                    <div class="day-long">Fri</div>
-                    <div class="day-short">F</div>
-                    <div class="day-long">Sat</div>
-                    <div class="day-short">S</div>
-                </div>
-
-                <div id="calendar-grid"></div>
-            </div>
-
-
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+        <div id="content-wrap" class = "history-wrapped">
+            <div id="historyBody"></div>
         </div>
 
         <footer id="footer">
@@ -115,6 +87,7 @@
                 <span id="profileLabel" class="footer-full">My Profile</span>
                 <span id="profileLabel" class="footer-short">My LB</span>
             </a>
+
                         <a href="/about#openModal" target="_blank" class="footer-item" id="contactItem">
                 <i class="fa-solid fa-paper-plane icon" id="contactIcon"></i>
                 <span id="contactLabel" class="footer-full">Contact Us</span>
@@ -124,8 +97,8 @@
         </footer>
     </main>
 
-    <script src="/common.js"></script>
-    <script src="/archive.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <script src="/history.js"></script>
 </body>
 
 </html>

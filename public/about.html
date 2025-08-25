@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-P9S92SGST0"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-P9S92SGST0');
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the Movie | About Me & Policies</title>
+    <meta name="description"
+        content="Guess The Movie is your daily interactive film challenge. Test your movie knowledge by reading reviews and guessing the featured film. Play now and join the fun!">
+    <meta name="keywords" content="movies, movie game, film challenge, movie reviews, guess the movie, daily game">
+    <meta name="author" content="Gaurav">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="/just_logo.png">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@700&display=swap" rel="stylesheet">
+
+    <script>
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        window.scrollTo(0, 0);
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3181134485510321"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <main id="page-container">
+        <header id="header">
+            <div class="header-content">
+                <!-- Logo -->
+                <img src="/logo_and_text.png" alt="Guess the Movie Logo" class="logo">
+
+                <!-- Navigation Buttons -->
+                <button id="todayButton" class="header-nav" onclick="location.href='/'">
+                    <i class="fa-solid fa-forward icon" id="todayIcon"></i>
+                    <span class="today-button-text header-full">Today's Movie</span>
+                    <span class="today-button-text header-short">Today</span>
+                </button>
+
+                <button id="archiveButton" class="header-nav" onclick="location.href='/archive'">
+                    <i class="fa-solid fa-box-archive icon" id="archiveIcon"></i>
+                    <span class="archive-button-text header-full">Past Movies</span>
+                    <span class="archive-button-text header-short">Archive</span>
+                </button>
+
+                <button id="historyStatsButton" class="header-nav" onclick="location.href='/history'">
+                    <i class="fa-solid fa-clock-rotate-left icon" id="historyIcon"></i>
+                    <span class="history-button-text header-full">History & Stats</span>
+                    <span class="history-button-text header-short">History</span>
+                </button>
+
+                <button id="aboutButton" class="header-nav active-header-nav">
+                    <i class="fa-solid fa-address-card icon" id="aboutIcon"></i>
+                    <span class="about-button-text header-full">About & Policies</span>
+                    <span class="about-button-text header-short">About Me</span>
+                </button>
+            </div>
+        </header>
+
+        <div id="content-wrap" class = "body-wrapped">
+            <div id="aboutBody">
+                <!-- About Section -->
+                <section id="about">
+                    <h2 class="history-about-subheading">About Me</h2>
+                    <p>Hi, I'm Gaurav. I'm a software developer and avid Letterboxd user (my phone is out and Letterboxd
+                        is
+                        open as soon as a movie ends). I created this game to combine my love for movies with my passion
+                        for
+                        coding and to create a fun and engaging experience for fans like me.</p>
+                    <p>
+                        I'm always open to feedback, ideas, or collaborations. You can email me at
+                        <a href="mailto:guessmovielb@gmail.com" class="text-link">guessmovielb@gmail.com</a> or
+                        <span style="cursor: pointer; text-decoration: underline;" class="text-link"
+                            onclick="displayContactForm()">use this form</span>.
+                        If you want to support the project, you can
+                        <a href="https://www.buymeacoffee.com/gprojects" target="_blank" rel="noopener" class="text-link">buy me a coffee
+                            ☕</a>. Also, I'm looking for people to help with review selection. I handpick all these
+                        reviews
+                        (NO AI). If you're interested, please reach out!
+                    </p>
+                </section>
+
+                <!-- Instructions Section -->
+                <section id="instructions">
+                    <h2 class="history-about-subheading">How to Play</h2>
+                    <p>You have a limited number of tries to guess the movie. Each guess (or skip) will reveal an
+                        additional
+                        review to help you.</p>
+                    <p>To guess, use the search bar and begin typing. You can navigate the list with the arrow keys or
+                        cursor and submit your guess with Enter. Use left/right buttons to toggle reviews.</p>
+                    <p>Every day features a new movie (added at 12AM EST). Use the archive to play previous days. Gray
+                        background means no movie, white means playable movie, green means already played.</p>
+                    <p>To save stats and history, play on the same browser/device and avoid incognito or private modes.
+                    </p>
+                    <p>Good luck and have fun!</p>
+                </section>
+
+                <!-- Policies Section -->
+                <section id="policies">
+                    <h2 class="history-about-subheading">Terms of Service</h2>
+                    <p>Last updated: April 09, 2025</p>
+                    <p>By accessing or using the "Guess The Movie" game (the Game), you agree to comply with and be
+                        bound by
+                        these Terms of Service. If you do not agree with these terms, please do not use the Game.</p>
+                    <p>This Game is intended for personal, non-commercial use. You are responsible for maintaining the
+                        confidentiality of your session, and for all activities that occur on your session.</p>
+                    <p>We reserve the right to modify or discontinue the Game at any time. We may also modify these
+                        Terms of
+                        Service at any time, with or without notice. Your continued use of the Game after any such
+                        changes
+                        constitutes your acceptance of the new Terms of Service.</p>
+                    <p>Any dispute arising out of or in connection with the Game shall be governed by the laws of the
+                        jurisdiction in which we operate, and you agree to submit to the exclusive jurisdiction of the
+                        courts in that jurisdiction.</p>
+
+                    <h2 class="history-about-subheading">Privacy Policy</h2>
+                    <p>Last updated: April 09, 2025</p>
+                    <p>Last updated: April 09, 2025</p>
+                    <p>This Privacy Policy outlines how we collect, use, and protect your personal data when you use the
+                        "Guess The Movie" game (the Game). By using the Game, you consent to the collection and use of
+                        information in accordance with this policy.</p>
+                    <p>We collect personal information when you register for the Game or voluntarily provide it. This
+                        may
+                        include your name, email address, and gameplay data. We use this information to personalize your
+                        experience and to improve the Game.</p>
+                    <p>We do not share your personal information with third parties, except as required by law or to
+                        facilitate our business operations (such as processing payments or providing customer support).
+                    </p>
+                    <p>We take appropriate security measures to protect your personal data, but no method of
+                        transmission
+                        over the internet is completely secure. We cannot guarantee the security of your information
+                        transmitted to the Game.</p>
+                    <p>You have the right to access, update, or delete your personal information. If you wish to
+                        exercise
+                        any of these rights, please contact us through the provided contact details.</p>
+
+                    <h2 class="history-about-subheading">Cookie Policy</h2>
+                    <p>Last updated: April 09, 2025</p>
+                    <p>This Cookie Policy explains how the "Guess The Movie" game (the Game) uses cookies and similar
+                        technologies to collect information when you interact with the Game. By using the Game, you
+                        consent
+                        to our use of cookies in accordance with this policy.</p>
+                    <p>Cookies are small files that are placed on your device when you access the Game. We use cookies
+                        to
+                        enhance your user experience by remembering your preferences, tracking your activity, and
+                        analyzing
+                        usage trends.</p>
+                    <p>We use two types of cookies: session cookies, which expire when you close your browser, and
+                        persistent cookies, which remain on your device for a specified period. These cookies help us
+                        understand how you interact with the Game and allow us to improve its functionality.</p>
+                    <p>You can control cookie settings in your browser to accept or reject cookies. Please note that
+                        rejecting cookies may affect the functionality of the Game, and you may not be able to use
+                        certain
+                        features.</p>
+                    <p>We may also use third-party services, such as analytics tools, which may place cookies on your
+                        device. These third-party cookies are subject to the privacy policies of the respective
+                        providers.
+                    </p>
+                </section>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+            </div>
+        </div>
+
+        <footer id="footer">
+            <a href="https://buymeacoffee.com/gprojects" target="_blank" class="footer-item" id="coffeeItem">
+                <i class="fa-solid fa-mug-hot icon" id="coffeeIcon"></i>
+                <span id="coffeeLabel" class="footer-full">Support Us</span>
+                <span id="coffeeLabel" class="footer-short">Support</span>
+            </a>
+
+            <a href="https://letterboxd.com/gaurava/" target="_blank" class="footer-item" id="profileItem">
+                <img src="/LBColorLogo.png" alt="My Letterboxd Profile" id="profileIcon" class="footer-image" />
+                <span id="profileLabel" class="footer-full">My Profile</span>
+                <span id="profileLabel" class="footer-short">My LB</span>
+            </a>
+            
+            <a href="javascript:void(0)" onclick="displayContactForm()"class="footer-item" id="contactItem">
+                <i class="fa-solid fa-paper-plane icon" id="contactIcon"></i>
+                <span id="contactLabel" class="footer-full">Contact Us</span>
+                <span id="contactLabel" class="footer-short">Contact</span>
+            </a>
+
+
+        </footer>
+    </main>
+    <div id="Modal" class="modal">
+        <div class="modal-content">
+            <span id="closeModal" class="close-button">&times;</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+    <script src="/about.js"></script>
+
+</body>
+
+</html>
