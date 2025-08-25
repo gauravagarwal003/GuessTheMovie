@@ -367,12 +367,9 @@ body {
 #coffeeItem {
     display: inline-flex;
     align-items: center;
-    /* Vertical alignment */
     gap: 3px;
-    /* Space between icon and text */
     padding-right: 10px;
     text-decoration: none;
-    /* Removes default anchor underline */
 }
 
 #coffeeLabel {
@@ -432,6 +429,7 @@ a:focus #profileIcon {
     display: inline-flex;
     align-items: center;
     gap: 3px;
+    padding-right: 10px;
 }
 
 .footer-full,
@@ -907,3 +905,23 @@ a:focus #profileIcon {
     opacity: 0.5;
 }
 
+
+#contactLabel {
+    color: var(--LBlue);
+    text-decoration: underline;
+}
+
+#contactIcon {
+    text-decoration: none !important;
+    color: var(--LBlue);
+    margin-top: 3px;
+}
+
+#contactItem {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    padding-right: 10px;
+        text-decoration: none;
+
+}
