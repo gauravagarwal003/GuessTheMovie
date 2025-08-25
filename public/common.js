@@ -34,16 +34,18 @@ function initializeFuse() {
   fuse = new Fuse(allMovies, options);
 }
 
-// Prevent archiveDate from being set if it's the latest day (today)
+// Prevent archiveDate from being set if it's the latest folder
 if (archiveDate) {
-  const today = new Date();
-  const yyyy = today.getFullYear();
-  const mm = String(today.getMonth() + 1).padStart(2, '0');
-  const dd = String(today.getDate()).padStart(2, '0');
-  const todayStr = `${yyyy}-${mm}-${dd}`;
-  if (archiveDate === todayStr) {
-    archiveDate = null;
-  }
+  fetch('/api/latest-date')
+    .then(res => res.json())
+    .then(data => {
+      if (archiveDate === data.latestDate) {
+        archiveDate = null;
+      }
+    })
+    .catch(err => {
+      console.error('Error fetching latest date:', err);
+    });
 }
 
 // Update the title if archive movie
@@ -302,6 +304,18 @@ async function fetchData(movieID, date, index) {
 
   } catch (error) {
     console.error('Error fetching JSONs:', error);
+  }
+}
+
+async function getLatestDate() {
+  try {
+    const res = await fetch('/api/latest-date');
+    if (!res.ok) throw new Error('Failed to fetch latest date');
+    const data = await res.json();
+    return data.latestDate; // <-- this is the YYYY-MM-DD folder name
+  } catch (err) {
+    console.error(err);
+    return null;
   }
 }
 
@@ -587,7 +601,7 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
           textDisplay.innerHTML = `<div id="textDisplay"><span class="message">You get 5 reviews (one at a time) to guess the movie. You can skip if you don't have a guess. Check your history and stats once you've played a few times. Have fun!</span>`;
         }
         else {
-          textDisplay.innerHTML = `<div id="textDisplay"><h2></h2><span class="message">Welcome to Guess the Movie! You get 5 reviews (one at a time) to guess the movie. You can skip if you don't have a guess. Click on "How To Play" to learn more and check your history and stats once you've played a few times. The movie updates every day at 12AM EST. Have fun!</span>`;
+          textDisplay.innerHTML = `<div id="textDisplay"><h2></h2><span class="message">Welcome to Guess the Movie! You get 5 reviews (one at a time) to guess the movie. You can skip if you don't have a guess. Click on "About & Policies" in the navbar to learn more or on "History & Stats" to check your history and stats once you've played a few times. The movie updates every day at 12AM EST. Have fun!</span>`;
         }
       }
       if (archiveDate) {

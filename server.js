@@ -24,6 +24,25 @@ app.get('/api/dates', (req, res) => {
   });
 });
 
+app.get('/api/latest-date', (req, res) => {
+  const moviesDir = path.join(__dirname, 'movies');
+
+  fs.readdir(moviesDir, { withFileTypes: true }, (err, items) => {
+    if (err) return res.status(500).json({ error: 'Error reading movies directory' });
+
+    const dateFolders = items
+      .filter(dirent => dirent.isDirectory() && /^\d{4}-\d{2}-\d{2}$/.test(dirent.name))
+      .map(dirent => dirent.name)
+      .sort();
+
+    if (dateFolders.length === 0) return res.status(404).json({ error: 'No date folders found' });
+
+    const latestDate = dateFolders[dateFolders.length - 1];
+    res.json({ latestDate });
+  });
+});
+
+
 app.get('/api/json', (req, res) => {
   const { date, name: movieID, index } = req.query;
   const reviewsPath = path.join(__dirname, 'movies', date, movieID);
