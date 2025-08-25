@@ -104,7 +104,14 @@ app.get('/api/get-movie', (req, res) => {
 // --- STATIC ASSETS ---
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, 'dist')));
+  app.use(express.static(path.join(__dirname, 'dist'), {
+    setHeaders: (res, filePath) => {
+      // Force browsers to always revalidate index.html
+      if (filePath.endsWith('index.html')) {
+        res.setHeader('Cache-Control', 'no-cache');
+      }
+    }
+  }));
 } else {
   app.use(express.static(path.join(__dirname, 'public')));
 }
@@ -113,8 +120,8 @@ if (process.env.NODE_ENV === 'production') {
 
 function sendIndex(res) {
   const file = process.env.NODE_ENV === 'production'
-    ? path.join(__dirname, 'dist', 'today.html')
-    : path.join(__dirname, 'today.html');
+    ? path.join(__dirname, 'dist', 'index.html')
+    : path.join(__dirname, 'index.html');
   res.sendFile(file);
 }
 
