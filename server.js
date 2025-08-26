@@ -13,6 +13,54 @@ const port = process.env.PORT || 3000;
 
 // --- API ROUTES ---
 
+app.get('/api/movie-with-reviews', async (req, res) => {
+  try {
+    const { date: requestedDate } = req.query;
+    const movieDir = path.join(__dirname, 'movies');
+
+    // 1) Get all valid date folders
+    const dateFolders = await fs.promises.readdir(movieDir);
+    const validDateFolders = dateFolders.filter(d => !d.startsWith('.')).sort();
+    if (validDateFolders.length === 0) return res.status(404).json({ error: 'No valid date folders found' });
+
+    // 2) Choose the date
+    let dateFolder;
+    if (requestedDate) {
+      if (!validDateFolders.includes(requestedDate)) {
+        return res.status(404).json({ error: 'Requested date not found' });
+      }
+      dateFolder = requestedDate;
+    } else {
+      dateFolder = validDateFolders[validDateFolders.length - 1];
+    }
+
+    // 3) Get the movie folder
+    const movieFolderPath = path.join(movieDir, dateFolder);
+    const movieFolders = await fs.promises.readdir(movieFolderPath);
+    const validMovieFolders = movieFolders.filter(m => !m.startsWith('.'));
+    if (validMovieFolders.length === 0) return res.status(404).json({ error: 'No valid movie folders found' });
+
+    const movieID = validMovieFolders[0];
+    const reviewsPath = path.join(movieFolderPath, movieID);
+
+    // 4) Read all JSON files in parallel
+    const files = await fs.promises.readdir(reviewsPath);
+    const jsonFiles = files.filter(f => f.endsWith('.json'));
+
+    const reviews = await Promise.all(
+      jsonFiles.map(f => fs.promises.readFile(path.join(reviewsPath, f), 'utf8').then(JSON.parse))
+    );
+
+    // 5) Send response
+    res.json({ movieID, date: dateFolder, reviews });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+
 app.get('/api/dates', (req, res) => {
   const moviesDir = path.join(__dirname, 'movies');
   fs.readdir(moviesDir, { withFileTypes: true }, (err, items) => {
