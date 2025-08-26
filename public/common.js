@@ -520,9 +520,10 @@ function displayMovieList(movies) {
 
 
 function filterMovies(event) {
+  if (!fuse) return; // Fuse not ready yet
+
   const allowedRegex = /^[a-zA-Z0-9 !@#$ﬂ&*()_+\-=\~`{}|:"<>?$$\\;',./]$/;
 
-  // Only process if the key pressed matches allowed characters
   if (event.key !== undefined && event.key !== "Backspace" && !allowedRegex.test(event.key)) {
     return;
   }
@@ -534,10 +535,7 @@ function filterMovies(event) {
     return;
   }
 
-  // Use Fuse for fuzzy search
   const results = fuse.search(searchQuery);
-
-  // Map back to original movie objects
   const filteredMovies = results
     .slice(0, MAX_NUM_MOVIES_TO_SHOW)
     .map(result => result.item);
@@ -550,23 +548,34 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
     // Load CSV file and parse movie data
     const csvResponse = await fetch('/movies.csv');
     const csvText = await csvResponse.text();
-    Papa.parse(csvText, {
-      header: true,
-      complete: results => {
-        allMovies = results.data
-          .map(row => {
-            let selectedRow = {};
-            SELECTED_COLUMNS.forEach(col => {
-              selectedRow[col] = row[col];
-            });
-            return selectedRow;
-          })
-          .filter(row =>
-            Object.values(row).every(value => value !== undefined && value !== null && value !== "")
-          );
-      }
-    });
-    initializeFuse();
+
+
+Papa.parse(csvText, {
+  header: true,
+  complete: results => {
+    allMovies = results.data
+      .map(row => {
+        let selectedRow = {};
+        SELECTED_COLUMNS.forEach(col => {
+          selectedRow[col] = row[col];
+        });
+        return selectedRow;
+      })
+      .filter(row =>
+        Object.values(row).every(value => value !== undefined && value !== null && value !== "")
+      );
+
+    // Lazy-init Fuse after page has rendered
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => initializeFuse());
+    } else {
+      // fallback
+      setTimeout(() => initializeFuse(), 1000);
+    }
+  }
+});
+
+
     if (!isArchivePage) {
       let response = '';
       if (archiveDate) {
