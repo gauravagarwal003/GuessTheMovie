@@ -116,7 +116,7 @@ function pushChanges(commitMessage) {
     }
     const githubToken = githubTokenRaw.trim();
 
-    const remoteUrl = `https://x-access-token:${githubToken}@github.com/gauravagarwal003/LBGuessMovie.git`;
+    const remoteUrl = `https://x-access-token:${githubToken}@github.com/gauravagarwal003/GuessTheMovie.git`;
 
     const envOptions = { ...process.env, GIT_TERMINAL_PROMPT: '0' };
 
