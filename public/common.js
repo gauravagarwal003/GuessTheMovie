@@ -130,7 +130,7 @@ window.addEventListener('resize', toggleLogoBasedOnHeaderItems);
 function selectMovie(guessedMovieID) {
   const guessedMovie = allMovies.find(movie => movie.movieID === guessedMovieID);
   const isCorrectMovie = guessedMovieID === correctMovieID;
-  
+
   if (isCorrectMovie) {
     // Won game
     collectedGuesses.push(guessedMovie.movieID);
@@ -169,7 +169,7 @@ function finishGame(wonGame) {
     currentReviewJSONs = allReviewJSONs.slice(0, MAX_GUESSES);
     updateReviewNumButtons();
   }
-  
+
   // Set up share button
   multiButton.textContent = "Share";
   multiButton.onclick = pressShare;
@@ -210,7 +210,7 @@ function finishGame(wonGame) {
 }
 
 // Handles the user's guess or skip
-function handleGuess(guess){
+function handleGuess(guess) {
   // Scroll to top of page
   if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
@@ -222,16 +222,16 @@ function handleGuess(guess){
   }), 100);
 
   // Update the text display with the guess result and add guess to collected guesses
-  let guessString = (MAX_GUESSES - incorrectGuessCount === 1) ? "1 guess" : `${MAX_GUESSES - incorrectGuessCount} guesses`;  
+  let guessString = (MAX_GUESSES - incorrectGuessCount === 1) ? "1 guess" : `${MAX_GUESSES - incorrectGuessCount} guesses`;
   if (guess !== null) {
     collectedGuesses.push(guess.movieID);
     textDisplay.innerHTML = `<div id="textDisplay"><span class="message">Wrong. </span>
     <a href="https://letterboxd.com/film/${guess.movieID}" class="text-link" target="_blank">
     ${guess.title} (${guess.year})</a>
     <span class="message"> is not the correct movie. You have ${guessString} left. Switch between reviews to get more info!
-        </a>`;  
+        </a>`;
   }
-  else{
+  else {
     collectedGuesses.push(SKIPPED_GUESS);
     multiButton.blur();
     textDisplay.innerHTML = `<a style="text-decoration:none; color:white;" target="_blank">
@@ -321,7 +321,7 @@ async function getLatestDate() {
 
 // Display the current review based on the review index
 function displayCurrentReview(index = 1) {
-  const review = currentReviewJSONs[index - 1]; 
+  const review = currentReviewJSONs[index - 1];
   const reviewCard = document.getElementById('reviewCard');
   if (!review || currentReviewJSONs.length === 0) {
     reviewCard.style.display = 'none';
@@ -550,30 +550,30 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
     const csvText = await csvResponse.text();
 
 
-Papa.parse(csvText, {
-  header: true,
-  complete: results => {
-    allMovies = results.data
-      .map(row => {
-        let selectedRow = {};
-        SELECTED_COLUMNS.forEach(col => {
-          selectedRow[col] = row[col];
-        });
-        return selectedRow;
-      })
-      .filter(row =>
-        Object.values(row).every(value => value !== undefined && value !== null && value !== "")
-      );
+    Papa.parse(csvText, {
+      header: true,
+      complete: results => {
+        allMovies = results.data
+          .map(row => {
+            let selectedRow = {};
+            SELECTED_COLUMNS.forEach(col => {
+              selectedRow[col] = row[col];
+            });
+            return selectedRow;
+          })
+          .filter(row =>
+            Object.values(row).every(value => value !== undefined && value !== null && value !== "")
+          );
 
-    // Lazy-init Fuse after page has rendered
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(() => initializeFuse());
-    } else {
-      // fallback
-      setTimeout(() => initializeFuse(), 1000);
-    }
-  }
-});
+        // Lazy-init Fuse after page has rendered
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(() => initializeFuse());
+        } else {
+          // fallback
+          setTimeout(() => initializeFuse(), 1000);
+        }
+      }
+    });
 
 
     if (!isArchivePage) {
@@ -681,7 +681,7 @@ Papa.parse(csvText, {
               let dateStr = year + "-" + monthStr + "-" + dayStr;
 
               // If there is a movie for this date, create a clickable link; otherwise, create plain text.
-                if (movieDates.has(dateStr)) {
+              if (movieDates.has(dateStr)) {
                 cell.classList.add("clickable-cell");
                 // Only show clickable if the date isn't today
                 const today = new Date();
@@ -699,11 +699,11 @@ Papa.parse(csvText, {
                   };
                 }
                 cell.textContent = day; // Display the day number
-                } else {
+              } else {
                 let span = document.createElement("span");
                 span.textContent = day;
                 cell.appendChild(span);
-                }
+              }
 
               // Set cell color based on movie availability and user completion
               if (movieDates.has(dateStr)) {
