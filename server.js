@@ -190,8 +190,8 @@ app.get('/', (req, res) => {
 // 2) Archive landing
 app.get('/archive', (req, res) => {
   const file = process.env.NODE_ENV === 'production'
-    ? path.join(__dirname, 'dist', 'archive.html')
-    : path.join(__dirname, 'public', 'archive.html');
+    ? path.join(__dirname, 'dist', 'calendar.html')
+    : path.join(__dirname, 'public', 'calendar.html');
   res.sendFile(file);
 });
 
@@ -212,18 +212,29 @@ app.get('/history', (req, res) => {
 // 3) Archive by date
 app.get('/archive/:date', (req, res) => {
   const { date } = req.params;
-  const folder = path.join(__dirname, 'movies', date);
+  const moviesDir = path.join(__dirname, 'movies');
+  const folder = path.join(moviesDir, date);
 
   if (fs.existsSync(folder) && fs.statSync(folder).isDirectory()) {
-    sendIndex(res);
+    // get all valid date folders
+    const dateFolders = fs.readdirSync(moviesDir)
+      .filter(d => !d.startsWith('.') && /^\d{4}-\d{2}-\d{2}$/.test(d))
+      .sort();
+
+    const latestDate = dateFolders[dateFolders.length - 1];
+
+    if (date === latestDate) {
+      // Redirect to root if the date is the latest
+      return res.redirect('/');
+    } else {
+      const file = process.env.NODE_ENV === 'production'
+        ? path.join(__dirname, 'dist', 'archive.html')
+        : path.join(__dirname, 'public', 'archive.html');
+      res.sendFile(file); // older game → archive.html
+    }
   } else {
     sendIncorrect(res);
   }
-});
-
-// 4) Everything else → incorrect
-app.get('*', (req, res) => {
-  sendIncorrect(res);
 });
 
 // --- START SERVER ---

@@ -2,39 +2,37 @@
 <html lang="en">
 
 <head>
-    <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3181134485510321"
-        crossorigin="anonymous"></script> -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-P9S92SGST0"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-
         gtag('config', 'G-P9S92SGST0');
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guess the Movie</title>
+    <title>Guess the Movie | Archive</title>
     <meta name="description"
         content="Guess The Movie is your daily interactive film challenge. Test your movie knowledge by reading reviews and guessing the featured film. Play now and join the fun!">
     <meta name="keywords" content="movies, movie game, film challenge, movie reviews, guess the movie, daily game">
     <meta name="author" content="Gaurav">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css">
-
     <link rel="icon" type="image/x-icon" href="/just_logo.png">
     <link rel="stylesheet" href="/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@700&display=swap" rel="stylesheet">
+
     <script>
         if ('scrollRestoration' in history) {
             history.scrollRestoration = 'manual';
         }
         window.scrollTo(0, 0);
     </script>
+    <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3181134485510321"
+        crossorigin="anonymous"></script> -->
 </head>
 
 <body>
@@ -45,13 +43,13 @@
                 <img src="/logo_and_text.png" alt="Guess the Movie Logo" class="logo">
 
                 <!-- Buttons -->
-                <button id="todayButton" class="header-nav active-header-nav" onclick="location.href='/'">
+                <button id="todayButton" class="header-nav" onclick="location.href='/'">
                     <i class="fa-solid fa-forward icon" id="todayIcon"></i>
                     <span class="today-button-text header-full">Today's Movie</span>
                     <span class="today-button-text header-short">Today</span>
                 </button>
 
-                <button id="archiveButton" class="header-nav" onclick="location.href='/archive'">
+                <button id="archiveButton" class="header-nav active-header-nav" onclick="location.href='/archive'">
                     <i class="fa-solid fa-box-archive icon" id="archiveIcon"></i>
                     <span class="archive-button-text header-full">Past Movies</span>
                     <span class="archive-button-text header-short">Archive</span>
@@ -68,61 +66,42 @@
                     <span class="about-button-text header-full">About & Policies</span>
                     <span class="about-button-text header-short">About Me</span>
                 </button>
-
             </div>
         </header>
 
         <div id="content-wrap">
-            <div id="dateDisplay">
-                <span id="dateDisplayMessage"></span>
-            </div>
-            <div id="textDisplay">
-                <span class="message"></span>
-                <a class="text-link"></a>
-                <span class="message"></span>
-            </div>
-            <div id="reviewContainer">
-                <div id="reviewCard" class="review-card" style="display: none;">
-                    <div class="review-username-container">
-                        <img id="reviewProfilePhoto" class="review-profile-photo" />
-                        <div class="review-username-text">
-                            <p id="reviewUsername" class="review-username"></p>
-                            <p id="reviewDate" class="review-date"></p>
-                        </div>
-                    </div>
-                    <span id="reviewRating" class="review-rating"></span>
-                    <i id="reviewLiked" class="fa-solid fa-heart liked icon" style="display: none;"></i>
-                    <div id="reviewText" class="review-text"></div>
-                    <p id="likesComments" class="likes-comments">
-                        <i class="fa-solid fa-heart icon"></i>
-                        <span id="likesCount">0</span>
-                        &nbsp;&nbsp;
-                        <i class="fa-solid fa-comment icon"></i>
-                        <span id="commentsCount">0</span>
-                    </p>
-                    <a id="reviewLink" class="review-link" target="_blank" style="display: none;">View on Letterboxd</a>
+            <!-- Calendar container -->
+            <div id="calendar-container">
+                <div id="calendar-header">
+                    <button id="prev-month"><i class="fa-solid fa-arrow-left icon" id="arrowLeftIcon"></i></button>
+                    <span id="month-year"></span>
+                    <button id="next-month"> <i class="fa-solid fa-arrow-right icon" id="arrowRightIcon"></i>
+                    </button>
                 </div>
+                <div id="calendar-days-header">
+                    <div class="day-long">Sun</div>
+                    <div class="day-short">S</div>
+                    <div class="day-long">Mon</div>
+                    <div class="day-short">M</div>
+                    <div class="day-long">Tue</div>
+                    <div class="day-short">T</div>
+                    <div class="day-long">Wed</div>
+                    <div class="day-short">W</div>
+                    <div class="day-long">Thu</div>
+                    <div class="day-short">T</div>
+                    <div class="day-long">Fri</div>
+                    <div class="day-short">F</div>
+                    <div class="day-long">Sat</div>
+                    <div class="day-short">S</div>
+                </div>
+
+                <div id="calendar-grid"></div>
             </div>
 
-            <nav id="allButtons">
-                <div id="imageButtons"></div>
-                <button onclick="handleGuess(null)" id="multi-button">Skip Guess</button>
-            </nav>
-
-            <div id="search-row">
-                <label for="search" class="visually-hidden">Search for a movie</label>
-                <input type="text" id="search" placeholder="Search" oninput="filterMovies(event)" autocorrect="off"
-                    autocomplete="off" autocapitalize="off" spellcheck="false">
-            </div>
-            <ul id="movieList" class="movie-list"></ul>
-            <div class="image-container" id="movie_container">
-                <a id="movie_poster">
-                </a>
-            </div>
 
             <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
-
         </div>
+
         <footer id="footer">
             <a href="https://buymeacoffee.com/gprojects" target="_blank" class="footer-item" id="coffeeItem">
                 <i class="fa-solid fa-mug-hot icon" id="coffeeIcon"></i>
@@ -135,18 +114,16 @@
                 <span id="profileLabel" class="footer-full">My Profile</span>
                 <span id="profileLabel" class="footer-short">My LB</span>
             </a>
-
-            <a href="/about#openModal" target="_blank" class="footer-item" id="contactItem">
+                        <a href="/about#openModal" target="_blank" class="footer-item" id="contactItem">
                 <i class="fa-solid fa-paper-plane icon" id="contactIcon"></i>
                 <span id="contactLabel" class="footer-full">Contact Us</span>
                 <span id="contactLabel" class="footer-short">Contact</span>
             </a>
 
         </footer>
-
     </main>
 
-    <script src="/common.js"></script>
+    <script src="/calendar.js"></script>
 </body>
 
 </html>

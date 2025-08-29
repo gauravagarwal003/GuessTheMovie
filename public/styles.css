@@ -752,7 +752,6 @@ a:focus #profileIcon {
 
 #month-year:hover {
     color: var(--LGreen);
-    text-decoration: underline;
 }
 
 #calendar-grid {
