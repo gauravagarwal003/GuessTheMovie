@@ -532,6 +532,7 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
         textDisplay.innerHTML = `<div id="textDisplay"><span class="message">You get 5 reviews (one at a time) to guess the movie. You can skip if you don't have a guess. Click on "About & Policies" in the navbar to learn more or on "History & Stats" to check your history and stats once you've played a few times. The movie updates every day at 12AM EST. Have fun!</span>`;
       }
     }
+    
     if (archiveDate) {
       dateDisplay.innerHTML = `<h2>Archive (${formattedMovieDate})</h2>`;
     }
