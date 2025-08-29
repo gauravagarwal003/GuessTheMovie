@@ -500,7 +500,7 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
     if (archiveDate) {
       response = await fetch('/api/get-movie?date=' + archiveDate);
     }
-    else  {
+    else{
       response = await fetch('/api/get-movie');
     }
 
@@ -529,7 +529,7 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
         textDisplay.innerHTML = `<div id="textDisplay"><span class="message">You get 5 reviews (one at a time) to guess the movie. You can skip if you don't have a guess. Check your history and stats once you've played a few times. Have fun!</span>`;
       }
       else {
-        textDisplay.innerHTML = `<div id="textDisplay"><h2></h2><span class="message">Welcome to Guess the Movie! You get 5 reviews (one at a time) to guess the movie. You can skip if you don't have a guess. Click on "About & Policies" in the navbar to learn more or on "History & Stats" to check your history and stats once you've played a few times. The movie updates every day at 12AM EST. Have fun!</span>`;
+        textDisplay.innerHTML = `<div id="textDisplay"><span class="message">You get 5 reviews (one at a time) to guess the movie. You can skip if you don't have a guess. Click on "About & Policies" in the navbar to learn more or on "History & Stats" to check your history and stats once you've played a few times. The movie updates every day at 12AM EST. Have fun!</span>`;
       }
     }
     if (archiveDate) {
