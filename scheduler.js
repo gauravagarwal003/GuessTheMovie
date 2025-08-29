@@ -111,49 +111,39 @@ async function downloadFromDropbox(dbx, dropboxPath, localPath, targetFolder) {
 function pushChanges(commitMessage) {
   return new Promise((resolve, reject) => {
     const githubTokenRaw = process.env.GITHUB_TOKEN;
-    if (!githubTokenRaw) {
-      return reject(new Error("Missing GITHUB_TOKEN environment variable."));
-    }
+    if (!githubTokenRaw) return reject(new Error("Missing GITHUB_TOKEN environment variable."));
     const githubToken = githubTokenRaw.trim();
 
     const remoteUrl = `https://x-access-token:${githubToken}@github.com/gauravagarwal003/GuessTheMovie.git`;
-
     const envOptions = { ...process.env, GIT_TERMINAL_PROMPT: '0' };
 
     exec(`git remote set-url origin ${remoteUrl}`, { env: envOptions }, (err) => {
-      if (err) {
-        console.error("Error updating remote URL:", err);
-        return reject(err);
-      }
-      console.log("Remote URL updated with GITHUB_TOKEN.");
+      if (err) return reject(err);
 
-      // Configure Git identity locally
-      const gitConfigCommand = `git config user.email "gagarwal003@gmail.com" && git config user.name "gauravagarwal003"`;
-      exec(gitConfigCommand, { env: envOptions }, (err) => {
-        if (err) {
-          console.error("Error configuring Git user identity:", err);
-          return reject(err);
-        }
-        console.log("Git user identity configured.");
+      exec(`git config user.email "gagarwal003@gmail.com" && git config user.name "gauravagarwal003"`, { env: envOptions }, (err) => {
+        if (err) return reject(err);
 
-        // Checkout the correct branch before committing.
-        const checkoutCommand = `git checkout main`;
-        exec(checkoutCommand, { env: envOptions }, (err) => {
-          if (err) {
-            console.error("Error checking out branch main:", err);
-            return reject(err);
-          }
-          console.log("Checked out branch main.");
+        exec(`git checkout main`, { env: envOptions }, (err) => {
+          if (err) return reject(err);
 
-          // Stage, commit, and push changes to the main branch.
-          const gitPushCommand = `git add . && git commit -m "${commitMessage}" && git push origin main`;
-          exec(gitPushCommand, { env: envOptions }, (err, stdout) => {
+          // Pull first to integrate remote changes
+          exec(`git pull --rebase origin main`, { env: envOptions }, (err, stdout, stderr) => {
             if (err) {
-              console.error("Error pushing changes:", err);
+              console.error("Git pull failed:", stderr);
               return reject(err);
             }
-            console.log("Changes pushed successfully:\n", stdout);
-            resolve(stdout);
+            console.log("Git pull succeeded:\n", stdout);
+
+            // Now stage, commit, and push
+            const gitPushCommand = `git add . && git commit -m "${commitMessage}" || echo "No changes to commit" && git push origin main`;
+            exec(gitPushCommand, { env: envOptions }, (err, stdout, stderr) => {
+              if (err) {
+                console.error("Git push failed:", stderr);
+                return reject(err);
+              }
+              console.log("Changes pushed successfully:\n", stdout);
+              resolve(stdout);
+            });
           });
         });
       });
