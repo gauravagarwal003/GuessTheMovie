@@ -163,7 +163,7 @@ function handleGuess(guess) {
   }), 100);
 
   // Update the text display with the guess result and add guess to collected guesses
-  let guessString = (MAX_GUESSES - incorrectGuessCount === 1) ? "1 guess" : `${MAX_GUESSES - incorrectGuessCount} guesses`;
+  let guessString = (MAX_GUESSES - incorrectGuessCount - 1 === 1) ? "1 guess" : `${MAX_GUESSES - incorrectGuessCount - 1} guesses`;
   if (guess !== null) {
     collectedGuesses.push(guess.movieID);
     textDisplay.innerHTML = `<div id="textDisplay"><span class="message">Wrong. </span>
