@@ -1,3 +1,4 @@
+
 :root {
     --LOrange: #ef8733;
     --LGreen: #66dd67;
@@ -14,6 +15,12 @@
     --inactiveButtonText: rgb(150, 170, 190);
     --movieHoverBackground: var(--LBackground);
     --coffeeColor: rgb(165, 135, 110);
+    --calendar-yellow-hover: rgb(169, 161, 0);
+    --calendar-yellow: #f1ff33;
+    --calendar-red-hover: rgb(128,0,0);
+    --calendar-red: #dd6667;
+    --calendar-green-hover: green;
+    --calendar-green: var(--LGreen);
 }
 
 html,
@@ -784,23 +791,29 @@ a:focus #profileIcon {
     text-decoration: underline !important;
 }
 
-.available a {
-    text-decoration: none !important;
-    color: black !important;
+
+
+.won {
+    background-color: var(--calendar-green);
+}
+.won:hover {
+    background-color: var(--calendar-green-hover);
 }
 
-.completed {
-    background-color: green;
+.lost {
+    background-color: var(--calendar-red);
+}
+.lost:hover {
+    background-color: var(--calendar-red-hover);
 }
 
-.completed:hover {
-    background-color: var(--LGreen);
+.incomplete {
+    background-color: var(--calendar-yellow);
+}
+.incomplete:hover {
+    background-color: var(--calendar-yellow-hover);
 }
 
-.completed a {
-    text-decoration: none !important;
-    color: black !important;
-}
 
 #calendar-days-header {
     display: grid;

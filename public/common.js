@@ -50,23 +50,147 @@ const multiButton = document.querySelector('button[id="multi-button"]');
 const dateDisplay = document.getElementById('dateDisplayMessage');
 const textDisplay = document.getElementById('textDisplay');
 
-// Fetch user's movie data from local storage
-var globalGameStats = JSON.parse(localStorage.getItem('gameStats')) || {
-  games: [],
-  totalPlayed: 0,
-  totalWon: 0
-};
+// --- v1 LocalStorage Model ---
+const STORAGE_VERSION = 'v1';
 
-// Checks whether the user has played the current game
-function hasGameBeenPlayed(correctMovieID, stats) {
-  if (!stats) return false;
-  return stats.games.some(game => game.correctMovieID === correctMovieID);
+function migrateLocalStorage() {
+  if (localStorage.getItem('storageVersion') === STORAGE_VERSION) return;
+
+  let oldStats = JSON.parse(localStorage.getItem('gameStats')) || {};
+  let games = oldStats.games || [];
+  let gamesFinished = games.length;
+  let gamesWon = games.filter(g => g.won).length;
+  let gamesLost = gamesFinished - gamesWon;
+  let winGames = games.filter(g => g.won);
+  let fastestWin = winGames.length ? Math.min(...winGames.map(g => g.guessCount)) : null;
+  let slowestWin = winGames.length ? Math.max(...winGames.map(g => g.guessCount)) : null;
+  let averageGuesses = gamesFinished ? (games.reduce((acc, g) => acc + (g.guessCount || 0), 0) / gamesFinished) : null;
+  let winPercentage = gamesFinished ? Math.round((gamesWon / gamesFinished) * 100) : 0;
+
+  let gameStats = {
+    gamesFinished,
+    gamesWon,
+    gamesLost,
+    fastestWin,
+    slowestWin,
+    averageGuesses,
+    winPercentage
+  };
+
+  let gameHistory = games.map(g => ({
+    id: g.correctMovieID,
+    date: g.date,
+    status: g.won ? 'won' : 'lost',
+    guesses: g.guesses || [],
+    timeStarted: null,
+    timeCompleted: null
+  }));
+
+  localStorage.setItem('gameStats', JSON.stringify(gameStats));
+  localStorage.setItem('gameHistory', JSON.stringify(gameHistory));
+  localStorage.setItem('storageVersion', STORAGE_VERSION);
 }
 
-// Checks if user won the current game
-function hasGameBeenWon(correctMovieID, stats) {
-  if (!stats) return false;
-  return stats.games.some(game => game.correctMovieID === correctMovieID && game.won === true);
+migrateLocalStorage();
+
+let globalGameStats = JSON.parse(localStorage.getItem('gameStats')) || {
+  gamesFinished: 0,
+  gamesWon: 0,
+  gamesLost: 0,
+  fastestWin: null,
+  slowestWin: null,
+  averageGuesses: null,
+  winPercentage: 0
+};
+let globalGameHistory = JSON.parse(localStorage.getItem('gameHistory')) || [];
+let ongoingGame = null;
+
+function loadOngoingGame(correctMovieID, correctMovieDate) {
+  let game = globalGameHistory.find(g => g.id === correctMovieID && g.status === 'incomplete');
+  if (game) {
+    ongoingGame = { ...game };
+    collectedGuesses = [...(game.guesses || [])];
+    incorrectGuessCount = collectedGuesses.length;
+    return true;
+  }
+  return false;
+}
+
+function startOngoingGame(correctMovieID, correctMovieDate) {
+  if (!ongoingGame) {
+    ongoingGame = {
+      id: correctMovieID,
+      date: correctMovieDate,
+      status: 'incomplete',
+      guesses: [],
+      timeStarted: null,
+      timeCompleted: null
+    };
+    globalGameHistory.push(ongoingGame);
+    saveGameHistory();
+  }
+}
+
+function saveGameHistory() {
+  localStorage.setItem('gameHistory', JSON.stringify(globalGameHistory));
+}
+
+function updateOngoingGameOnGuess(guess, isSkip = false) {
+  if (!ongoingGame) return;
+  if (!ongoingGame.timeStarted) ongoingGame.timeStarted = new Date().toISOString();
+  ongoingGame.guesses.push(guess);
+  saveGameHistory();
+}
+
+function finishOngoingGame(status) {
+  if (!ongoingGame) return;
+  ongoingGame.status = status;
+  ongoingGame.timeCompleted = new Date().toISOString();
+
+  // Find and update the corresponding game in globalGameHistory
+  const idx = globalGameHistory.findIndex(g => g.id === ongoingGame.id && g.status === 'incomplete');
+  if (idx !== -1) {
+    globalGameHistory[idx] = { ...ongoingGame };
+  }
+
+  saveGameHistory();
+  updateGameStats();
+  ongoingGame = null;
+}
+
+function updateGameStats() {
+  let history = JSON.parse(localStorage.getItem('gameHistory')) || [];
+  let finishedGames = history.filter(g => g.status === 'won' || g.status === 'lost');
+  let gamesFinished = finishedGames.length;
+  let gamesWon = finishedGames.filter(g => g.status === 'won').length;
+  let gamesLost = finishedGames.filter(g => g.status === 'lost').length;
+  let winGames = finishedGames.filter(g => g.status === 'won');
+  let fastestWin = winGames.length ? Math.min(...winGames.map(g => g.guesses.length)) : null;
+  let slowestWin = winGames.length ? Math.max(...winGames.map(g => g.guesses.length)) : null;
+  let averageGuesses = gamesFinished ? (finishedGames.reduce((acc, g) => acc + (g.guesses.length || 0), 0) / gamesFinished) : null;
+  let winPercentage = gamesFinished ? Math.round((gamesWon / gamesFinished) * 100) : 0;
+  let stats = {
+    gamesFinished,
+    gamesWon,
+    gamesLost,
+    fastestWin,
+    slowestWin,
+    averageGuesses,
+    winPercentage
+  };
+  localStorage.setItem('gameStats', JSON.stringify(stats));
+}
+
+// v1: Checks whether the user has played the current game
+function hasGameBeenPlayed(correctMovieID) {
+  let history = JSON.parse(localStorage.getItem('gameHistory')) || [];
+  return history.some(game => game.id === correctMovieID && (game.status === 'won' || game.status === 'lost'));
+}
+
+// v1: Checks if user won the current game
+function hasGameBeenWon(correctMovieID) {
+  let history = JSON.parse(localStorage.getItem('gameHistory')) || [];
+  return history.some(game => game.id === correctMovieID && game.status === 'won');
 }
 
 // Update game based on the movie the user selected
@@ -74,24 +198,15 @@ function selectMovie(guessedMovieID) {
   const guessedMovie = allMovies.find(movie => movie.movieID === guessedMovieID);
   const isCorrectMovie = guessedMovieID === correctMovieID;
 
+  startOngoingGame(correctMovieID, correctMovieDate);
+
   if (isCorrectMovie) {
-    // Won game
     collectedGuesses.push(guessedMovie.movieID);
+    updateOngoingGameOnGuess(guessedMovie.movieID);
     finishGame(true);
   } else {
-    // Incorrect guess
     handleGuess(guessedMovie);
   }
-}
-
-// Update the game stats in local storage 
-function updateGameStats(currentGame) {
-  globalGameStats.games.push(currentGame);
-  globalGameStats.totalPlayed += 1;
-  if (currentGame.won) {
-    globalGameStats.totalWon += 1;
-  }
-  localStorage.setItem('gameStats', JSON.stringify(globalGameStats));
 }
 
 // Finish the game
@@ -133,39 +248,31 @@ function finishGame(wonGame) {
   existingDiv.setAttribute("target", "_blank");
   document.getElementById('search-row').style.margin = "0px";
 
-  // Set and update game stats only when game is finished
-  if (!hasGameBeenPlayed(correctMovieID, globalGameStats)) {
-    const currentGame = {
-      correctMovieID: correctMovieID,
-      won: (incorrectGuessCount < MAX_GUESSES),
-      guessCount: collectedGuesses.length,
-      guesses: collectedGuesses,
-      date: correctMovieDate,
-      title: correctMovieObject.title,
-      year: correctMovieObject.year,
-      posterLink: correctMovieObject.posterLink,
-    };
-    updateGameStats(currentGame);
+  // v1: Set and update gameHistory and stats only when game is finished
+  if (ongoingGame) {
+    let status = (incorrectGuessCount < MAX_GUESSES) ? 'won' : 'lost';
+    finishOngoingGame(status);
   }
   displayCurrentReview(currentReviewIndex);
 }
 
 // Handles the user's guess or skip
 function handleGuess(guess) {
-  // Scroll to top of page
   if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
   }
   setTimeout(() => window.scrollTo({
     top: 0,
     left: 0,
-    behavior: 'smooth' // or 'auto'
+    behavior: 'smooth'
   }), 100);
 
-  // Update the text display with the guess result and add guess to collected guesses
+  startOngoingGame(correctMovieID, correctMovieDate);
+
   let guessString = (MAX_GUESSES - incorrectGuessCount - 1 === 1) ? "1 guess" : `${MAX_GUESSES - incorrectGuessCount - 1} guesses`;
   if (guess !== null) {
     collectedGuesses.push(guess.movieID);
+    updateOngoingGameOnGuess(guess.movieID);
     textDisplay.innerHTML = `<div id="textDisplay"><span class="message">Wrong. </span>
     <a href="https://letterboxd.com/film/${guess.movieID}" class="text-link" target="_blank">
     ${guess.title} (${guess.year})</a>
@@ -174,13 +281,13 @@ function handleGuess(guess) {
   }
   else {
     collectedGuesses.push(SKIPPED_GUESS);
+    updateOngoingGameOnGuess(SKIPPED_GUESS, true);
     multiButton.blur();
     textDisplay.innerHTML = `<a style="text-decoration:none; color:white;" target="_blank">
               You skipped! You have ${guessString} left. Switch between reviews to get more info!
           </a>`;
   }
 
-  // Update the game state
   clearSearchAndMovieList();
   incorrectGuessCount++;
   if (incorrectGuessCount < MAX_GUESSES) {
@@ -475,7 +582,6 @@ function filterMovies(event) {
 
 document.addEventListener('DOMContentLoaded', async function initializeGame() {
   try {
-    // Load CSV file and parse movie data
     const csvResponse = await fetch('/movies.csv');
     const csvText = await csvResponse.text();
 
@@ -511,19 +617,35 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
     correctMovieObject = allMovies.find(movie => movie.movieID === correctMovieID);
     correctMovieDate = data.date;
     formattedMovieDate = new Date(correctMovieDate).toLocaleDateString('en-US', {
-      timeZone: 'UTC',  // Set timezone to UTC to ignore local timezones
+      timeZone: 'UTC',
       year: 'numeric',
-      month: 'long',     // Full month name (e.g. "February")
-      day: 'numeric'     // Day without leading zeros (e.g. "2")
+      month: 'long',
+      day: 'numeric'
     });
 
-    // Fetch all images, text, and links for the movie
     for (let i = 0; i < MAX_GUESSES; i++) {
       await fetchData(correctMovieID, correctMovieDate, i);
     }
-    // Check if this game has already been played.
-    if (hasGameBeenPlayed(correctMovieID, globalGameStats)) {
-      finishGame(hasGameBeenWon(correctMovieID, globalGameStats));
+
+    let loaded = loadOngoingGame(correctMovieID, correctMovieDate);
+
+
+    if (hasGameBeenPlayed(correctMovieID)) {
+      finishGame(hasGameBeenWon(correctMovieID));
+    }
+    else if (loaded) {
+      textDisplay.innerHTML = `<div id="textDisplay"><span class="message">You have an incomplete game for this movie. Continue guessing or skip!</span>`;
+      incorrectGuessCount = ongoingGame.guesses.length;
+      collectedGuesses = [...ongoingGame.guesses];
+      currentReviewJSONs = allReviewJSONs.slice(0, incorrectGuessCount + 1);
+      updateReviewNumButtons();
+      // Show the last review the user unlocked, not always the first
+      if (incorrectGuessCount > 0) {
+        console.log(`Showing review ${incorrectGuessCount}`);
+        displayCurrentReview(incorrectGuessCount + 1);
+      } else {
+        displayCurrentReview();
+      }
     }
     else {
       if (archiveDate) {
@@ -532,6 +654,9 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
       else {
         textDisplay.innerHTML = `<div id="textDisplay"><span class="message">You get 5 reviews (one at a time) to guess the movie. You can skip if you don't have a guess. Click on "About & Policies" in the navbar to learn more or on "History & Stats" to check your history and stats once you've played a few times. The movie updates every day at 12AM EST. Have fun!</span>`;
       }
+      updateReviewNumButtons();
+      displayCurrentReview();
+
     }
 
     if (archiveDate) {
@@ -541,11 +666,8 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
       dateDisplay.innerHTML = `<h2>Today's movie (${formattedMovieDate})</h2>`;
     }
 
-    updateReviewNumButtons();
-    displayCurrentReview();
   }
   catch (error) {
     console.error('Error during initialization:', error);
   }
-
 });

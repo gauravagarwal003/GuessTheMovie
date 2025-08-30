@@ -1,3 +1,45 @@
+const STORAGE_VERSION = 'v1';
+
+function migrateLocalStorage() {
+  if (localStorage.getItem('storageVersion') === STORAGE_VERSION) return;
+
+  let oldStats = JSON.parse(localStorage.getItem('gameStats')) || {};
+  let games = oldStats.games || [];
+  let gamesFinished = games.length;
+  let gamesWon = games.filter(g => g.won).length;
+  let gamesLost = gamesFinished - gamesWon;
+  let winGames = games.filter(g => g.won);
+  let fastestWin = winGames.length ? Math.min(...winGames.map(g => g.guessCount)) : null;
+  let slowestWin = winGames.length ? Math.max(...winGames.map(g => g.guessCount)) : null;
+  let averageGuesses = gamesFinished ? (games.reduce((acc, g) => acc + (g.guessCount || 0), 0) / gamesFinished) : null;
+  let winPercentage = gamesFinished ? Math.round((gamesWon / gamesFinished) * 100) : 0;
+
+  let gameStats = {
+    gamesFinished,
+    gamesWon,
+    gamesLost,
+    fastestWin,
+    slowestWin,
+    averageGuesses,
+    winPercentage
+  };
+
+  let gameHistory = games.map(g => ({
+    id: g.correctMovieID,
+    date: g.date,
+    status: g.won ? 'won' : 'lost',
+    guesses: g.guesses || [],
+    timeStarted: null,
+    timeCompleted: null
+  }));
+
+  localStorage.setItem('gameStats', JSON.stringify(gameStats));
+  localStorage.setItem('gameHistory', JSON.stringify(gameHistory));
+  localStorage.setItem('storageVersion', STORAGE_VERSION);
+}
+
+migrateLocalStorage();
+
 document.addEventListener('DOMContentLoaded', async function initializeGame() {
     fetch('/api/dates')
         .then(response => response.json())
@@ -6,10 +48,9 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
             // Retrieve user game stats (assumed stored as JSON under 'gameStats')
             let userGames = [];
             try {
-                const storedData = localStorage.getItem('gameStats');
+                const storedData = localStorage.getItem('gameHistory');
                 if (storedData) {
-                    const parsed = JSON.parse(storedData);
-                    if (parsed.games) userGames = parsed.games;
+                    userGames = JSON.parse(storedData);
                 }
             } catch (e) {
                 console.error(e);
@@ -71,7 +112,13 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
                     // Set cell color based on movie availability and user completion
                     if (movieDates.has(dateStr)) {
                         if (completedDates.has(dateStr)) {
-                            cell.classList.add("completed");
+                            if (userGames.some(game => game.date === dateStr && game.status === 'won')) {
+                                cell.classList.add("won");
+                            } else if (userGames.some(game => game.date === dateStr && game.status === 'lost')) {
+                                cell.classList.add("lost");
+                            } else if (userGames.some(game => game.date === dateStr && game.status === 'incomplete')) {
+                                cell.classList.add("incomplete");
+                            }
                         } else {
                             cell.classList.add("available");
                         }
