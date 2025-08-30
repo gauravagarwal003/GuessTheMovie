@@ -77,14 +77,21 @@ function migrateLocalStorage() {
     winPercentage
   };
 
-  let gameHistory = games.map(g => ({
-    id: g.correctMovieID,
-    date: g.date,
-    status: g.won ? 'won' : 'lost',
-    guesses: g.guesses || [],
-    timeStarted: null,
-    timeCompleted: null
-  }));
+  let gameHistory = games.map(g => {
+    let guesses = g.guesses || [];
+    // Fix: If won, but correctMovieID not in guesses and guesses.length < MAX_GUESSES, add it
+    if (g.won && (!guesses.includes(g.correctMovieID)) && guesses.length < MAX_GUESSES) {
+      guesses = [...guesses, g.correctMovieID];
+    }
+    return {
+      id: g.correctMovieID,
+      date: g.date,
+      status: g.won ? 'won' : 'lost',
+      guesses,
+      timeStarted: null,
+      timeCompleted: null
+    };
+  });
 
   localStorage.setItem('gameStats', JSON.stringify(gameStats));
   localStorage.setItem('gameHistory', JSON.stringify(gameHistory));
