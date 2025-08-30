@@ -90,7 +90,6 @@ function migrateLocalStorage() {
   localStorage.setItem('gameHistory', JSON.stringify(gameHistory));
   localStorage.setItem('storageVersion', STORAGE_VERSION);
 }
-
 migrateLocalStorage();
 
 let globalGameStats = JSON.parse(localStorage.getItem('gameStats')) || {
@@ -557,7 +556,9 @@ function displayMovieList(movies) {
 
 
 function filterMovies(event) {
-  if (!fuse) return; // Fuse not ready yet
+  // Backup: If Fuse is not ready, fallback to simple substring search
+  const searchInput = document.getElementById("search");
+  if (!searchInput) return;
 
   const allowedRegex = /^[a-zA-Z0-9 !@#$ﬂ&*()_+\-=\~`{}|:"<>?$$\\;',./]$/;
 
@@ -565,17 +566,25 @@ function filterMovies(event) {
     return;
   }
 
-  const searchQuery = document.getElementById("search").value.trim().toLowerCase();
+  const searchQuery = searchInput.value.trim().toLowerCase();
 
   if (searchQuery === "") {
     clearSearchAndMovieList();
     return;
   }
 
-  const results = fuse.search(searchQuery);
-  const filteredMovies = results
-    .slice(0, MAX_NUM_MOVIES_TO_SHOW)
-    .map(result => result.item);
+  let filteredMovies = [];
+  if (fuse) {
+    const results = fuse.search(searchQuery);
+    filteredMovies = results
+      .slice(0, MAX_NUM_MOVIES_TO_SHOW)
+      .map(result => result.item);
+  } else {
+    // Simple substring search as backup
+    filteredMovies = allMovies.filter(movie =>
+      movie.title && movie.title.toLowerCase().includes(searchQuery)
+    ).slice(0, MAX_NUM_MOVIES_TO_SHOW);
+  }
 
   displayMovieList(filteredMovies);
 }
@@ -610,9 +619,9 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
     else{
       response = await fetch('/api/get-movie');
     }
-
     if (!response.ok) throw new Error('Network response was not ok');
     const data = await response.json();
+
     correctMovieID = data.movieID;
     correctMovieObject = allMovies.find(movie => movie.movieID === correctMovieID);
     correctMovieDate = data.date;
@@ -627,13 +636,14 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
       await fetchData(correctMovieID, correctMovieDate, i);
     }
 
-    let loaded = loadOngoingGame(correctMovieID, correctMovieDate);
+    let game_in_progress = loadOngoingGame(correctMovieID, correctMovieDate);
 
-
+    // Game was lost or won (completed)
     if (hasGameBeenPlayed(correctMovieID)) {
       finishGame(hasGameBeenWon(correctMovieID));
     }
-    else if (loaded) {
+    // Game was attempted but not completed
+    else if (game_in_progress) {
       textDisplay.innerHTML = `<div id="textDisplay"><span class="message">You have an incomplete game for this movie. Continue guessing or skip!</span>`;
       incorrectGuessCount = ongoingGame.guesses.length;
       collectedGuesses = [...ongoingGame.guesses];
@@ -641,18 +651,18 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
       updateReviewNumButtons();
       // Show the last review the user unlocked, not always the first
       if (incorrectGuessCount > 0) {
-        console.log(`Showing review ${incorrectGuessCount}`);
         displayCurrentReview(incorrectGuessCount + 1);
       } else {
         displayCurrentReview();
       }
     }
+    // New game
     else {
       if (archiveDate) {
-        textDisplay.innerHTML = `<div id="textDisplay"><span class="message">You get 5 reviews (one at a time) to guess the movie. You can skip if you don't have a guess. Check your history and stats once you've played a few times. Have fun!</span>`;
+        textDisplay.innerHTML = `<div id="textDisplay"><span class="message">You get 5 reviews (one at a time) to guess the movie. You can skip. Check your history and stats once you've played a few times. Have fun!</span>`;
       }
       else {
-        textDisplay.innerHTML = `<div id="textDisplay"><span class="message">You get 5 reviews (one at a time) to guess the movie. You can skip if you don't have a guess. Click on "About & Policies" in the navbar to learn more or on "History & Stats" to check your history and stats once you've played a few times. The movie updates every day at 12AM EST. Have fun!</span>`;
+        textDisplay.innerHTML = `<div id="textDisplay"><span class="message">You get 5 reviews (one at a time) to guess the movie. You can skip. Click on "About & Policies" in the navbar to learn more or on "History & Stats" to check your history and stats once you've played a few times. The movie updates every day at 12AM EST. Have fun!</span>`;
       }
       updateReviewNumButtons();
       displayCurrentReview();
