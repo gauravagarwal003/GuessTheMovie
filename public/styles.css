@@ -307,6 +307,8 @@ body {
     margin-top: 10px;
     max-width: 720px;
     color: var(--bonewhite);
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 #dateDisplay {
@@ -731,6 +733,8 @@ a:focus #profileIcon {
     max-width: 600px;
     margin: 30px auto;
     text-align: center;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 #prev-month,
