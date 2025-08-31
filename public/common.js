@@ -48,7 +48,7 @@ if (typeof MAX_GUESSES === 'undefined') {
 
 // Frequently used DOM elements
 const reviewNumButtons = document.getElementById('imageButtons');
-const multiButton = document.querySelector('button[id="multi-button"]');
+const shareButton = document.querySelector('button[id="share-button"]');
 const dateDisplay = document.getElementById('dateDisplayMessage');
 const textDisplay = document.getElementById('textDisplay');
 
@@ -245,9 +245,6 @@ function finishGame(wonGame) {
     updateReviewNumButtons();
   }
 
-  // Set up share button
-  multiButton.textContent = "Share";
-  multiButton.onclick = pressShare;
   reviewNumButtons.style.marginRight = "0px";
   document.getElementById('search').remove();
 
@@ -269,6 +266,10 @@ function finishGame(wonGame) {
   if (searchRow) {
     searchRow.remove();
   }
+
+  // Show the share button now that the game is over
+  shareButton.style.display = 'inline-block';
+  document.getElementById('imageButtons').style.marginRight = '5px';
 
   // v1: Set and update gameHistory and stats only when game is finished
   if (ongoingGame) {
@@ -304,7 +305,6 @@ function handleGuess(guess) {
   else {
     collectedGuesses.push(SKIPPED_GUESS);
     updateOngoingGameOnGuess(SKIPPED_GUESS, true);
-    multiButton.blur();
     textDisplay.innerHTML = `<a style="text-decoration:none; color:white;" target="_blank">
               You skipped! You have ${guessString} left. Switch between reviews to get more info!
           </a>`;
@@ -329,7 +329,7 @@ function pressShare() {
     shareText = `I played "Guess The Movie" and got it in ${collectedGuesses.length} guesses! Can you do better?`;
   }
   else {
-    shareText = `I played "Guess The Movie" but wasn't able to get it. Can you do better?`;
+    shareText = `I played "Guess The Movie" but wasn't able to get it. Can you?`;
   }
   const shareData = {
     text: shareText,
@@ -343,9 +343,9 @@ function pressShare() {
     shareText += ` Play now at ${window.location.href}`;
     navigator.clipboard.writeText(shareText)
       .then(() => {
-        multiButton.textContent = "Copied";
+        shareButton.textContent = "Copied";
         setTimeout(() => {
-          multiButton.textContent = "Share";
+          shareButton.textContent = "Share";
         }, 4000);
       })
       .catch((err) => {
@@ -705,6 +705,8 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
       } else {
         displayCurrentReview();
       }
+      
+      shareButton.style.display = 'none';
     }
     // New game
     else {
@@ -716,6 +718,9 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
       }
       updateReviewNumButtons();
       displayCurrentReview();
+      
+      // Hide share button for new games
+      shareButton.style.display = 'none';
 
     }
 

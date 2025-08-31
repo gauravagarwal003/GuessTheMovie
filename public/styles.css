@@ -235,6 +235,18 @@ body {
     color: var(--LBackground);
 }
 
+#share-button {
+    background-color: transparent;
+    color: var(--bonewhite);
+    outline: none;
+    border: none;
+    display: none; /* Initially hidden */
+}
+
+#share-button:hover {
+    color: var(--LBackground);
+}
+
 #search-row {
     display: flex;
     align-items: center;
@@ -351,10 +363,6 @@ body {
     max-width: fit-content;
     align-items: center;
     display: flex;
-}
-
-#imageButtons {
-    margin-right: 20px;
 }
 
 #imageButtons button {
