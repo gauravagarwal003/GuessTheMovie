@@ -111,8 +111,9 @@
 
             <div id="search-row">
                 <label for="search" class="visually-hidden">Search for a movie</label>
-                <input type="text" id="search" placeholder="Search" oninput="filterMovies(event)" autocorrect="off"
+                <input type="text" id="search" placeholder="Search or press submit to skip" oninput="filterMovies(event)" autocorrect="off"
                     autocomplete="off" autocapitalize="off" spellcheck="false">
+                <button type="button" id="submit-button" onclick="handleSubmit()">Submit</button>
             </div>
             <ul id="movieList" class="movie-list"></ul>
             <div class="image-container" id="movie_container">

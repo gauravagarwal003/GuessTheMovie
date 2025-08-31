@@ -263,6 +263,31 @@ body {
     padding-left: 2px;
 }
 
+#submit-button {
+    background-color: var(--calendar-green-hover);
+    color: var(--bonewhite);
+    border: none;
+    outline: none;
+    padding: 10px 15px;
+    border-radius: 20px;
+    font-size: 1.1rem;
+    margin-left: 10px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+#submit-button:hover {
+    background-color: var(--calendar-green);
+}
+
+@media (max-width: 460px) {
+    #submit-button {
+        padding: 10px 12px;
+        font-size: 1rem;
+        margin-left: 8px;
+    }
+}
+
 .movie-list {
     padding-left: 0;
     list-style-type: none;

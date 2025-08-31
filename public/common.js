@@ -170,6 +170,64 @@ function selectMovie(guessedMovieID) {
   }
 }
 
+// Load movie into search bar without submitting
+function loadMovieIntoSearchBar(movieID) {
+  const movie = allMovies.find(m => m.movieID === movieID);
+  if (movie) {
+    const searchInput = document.getElementById('search');
+    searchInput.value = `${movie.title} (${movie.year})`;
+    clearMovieList();
+  }
+}
+
+// Handle submit button click
+function handleSubmit() {
+  const searchInput = document.getElementById('search');
+  const searchQuery = searchInput.value.trim();
+  
+  if (searchQuery === '') {
+    // Empty search bar counts as skip
+    handleGuess(null);
+    return;
+  }
+  
+  // Check if the search query exactly matches a movie in the format "Title (Year)"
+  const exactMatch = allMovies.find(movie => 
+    `${movie.title} (${movie.year})` === searchQuery
+  );
+  
+  if (exactMatch) {
+    // Submit the exact match
+    selectMovie(exactMatch.movieID);
+    return;
+  }
+  
+  // If no exact match, search for movies and auto-select the first result
+  let filteredMovies = [];
+  if (fuse) {
+    const results = fuse.search(searchQuery);
+    filteredMovies = results
+      .slice(0, MAX_NUM_MOVIES_TO_SHOW)
+      .map(result => result.item);
+  } else {
+    // Simple substring search as backup
+    filteredMovies = allMovies.filter(movie =>
+      movie.title && movie.title.toLowerCase().includes(searchQuery.toLowerCase())
+    ).slice(0, MAX_NUM_MOVIES_TO_SHOW);
+  }
+  
+  if (filteredMovies.length > 0) {
+    // Load first result into search bar and submit it
+    const firstMovie = filteredMovies[0];
+    searchInput.value = `${firstMovie.title} (${firstMovie.year})`;
+    clearMovieList();
+    selectMovie(firstMovie.movieID);
+  } else {
+    // No matches found, treat as skip
+    handleGuess(null);
+  }
+}
+
 // Finish the game
 function finishGame(wonGame) {
   gameOver = true;
@@ -207,7 +265,10 @@ function finishGame(wonGame) {
   }
   existingDiv.setAttribute("href", "https://letterboxd.com/film/" + correctMovieID);
   existingDiv.setAttribute("target", "_blank");
-  document.getElementById('search-row').style.margin = "0px";
+  const searchRow = document.getElementById('search-row');
+  if (searchRow) {
+    searchRow.remove();
+  }
 
   // v1: Set and update gameHistory and stats only when game is finished
   if (ongoingGame) {
@@ -282,7 +343,6 @@ function pressShare() {
     shareText += ` Play now at ${window.location.href}`;
     navigator.clipboard.writeText(shareText)
       .then(() => {
-
         multiButton.textContent = "Copied";
         setTimeout(() => {
           multiButton.textContent = "Share";
@@ -297,6 +357,11 @@ function pressShare() {
 // Clear the search input and movie list
 function clearSearchAndMovieList() {
   document.getElementById('search').value = '';
+  document.getElementById('movieList').innerHTML = '';
+}
+
+// Clear only the movie list
+function clearMovieList() {
   document.getElementById('movieList').innerHTML = '';
 }
 
@@ -473,16 +538,26 @@ window.addEventListener('keydown', (event) => {
   }
   else if (event.key === 'Enter') {
     const items = document.querySelectorAll('.movie-list li');
-    if (items.length === 0) return;
     const activeElement = document.activeElement;
-    // If the search textbox is focused, select the first movie
+    
+    // If Enter is pressed while search input is focused and no movie is selected from list
     if (activeElement.id === 'search' && currentMovieListIndex === -1) {
-      currentMovieListIndex = 0;
-      updateSelectedItem();
+      // Submit the current search query
+      handleSubmit();
+      return;
     }
-    // Select the movie if valid
-    else if (currentMovieListIndex >= 0 && currentMovieListIndex < items.length) {
-      items[currentMovieListIndex].click();
+    
+    // If there are movies in the list
+    if (items.length > 0) {
+      // If the search textbox is focused and no movie is selected, select the first movie
+      if (activeElement.id === 'search' && currentMovieListIndex === -1) {
+        currentMovieListIndex = 0;
+        updateSelectedItem();
+      }
+      // Load the selected movie into search bar if valid
+      else if (currentMovieListIndex >= 0 && currentMovieListIndex < items.length) {
+        items[currentMovieListIndex].click();
+      }
     }
   }
   else if (event.key === 'ArrowRight') {
@@ -508,7 +583,7 @@ function displayMovieList(movies) {
   movies.slice(0, MAX_NUM_MOVIES_TO_SHOW).forEach(movie => {
     const listItem = document.createElement('li');
     listItem.textContent = `${movie.title} (${movie.year})`;
-    listItem.onclick = () => selectMovie(movie.movieID);
+    listItem.onclick = () => loadMovieIntoSearchBar(movie.movieID);
     movieListElement.appendChild(listItem);
   });
   // Reset the selection index on list update and add mouse listeners
