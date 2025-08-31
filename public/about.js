@@ -1,3 +1,4 @@
+migrateLocalStorage();
 function displayContactForm() {
   const modalContentDiv = document.getElementById('modalContent');
   
