@@ -240,7 +240,9 @@ body {
     align-items: center;
     position: relative;
     margin: 10px auto;
-    max-width: fit-content;
+    max-width: 532px;
+    width: 100%;
+    justify-content: center;
 }
 
 #search {
@@ -251,6 +253,9 @@ body {
     padding: 10px;
     border-radius: 20px;
     font-size: 1.1rem;
+    flex: 1;
+    width: 100%;
+    min-width: 0;
 }
 
 #search::placeholder {
@@ -584,7 +589,7 @@ a:focus #profileIcon {
     background-color: var(--bonewhite);
     border-radius: 8px;
     padding: 16px;
-    margin: 16px auto;
+    margin: 16px auto 0 auto;
     max-width: 500px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
