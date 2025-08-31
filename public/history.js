@@ -145,8 +145,7 @@ function generateGameHTML(game) {
 
     if (guessText.endsWith(', ')) guessText = guessText.slice(0, -2);
 
-    const correctMovie = allMovies.find(m => m.movieID === game.correctMovieID);
-    let html = `<h3 class="historyFirstLine"><strong>${formattedDate}: <a href="https://letterboxd.com/film/${correctMovie.movieID}/" target="_blank" class="text-link"><u>${game.title} (${game.year})</u></a></strong></h3>`;
+    let html = `<h3 class="historyFirstLine"><strong>${formattedDate}: <a href="https://letterboxd.com/film/${g.movieID}/" target="_blank" class="text-link"><u>${g.title} (${g.year})</u></a></strong></h3>`;
     if (realGuessCount <= 0) html += `<p class="historySecondLine">You ${resultText} and did not guess any movies</p>`;
     else html += `<p class="historySecondLine">You ${resultText} with ${game.guessCount} ${plural}: ${guessText}</p>`;
     return html;
@@ -187,11 +186,16 @@ function generateGameHTML_v1(game) {
     if (game.status === 'incomplete') {
         html += `<span style='color: orange;'>[Movie hidden]</span>`;
     } else {
-        const correctMovie = allMovies.find(m => m.movieID === game.id);
-        if (correctMovie) {
-            html += `<a href=\"https://letterboxd.com/film/${correctMovie.movieID}/\" target=\"_blank\" class=\"text-link\"><u>${correctMovie.title} (${correctMovie.year})</u></a>`;
+        // Use title/year from game history if available
+        if (game.title && game.year) {
+            html += `<a href=\"https://letterboxd.com/film/${game.id}/\" target=\"_blank\" class=\"text-link\"><u>${game.title} (${game.year})</u></a>`;
         } else {
-            html += `${game.id}`;
+            const correctMovie = allMovies.find(m => m.movieID === game.id);
+            if (correctMovie) {
+                html += `<a href=\"https://letterboxd.com/film/${correctMovie.movieID}/\" target=\"_blank\" class=\"text-link\"><u>${correctMovie.title} (${correctMovie.year})</u></a>`;
+            } else {
+                html += `${game.id}`;
+            }
         }
     }
     html += `</strong></h3>`;

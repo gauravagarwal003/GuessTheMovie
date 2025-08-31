@@ -1,4 +1,5 @@
 window.STORAGE_VERSION = 'v1';
+const MAX_GUESSES = 5;
 window.migrateLocalStorage = function() {
   if (localStorage.getItem('storageVersion') === window.STORAGE_VERSION) return;
 
@@ -39,6 +40,9 @@ window.migrateLocalStorage = function() {
       date: g.date,
       status: isWin ? 'won' : 'lost',
       guesses,
+      title: g.title || null,
+      year: g.year || null,
+      posterLink: g.posterLink || null,
       timeStarted: null,
       timeCompleted: null
     };

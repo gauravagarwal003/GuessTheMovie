@@ -42,7 +42,9 @@ if (archiveDate) {
 const SKIPPED_GUESS = '__SKIPPED__'; // Sentinel value to indicate a skipped guess
 const MAX_NUM_MOVIES_TO_SHOW = 50;
 const SELECTED_COLUMNS = ['title', 'year', 'movieID', 'posterLink']; // Columns to select from the CSV file
-const MAX_GUESSES = 5;
+if (typeof MAX_GUESSES === 'undefined') {
+  MAX_GUESSES = 5;
+}
 
 // Frequently used DOM elements
 const reviewNumButtons = document.getElementById('imageButtons');
@@ -583,14 +585,27 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
     const data = await response.json();
 
     correctMovieID = data.movieID;
-    correctMovieObject = allMovies.find(movie => movie.movieID === correctMovieID);
-    correctMovieDate = data.date;
-    formattedMovieDate = new Date(correctMovieDate).toLocaleDateString('en-US', {
-      timeZone: 'UTC',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
+      correctMovieDate = data.date;
+      formattedMovieDate = new Date(correctMovieDate).toLocaleDateString('en-US', {
+        timeZone: 'UTC',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+
+      // Try to get correctMovieObject from localStorage game history if available
+      let history = JSON.parse(localStorage.getItem('gameHistory')) || [];
+      let gameObj = history.find(g => g.id === correctMovieID);
+      if (gameObj && gameObj.title && gameObj.year && gameObj.posterLink) {
+        correctMovieObject = {
+          title: gameObj.title,
+          year: gameObj.year,
+          posterLink: gameObj.posterLink,
+          movieID: correctMovieID
+        };
+      } else {
+        correctMovieObject = allMovies.find(movie => movie.movieID === correctMovieID);
+      }
 
     for (let i = 0; i < MAX_GUESSES; i++) {
       await fetchData(correctMovieID, correctMovieDate, i);
