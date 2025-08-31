@@ -9,7 +9,7 @@
     --searchbarBackground: var(--bonewhite);
     --searchbarText: rgb(100, 110, 130);
     --movieListText: var(--bonewhite);
-    --activeButtonBackground: var(--LBackground);
+    --activeButtonBackground: rgb(30, 30, 40);
     --activeButtonText: var(--bonewhite);
     --inactiveButtonBackground: transparent;
     --inactiveButtonText: rgb(150, 170, 190);
@@ -619,7 +619,7 @@ a:focus #profileIcon {
 
 /* Container for the entire review card */
 .review-card {
-    background-color: var(--bonewhite);
+    background-color: var(--LBackground);
     border-radius: 8px;
     padding: 16px;
     margin: 16px auto 0 auto;
@@ -640,7 +640,7 @@ a:focus #profileIcon {
 .review-username {
     margin: -15px 0 8px;
     font-size: 25px;
-    color: var(--LBackground);
+    color: var(--bonewhite);
 }
 
 /* Rating styling */
@@ -656,7 +656,7 @@ a:focus #profileIcon {
 /* Review text styling */
 .review-text {
     margin: 4px 0;
-    color: var(--currentBackground);
+    color: var(--bonewhite);
     line-height: 1.4;
     font-size: 20px;
 }
@@ -681,7 +681,7 @@ a:focus #profileIcon {
 .review-comments,
 .likes-comments {
     margin: 4px 0;
-    color: #777;
+    color: rgb(150,150,150);
     font-size: 14px;
 }
 
