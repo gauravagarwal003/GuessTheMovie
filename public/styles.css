@@ -665,11 +665,17 @@ a:focus #profileIcon {
 .review-link {
     display: inline-block;
     margin-top: 8px;
-    padding: 6px 12px;
+    padding: 4px 8px;
     background-color: #0077cc;
     color: #fff;
     text-decoration: none;
     border-radius: 4px;
+    font-size: 14px;
+}
+
+/* Remove top margin when inside the likes-comments container */
+.likes-comments-container .review-link {
+    margin-top: 0;
 }
 
 .review-link:hover {
@@ -683,6 +689,22 @@ a:focus #profileIcon {
     margin: 4px 0;
     color: rgb(150,150,150);
     font-size: 14px;
+}
+
+/* Container for likes/comments and review link */
+.likes-comments-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 4px 0;
+}
+
+.likes-comments-container .likes-comments {
+    margin: 0;
+}
+
+.likes-comments-container .review-link {
+    margin: 0;
 }
 
 .review-date {
