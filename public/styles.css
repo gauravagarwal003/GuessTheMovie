@@ -339,8 +339,8 @@ body {
 }
 
 #textDisplay {
-    margin-top: 10px;
-    font-size: 110%;
+    margin-top: -10px;
+    font-size: 18px;
     max-width: 720px;
     color: var(--bonewhite);
 }
@@ -417,6 +417,63 @@ body {
     gap: 3px;
     padding-right: 10px;
     text-decoration: none;
+}
+
+/* Game progress pill-style buttons */
+.game-progress {
+    margin: 15px 0;
+    text-align: center;
+}
+
+.game-progress .remaining-guesses {
+    color: var(--bonewhite);
+    margin-bottom: 12px;
+    font-size: 1.1em;
+}
+
+.previous-guesses {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+    margin-top: 8px;
+}
+
+.guess-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 12px;
+    background-color: transparent;
+    color: var(--inactiveButtonText);
+    border: 1px solid var(--inactiveButtonText);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.guess-pill:hover {
+    color: var(--bonewhite);
+    border-color: var(--bonewhite);
+}
+
+.guess-pill.skipped {
+    color: var(--inactiveButtonText);
+    border-color: var(--inactiveButtonText);
+}
+
+.guess-pill.skipped:hover {
+    color: var(--bonewhite);
+    border-color: var(--bonewhite);
+}
+
+.guess-number {
+    font-size: 0.8em;
+    opacity: 0.8;
 }
 
 #coffeeLabel {
@@ -579,19 +636,15 @@ a:focus #profileIcon {
 
 #movie_poster {
     display: inline-block;
-}
-
-.movie-poster-img {
-    display: block;
-    margin-top: 3%;
-    max-width: 100%;
-    padding-bottom: 100px;
+    max-width: 90%;
 }
 
 #movie_poster img {
     display: block;
-    max-width: 100%;
+    margin: 3% auto 0 auto;
+    width: 100%;
     height: auto;
+    padding-bottom: 5%;
 }
 
 .footer-item:hover .icon {
@@ -654,11 +707,12 @@ a:focus #profileIcon {
 }
 
 /* Review text styling */
-.review-text {
-    margin: 4px 0;
+#reviewText {
     color: var(--bonewhite);
     line-height: 1.4;
     font-size: 20px;
+    margin-top: -10px;
+    margin-bottom: -10px;
 }
 
 /* Link styling */

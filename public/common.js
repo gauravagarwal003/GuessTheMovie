@@ -268,11 +268,7 @@ function finishGame(wonGame) {
   gameOver = true;
   gameWon = wonGame;
   gameOverMessage = wonGame ? "You got it! " : "You lost. ";
-  textDisplay.innerHTML = `<div id="textDisplay">${gameOverMessage}<span class="message"></span><a href="https://letterboxd.com/film/${correctMovieID}" class="text-link" target="_blank">${correctMovieObject.title} (${correctMovieObject.year})</a><span class="message"> is the correct movie.</span><br>`;
-  if (!archiveDate) {
-    textDisplay.innerHTML += `<span class="message"> Come back tomorrow to play again!</span>`;
-  }
-  textDisplay.innerHTML += `</div>`;
+  textDisplay.innerHTML = `<div id="textDisplay">${gameOverMessage}<span class="message"></span><a href="https://letterboxd.com/film/${correctMovieID}" class="text-link" target="_blank">${correctMovieObject.title} (${correctMovieObject.year})</a><span class="message"> is the correct movie.</span><br></div>`;
 
   clearSearchAndMovieList();
   if (incorrectGuessCount < MAX_GUESSES) {
@@ -285,7 +281,6 @@ function finishGame(wonGame) {
 
   // Add movie poster to page
   const img = document.createElement('img');
-  img.classList.add('movie-poster-img');
   img.src = correctMovieObject.posterLink;
   img.alt = `${correctMovieObject.title} (${correctMovieObject.year}) movie poster`;
   const existingDiv = document.getElementById('movie_poster');
@@ -342,13 +337,24 @@ function handleGuess(guess) {
   const guessString = remainingGuesses === 1 ? "1 guess" : `${remainingGuesses} guesses`;
   const previousGuessesItems = formatPreviousGuesses(collectedGuesses);
   
-  // Display updated game progress (same format as incomplete/new games)
-  let progressMessage = `<div id="textDisplay"><span class="message">You have ${guessString} left.</span>`;
+  // Display updated game progress with pill-style buttons
+  let progressMessage = `<div class="game-progress">
+    <div class="remaining-guesses">You have ${guessString} left</div>`;
+  
   if (previousGuessesItems.length > 0) {
+    progressMessage += `<div class="previous-guesses">`;
+    
     previousGuessesItems.forEach((item, index) => {
-      progressMessage += `<br><span class="message" style="cursor: pointer; text-decoration: underline;" onclick="displayCurrentReview(${item.reviewIndex}); makeButtonActive(${item.reviewIndex}); currentReviewIndex = ${item.reviewIndex};">${index + 1}. ${item.text}</span>`;
+      const skippedClass = item.isSkipped ? ' skipped' : '';
+      progressMessage += `<div class="guess-pill${skippedClass}" onclick="displayCurrentReview(${item.reviewIndex}); makeButtonActive(${item.reviewIndex}); currentReviewIndex = ${item.reviewIndex};">
+        <span class="guess-number">${index + 1}.</span>
+        <span>${item.text}</span>
+      </div>`;
     });
+    
+    progressMessage += `</div>`;
   }
+  
   progressMessage += `</div>`;
   
   textDisplay.innerHTML = progressMessage;
@@ -746,13 +752,24 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
       // Format previous guesses
       const previousGuessesItems = formatPreviousGuesses(collectedGuesses);
       
-      // Display game progress instead of generic instructions
-      let progressMessage = `<div id="textDisplay"><span class="message">You have ${guessString} left.</span>`;
+      // Display game progress with pill-style buttons
+      let progressMessage = `<div class="game-progress">
+        <div class="remaining-guesses">You have ${guessString} left</div>`;
+      
       if (previousGuessesItems.length > 0) {
+        progressMessage += `<div class="previous-guesses">`;
+        
         previousGuessesItems.forEach((item, index) => {
-          progressMessage += `<br><span class="message" style="cursor: pointer; text-decoration: underline;" onclick="displayCurrentReview(${item.reviewIndex}); makeButtonActive(${item.reviewIndex}); currentReviewIndex = ${item.reviewIndex};">${index + 1}. ${item.text}</span>`;
+          const skippedClass = item.isSkipped ? ' skipped' : '';
+          progressMessage += `<div class="guess-pill${skippedClass}" onclick="displayCurrentReview(${item.reviewIndex}); makeButtonActive(${item.reviewIndex}); currentReviewIndex = ${item.reviewIndex};">
+            <span class="guess-number">${index + 1}.</span>
+            <span>${item.text}</span>
+          </div>`;
         });
+        
+        progressMessage += `</div>`;
       }
+      
       progressMessage += `</div>`;
       
       textDisplay.innerHTML = progressMessage;
@@ -770,11 +787,11 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
     }
     // New game
     else {
-      // Show remaining guesses for new games (same format as incomplete games)
+      // Show remaining guesses for new games with pill-style structure
       const guessString = MAX_GUESSES === 1 ? "1 guess" : `${MAX_GUESSES} guesses`;
-      let progressMessage = `<div id="textDisplay"><span class="message">You have ${guessString} left.</span>`;
-      // No previous guesses for new games, so no additional line needed
-      progressMessage += `</div>`;
+      let progressMessage = `<div class="game-progress">
+        <div class="remaining-guesses">You have ${guessString} left</div>
+      </div>`;
       
       textDisplay.innerHTML = progressMessage;
       
