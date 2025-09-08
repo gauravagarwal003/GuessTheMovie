@@ -70,33 +70,78 @@ gameStats = JSON.parse(localStorage.getItem('gameStats')) || {};
 function generateGameHTML(game) {
     const formattedDate = formatDate(game.date);
     let resultText = '';
-    if (game.status === 'won') resultText = '<strong style="color: green;">won</strong>';
-    else if (game.status === 'lost') resultText = '<strong style="color: red;">lost</strong>';
-    else resultText = '<strong style="color: orange;">didn\'t finish the game (you can finish with the archive)</strong>';
+    let dateColor = '';
+    if (game.status === 'won') {
+        resultText = '<strong style="color: green;">won</strong>';
+        dateColor = 'green';
+    } else if (game.status === 'lost') {
+        resultText = '<strong style="color: red;">lost</strong>';
+        dateColor = 'red';
+    } else {
+        resultText = '<strong style="color: orange;">didn\'t finish (archive available)</strong>';
+        dateColor = 'orange';
+    }
 
     let realGuessCount = 0;
     let plural = (game.guesses && game.guesses.length > 1) ? 'reviews' : 'review';
     let guessText = '';
 
     if (Array.isArray(game.guesses)) {
-        for (let i = 0; i < game.guesses.length; i++) {
-            if (i === game.guesses.length - 1 && game.guesses.length > 1) guessText += 'and ';
-            if (game.guesses[i] === SKIPPED_GUESS) guessText += 'skipped, ';
-            else {
-                const movie = allMovies.find(m => m.movieID === game.guesses[i]);
-                if (!movie) continue;
-                realGuessCount++;
-                guessText += (game.guesses[i] === game.id ? 'correctly' : 'incorrectly');
-                guessText += ` guessed <a href="https://letterboxd.com/film/${movie.movieID}/" target="_blank" class="text-link"><u>${movie.title} (${movie.year})</u></a>, `;
+        let i = 0;
+        let guessItems = [];
+        
+        while (i < game.guesses.length) {
+            if (game.guesses[i] === SKIPPED_GUESS) {
+                // Count consecutive skips
+                let skipCount = 0;
+                while (i < game.guesses.length && game.guesses[i] === SKIPPED_GUESS) {
+                    skipCount++;
+                    i++;
+                }
+                
+                if (skipCount === 1) {
+                    guessItems.push('skipped');
+                } else {
+                    guessItems.push(`skipped ${skipCount} times`);
+                }
+            } else {
+                // Count consecutive guesses of the same movie
+                const currentMovieId = game.guesses[i];
+                let sameMovieCount = 0;
+                while (i < game.guesses.length && game.guesses[i] === currentMovieId) {
+                    sameMovieCount++;
+                    i++;
+                }
+                
+                const movie = allMovies.find(m => m.movieID === currentMovieId);
+                if (movie) {
+                    realGuessCount += sameMovieCount;
+                    const correctness = currentMovieId === game.id ? 'correctly' : 'incorrectly';
+                    
+                    if (sameMovieCount === 1) {
+                        guessItems.push(`${correctness} guessed <a href="https://letterboxd.com/film/${movie.movieID}/" target="_blank" class="text-link"><u>${movie.title} (${movie.year})</u></a>`);
+                    } else {
+                        guessItems.push(`${correctness} guessed <a href="https://letterboxd.com/film/${movie.movieID}/" target="_blank" class="text-link"><u>${movie.title} (${movie.year})</u></a> ${sameMovieCount} times`);
+                    }
+                }
             }
         }
-        if (guessText.endsWith(', ')) guessText = guessText.slice(0, -2);
+        
+        // Join the items with proper grammar
+        if (guessItems.length > 0) {
+            if (guessItems.length === 1) {
+                guessText = guessItems[0];
+            } else if (guessItems.length === 2) {
+                guessText = guessItems[0] + ' and ' + guessItems[1];
+            } else {
+                guessText = guessItems.slice(0, -1).join(', ') + ', and ' + guessItems[guessItems.length - 1];
+            }
+        }
     }
 
-    let html = `<h3 class=\"historyFirstLine\"><strong>${formattedDate}: `;
-    if (game.status === 'incomplete') {
-        html += `<span style='color: orange;'>[Movie hidden]</span>`;
-    } else {
+    let html = `<h3 class=\"historyFirstLine\"><strong>${formattedDate}`;
+    if (game.status !== 'incomplete') {
+        html += `: `;
         // Use title/year from game history if available
         if (game.title && game.year) {
             html += `<a href=\"https://letterboxd.com/film/${game.id}/\" target=\"_blank\" class=\"text-link\"><u>${game.title} (${game.year})</u></a>`;
@@ -110,8 +155,11 @@ function generateGameHTML(game) {
         }
     }
     html += `</strong></h3>`;
-    if (realGuessCount <= 0) html += `<p class="historySecondLine">You ${resultText} and did not guess any movies</p>`;
-    else html += `<p class="historySecondLine">You ${resultText} with ${game.guesses.length} ${plural}: ${guessText}</p>`;
+    if (realGuessCount <= 0 && guessText === '') {
+        html += `<p class="historySecondLine">You ${resultText} and did not guess any movies</p>`;
+    } else {
+        html += `<p class="historySecondLine">You ${resultText} with ${game.guesses.length} ${plural}: ${guessText}</p>`;
+    }
     return html;
 }
 
