@@ -148,6 +148,41 @@ function hasGameBeenPlayed(correctMovieID) {
   return history.some(game => game.id === correctMovieID && (game.status === 'won' || game.status === 'lost'));
 }
 
+// Formats previous guesses for display in incomplete games
+function formatPreviousGuesses(guesses) {
+  if (!guesses || guesses.length === 0) {
+    return [];
+  }
+  
+  let guessItems = [];
+  
+  for (let i = 0; i < guesses.length; i++) {
+    if (guesses[i] === SKIPPED_GUESS) {
+      guessItems.push({
+        text: 'Skipped',
+        reviewIndex: i + 1
+      });
+    } else {
+      // Find the movie object for this guess
+      const movie = allMovies.find(m => m.movieID === guesses[i]);
+      if (movie) {
+        guessItems.push({
+          text: `${movie.title} (${movie.year})`,
+          reviewIndex: i + 1
+        });
+      } else {
+        // Fallback if movie not found
+        guessItems.push({
+          text: `${guesses[i]}`,
+          reviewIndex: i + 1
+        });
+      }
+    }
+  }
+  
+  return guessItems;
+}
+
 // v1: Checks if user won the current game
 function hasGameBeenWon(correctMovieID) {
   let history = JSON.parse(localStorage.getItem('gameHistory')) || [];
@@ -292,26 +327,33 @@ function handleGuess(guess) {
 
   startOngoingGame(correctMovieID, correctMovieDate);
 
-  let guessString = (MAX_GUESSES - incorrectGuessCount - 1 === 1) ? "1 guess" : `${MAX_GUESSES - incorrectGuessCount - 1} guesses`;
   if (guess !== null) {
     collectedGuesses.push(guess.movieID);
     updateOngoingGameOnGuess(guess.movieID);
-    textDisplay.innerHTML = `<div id="textDisplay"><span class="message">Wrong. </span>
-    <a href="https://letterboxd.com/film/${guess.movieID}" class="text-link" target="_blank">
-    ${guess.title} (${guess.year})</a>
-    <span class="message"> is not the correct movie. You have ${guessString} left. Switch between reviews to get more info!
-        </a>`;
-  }
-  else {
+  } else {
     collectedGuesses.push(SKIPPED_GUESS);
     updateOngoingGameOnGuess(SKIPPED_GUESS, true);
-    textDisplay.innerHTML = `<a style="text-decoration:none; color:white;" target="_blank">
-              You skipped! You have ${guessString} left. Switch between reviews to get more info!
-          </a>`;
   }
 
-  clearSearchAndMovieList();
   incorrectGuessCount++;
+  
+  // Calculate remaining guesses and format previous guesses
+  const remainingGuesses = MAX_GUESSES - incorrectGuessCount;
+  const guessString = remainingGuesses === 1 ? "1 guess" : `${remainingGuesses} guesses`;
+  const previousGuessesItems = formatPreviousGuesses(collectedGuesses);
+  
+  // Display updated game progress (same format as incomplete/new games)
+  let progressMessage = `<div id="textDisplay"><span class="message">You have ${guessString} left.</span>`;
+  if (previousGuessesItems.length > 0) {
+    previousGuessesItems.forEach((item, index) => {
+      progressMessage += `<br><span class="message" style="cursor: pointer; text-decoration: underline;" onclick="displayCurrentReview(${item.reviewIndex}); makeButtonActive(${item.reviewIndex}); currentReviewIndex = ${item.reviewIndex};">${index + 1}. ${item.text}</span>`;
+    });
+  }
+  progressMessage += `</div>`;
+  
+  textDisplay.innerHTML = progressMessage;
+
+  clearSearchAndMovieList();
   if (incorrectGuessCount < MAX_GUESSES) {
     currentReviewJSONs = allReviewJSONs.slice(0, incorrectGuessCount + 1);
     updateReviewNumButtons();
@@ -694,9 +736,27 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
     }
     // Game was attempted but not completed
     else if (game_in_progress) {
-      textDisplay.innerHTML = `<div id="textDisplay"><span class="message">You have an incomplete game for this movie. Continue guessing or skip!</span>`;
       incorrectGuessCount = ongoingGame.guesses.length;
       collectedGuesses = [...ongoingGame.guesses];
+      
+      // Calculate remaining guesses
+      const remainingGuesses = MAX_GUESSES - incorrectGuessCount;
+      const guessString = remainingGuesses === 1 ? "1 guess" : `${remainingGuesses} guesses`;
+      
+      // Format previous guesses
+      const previousGuessesItems = formatPreviousGuesses(collectedGuesses);
+      
+      // Display game progress instead of generic instructions
+      let progressMessage = `<div id="textDisplay"><span class="message">You have ${guessString} left.</span>`;
+      if (previousGuessesItems.length > 0) {
+        previousGuessesItems.forEach((item, index) => {
+          progressMessage += `<br><span class="message" style="cursor: pointer; text-decoration: underline;" onclick="displayCurrentReview(${item.reviewIndex}); makeButtonActive(${item.reviewIndex}); currentReviewIndex = ${item.reviewIndex};">${index + 1}. ${item.text}</span>`;
+        });
+      }
+      progressMessage += `</div>`;
+      
+      textDisplay.innerHTML = progressMessage;
+      
       currentReviewJSONs = allReviewJSONs.slice(0, incorrectGuessCount + 1);
       updateReviewNumButtons();
       // Show the last review the user unlocked, not always the first
@@ -710,12 +770,14 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
     }
     // New game
     else {
-      if (archiveDate) {
-        textDisplay.innerHTML = `<div id="textDisplay"><span class="message">You get 5 reviews (one at a time) to guess the movie. You can skip. Check your history and stats once you've played a few times. Have fun!</span>`;
-      }
-      else {
-        textDisplay.innerHTML = `<div id="textDisplay"><span class="message">You get 5 reviews (one at a time) to guess the movie. You can skip. Click on "About & Policies" in the navbar to learn more or on "History & Stats" to check your history and stats once you've played a few times. The movie updates every day at 12AM EST. Have fun!</span>`;
-      }
+      // Show remaining guesses for new games (same format as incomplete games)
+      const guessString = MAX_GUESSES === 1 ? "1 guess" : `${MAX_GUESSES} guesses`;
+      let progressMessage = `<div id="textDisplay"><span class="message">You have ${guessString} left.</span>`;
+      // No previous guesses for new games, so no additional line needed
+      progressMessage += `</div>`;
+      
+      textDisplay.innerHTML = progressMessage;
+      
       updateReviewNumButtons();
       displayCurrentReview();
       
