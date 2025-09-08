@@ -680,25 +680,40 @@ a:focus #profileIcon {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Review header container for profile info and rating */
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
 /* Profile photo styling */
 .review-profile-photo {
     width: 45px;
     height: 45px;
     border-radius: 50%;
     object-fit: cover;
-    margin-bottom: 8px;
+    margin-bottom: 0;
 }
 
 /* Username styling */
 .review-username {
-    margin: -15px 0 8px;
+    margin: 0 0 4px 0;
     font-size: 25px;
     color: var(--bonewhite);
 }
 
+/* Rating and liked container for top right */
+.review-rating-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+}
+
 /* Rating styling */
 .review-rating {
-    margin: 4px 0;
+    margin: 0;
     color: var(--LGreen);
 }
 
@@ -769,8 +784,6 @@ a:focus #profileIcon {
     display: flex;
     align-items: center;
     gap: 12px;
-    /* space between image and text */
-    margin-bottom: 8px;
 }
 
 .review-username-text {
