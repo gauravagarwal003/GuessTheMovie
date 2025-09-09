@@ -107,6 +107,13 @@ function finishOngoingGame(status) {
   if (!ongoingGame) return;
   ongoingGame.status = status;
   ongoingGame.timeCompleted = new Date().toISOString();
+  
+  // Store movie details for future reference
+  if (correctMovieObject) {
+    ongoingGame.title = correctMovieObject.title;
+    ongoingGame.year = correctMovieObject.year;
+    ongoingGame.posterLink = correctMovieObject.posterLink;
+  }
 
   // Find and update the corresponding game in globalGameHistory
   const idx = globalGameHistory.findIndex(g => g.id === ongoingGame.id && g.status === 'incomplete');
@@ -150,6 +157,10 @@ function hasGameBeenPlayed(correctMovieID) {
 
 // Formats previous guesses for display in incomplete games
 function formatPreviousGuesses(guesses) {
+  console.log('formatPreviousGuesses called with:', guesses);
+  console.log('allMovies length:', allMovies.length);
+  console.log('correctMovieID:', correctMovieID);
+  
   if (!guesses || guesses.length === 0) {
     return [];
   }
@@ -160,26 +171,57 @@ function formatPreviousGuesses(guesses) {
     if (guesses[i] === SKIPPED_GUESS) {
       guessItems.push({
         text: 'Skipped',
-        reviewIndex: i + 1
+        reviewIndex: i + 1,
+        isCorrect: false
       });
     } else {
+      // Check if this guess is the correct movie
+      const isCorrect = guesses[i] === correctMovieID;
+      
       // Find the movie object for this guess
-      const movie = allMovies.find(m => m.movieID === guesses[i]);
+      let movie = allMovies.find(m => m.movieID === guesses[i]);
+      
       if (movie) {
         guessItems.push({
           text: `${movie.title} (${movie.year})`,
-          reviewIndex: i + 1
+          reviewIndex: i + 1,
+          isCorrect: isCorrect
         });
       } else {
-        // Fallback if movie not found
-        guessItems.push({
-          text: `${guesses[i]}`,
-          reviewIndex: i + 1
-        });
+        console.log(`Movie not found in allMovies for ID: ${guesses[i]}`);
+        
+        // For completed games, try to look up the movie info from game history
+        // This handles the case where the game was completed and we stored movie details
+        let history = JSON.parse(localStorage.getItem('gameHistory')) || [];
+        let foundMovieInfo = null;
+        
+        // Look through all completed games to find this movieID as a correct answer
+        for (let game of history) {
+          if (game.id === guesses[i] && game.title && game.year) {
+            foundMovieInfo = { title: game.title, year: game.year };
+            break;
+          }
+        }
+        
+        if (foundMovieInfo) {
+          guessItems.push({
+            text: `${foundMovieInfo.title} (${foundMovieInfo.year})`,
+            reviewIndex: i + 1,
+            isCorrect: isCorrect
+          });
+        } else {
+          // Final fallback - just show the movieID (this should rarely happen)
+          guessItems.push({
+            text: `Movie ID: ${guesses[i]}`,
+            reviewIndex: i + 1,
+            isCorrect: isCorrect
+          });
+        }
       }
     }
   }
   
+  console.log('formatPreviousGuesses returning:', guessItems);
   return guessItems;
 }
 
@@ -269,6 +311,10 @@ function finishGame(wonGame) {
   gameWon = wonGame;
   gameOverMessage = wonGame ? "You got it! " : "You lost. ";
   textDisplay.innerHTML = `<div id="textDisplay">${gameOverMessage}<span class="message"></span><a href="https://letterboxd.com/film/${correctMovieID}" class="text-link" target="_blank">${correctMovieObject.title} (${correctMovieObject.year})</a><span class="message"> is the correct movie.</span><br></div>`;
+  
+  // Update the past guesses accordion for finished games
+  const previousGuessesItems = formatPreviousGuesses(collectedGuesses);
+  updatePastGuessesDisplay(previousGuessesItems);
 
   clearSearchAndMovieList();
   if (incorrectGuessCount < MAX_GUESSES) {
@@ -337,27 +383,11 @@ function handleGuess(guess) {
   const guessString = remainingGuesses === 1 ? "1 guess" : `${remainingGuesses} guesses`;
   const previousGuessesItems = formatPreviousGuesses(collectedGuesses);
   
-  // Display updated game progress with pill-style buttons
-  let progressMessage = `<div class="game-progress">
-    <div class="remaining-guesses">You have ${guessString} left</div>`;
+  // Display simple progress message
+  textDisplay.innerHTML = `<div class="remaining-guesses">You have ${guessString} left</div>`;
   
-  if (previousGuessesItems.length > 0) {
-    progressMessage += `<div class="previous-guesses">`;
-    
-    previousGuessesItems.forEach((item, index) => {
-      const skippedClass = item.isSkipped ? ' skipped' : '';
-      progressMessage += `<div class="guess-pill${skippedClass}" onclick="displayCurrentReview(${item.reviewIndex}); makeButtonActive(${item.reviewIndex}); currentReviewIndex = ${item.reviewIndex};">
-        <span class="guess-number">${index + 1}.</span>
-        <span>${item.text}</span>
-      </div>`;
-    });
-    
-    progressMessage += `</div>`;
-  }
-  
-  progressMessage += `</div>`;
-  
-  textDisplay.innerHTML = progressMessage;
+  // Update the past guesses accordion
+  updatePastGuessesDisplay(previousGuessesItems);
 
   clearSearchAndMovieList();
   if (incorrectGuessCount < MAX_GUESSES) {
@@ -738,6 +768,13 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
 
     // Game was lost or won (completed)
     if (hasGameBeenPlayed(correctMovieID)) {
+      // Load the completed game data to populate collectedGuesses and incorrectGuessCount
+      let history = JSON.parse(localStorage.getItem('gameHistory')) || [];
+      let completedGame = history.find(g => g.id === correctMovieID && (g.status === 'won' || g.status === 'lost'));
+      if (completedGame && completedGame.guesses) {
+        collectedGuesses = [...completedGame.guesses];
+        incorrectGuessCount = completedGame.guesses.length;
+      }
       finishGame(hasGameBeenWon(correctMovieID));
     }
     // Game was attempted but not completed
@@ -752,27 +789,11 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
       // Format previous guesses
       const previousGuessesItems = formatPreviousGuesses(collectedGuesses);
       
-      // Display game progress with pill-style buttons
-      let progressMessage = `<div class="game-progress">
-        <div class="remaining-guesses">You have ${guessString} left</div>`;
+      // Display simple progress message
+      textDisplay.innerHTML = `<div class="remaining-guesses">You have ${guessString} left</div>`;
       
-      if (previousGuessesItems.length > 0) {
-        progressMessage += `<div class="previous-guesses">`;
-        
-        previousGuessesItems.forEach((item, index) => {
-          const skippedClass = item.isSkipped ? ' skipped' : '';
-          progressMessage += `<div class="guess-pill${skippedClass}" onclick="displayCurrentReview(${item.reviewIndex}); makeButtonActive(${item.reviewIndex}); currentReviewIndex = ${item.reviewIndex};">
-            <span class="guess-number">${index + 1}.</span>
-            <span>${item.text}</span>
-          </div>`;
-        });
-        
-        progressMessage += `</div>`;
-      }
-      
-      progressMessage += `</div>`;
-      
-      textDisplay.innerHTML = progressMessage;
+      // Update the past guesses accordion
+      updatePastGuessesDisplay(previousGuessesItems);
       
       currentReviewJSONs = allReviewJSONs.slice(0, incorrectGuessCount + 1);
       updateReviewNumButtons();
@@ -787,13 +808,9 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
     }
     // New game
     else {
-      // Show remaining guesses for new games with pill-style structure
+      // Show remaining guesses for new games
       const guessString = MAX_GUESSES === 1 ? "1 guess" : `${MAX_GUESSES} guesses`;
-      let progressMessage = `<div class="game-progress">
-        <div class="remaining-guesses">You have ${guessString} left</div>
-      </div>`;
-      
-      textDisplay.innerHTML = progressMessage;
+      textDisplay.innerHTML = `<div class="remaining-guesses">You have ${guessString} left</div>`;
       
       updateReviewNumButtons();
       displayCurrentReview();
@@ -815,3 +832,84 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
     console.error('Error during initialization:', error);
   }
 });
+
+// Past Guesses Accordion Functions
+function toggleAccordion() {
+    const container = document.querySelector('.accordion-container');
+    const content = document.querySelector('.accordion-content');
+    const expandText = document.querySelector('.expand-minimize-text');
+    
+    if (container && content) {
+        container.classList.toggle('open');
+        
+        // Update expand/minimize text
+        if (expandText) {
+            if (container.classList.contains('open')) {
+                expandText.textContent = 'Click to minimize';
+            } else {
+                expandText.textContent = 'Click to expand';
+            }
+        }
+    }
+}
+
+function updatePastGuessesDisplay(guesses) {
+    console.log('Updating past guesses display with guesses:', guesses);
+    const container = document.getElementById('past-guesses-display');
+    const guessCountBadge = document.querySelector('.guess-count-badge');
+    const headerTitle = document.querySelector('.header-title');
+    const content = document.querySelector('.accordion-content');
+    
+    if (!container || !guessCountBadge || !content) {
+        return;
+    }
+    
+    // Show/hide the container based on whether there are guesses
+    if (!guesses || guesses.length === 0) {
+        container.style.display = 'none';
+        return;
+    }
+    
+    container.style.display = 'block';    // Update the header title and badge count
+    const guessesText = gameOver ? 'Guesses' : 'Previous Guesses';
+    headerTitle.textContent = guessesText;
+    guessCountBadge.textContent = guesses.length;
+    
+    // Add winning class if game was won
+    if (gameWon) {
+        container.classList.add('won');
+        container.classList.remove('lost');
+    } else {
+        container.classList.remove('won');
+        container.classList.add('lost');
+    }
+    
+    // Populate the accordion content
+    populateAccordionContent(guesses);
+}
+
+function populateAccordionContent(guesses) {
+    const content = document.querySelector('.accordion-content');
+    if (!content) return;
+    
+    content.innerHTML = '';
+    
+    guesses.forEach((guess, index) => {
+        const item = document.createElement('div');
+        item.className = 'guess-item hoverable-row';
+        
+        const isSkipped = guess.text === 'Skipped';
+        const titleClass = isSkipped ? 'guess-title skipped' : 'guess-title';
+        const numberClass = guess.isCorrect ? 'guess-number correct' : 'guess-number';
+        
+        item.innerHTML = `
+            <div class="${numberClass}">${index + 1}</div>
+            <div class="guess-content">
+                <div class="${titleClass}">${guess.text}</div>
+                <div class="guess-meta review-selected">Review ${guess.reviewIndex}</div>
+            </div>
+        `;
+        
+        content.appendChild(item);
+    });
+}

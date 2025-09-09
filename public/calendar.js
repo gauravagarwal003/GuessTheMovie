@@ -73,11 +73,11 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
                     if (movieDates.has(dateStr)) {
                         if (completedDates.has(dateStr)) {
                             if (userGames.some(game => game.date === dateStr && game.status === 'won')) {
-                                cell.classList.add("won");
+                                cell.classList.add("won-calendar-cell");
                             } else if (userGames.some(game => game.date === dateStr && game.status === 'lost')) {
-                                cell.classList.add("lost");
+                                cell.classList.add("lost-calendar-cell");
                             } else if (userGames.some(game => game.date === dateStr && game.status === 'incomplete')) {
-                                cell.classList.add("incomplete");
+                                cell.classList.add("incomplete-calendar-cell");
                             }
                         } else {
                             cell.classList.add("available");
