@@ -170,11 +170,6 @@ function displayHistoryAndStats() {
         return;
     }
 
-    // --- History ---
-    container.innerHTML += `<h2 class="history-about-subheading" >Your Game History</h2>`;
-    const sortedGames = gameHistory.slice().sort((a, b) => new Date(b.date) - new Date(a.date));
-    sortedGames.forEach(game => container.innerHTML += generateGameHTML(game));
-
     // --- Stats ---
     container.innerHTML += `<h2 class="history-about-subheading" >Your Stats</h2>`;
     container.innerHTML += `<p>You've played ${gameStats.gamesFinished || 0} games and won ${gameStats.gamesWon || 0}, giving a win percentage of ${gameStats.winPercentage || 0}%.</p>`;
@@ -192,6 +187,13 @@ function displayHistoryAndStats() {
     if (longestWinStreak > 0) container.innerHTML += `<p>Longest win streak: ${longestWinStreak}</p>`;
     if (totalMoviesGuessed === 1) container.innerHTML += `<p>Unique movies guessed: 1</p>`;
     else if (totalMoviesGuessed > 0) container.innerHTML += `<p>Unique movies guessed: ${totalMoviesGuessed}</p>`;
+
+    // --- History ---
+    container.innerHTML += `<h2 class="history-about-subheading" >Your Game History</h2>`;
+    const sortedGames = gameHistory.slice().sort((a, b) => new Date(b.date) - new Date(a.date));
+    sortedGames.forEach(game => container.innerHTML += generateGameHTML(game));
+}
+
 // --- v1 versions of stats functions ---
 function calculateCurrentStreak(games) {
     if (!games.length) return { streak: 0, type: "none" };
@@ -248,7 +250,6 @@ function totalUniqueMoviesGuessed(games) {
         }
     }
     return guessed.size;
-}
 }
 
 // ---------------- Initialization ----------------
