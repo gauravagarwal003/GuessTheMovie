@@ -172,7 +172,7 @@ function displayHistoryAndStats() {
 
     // --- Stats ---
     container.innerHTML += `<h2 class="history-about-subheading" >Your Stats</h2>`;
-    container.innerHTML += `<p>You've played ${gameStats.gamesFinished || 0} games and won ${gameStats.gamesWon || 0}, giving a win percentage of ${gameStats.winPercentage || 0}%.</p>`;
+    container.innerHTML += `<p>You've played ${gameStats.gamesFinished || 0} games and won ${gameStats.gamesWon || 0}, giving you a win percentage of ${gameStats.winPercentage || 0}%.</p>`;
     container.innerHTML += `<p>Average guesses per win: ${(gameStats.averageGuesses || 0).toFixed(2)}</p>`;
     if (gameStats.fastestWin !== undefined) container.innerHTML += `<p>Fastest win (fewest guesses): ${gameStats.fastestWin}</p>`;
 
@@ -278,7 +278,7 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
             });
         });
 
-        // Render history & stats
+        // Render Stats & History
         displayHistoryAndStats();
 
     } catch (err) {
