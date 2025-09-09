@@ -349,6 +349,8 @@ body {
 #content-wrap {
     padding-bottom: 2.5rem;
     /* MUST BE SAME AS HEIGHT OF FOOTER */
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .body-wrapped, .history-wrapped{
