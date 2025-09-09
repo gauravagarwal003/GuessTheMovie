@@ -62,11 +62,8 @@ async function downloadFolderContents(dbx, dropboxFolderPath, localPath) {
     if (entry['.tag'] === 'file') {
       const downloadResult = await dbx.filesDownload({ path: entry.path_lower });
       fs.writeFileSync(localEntryPath, downloadResult.result.fileBinary, 'binary');
-      console.log(`Downloaded file: ${entry.path_lower} to ${localEntryPath}`);
     } else if (entry['.tag'] === 'folder') {
       await downloadFolderContents(dbx, entry.path_lower, localEntryPath);
-    } else {
-      console.log(`Skipping unsupported entry: ${entry.name}`);
     }
   }
 }
@@ -82,7 +79,6 @@ async function downloadFromDropbox(dbx, dropboxPath, localPath, targetFolder) {
     // Check if the target day's folder already exists locally.
     const targetLocalFolder = path.join(localPath, targetFolder);
     if (fs.existsSync(targetLocalFolder)) {
-      console.log(`Local folder for ${targetFolder} already exists. Skipping download.`);
       return;
     }
 
@@ -94,15 +90,12 @@ async function downloadFromDropbox(dbx, dropboxPath, localPath, targetFolder) {
         if (entry['.tag'] === 'file') {
           const downloadResult = await dbx.filesDownload({ path: entry.path_lower });
           fs.writeFileSync(localEntryPath, downloadResult.result.fileBinary, 'binary');
-          console.log(`Downloaded file: ${entry.path_lower} to ${localEntryPath}`);
         } else if (entry['.tag'] === 'folder') {
           await downloadFolderContents(dbx, entry.path_lower, localEntryPath);
-          console.log(`Downloaded folder: ${entry.path_lower} to ${localEntryPath}`);
         }
         return; // Exit after processing the target entry.
       }
     }
-    console.log(`No folder or file named '${targetFolder}' found in ${dropboxPath}`);
   } catch (error) {
     console.error('Error in downloadFromDropbox:', error);
   }
@@ -132,7 +125,6 @@ function pushChanges(commitMessage) {
               console.error("Git pull failed:", stderr);
               return reject(err);
             }
-            console.log("Git pull succeeded:\n", stdout);
 
             // Now stage, commit, and push
             const gitPushCommand = `git add . && git commit -m "${commitMessage}" || echo "No changes to commit" && git push origin main`;
@@ -141,7 +133,6 @@ function pushChanges(commitMessage) {
                 console.error("Git push failed:", stderr);
                 return reject(err);
               }
-              console.log("Changes pushed successfully:\n", stdout);
               resolve(stdout);
             });
           });
@@ -167,7 +158,6 @@ async function downloadMoviesData() {
 
     // Refresh the access token
     const accessToken = await refreshAccessToken(appKey, appSecret, refreshToken);
-    console.log("Access token refreshed.");
 
     const dbx = new Dropbox({ accessToken, fetch });
 
@@ -183,7 +173,6 @@ async function downloadMoviesData() {
 }
 
 cron.schedule('00 21 * * *', async () => {
-  console.log("Cron job triggered at " + new Date().toLocaleString());
   try {
     await downloadMoviesData();
     const commitMessage = `Update movie data for ${new Date().toLocaleDateString()}`;
@@ -198,4 +187,3 @@ cron.schedule('00 21 * * *', async () => {
 });
 
 module.exports = { pushChanges };
-console.log("Scheduler started. Waiting for next scheduled run...");
