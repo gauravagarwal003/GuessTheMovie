@@ -21,6 +21,7 @@
     --calendar-red: #dd6667;
     --calendar-green-hover: green;
     --calendar-green: var(--LGreen);
+    --offWhite: rgb(229, 229, 229);
 }
 
 html,
@@ -1072,7 +1073,7 @@ a:focus #profileIcon {
     max-height: 0;
     overflow: hidden;
     transition: all 0.3s ease;
-    background: var(--LBackground);
+    background: var(--offWhite);
 }
 
 .accordion-container.open .accordion-content {
@@ -1132,7 +1133,7 @@ a:focus #profileIcon {
 }
 
 .guess-title {
-    color: var(--bonewhite);
+    color: var(--LBackground);
     font-weight: 400;
     font-size: 0.9rem;
     line-height: 1.2;
@@ -1141,7 +1142,7 @@ a:focus #profileIcon {
 .guess-title.skipped {
     font-style: italic;
     color: var(--inactiveButtonText);
-    color: rgba(150, 170, 190, 0.5);
+    color: rgba(100, 130, 160, 0.5);
 }
 
 .guess-meta {
@@ -1152,19 +1153,23 @@ a:focus #profileIcon {
 
 /* Review text styling */
 .review-selected {
-        color: var(--inactiveButtonText);
-
+    color: var(--searchbarText);
 }
 
 /* Hoverable row styling */
 .hoverable-row {
     transition: all 0.2s ease;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 .hoverable-row:hover {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 4px;
-    padding-left: 8px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 6px;
+    padding-left: 12px;
+    padding-right: 4px;
+    transform: translateX(4px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 /* Default hover: wrong guesses show red hover */
