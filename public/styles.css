@@ -115,9 +115,6 @@ body {
     margin-bottom: 7px;
 }
 
-.text-link:hover {
-    color: var(--bonewhite);
-} 
 .text-link {
     color: var(--LBlue);
 }
