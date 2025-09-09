@@ -170,33 +170,6 @@ body {
     color: var(--LBlue) !important;
 }
 
-.tab-nav {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 1%;
-}
-
-.tab-nav a {
-    text-decoration: none;
-    padding: 1%;
-    font-weight: bold;
-    cursor: pointer;
-    color: var(--LBackground) !important;
-}
-
-.tab-nav a.active {
-    border-bottom: 1% solid var(--LBackground) !important;
-    text-decoration: underline;
-}
-
-/* Policy Content */
-.policy-content {
-    display: none;
-}
-
-.policy-content.active {
-    display: block;
-}
 
 .close-button {
     color: var(--currentBackground);
@@ -223,17 +196,6 @@ body {
     background-color: var(--currentBackground);
     margin: 0;
     padding: 0;
-}
-
-#multi-button {
-    background-color: transparent;
-    color: var(--bonewhite);
-    outline: none;
-    border: none;
-}
-
-#multi-button:hover {
-    color: var(--LBackground);
 }
 
 #share-button {
@@ -434,16 +396,6 @@ body {
     color: var(--coffeeColor);
 }
 
-#policiesLabel {
-    color: var(--LGreen);
-    text-decoration: underline;
-}
-
-#policiesIcon {
-    text-decoration: none !important;
-    color: var(--LGreen);
-}
-
 
 #contactLabel {
     color: var(--LBlue);
@@ -559,18 +511,6 @@ a:focus #profileIcon {
     animation: beat 0.8s ease infinite;
 }
 
-#footerIcon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-    color: #6e5494;
-    margin-right: -0.5%;
-}
-
-.fa-brands.fa-github:hover {
-    color: var(--bonewhite);
-}
 
 .image-container {
     display: flex;
@@ -699,7 +639,6 @@ a:focus #profileIcon {
 
 /* Date, comments, and likes styling */
 .review-date,
-.review-comments,
 .likes-comments {
     margin: 4px 0;
     color: rgb(150,150,150);
@@ -934,12 +873,6 @@ a:focus #profileIcon {
     .calendar-cell {
         padding: 5px;
         font-size: 0.8rem;
-    }
-
-    /* Optionally adjust the day-of-week header font too */
-    .calendar-day-header {
-        font-size: 0.8rem;
-        padding: 3px 0;
     }
 
     /* Reduce header font size */

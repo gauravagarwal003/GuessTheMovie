@@ -310,8 +310,8 @@ function finishGame(wonGame) {
   gameOver = true;
   gameWon = wonGame;
   gameOverMessage = wonGame ? "You got it! " : "You lost. ";
-  textDisplay.innerHTML = `<div id="textDisplay">${gameOverMessage}<span class="message"></span><a href="https://letterboxd.com/film/${correctMovieID}" class="text-link" target="_blank">${correctMovieObject.title} (${correctMovieObject.year})</a><span class="message"> is the correct movie.</span><br></div>`;
-  
+  textDisplay.innerHTML = `<div id="textDisplay">${gameOverMessage}<span class="message"></span><a href="https://letterboxd.com/film/${correctMovieID}" class="text-link" target="_blank">${correctMovieObject.title} (${correctMovieObject.year})</a><span class="message"> is the correct movie. Come back later for a new movie or use the archive to play past movies!</span><br></div>`;
+
   // Update the past guesses accordion for finished games
   const previousGuessesItems = formatPreviousGuesses(collectedGuesses);
   updatePastGuessesDisplay(previousGuessesItems);

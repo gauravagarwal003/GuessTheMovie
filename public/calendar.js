@@ -58,7 +58,6 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
 
                     // If there is a movie for this date, create a clickable link; otherwise, create plain text.
                     if (movieDates.has(dateStr)) {
-                        cell.classList.add("clickable-cell");
                         cell.onclick = function () {
                             window.location.href = "/archive/" + dateStr;
                         };
