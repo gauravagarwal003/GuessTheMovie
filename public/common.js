@@ -156,11 +156,7 @@ function hasGameBeenPlayed(correctMovieID) {
 }
 
 // Formats previous guesses for display in incomplete games
-function formatPreviousGuesses(guesses) {
-  console.log('formatPreviousGuesses called with:', guesses);
-  console.log('allMovies length:', allMovies.length);
-  console.log('correctMovieID:', correctMovieID);
-  
+function formatPreviousGuesses(guesses) {  
   if (!guesses || guesses.length === 0) {
     return [];
   }
@@ -188,7 +184,6 @@ function formatPreviousGuesses(guesses) {
           isCorrect: isCorrect
         });
       } else {
-        console.log(`Movie not found in allMovies for ID: ${guesses[i]}`);
         
         // For completed games, try to look up the movie info from game history
         // This handles the case where the game was completed and we stored movie details
@@ -221,7 +216,6 @@ function formatPreviousGuesses(guesses) {
     }
   }
   
-  console.log('formatPreviousGuesses returning:', guessItems);
   return guessItems;
 }
 
@@ -317,10 +311,9 @@ function finishGame(wonGame) {
   updatePastGuessesDisplay(previousGuessesItems);
 
   clearSearchAndMovieList();
-  if (incorrectGuessCount < MAX_GUESSES) {
-    currentReviewJSONs = allReviewJSONs.slice(0, MAX_GUESSES);
-    updateReviewNumButtons();
-  }
+  // Always show all reviews when game ends, regardless of win/loss
+  currentReviewJSONs = allReviewJSONs.slice(0, MAX_GUESSES);
+  updateReviewNumButtons();
 
   reviewNumButtons.style.marginRight = "0px";
   document.getElementById('search').remove();
@@ -551,8 +544,16 @@ function updateReviewNumButtons() {
     };
     reviewNumButtons.appendChild(button);
   });
-  makeButtonActive(incorrectGuessCount + 1);
-  currentReviewIndex = incorrectGuessCount + 1;
+  
+  // When game is over, ensure currentReviewIndex is valid for available reviews
+  if (gameOver) {
+    const validIndex = Math.min(currentReviewIndex, currentReviewJSONs.length);
+    makeButtonActive(validIndex);
+    currentReviewIndex = validIndex;
+  } else {
+    makeButtonActive(incorrectGuessCount + 1);
+    currentReviewIndex = incorrectGuessCount + 1;
+  }
 }
 
 // Updates the selected movie for styling
