@@ -154,14 +154,29 @@ app.get('/api/get-movie', (req, res) => {
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'dist'), {
     setHeaders: (res, filePath) => {
-      // Force browsers to always revalidate index.html
-      if (filePath.endsWith('index.html')) {
-        res.setHeader('Cache-Control', 'no-cache');
+      // Force browsers to always revalidate HTML, JS, and CSS files
+      if (filePath.endsWith('index.html') || 
+          filePath.endsWith('.js') || 
+          filePath.endsWith('.css')) {
+        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+        res.setHeader('Pragma', 'no-cache');
+        res.setHeader('Expires', '0');
       }
     }
   }));
 } else {
-  app.use(express.static(path.join(__dirname, 'public')));
+  app.use(express.static(path.join(__dirname, 'public'), {
+    setHeaders: (res, filePath) => {
+      // Also apply no-cache in development for consistency
+      if (filePath.endsWith('index.html') || 
+          filePath.endsWith('.js') || 
+          filePath.endsWith('.css')) {
+        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+        res.setHeader('Pragma', 'no-cache');
+        res.setHeader('Expires', '0');
+      }
+    }
+  }));
 }
 
 // --- HELPERS TO SEND PAGES ---
