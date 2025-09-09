@@ -82,8 +82,7 @@
                     <p>
                         I'm always open to feedback, ideas, or collaborations. You can email me at
                         <a href="mailto:guessmovielb@gmail.com" class="text-link">guessmovielb@gmail.com</a> or
-                        <span style="cursor: pointer; text-decoration: underline;" class="text-link"
-                            onclick="displayContactForm()">use this form</span>.
+                        <a href="javascript:void(0)" onclick="openContactForm()" class="text-link">use this form</a>.
                         If you want to support the project, you can
                         <a href="https://www.buymeacoffee.com/gprojects" target="_blank" rel="noopener" class="text-link">buy me a coffee
                             ☕</a>. Also, I'm looking for people to help with review selection. I handpick all these
@@ -186,7 +185,7 @@
                 <span id="profileLabel" class="footer-short">My LB</span>
             </a>
             
-            <a href="javascript:void(0)" onclick="displayContactForm()"class="footer-item" id="contactItem">
+            <a href="javascript:void(0)" onclick="openContactForm()" class="footer-item" id="contactItem">
                 <i class="fa-solid fa-paper-plane icon" id="contactIcon"></i>
                 <span id="contactLabel" class="footer-full">Contact Us</span>
                 <span id="contactLabel" class="footer-short">Contact</span>
@@ -195,12 +194,7 @@
 
         </footer>
     </main>
-    <div id="Modal" class="modal">
-        <div class="modal-content">
-            <span id="closeModal" class="close-button">&times;</span>
-            <div id="modalContent"></div>
-        </div>
-    </div>
+    
     <script src="/migration.js"></script>
     <script src="/about.js"></script>
 

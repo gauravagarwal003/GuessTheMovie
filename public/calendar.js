@@ -5,15 +5,14 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
         .then(response => response.json())
         .then(data => {
             const movieDates = new Set(data.dates);
-            // Retrieve user game stats (assumed stored as JSON under 'gameStats')
+            // Retrieve user game stats with error handling
             let userGames = [];
             try {
                 const storedData = localStorage.getItem('gameHistory');
-                if (storedData) {
-                    userGames = JSON.parse(storedData);
-                }
+                userGames = storedData ? JSON.parse(storedData) : [];
             } catch (e) {
-                console.error(e);
+                console.error('Failed to parse game history:', e);
+                userGames = [];
             }
             const completedDates = new Set(userGames.map(game => game.date));
 
@@ -22,29 +21,37 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
             let currentMonth = currentDate.getMonth();
             let currentYear = currentDate.getFullYear();
 
-            const monthYearSpan = document.getElementById("month-year");
-            const calendarGrid = document.getElementById("calendar-grid");
-            const prevBtn = document.getElementById("prev-month");
-            const nextBtn = document.getElementById("next-month");
+            // Cache DOM elements
+            const calendarElements = {
+                monthYearSpan: document.getElementById("month-year"),
+                calendarGrid: document.getElementById("calendar-grid"),
+                prevBtn: document.getElementById("prev-month"),
+                nextBtn: document.getElementById("next-month")
+            };
 
             function renderCalendar(month, year) {
-                calendarGrid.innerHTML = "";
+                if (!calendarElements.calendarGrid || !calendarElements.monthYearSpan) return;
+                
+                calendarElements.calendarGrid.innerHTML = "";
 
                 // Display month and year
                 const monthNames = ["January", "February", "March", "April", "May", "June",
                     "July", "August", "September", "October", "November", "December"];
-                monthYearSpan.textContent = monthNames[month] + " " + year;
+                calendarElements.monthYearSpan.textContent = `${monthNames[month]} ${year}`;
 
                 // Get the day of the week the month starts on (0=Sunday)
                 const firstDay = new Date(year, month, 1).getDay();
                 // Number of days in the month
                 const daysInMonth = new Date(year, month + 1, 0).getDate();
 
+                // Use document fragment for better performance
+                const fragment = document.createDocumentFragment();
+                
                 // Add empty cells for days before the first day of the month
                 for (let i = 0; i < firstDay; i++) {
                     let emptyCell = document.createElement("div");
                     emptyCell.classList.add("calendar-cell", "empty");
-                    calendarGrid.appendChild(emptyCell);
+                    fragment.appendChild(emptyCell);
                 }
 
                 // Create cells for each day
@@ -85,27 +92,34 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
                         cell.classList.add("no-movie");
                     }
 
-                    calendarGrid.appendChild(cell);
+                    fragment.appendChild(cell);
                 }
+                
+                // Append the entire fragment at once for better performance
+                calendarElements.calendarGrid.appendChild(fragment);
             }
 
-            prevBtn.addEventListener("click", function () {
-                currentMonth--;
-                if (currentMonth < 0) {
-                    currentMonth = 11;
-                    currentYear--;
-                }
-                renderCalendar(currentMonth, currentYear);
-            });
+            if (calendarElements.prevBtn) {
+                calendarElements.prevBtn.addEventListener("click", function () {
+                    currentMonth--;
+                    if (currentMonth < 0) {
+                        currentMonth = 11;
+                        currentYear--;
+                    }
+                    renderCalendar(currentMonth, currentYear);
+                });
+            }
 
-            nextBtn.addEventListener("click", function () {
-                currentMonth++;
-                if (currentMonth > 11) {
-                    currentMonth = 0;
-                    currentYear++;
-                }
-                renderCalendar(currentMonth, currentYear);
-            });
+            if (calendarElements.nextBtn) {
+                calendarElements.nextBtn.addEventListener("click", function () {
+                    currentMonth++;
+                    if (currentMonth > 11) {
+                        currentMonth = 0;
+                        currentYear++;
+                    }
+                    renderCalendar(currentMonth, currentYear);
+                });
+            }
 
             renderCalendar(currentMonth, currentYear);
         })
