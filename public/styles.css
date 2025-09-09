@@ -1,3 +1,4 @@
+
 :root {
     --LOrange: #ef8733;
     --LGreen: #66dd67;
@@ -8,18 +9,25 @@
     --searchbarBackground: var(--bonewhite);
     --searchbarText: rgb(100, 110, 130);
     --movieListText: var(--bonewhite);
-    --activeButtonBackground: var(--LBackground);
+    --activeButtonBackground: rgb(30, 30, 40);
     --activeButtonText: var(--bonewhite);
     --inactiveButtonBackground: transparent;
     --inactiveButtonText: rgb(150, 170, 190);
     --movieHoverBackground: var(--LBackground);
     --coffeeColor: rgb(165, 135, 110);
+    --calendar-yellow-hover: rgb(169, 161, 0);
+    --calendar-yellow: #f1ff33;
+    --calendar-red-hover: rgb(128,0,0);
+    --calendar-red: #dd6667;
+    --calendar-green-hover: green;
+    --calendar-green: var(--LGreen);
+    --offWhite: rgb(229, 229, 229);
 }
 
 html,
 body {
     overflow-x: hidden;
-    overscroll-behavior: none;
+    overscroll-behavior-x: none;
 }
 
 #header {
@@ -107,9 +115,6 @@ body {
     margin-bottom: 7px;
 }
 
-.text-link:hover {
-    color: var(--bonewhite);
-} 
 .text-link {
     color: var(--LBlue);
 }
@@ -162,33 +167,6 @@ body {
     color: var(--LBlue) !important;
 }
 
-.tab-nav {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 1%;
-}
-
-.tab-nav a {
-    text-decoration: none;
-    padding: 1%;
-    font-weight: bold;
-    cursor: pointer;
-    color: var(--LBackground) !important;
-}
-
-.tab-nav a.active {
-    border-bottom: 1% solid var(--LBackground) !important;
-    text-decoration: underline;
-}
-
-/* Policy Content */
-.policy-content {
-    display: none;
-}
-
-.policy-content.active {
-    display: block;
-}
 
 .close-button {
     color: var(--currentBackground);
@@ -217,14 +195,15 @@ body {
     padding: 0;
 }
 
-#multi-button {
+#share-button {
     background-color: transparent;
     color: var(--bonewhite);
     outline: none;
     border: none;
+    display: none; /* Initially hidden */
 }
 
-#multi-button:hover {
+#share-button:hover {
     color: var(--LBackground);
 }
 
@@ -233,7 +212,9 @@ body {
     align-items: center;
     position: relative;
     margin: 10px auto;
-    max-width: fit-content;
+    max-width: 532px;
+    width: 100%;
+    justify-content: center;
 }
 
 #search {
@@ -244,11 +225,39 @@ body {
     padding: 10px;
     border-radius: 20px;
     font-size: 1.1rem;
+    flex: 1;
+    width: 100%;
+    min-width: 0;
 }
 
 #search::placeholder {
     color: var(--searchbarText);
     padding-left: 2px;
+}
+
+#submit-button {
+    background-color: var(--calendar-green-hover);
+    color: var(--bonewhite);
+    border: none;
+    outline: none;
+    padding: 10px 15px;
+    border-radius: 20px;
+    font-size: 1.1rem;
+    margin-left: 10px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+#submit-button:hover {
+    background-color: var(--calendar-green);
+}
+
+@media (max-width: 460px) {
+    #submit-button {
+        padding: 10px 12px;
+        font-size: 1rem;
+        margin-left: 8px;
+    }
 }
 
 .movie-list {
@@ -290,8 +299,8 @@ body {
 }
 
 #textDisplay {
-    margin-top: 10px;
-    font-size: 110%;
+    margin-top: -10px;
+    font-size: 18px;
     max-width: 720px;
     color: var(--bonewhite);
 }
@@ -300,6 +309,8 @@ body {
     margin-top: 10px;
     max-width: 720px;
     color: var(--bonewhite);
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 #dateDisplay {
@@ -312,10 +323,6 @@ body {
     max-width: fit-content;
     align-items: center;
     display: flex;
-}
-
-#imageButtons {
-    margin-right: 20px;
 }
 
 #imageButtons button {
@@ -339,6 +346,8 @@ body {
 #content-wrap {
     padding-bottom: 2.5rem;
     /* MUST BE SAME AS HEIGHT OF FOOTER */
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .body-wrapped, .history-wrapped{
@@ -372,6 +381,8 @@ body {
     text-decoration: none;
 }
 
+
+
 #coffeeLabel {
     color: var(--coffeeColor);
     text-decoration: underline;
@@ -382,16 +393,6 @@ body {
     text-decoration: none !important;
     /* Ensures icon remains unlined */
     color: var(--coffeeColor);
-}
-
-#policiesLabel {
-    color: var(--LGreen);
-    text-decoration: underline;
-}
-
-#policiesIcon {
-    text-decoration: none !important;
-    color: var(--LGreen);
 }
 
 
@@ -509,18 +510,6 @@ a:focus #profileIcon {
     animation: beat 0.8s ease infinite;
 }
 
-#footerIcon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-    color: #6e5494;
-    margin-right: -0.5%;
-}
-
-.fa-brands.fa-github:hover {
-    color: var(--bonewhite);
-}
 
 .image-container {
     display: flex;
@@ -532,19 +521,15 @@ a:focus #profileIcon {
 
 #movie_poster {
     display: inline-block;
-}
-
-.movie-poster-img {
-    display: block;
-    margin-top: 3%;
-    max-width: 100%;
-    padding-bottom: 100px;
+    max-width: 90%;
 }
 
 #movie_poster img {
     display: block;
-    max-width: 100%;
+    margin: 3% auto 0 auto;
+    width: 100%;
     height: auto;
+    padding-bottom: 5%;
 }
 
 .footer-item:hover .icon {
@@ -572,12 +557,19 @@ a:focus #profileIcon {
 
 /* Container for the entire review card */
 .review-card {
-    background-color: var(--bonewhite);
+    background-color: var(--LBackground);
     border-radius: 8px;
     padding: 16px;
-    margin: 16px auto;
+    margin: 16px auto 0 auto;
     max-width: 500px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Review header container for profile info and rating */
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
 /* Profile photo styling */
@@ -586,19 +578,27 @@ a:focus #profileIcon {
     height: 45px;
     border-radius: 50%;
     object-fit: cover;
-    margin-bottom: 8px;
+    margin-bottom: 0;
 }
 
 /* Username styling */
 .review-username {
-    margin: -15px 0 8px;
+    margin: 0 0 4px 0;
     font-size: 25px;
-    color: var(--LBackground);
+    color: var(--bonewhite);
+}
+
+/* Rating and liked container for top right */
+.review-rating-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
 }
 
 /* Rating styling */
 .review-rating {
-    margin: 4px 0;
+    margin: 0;
     color: var(--LGreen);
 }
 
@@ -607,22 +607,29 @@ a:focus #profileIcon {
 }
 
 /* Review text styling */
-.review-text {
-    margin: 4px 0;
-    color: var(--currentBackground);
+#reviewText {
+    color: var(--bonewhite);
     line-height: 1.4;
     font-size: 20px;
+    margin-top: -10px;
+    margin-bottom: -10px;
 }
 
 /* Link styling */
 .review-link {
     display: inline-block;
     margin-top: 8px;
-    padding: 6px 12px;
+    padding: 4px 8px;
     background-color: #0077cc;
     color: #fff;
     text-decoration: none;
     border-radius: 4px;
+    font-size: 14px;
+}
+
+/* Remove top margin when inside the likes-comments container */
+.likes-comments-container .review-link {
+    margin-top: 0;
 }
 
 .review-link:hover {
@@ -631,23 +638,36 @@ a:focus #profileIcon {
 
 /* Date, comments, and likes styling */
 .review-date,
-.review-comments,
 .likes-comments {
     margin: 4px 0;
-    color: #777;
+    color: rgb(150,150,150);
     font-size: 14px;
 }
 
+/* Container for likes/comments and review link */
+.likes-comments-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 4px 0;
+}
+
+.likes-comments-container .likes-comments {
+    margin: 0;
+}
+
+.likes-comments-container .review-link {
+    margin: 0;
+}
+
 .review-date {
-    margin-top: -10px;
+    margin-top: -8px;
 }
 
 .review-username-container {
     display: flex;
     align-items: center;
     gap: 12px;
-    /* space between image and text */
-    margin-bottom: 8px;
 }
 
 .review-username-text {
@@ -724,6 +744,8 @@ a:focus #profileIcon {
     max-width: 600px;
     margin: 30px auto;
     text-align: center;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 #prev-month,
@@ -784,23 +806,29 @@ a:focus #profileIcon {
     text-decoration: underline !important;
 }
 
-.available a {
-    text-decoration: none !important;
-    color: black !important;
+
+
+.won-calendar-cell {
+    background-color: var(--calendar-green);
+}
+.won-calendar-cell:hover {
+    background-color: var(--calendar-green-hover);
 }
 
-.completed {
-    background-color: green;
+.lost-calendar-cell {
+    background-color: var(--calendar-red);
+}
+.lost-calendar-cell:hover {
+    background-color: var(--calendar-red-hover);
 }
 
-.completed:hover {
-    background-color: var(--LGreen);
+.incomplete-calendar-cell {
+    background-color: var(--calendar-yellow);
+}
+.incomplete-calendar-cell:hover {
+    background-color: var(--calendar-yellow-hover);
 }
 
-.completed a {
-    text-decoration: none !important;
-    color: black !important;
-}
 
 #calendar-days-header {
     display: grid;
@@ -844,12 +872,6 @@ a:focus #profileIcon {
     .calendar-cell {
         padding: 5px;
         font-size: 0.8rem;
-    }
-
-    /* Optionally adjust the day-of-week header font too */
-    .calendar-day-header {
-        font-size: 0.8rem;
-        padding: 3px 0;
     }
 
     /* Reduce header font size */
@@ -921,6 +943,182 @@ a:focus #profileIcon {
     align-items: center;
     gap: 3px;
     padding-right: 10px;
-        text-decoration: none;
+    text-decoration: none;
+}
 
+/* ========================================
+   ULTRA COMPACT ACCORDION
+   ======================================== */
+
+.accordion-container {
+    background: var(--searchbarText);
+    border-radius: 8px;
+    margin: 15px auto;
+    max-width: 532px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.accordion-header {
+    padding: 12px 16px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--searchbarText);
+    border-radius: 8px;
+    user-select: none;
+}
+
+.guess-count-badge {
+    color: var(--bonewhite);
+    background: var(--LBackground);
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 1.5rem;
+    min-width: 20px;
+    text-align: center;
+}
+
+.header-title {
+    flex: 1;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding-left: 10px;
+    font-weight: bold;
+    color: var(--bonewhite);
+}
+
+.expand-minimize-text {
+    font-size: 0.75rem;
+    opacity: 0.8;
+    font-style: italic;
+    color: var(--activeButtonText);
+}
+
+.skipped {
+    font-style: italic;
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    background: var(--offWhite);
+}
+
+.accordion-container.open .accordion-content {
+    max-height: 250px;
+    padding: 12px 16px;
+    border-radius: 0 0 7px 7px;
+}
+
+.guess-item {
+    padding: 6px 0;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    position: relative;
+}
+
+.guess-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 3px;
+    right: 3px;
+    height: 1px;
+    background: var(--currentBackground);
+}
+
+.guess-item:last-child {
+    border-bottom: none;
+}
+
+.guess-number {
+    background: var(--calendar-red);
+    color: white;
+    padding: 3px 4px;
+    border-radius: 8px;
+    font-weight: bold;
+    min-width: 16px;
+    text-align: center;
+    font-size: 0.8rem;
+}
+
+.guess-number:hover {
+    background: var(--calendar-red-hover);
+}
+
+.guess-number.correct {
+    background: var(--calendar-green);
+}
+
+.guess-number.correct:hover {
+    background: var(--calendar-green-hover);
+}
+
+.guess-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.guess-title {
+    color: var(--LBackground);
+    font-weight: 400;
+    font-size: 0.9rem;
+    line-height: 1.2;
+}
+
+.guess-title.skipped {
+    font-style: italic;
+    color: var(--inactiveButtonText);
+    color: rgba(100, 130, 160, 0.5);
+}
+
+.guess-meta {
+    color: rgba(150, 170, 190, 0.5);
+    font-size: 0.75rem;
+    margin-top: 2px;
+}
+
+/* Review text styling */
+.review-selected {
+    color: var(--searchbarText);
+}
+
+/* Hoverable row styling */
+.hoverable-row {
+    transition: all 0.2s ease;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.hoverable-row:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 6px;
+    padding-left: 12px;
+    padding-right: 4px;
+    transform: translateX(4px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Default hover: wrong guesses show red hover */
+.hoverable-row:hover .guess-number {
+    background: var(--calendar-red-hover);
+}
+
+/* Correct guesses show green hover */
+.hoverable-row:hover .guess-number.correct {
+    background: var(--calendar-green-hover);
+}
+
+/* Winning state styling */
+.past-guesses-display.won .guess-count-badge {
+    background: var(--calendar-green-hover);
+}
+
+.past-guesses-display.lost .guess-count-badge {
+    background: var(--calendar-red-hover);
 }

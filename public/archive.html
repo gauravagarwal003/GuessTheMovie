@@ -58,7 +58,7 @@
 
                 <button id="historyStatsButton" class="header-nav" onclick="location.href='/history'">
                     <i class="fa-solid fa-clock-rotate-left icon" id="historyIcon"></i>
-                    <span class="history-button-text header-full">History & Stats</span>
+                    <span class="history-button-text header-full">Stats & History</span>
                     <span class="history-button-text header-short">History</span>
                 </button>
 
@@ -70,7 +70,7 @@
             </div>
         </header>
 
-<div id="content-wrap">
+        <div id="content-wrap">
             <div id="dateDisplay">
                 <span id="dateDisplayMessage"></span>
             </div>
@@ -79,38 +79,62 @@
                 <a class="text-link"></a>
                 <span class="message"></span>
             </div>
-            <div id="reviewContainer">
-                <div id="reviewCard" class="review-card" style="display: none;">
-                    <div class="review-username-container">
-                        <img id="reviewProfilePhoto" class="review-profile-photo" />
-                        <div class="review-username-text">
-                            <p id="reviewUsername" class="review-username"></p>
-                            <p id="reviewDate" class="review-date"></p>
+            
+            <!-- Past Guesses Container -->
+                <div id="past-guesses-display" class="past-guesses-display" style="display: none;">
+                    <div class="accordion-container" onclick="toggleAccordion()">
+                        <div class="accordion-header">
+                            <div class="guess-count-badge"></div>
+                            <span class="header-title">Previous Guesses</span>
+                            <span class="expand-minimize-text">Click to expand</span>
+                        </div>
+                        <div class="accordion-content">
+                            <!-- Past guesses content will be populated here -->
                         </div>
                     </div>
-                    <span id="reviewRating" class="review-rating"></span>
-                    <i id="reviewLiked" class="fa-solid fa-heart liked icon" style="display: none;"></i>
-                    <div id="reviewText" class="review-text"></div>
-                    <p id="likesComments" class="likes-comments">
-                        <i class="fa-solid fa-heart icon"></i>
-                        <span id="likesCount">0</span>
-                        &nbsp;&nbsp;
-                        <i class="fa-solid fa-comment icon"></i>
-                        <span id="commentsCount">0</span>
-                    </p>
-                    <a id="reviewLink" class="review-link" target="_blank" style="display: none;">View on Letterboxd</a>
+            </div>
+            
+            <div id="reviewContainer">
+                <div id="reviewCard" class="review-card" style="display: none;">
+                    <div class="review-header">
+                        <div class="review-username-container">
+                            <img id="reviewProfilePhoto" class="review-profile-photo" />
+                            <div class="review-username-text">
+                                <p id="reviewUsername" class="review-username"></p>
+                                <p id="reviewDate" class="review-date"></p>
+                            </div>
+                        </div>
+                        <div class="review-rating-container">
+                            <span id="reviewRating" class="review-rating"></span>
+                            <i id="reviewLiked" class="fa-solid fa-heart liked icon" style="display: none;"></i>
+                        </div>
+                    </div>
+                    <div id="reviewText"></div>
+                    <div id="likesCommentsContainer" class="likes-comments-container">
+                        <p id="likesComments" class="likes-comments">
+                            <i class="fa-solid fa-heart icon"></i>
+                            <span id="likesCount">0</span>
+                            &nbsp;&nbsp;
+                            <i class="fa-solid fa-comment icon"></i>
+                            <span id="commentsCount">0</span>
+                        </p>
+                        <a id="reviewLink" class="review-link" target="_blank" style="display: none;">View on
+                            Letterboxd</a>
+                    </div>
                 </div>
             </div>
 
             <nav id="allButtons">
                 <div id="imageButtons"></div>
-                <button onclick="handleGuess(null)" id="multi-button">Skip Guess</button>
+                <button onclick="pressShare()" id="share-button">Share</button>
             </nav>
 
             <div id="search-row">
                 <label for="search" class="visually-hidden">Search for a movie</label>
-                <input type="text" id="search" placeholder="Search" oninput="filterMovies(event)" autocorrect="off"
-                    autocomplete="off" autocapitalize="off" spellcheck="false">
+                <input type="text" id="search" placeholder="Search or press submit to skip"
+                    oninput="filterMovies(event)" autocorrect="off" autocomplete="off" autocapitalize="off"
+                    spellcheck="false">
+                <button type="button" id="submit-button" onclick="handleSubmit()">Submit</button>
             </div>
             <ul id="movieList" class="movie-list"></ul>
             <div class="image-container" id="movie_container">
@@ -133,7 +157,7 @@
                 <span id="profileLabel" class="footer-full">My Profile</span>
                 <span id="profileLabel" class="footer-short">My LB</span>
             </a>
-                        <a href="/about#openModal" target="_blank" class="footer-item" id="contactItem">
+            <a href="/about#openModal" target="_blank" class="footer-item" id="contactItem">
                 <i class="fa-solid fa-paper-plane icon" id="contactIcon"></i>
                 <span id="contactLabel" class="footer-full">Contact Us</span>
                 <span id="contactLabel" class="footer-short">Contact</span>
@@ -142,6 +166,7 @@
         </footer>
     </main>
 
+    <script src="/migration.js"></script>
     <script src="/common.js"></script>
 </body>
 

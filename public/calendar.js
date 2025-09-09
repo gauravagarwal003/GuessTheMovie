@@ -1,3 +1,5 @@
+migrateLocalStorage();
+
 document.addEventListener('DOMContentLoaded', async function initializeGame() {
     fetch('/api/dates')
         .then(response => response.json())
@@ -6,10 +8,9 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
             // Retrieve user game stats (assumed stored as JSON under 'gameStats')
             let userGames = [];
             try {
-                const storedData = localStorage.getItem('gameStats');
+                const storedData = localStorage.getItem('gameHistory');
                 if (storedData) {
-                    const parsed = JSON.parse(storedData);
-                    if (parsed.games) userGames = parsed.games;
+                    userGames = JSON.parse(storedData);
                 }
             } catch (e) {
                 console.error(e);
@@ -57,7 +58,6 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
 
                     // If there is a movie for this date, create a clickable link; otherwise, create plain text.
                     if (movieDates.has(dateStr)) {
-                        cell.classList.add("clickable-cell");
                         cell.onclick = function () {
                             window.location.href = "/archive/" + dateStr;
                         };
@@ -71,7 +71,13 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
                     // Set cell color based on movie availability and user completion
                     if (movieDates.has(dateStr)) {
                         if (completedDates.has(dateStr)) {
-                            cell.classList.add("completed");
+                            if (userGames.some(game => game.date === dateStr && game.status === 'won')) {
+                                cell.classList.add("won-calendar-cell");
+                            } else if (userGames.some(game => game.date === dateStr && game.status === 'lost')) {
+                                cell.classList.add("lost-calendar-cell");
+                            } else if (userGames.some(game => game.date === dateStr && game.status === 'incomplete')) {
+                                cell.classList.add("incomplete-calendar-cell");
+                            }
                         } else {
                             cell.classList.add("available");
                         }
