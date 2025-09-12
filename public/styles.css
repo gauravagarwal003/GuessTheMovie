@@ -53,7 +53,19 @@ body {
     justify-content: space-around !important;
 }
 
+@media (max-width: 400px) {
+    .review-username {
+        font-size: 20px;
+        max-width: calc(100vw - 120px);
+    }
+}
+
 @media (max-width: 560px) {
+    .review-username {
+        font-size: 22px;
+        max-width: calc(100vw - 150px);
+    }
+
     #textDisplay {
         padding-left: 10px;
         padding-right: 10px;
@@ -248,14 +260,6 @@ body {
 
 #submit-button:hover {
     background-color: var(--calendar-green);
-}
-
-@media (max-width: 460px) {
-    #submit-button {
-        padding: 10px 12px;
-        font-size: 1rem;
-        margin-left: 8px;
-    }
 }
 
 .movie-list {
@@ -575,6 +579,7 @@ a:focus #profileIcon {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    gap: 10px;
 }
 
 /* Profile photo styling */
@@ -586,19 +591,24 @@ a:focus #profileIcon {
     margin-bottom: 0;
 }
 
-/* Username styling */
 .review-username {
     margin: 0 0 4px 0;
     font-size: 25px;
     color: var(--bonewhite);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* Responsive max-width using calc */
+    max-width: calc(100vw - 200px);
 }
 
-/* Rating and liked container for top right */
 .review-rating-container {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     gap: 2px;
+    flex-shrink: 0;
+    min-width: fit-content;
 }
 
 /* Rating styling */
@@ -673,11 +683,15 @@ a:focus #profileIcon {
     display: flex;
     align-items: center;
     gap: 12px;
+    flex: 1;
+    min-width: 0; /* Essential for text truncation in flex */
 }
 
 .review-username-text {
     display: flex;
     flex-direction: column;
+    min-width: 0;
+    flex: 1;
 }
 
 .truncated-label {
@@ -850,6 +864,12 @@ a:focus #profileIcon {
 }
 
 @media (max-width: 460px) {
+    #submit-button {
+        padding: 10px 12px;
+        font-size: 1rem;
+        margin-left: 8px;
+    }
+
     .footer-full {
         display: none !important;
     }
@@ -860,7 +880,6 @@ a:focus #profileIcon {
 }
 
 @media (max-width: 320px) {
-
     /* Reduce margins and padding for a smaller container */
     #calendar-container {
         margin: 10px auto;
