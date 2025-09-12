@@ -375,9 +375,21 @@ function finishGame(wonGame) {
     textDisplay.innerHTML = `<div id="textDisplay">${gameOverMessage}<span class="message"></span><a href="https://letterboxd.com/film/${correctMovieID}" class="text-link" target="_blank">${correctMovieObject.title} (${correctMovieObject.year})</a><span class="message"> is the correct movie. Come back later for a new movie or use the archive to play past movies!</span><br></div>`;
   }
 
+
   // Update the past guesses accordion for finished games
   const previousGuessesItems = formatPreviousGuesses(collectedGuesses);
   updatePastGuessesDisplay(previousGuessesItems);
+
+  // Close the accordion when the game is over
+  const accordionContainer = document.querySelector('.accordion-container');
+  if (accordionContainer && accordionContainer.classList.contains('open')) {
+    accordionContainer.classList.remove('open');
+    // Update expand/minimize text if present
+    const expandText = document.querySelector('.expand-minimize-text');
+    if (expandText) {
+      expandText.textContent = 'Click to expand';
+    }
+  }
 
   clearSearchAndMovieList();
   // Always show all reviews when game ends, regardless of win/loss
@@ -537,6 +549,7 @@ async function fetchData(movieID, date, index) {
 
 // Display the current review based on the review index
 function displayCurrentReview(index = 1) {
+
   const review = currentReviewJSONs[index - 1];
   const reviewCard = document.getElementById('reviewCard');
   if (!review || currentReviewJSONs.length === 0) {
@@ -544,6 +557,19 @@ function displayCurrentReview(index = 1) {
     return;
   }
   reviewCard.style.display = 'block';
+
+  // Open the accordion if a new review is displayed (except for the first review)
+  if (index > 1) {
+    const accordionContainer = document.querySelector('.accordion-container');
+    if (accordionContainer && !accordionContainer.classList.contains('open')) {
+      accordionContainer.classList.add('open');
+      // Update expand/minimize text if present
+      const expandText = document.querySelector('.expand-minimize-text');
+      if (expandText) {
+        expandText.textContent = 'Click to minimize';
+      }
+    }
+  }
 
   // Profile photo
   const profileImg = document.getElementById('reviewProfilePhoto');
@@ -956,7 +982,6 @@ function toggleAccordion() {
 function updatePastGuessesDisplay(guesses) {
     const container = document.getElementById('past-guesses-display');
     const guessCountBadge = document.querySelector('.guess-count-badge');
-    const headerTitle = document.querySelector('.header-title');
     const content = document.querySelector('.accordion-content');
     
     if (!container || !guessCountBadge || !content) {
@@ -970,8 +995,6 @@ function updatePastGuessesDisplay(guesses) {
     }
     
     container.style.display = 'block';    // Update the header title and badge count
-    const guessesText = gameOver ? 'Guesses' : 'Previous Guesses';
-    headerTitle.textContent = guessesText;
     guessCountBadge.textContent = guesses.length;
     
     // Add winning class if game was won

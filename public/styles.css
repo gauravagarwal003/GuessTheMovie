@@ -31,7 +31,6 @@ body {
 }
 
 #header {
-    background: none;
     background: var(--LBackground);
     color: var(--bonewhite);
     display: flex;
