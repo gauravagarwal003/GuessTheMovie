@@ -298,7 +298,6 @@ body {
 }
 
 #textDisplay {
-    margin-top: -10px;
     font-size: 18px;
     max-width: 720px;
     color: var(--bonewhite);

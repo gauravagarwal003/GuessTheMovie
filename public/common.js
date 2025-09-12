@@ -947,9 +947,9 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
 
     if (dateDisplay) {
       if (archiveDate) {
-        dateDisplay.innerHTML = `<h2>Archive (${formattedMovieDate})</h2>`;
+        dateDisplay.textContent = `Archive (${formattedMovieDate})`;
       } else {
-        dateDisplay.innerHTML = `<h2>Today's movie (${formattedMovieDate})</h2>`;
+        dateDisplay.textContent = `Today's movie (${formattedMovieDate})`;
       }
     }
 
