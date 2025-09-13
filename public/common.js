@@ -46,24 +46,92 @@ if (typeof MAX_GUESSES === 'undefined') {
   MAX_GUESSES = 5;
 }
 
-// Frequently used DOM elements
-const reviewNumButtons = document.getElementById('imageButtons');
-const shareButton = document.querySelector('button[id="share-button"]');
-const dateDisplay = document.getElementById('dateDisplayMessage');
-const textDisplay = document.getElementById('textDisplay');
+// Frequently used DOM elements - cached for performance
+const domElements = {
+  reviewNumButtons: null,
+  shareButton: null,
+  dateDisplay: null,
+  resultDisplay: null,
+  searchInput: null,
+  movieList: null,
+  reviewCard: null,
+
+  init() {
+    this.reviewNumButtons = document.getElementById('imageButtons');
+    this.shareButton = document.querySelector('button[id="share-button"]');
+    this.dateDisplay = document.getElementById('dateDisplayMessage');
+    this.resultDisplay = document.getElementById('resultDisplay');
+    this.searchInput = document.getElementById('search');
+    this.movieList = document.getElementById('movieList');
+    this.reviewCard = document.getElementById('reviewCard');
+  },
+
+  get(elementName) {
+    if (!this[elementName]) {
+      switch (elementName) {
+        case 'searchInput': this.searchInput = document.getElementById('search'); break;
+        case 'movieList': this.movieList = document.getElementById('movieList'); break;
+        case 'reviewCard': this.reviewCard = document.getElementById('reviewCard'); break;
+        default: break;
+      }
+    }
+    return this[elementName];
+  }
+};
+
+// Legacy constants for backward compatibility - will be set after DOM is ready
+let reviewNumButtons, shareButton, dateDisplay, resultDisplay;
 
 migrateLocalStorage();
 
-let globalGameStats = JSON.parse(localStorage.getItem('gameStats')) || {
-  gamesFinished: 0,
-  gamesWon: 0,
-  gamesLost: 0,
-  fastestWin: null,
-  slowestWin: null,
-  averageGuesses: null,
-  winPercentage: 0
-};
-let globalGameHistory = JSON.parse(localStorage.getItem('gameHistory')) || [];
+// Cache localStorage data to avoid repeated parsing
+class GameDataCache {
+  constructor() {
+    this._gameStats = null;
+    this._gameHistory = null;
+  }
+
+  get gameStats() {
+    if (!this._gameStats) {
+      this._gameStats = JSON.parse(localStorage.getItem('gameStats')) || {
+        gamesFinished: 0,
+        gamesWon: 0,
+        gamesLost: 0,
+        fastestWin: null,
+        slowestWin: null,
+        averageGuesses: null,
+        winPercentage: 0
+      };
+    }
+    return this._gameStats;
+  }
+
+  get gameHistory() {
+    if (!this._gameHistory) {
+      this._gameHistory = JSON.parse(localStorage.getItem('gameHistory')) || [];
+    }
+    return this._gameHistory;
+  }
+
+  saveGameStats(stats) {
+    this._gameStats = stats;
+    localStorage.setItem('gameStats', JSON.stringify(stats));
+  }
+
+  saveGameHistory(history) {
+    this._gameHistory = history;
+    localStorage.setItem('gameHistory', JSON.stringify(history));
+  }
+
+  invalidateCache() {
+    this._gameStats = null;
+    this._gameHistory = null;
+  }
+}
+
+const gameCache = new GameDataCache();
+let globalGameStats = gameCache.gameStats;
+let globalGameHistory = gameCache.gameHistory;
 let ongoingGame = null;
 
 function loadOngoingGame(correctMovieID, correctMovieDate) {
@@ -93,7 +161,7 @@ function startOngoingGame(correctMovieID, correctMovieDate) {
 }
 
 function saveGameHistory() {
-  localStorage.setItem('gameHistory', JSON.stringify(globalGameHistory));
+  gameCache.saveGameHistory(globalGameHistory);
 }
 
 function updateOngoingGameOnGuess(guess, isSkip = false) {
@@ -107,7 +175,7 @@ function finishOngoingGame(status) {
   if (!ongoingGame) return;
   ongoingGame.status = status;
   ongoingGame.timeCompleted = new Date().toISOString();
-  
+
   // Store movie details for future reference
   if (correctMovieObject) {
     ongoingGame.title = correctMovieObject.title;
@@ -127,42 +195,42 @@ function finishOngoingGame(status) {
 }
 
 function updateGameStats() {
-  let history = JSON.parse(localStorage.getItem('gameHistory')) || [];
-  let finishedGames = history.filter(g => g.status === 'won' || g.status === 'lost');
-  let gamesFinished = finishedGames.length;
-  let gamesWon = finishedGames.filter(g => g.status === 'won').length;
-  let gamesLost = finishedGames.filter(g => g.status === 'lost').length;
-  let winGames = finishedGames.filter(g => g.status === 'won');
-  let fastestWin = winGames.length ? Math.min(...winGames.map(g => g.guesses.length)) : null;
-  let slowestWin = winGames.length ? Math.max(...winGames.map(g => g.guesses.length)) : null;
-  let averageGuesses = gamesFinished ? (finishedGames.reduce((acc, g) => acc + (g.guesses.length || 0), 0) / gamesFinished) : null;
-  let winPercentage = gamesFinished ? Math.round((gamesWon / gamesFinished) * 100) : 0;
-  let stats = {
+  const history = gameCache.gameHistory;
+  const finishedGames = history.filter(g => g.status === 'won' || g.status === 'lost');
+  const gamesFinished = finishedGames.length;
+  const gamesWon = finishedGames.filter(g => g.status === 'won').length;
+  const gamesLost = finishedGames.filter(g => g.status === 'lost').length;
+  const winGames = finishedGames.filter(g => g.status === 'won');
+
+  const stats = {
     gamesFinished,
     gamesWon,
     gamesLost,
-    fastestWin,
-    slowestWin,
-    averageGuesses,
-    winPercentage
+    fastestWin: winGames.length ? Math.min(...winGames.map(g => g.guesses.length)) : null,
+    slowestWin: winGames.length ? Math.max(...winGames.map(g => g.guesses.length)) : null,
+    averageGuesses: gamesFinished ? (finishedGames.reduce((acc, g) => acc + (g.guesses.length || 0), 0) / gamesFinished) : null,
+    winPercentage: gamesFinished ? Math.round((gamesWon / gamesFinished) * 100) : 0
   };
-  localStorage.setItem('gameStats', JSON.stringify(stats));
+
+  gameCache.saveGameStats(stats);
+  globalGameStats = stats;
 }
 
 // v1: Checks whether the user has played the current game
 function hasGameBeenPlayed(correctMovieID) {
-  let history = JSON.parse(localStorage.getItem('gameHistory')) || [];
-  return history.some(game => game.id === correctMovieID && (game.status === 'won' || game.status === 'lost'));
+  return gameCache.gameHistory.some(game =>
+    game.id === correctMovieID && (game.status === 'won' || game.status === 'lost')
+  );
 }
 
 // Formats previous guesses for display in incomplete games
-function formatPreviousGuesses(guesses) {  
+function formatPreviousGuesses(guesses) {
   if (!guesses || guesses.length === 0) {
     return [];
   }
-  
+
   let guessItems = [];
-  
+
   for (let i = 0; i < guesses.length; i++) {
     if (guesses[i] === SKIPPED_GUESS) {
       guessItems.push({
@@ -173,10 +241,10 @@ function formatPreviousGuesses(guesses) {
     } else {
       // Check if this guess is the correct movie
       const isCorrect = guesses[i] === correctMovieID;
-      
+
       // Find the movie object for this guess
       let movie = allMovies.find(m => m.movieID === guesses[i]);
-      
+
       if (movie) {
         guessItems.push({
           text: `${movie.title} (${movie.year})`,
@@ -184,20 +252,14 @@ function formatPreviousGuesses(guesses) {
           isCorrect: isCorrect
         });
       } else {
-        
+
         // For completed games, try to look up the movie info from game history
         // This handles the case where the game was completed and we stored movie details
-        let history = JSON.parse(localStorage.getItem('gameHistory')) || [];
-        let foundMovieInfo = null;
-        
-        // Look through all completed games to find this movieID as a correct answer
-        for (let game of history) {
-          if (game.id === guesses[i] && game.title && game.year) {
-            foundMovieInfo = { title: game.title, year: game.year };
-            break;
-          }
-        }
-        
+        const history = gameCache.gameHistory;
+        const foundMovieInfo = history.find(game =>
+          game.id === guesses[i] && game.title && game.year
+        );
+
         if (foundMovieInfo) {
           guessItems.push({
             text: `${foundMovieInfo.title} (${foundMovieInfo.year})`,
@@ -215,14 +277,15 @@ function formatPreviousGuesses(guesses) {
       }
     }
   }
-  
+
   return guessItems;
 }
 
 // v1: Checks if user won the current game
 function hasGameBeenWon(correctMovieID) {
-  let history = JSON.parse(localStorage.getItem('gameHistory')) || [];
-  return history.some(game => game.id === correctMovieID && game.status === 'won');
+  return gameCache.gameHistory.some(game =>
+    game.id === correctMovieID && game.status === 'won'
+  );
 }
 
 // Update game based on the movie the user selected
@@ -245,58 +308,62 @@ function selectMovie(guessedMovieID) {
 function loadMovieIntoSearchBar(movieID) {
   const movie = allMovies.find(m => m.movieID === movieID);
   if (movie) {
-    const searchInput = document.getElementById('search');
-    searchInput.value = `${movie.title} (${movie.year})`;
-    clearMovieList();
+    const searchInput = domElements.get('searchInput');
+    if (searchInput) {
+      searchInput.value = `${movie.title} (${movie.year})`;
+      clearMovieList();
+    }
   }
 }
 
 // Handle submit button click
 function handleSubmit() {
-  const searchInput = document.getElementById('search');
+  const searchInput = domElements.get('searchInput');
+  if (!searchInput) return;
+
   const searchQuery = searchInput.value.trim();
-  
+
   if (searchQuery === '') {
-    // Empty search bar counts as skip
     handleGuess(null);
     return;
   }
-  
-  // Check if the search query exactly matches a movie in the format "Title (Year)"
-  const exactMatch = allMovies.find(movie => 
+
+  // Check for exact match first (most common case)
+  const exactMatch = allMovies.find(movie =>
     `${movie.title} (${movie.year})` === searchQuery
   );
-  
+
   if (exactMatch) {
-    // Submit the exact match
     selectMovie(exactMatch.movieID);
     return;
   }
-  
-  // If no exact match, search for movies and auto-select the first result
-  let filteredMovies = [];
-  if (fuse) {
-    const results = fuse.search(searchQuery);
-    filteredMovies = results
-      .slice(0, MAX_NUM_MOVIES_TO_SHOW)
-      .map(result => result.item);
-  } else {
-    // Simple substring search as backup
-    filteredMovies = allMovies.filter(movie =>
-      movie.title && movie.title.toLowerCase().includes(searchQuery.toLowerCase())
-    ).slice(0, MAX_NUM_MOVIES_TO_SHOW);
-  }
-  
+
+  // Search for movies using Fuse or fallback
+  const filteredMovies = searchMovies(searchQuery);
+
   if (filteredMovies.length > 0) {
-    // Load first result into search bar and submit it
     const firstMovie = filteredMovies[0];
     searchInput.value = `${firstMovie.title} (${firstMovie.year})`;
     clearMovieList();
     selectMovie(firstMovie.movieID);
   } else {
-    // No matches found, treat as skip
     handleGuess(null);
   }
+}
+
+// Extracted search logic for reusability
+function searchMovies(query) {
+  if (fuse) {
+    return fuse.search(query)
+      .slice(0, MAX_NUM_MOVIES_TO_SHOW)
+      .map(result => result.item);
+  }
+
+  // Fallback search
+  const lowerQuery = query.toLowerCase();
+  return allMovies.filter(movie =>
+    movie.title && movie.title.toLowerCase().includes(lowerQuery)
+  ).slice(0, MAX_NUM_MOVIES_TO_SHOW);
 }
 
 // Finish the game
@@ -304,18 +371,29 @@ function finishGame(wonGame) {
   gameOver = true;
   gameWon = wonGame;
   gameOverMessage = wonGame ? "You got it! " : "You lost. ";
-  textDisplay.innerHTML = `<div id="textDisplay">${gameOverMessage}<span class="message"></span><a href="https://letterboxd.com/film/${correctMovieID}" class="text-link" target="_blank">${correctMovieObject.title} (${correctMovieObject.year})</a><span class="message"> is the correct movie. Come back later for a new movie or use the archive to play past movies!</span><br></div>`;
+  if (resultDisplay) {
+    resultDisplay.innerHTML = `${gameOverMessage}<span class="message"></span><a href="https://letterboxd.com/film/${correctMovieID}" class="text-link" target="_blank">${correctMovieObject.title} (${correctMovieObject.year})</a><span class="message"> is the correct movie.</span><br>`;
+    const comeBackText = document.getElementById('come-back-text');
+    if (comeBackText) {
+      comeBackText.textContent = "Come back tomorrow for a new movie or use the archive to play past movies!";
+    }
+  }
+
 
   // Update the past guesses accordion for finished games
   const previousGuessesItems = formatPreviousGuesses(collectedGuesses);
   updatePastGuessesDisplay(previousGuessesItems);
+
+  toggleAccordion(false);
 
   clearSearchAndMovieList();
   // Always show all reviews when game ends, regardless of win/loss
   currentReviewJSONs = allReviewJSONs.slice(0, MAX_GUESSES);
   updateReviewNumButtons();
 
-  reviewNumButtons.style.marginRight = "0px";
+  if (reviewNumButtons) {
+    reviewNumButtons.style.marginRight = "0px";
+  }
   document.getElementById('search').remove();
 
   // Add movie poster to page
@@ -337,8 +415,12 @@ function finishGame(wonGame) {
   }
 
   // Show the share button now that the game is over
-  shareButton.style.display = 'inline-block';
-  document.getElementById('imageButtons').style.marginRight = '5px';
+  if (shareButton) {
+    shareButton.style.display = 'inline-block';
+  }
+  if (reviewNumButtons) {
+    reviewNumButtons.style.marginRight = '5px';
+  }
 
   // v1: Set and update gameHistory and stats only when game is finished
   if (ongoingGame) {
@@ -350,6 +432,7 @@ function finishGame(wonGame) {
 
 // Handles the user's guess or skip
 function handleGuess(guess) {
+  toggleAccordion(true);
   if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
   }
@@ -370,15 +453,17 @@ function handleGuess(guess) {
   }
 
   incorrectGuessCount++;
-  
+
   // Calculate remaining guesses and format previous guesses
   const remainingGuesses = MAX_GUESSES - incorrectGuessCount;
-  const guessString = remainingGuesses === 1 ? "1 guess" : `${remainingGuesses} guesses`;
+  const guessString = remainingGuesses === 1 ? "1 Guess" : `${remainingGuesses} Guesses`;
   const previousGuessesItems = formatPreviousGuesses(collectedGuesses);
-  
+
   // Display simple progress message
-  textDisplay.innerHTML = `<div class="remaining-guesses">You have ${guessString} left</div>`;
-  
+  if (resultDisplay) {
+    resultDisplay.innerHTML = `<div class="remaining-guesses">${guessString} Left</div>`;
+  }
+
   // Update the past guesses accordion
   updatePastGuessesDisplay(previousGuessesItems);
 
@@ -414,10 +499,12 @@ function pressShare() {
     shareText += ` Play now at ${window.location.href}`;
     navigator.clipboard.writeText(shareText)
       .then(() => {
-        shareButton.textContent = "Copied";
-        setTimeout(() => {
-          shareButton.textContent = "Share";
-        }, 4000);
+        if (shareButton) {
+          shareButton.textContent = "Copied";
+          setTimeout(() => {
+            shareButton.textContent = "Share";
+          }, 4000);
+        }
       })
       .catch((err) => {
         console.error("Failed to copy text: ", err);
@@ -427,13 +514,17 @@ function pressShare() {
 
 // Clear the search input and movie list
 function clearSearchAndMovieList() {
-  document.getElementById('search').value = '';
-  document.getElementById('movieList').innerHTML = '';
+  const searchInput = domElements.get('searchInput');
+  const movieList = domElements.get('movieList');
+
+  if (searchInput) searchInput.value = '';
+  if (movieList) movieList.innerHTML = '';
 }
 
 // Clear only the movie list
 function clearMovieList() {
-  document.getElementById('movieList').innerHTML = '';
+  const movieList = domElements.get('movieList');
+  if (movieList) movieList.innerHTML = '';
 }
 
 // Fetch the JSON data for the reviews based on the movie ID, date, and review index
@@ -454,6 +545,7 @@ async function fetchData(movieID, date, index) {
 
 // Display the current review based on the review index
 function displayCurrentReview(index = 1) {
+
   const review = currentReviewJSONs[index - 1];
   const reviewCard = document.getElementById('reviewCard');
   if (!review || currentReviewJSONs.length === 0) {
@@ -461,6 +553,9 @@ function displayCurrentReview(index = 1) {
     return;
   }
   reviewCard.style.display = 'block';
+
+  // ...existing code...
+  // ...existing code...
 
   // Profile photo
   const profileImg = document.getElementById('reviewProfilePhoto');
@@ -519,6 +614,8 @@ function displayCurrentReview(index = 1) {
 
 // Make review number button active 
 function makeButtonActive(index) {
+  if (!reviewNumButtons) return;
+
   const buttons = reviewNumButtons.querySelectorAll('button');
   buttons.forEach(button => {
     if (parseInt(button.textContent) === index) {
@@ -532,6 +629,8 @@ function makeButtonActive(index) {
 
 // Update the review number buttons based on the current review JSONs
 function updateReviewNumButtons() {
+  if (!reviewNumButtons) return;
+
   reviewNumButtons.innerHTML = '';
   currentReviewJSONs.forEach((review, index) => {
     const button = document.createElement('button');
@@ -544,7 +643,7 @@ function updateReviewNumButtons() {
     };
     reviewNumButtons.appendChild(button);
   });
-  
+
   // When game is over, ensure currentReviewIndex is valid for available reviews
   if (gameOver) {
     const validIndex = Math.min(currentReviewIndex, currentReviewJSONs.length);
@@ -602,7 +701,7 @@ window.addEventListener('keydown', (event) => {
     }
     updateSelectedItem();
   }
-  
+
   else if (event.key === 'ArrowUp') {
     const items = document.querySelectorAll('.movie-list li');
     if (items.length === 0) return;
@@ -618,14 +717,14 @@ window.addEventListener('keydown', (event) => {
   else if (event.key === 'Enter') {
     const items = document.querySelectorAll('.movie-list li');
     const activeElement = document.activeElement;
-    
+
     // If Enter is pressed while search input is focused and no movie is selected from list
     if (activeElement.id === 'search' && currentMovieListIndex === -1) {
       // Submit the current search query
       handleSubmit();
       return;
     }
-    
+
     // If there are movies in the list
     if (items.length > 0) {
       // If the search textbox is focused and no movie is selected, select the first movie
@@ -657,14 +756,22 @@ window.addEventListener('keydown', (event) => {
 
 // Display the updated movie list 
 function displayMovieList(movies) {
-  const movieListElement = document.getElementById('movieList');
-  movieListElement.innerHTML = '';
+  const movieListElement = domElements.get('movieList');
+  if (!movieListElement) return;
+
+  // Use document fragment for better performance
+  const fragment = document.createDocumentFragment();
+
   movies.slice(0, MAX_NUM_MOVIES_TO_SHOW).forEach(movie => {
     const listItem = document.createElement('li');
     listItem.textContent = `${movie.title} (${movie.year})`;
     listItem.onclick = () => loadMovieIntoSearchBar(movie.movieID);
-    movieListElement.appendChild(listItem);
+    fragment.appendChild(listItem);
   });
+
+  movieListElement.innerHTML = '';
+  movieListElement.appendChild(fragment);
+
   // Reset the selection index on list update and add mouse listeners
   currentMovieListIndex = -1;
   addMouseListeners();
@@ -672,41 +779,36 @@ function displayMovieList(movies) {
 
 
 function filterMovies(event) {
-  // Backup: If Fuse is not ready, fallback to simple substring search
-  const searchInput = document.getElementById("search");
+  const searchInput = domElements.get('searchInput');
   if (!searchInput) return;
 
+  // Only process valid characters
   const allowedRegex = /^[a-zA-Z0-9 !@#$ﬂ&*()_+\-=\~`{}|:"<>?$$\\;',./]$/;
-
   if (event.key !== undefined && event.key !== "Backspace" && !allowedRegex.test(event.key)) {
     return;
   }
 
-  const searchQuery = searchInput.value.trim().toLowerCase();
+  const searchQuery = searchInput.value.trim();
 
   if (searchQuery === "") {
     clearSearchAndMovieList();
     return;
   }
 
-  let filteredMovies = [];
-  if (fuse) {
-    const results = fuse.search(searchQuery);
-    filteredMovies = results
-      .slice(0, MAX_NUM_MOVIES_TO_SHOW)
-      .map(result => result.item);
-  } else {
-    // Simple substring search as backup
-    filteredMovies = allMovies.filter(movie =>
-      movie.title && movie.title.toLowerCase().includes(searchQuery)
-    ).slice(0, MAX_NUM_MOVIES_TO_SHOW);
-  }
-
+  const filteredMovies = searchMovies(searchQuery);
   displayMovieList(filteredMovies);
 }
 
 document.addEventListener('DOMContentLoaded', async function initializeGame() {
   try {
+    // Initialize DOM elements cache
+    domElements.init();
+
+    // Set legacy constants after DOM is ready
+    reviewNumButtons = domElements.reviewNumButtons;
+    shareButton = domElements.shareButton;
+    dateDisplay = domElements.dateDisplay;
+    resultDisplay = domElements.resultDisplay;
     const csvResponse = await fetch('/movies.csv');
     const csvText = await csvResponse.text();
 
@@ -732,34 +834,33 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
     if (archiveDate) {
       response = await fetch('/api/get-movie?date=' + archiveDate);
     }
-    else{
+    else {
       response = await fetch('/api/get-movie');
     }
     if (!response.ok) throw new Error('Network response was not ok');
     const data = await response.json();
 
     correctMovieID = data.movieID;
-      correctMovieDate = data.date;
-      formattedMovieDate = new Date(correctMovieDate).toLocaleDateString('en-US', {
-        timeZone: 'UTC',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-      });
+    correctMovieDate = data.date;
+    formattedMovieDate = new Date(correctMovieDate).toLocaleDateString('en-US', {
+      timeZone: 'UTC',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
 
-      // Try to get correctMovieObject from localStorage game history if available
-      let history = JSON.parse(localStorage.getItem('gameHistory')) || [];
-      let gameObj = history.find(g => g.id === correctMovieID);
-      if (gameObj && gameObj.title && gameObj.year && gameObj.posterLink) {
-        correctMovieObject = {
-          title: gameObj.title,
-          year: gameObj.year,
-          posterLink: gameObj.posterLink,
-          movieID: correctMovieID
-        };
-      } else {
-        correctMovieObject = allMovies.find(movie => movie.movieID === correctMovieID);
-      }
+    // Try to get correctMovieObject from localStorage game history if available
+    const gameObj = gameCache.gameHistory.find(g => g.id === correctMovieID);
+    if (gameObj && gameObj.title && gameObj.year && gameObj.posterLink) {
+      correctMovieObject = {
+        title: gameObj.title,
+        year: gameObj.year,
+        posterLink: gameObj.posterLink,
+        movieID: correctMovieID
+      };
+    } else {
+      correctMovieObject = allMovies.find(movie => movie.movieID === correctMovieID);
+    }
 
     for (let i = 0; i < MAX_GUESSES; i++) {
       await fetchData(correctMovieID, correctMovieDate, i);
@@ -770,8 +871,9 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
     // Game was lost or won (completed)
     if (hasGameBeenPlayed(correctMovieID)) {
       // Load the completed game data to populate collectedGuesses and incorrectGuessCount
-      let history = JSON.parse(localStorage.getItem('gameHistory')) || [];
-      let completedGame = history.find(g => g.id === correctMovieID && (g.status === 'won' || g.status === 'lost'));
+      const completedGame = gameCache.gameHistory.find(g =>
+        g.id === correctMovieID && (g.status === 'won' || g.status === 'lost')
+      );
       if (completedGame && completedGame.guesses) {
         collectedGuesses = [...completedGame.guesses];
         incorrectGuessCount = completedGame.guesses.length;
@@ -782,20 +884,22 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
     else if (game_in_progress) {
       incorrectGuessCount = ongoingGame.guesses.length;
       collectedGuesses = [...ongoingGame.guesses];
-      
+
       // Calculate remaining guesses
       const remainingGuesses = MAX_GUESSES - incorrectGuessCount;
-      const guessString = remainingGuesses === 1 ? "1 guess" : `${remainingGuesses} guesses`;
-      
+      const guessString = remainingGuesses === 1 ? "1 Guess" : `${remainingGuesses} Guesses`;
+
       // Format previous guesses
       const previousGuessesItems = formatPreviousGuesses(collectedGuesses);
-      
+
       // Display simple progress message
-      textDisplay.innerHTML = `<div class="remaining-guesses">You have ${guessString} left</div>`;
-      
+      if (resultDisplay) {
+        resultDisplay.innerHTML = `<div class="remaining-guesses">${guessString} Left</div>`;
+      }
+
       // Update the past guesses accordion
       updatePastGuessesDisplay(previousGuessesItems);
-      
+
       currentReviewJSONs = allReviewJSONs.slice(0, incorrectGuessCount + 1);
       updateReviewNumButtons();
       // Show the last review the user unlocked, not always the first
@@ -804,28 +908,35 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
       } else {
         displayCurrentReview();
       }
-      
-      shareButton.style.display = 'none';
+
+      if (shareButton) {
+        shareButton.style.display = 'none';
+      }
     }
     // New game
     else {
       // Show remaining guesses for new games
-      const guessString = MAX_GUESSES === 1 ? "1 guess" : `${MAX_GUESSES} guesses`;
-      textDisplay.innerHTML = `<div class="remaining-guesses">You have ${guessString} left</div>`;
-      
+      const guessString = MAX_GUESSES === 1 ? "1 Guess" : `${MAX_GUESSES} Guesses`;
+      if (resultDisplay) {
+        resultDisplay.innerHTML = `<div class="remaining-guesses">${guessString} Left</div>`;
+      }
+
       updateReviewNumButtons();
       displayCurrentReview();
-      
+
       // Hide share button for new games
-      shareButton.style.display = 'none';
+      if (shareButton) {
+        shareButton.style.display = 'none';
+      }
 
     }
 
-    if (archiveDate) {
-      dateDisplay.innerHTML = `<h2>Archive (${formattedMovieDate})</h2>`;
-    }
-    else {
-      dateDisplay.innerHTML = `<h2>Today's movie (${formattedMovieDate})</h2>`;
+    if (dateDisplay) {
+      if (archiveDate) {
+        dateDisplay.textContent = `Archive (${formattedMovieDate})`;
+      } else {
+        dateDisplay.textContent = `Today's movie (${formattedMovieDate})`;
+      }
     }
 
   }
@@ -835,82 +946,125 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
 });
 
 // Past Guesses Accordion Functions
-function toggleAccordion() {
-    const container = document.querySelector('.accordion-container');
-    const content = document.querySelector('.accordion-content');
-    const expandText = document.querySelector('.expand-minimize-text');
-    
-    if (container && content) {
-        container.classList.toggle('open');
-        
-        // Update expand/minimize text
-        if (expandText) {
-            if (container.classList.contains('open')) {
-                expandText.textContent = 'Click to minimize';
-            } else {
-                expandText.textContent = 'Click to expand';
-            }
-        }
+function toggleAccordion(forceState) {
+  const container = document.querySelector('.accordion-container');
+  const content = document.querySelector('.accordion-content');
+  const expandText = document.querySelector('.expand-minimize-text');
+
+  if (!container || !content) return;
+
+  if (typeof forceState === 'boolean') {
+    if (forceState) {
+      container.classList.add('open');
+      if (expandText) expandText.textContent = 'Click to minimize';
+    } else {
+      container.classList.remove('open');
+      if (expandText) expandText.textContent = 'Click to expand';
     }
+  } else {
+    container.classList.toggle('open');
+    if (expandText) {
+      if (container.classList.contains('open')) {
+        expandText.textContent = 'Click to minimize';
+      } else {
+        expandText.textContent = 'Click to expand';
+      }
+    }
+  }
 }
 
 function updatePastGuessesDisplay(guesses) {
-    console.log('Updating past guesses display with guesses:', guesses);
-    const container = document.getElementById('past-guesses-display');
-    const guessCountBadge = document.querySelector('.guess-count-badge');
-    const headerTitle = document.querySelector('.header-title');
-    const content = document.querySelector('.accordion-content');
-    
-    if (!container || !guessCountBadge || !content) {
-        return;
-    }
-    
-    // Show/hide the container based on whether there are guesses
-    if (!guesses || guesses.length === 0) {
-        container.style.display = 'none';
-        return;
-    }
-    
-    container.style.display = 'block';    // Update the header title and badge count
-    const guessesText = gameOver ? 'Guesses' : 'Previous Guesses';
-    headerTitle.textContent = guessesText;
-    guessCountBadge.textContent = guesses.length;
-    
-    // Add winning class if game was won
-    if (gameWon) {
-        container.classList.add('won');
-        container.classList.remove('lost');
-    } else {
-        container.classList.remove('won');
-        container.classList.add('lost');
-    }
-    
-    // Populate the accordion content
-    populateAccordionContent(guesses);
+  const container = document.getElementById('past-guesses-display');
+  const guessCountBadge = document.querySelector('.guess-count-badge');
+  const content = document.querySelector('.accordion-content');
+
+  if (!container || !guessCountBadge || !content) {
+    return;
+  }
+
+  // Show/hide the container based on whether there are guesses
+  if (!guesses || guesses.length === 0) {
+    container.style.display = 'none';
+    return;
+  }
+
+  container.style.display = 'block';    // Update the header title and badge count
+  guessCountBadge.textContent = guesses.length;
+
+  // Add winning class if game was won
+  if (gameWon) {
+    container.classList.add('won');
+    container.classList.remove('lost');
+  } else {
+    container.classList.remove('won');
+    container.classList.add('lost');
+  }
+
+  // Populate the accordion content
+  populateAccordionContent(guesses);
 }
 
 function populateAccordionContent(guesses) {
-    const content = document.querySelector('.accordion-content');
-    if (!content) return;
-    
-    content.innerHTML = '';
-    
-    guesses.forEach((guess, index) => {
-        const item = document.createElement('div');
-        item.className = 'guess-item hoverable-row';
-        
-        const isSkipped = guess.text === 'Skipped';
-        const titleClass = isSkipped ? 'guess-title skipped' : 'guess-title';
-        const numberClass = guess.isCorrect ? 'guess-number correct' : 'guess-number';
-        
-        item.innerHTML = `
-            <div class="${numberClass}">${index + 1}</div>
-            <div class="guess-content">
-                <div class="${titleClass}">${guess.text}</div>
-                <div class="guess-meta review-selected">Review ${guess.reviewIndex}</div>
-            </div>
-        `;
-        
-        content.appendChild(item);
-    });
+  const content = document.querySelector('.accordion-content');
+  if (!content) return;
+
+  content.innerHTML = '';
+
+  // Create a horizontal container for the guesses
+  const horizontalContainer = document.createElement('div');
+  horizontalContainer.className = 'guess-horizontal-container';
+  // Set a CSS variable for the number of guesses (for spacing)
+  horizontalContainer.style.setProperty('--guess-count', guesses.length);
+
+  guesses.forEach((guess, index) => {
+    const item = document.createElement('div');
+    item.className = 'guess-item-horizontal';
+
+    const isSkipped = guess.text === 'Skipped';
+    const titleClass = isSkipped ? 'guess-title skipped' : 'guess-title';
+    const numberClass = guess.isCorrect ? 'guess-number correct' : 'guess-number';
+
+    // Try to get posterLink from allMovies or game history
+    let posterLink = '';
+    let movieID = '';
+    let title = '';
+    let year = '';
+    if (!isSkipped) {
+      // Extract movieID from guess.text if possible
+      const match = guess.text.match(/\((\d{4})\)$/);
+      if (match) {
+        // Try to find the movie in allMovies
+        const found = allMovies.find(m => `${m.title} (${m.year})` === guess.text);
+        if (found) {
+          posterLink = found.posterLink;
+          movieID = found.movieID;
+          title = found.title;
+          year = found.year;
+        } else {
+          // Try to find in game history
+          const foundHistory = (gameCache && gameCache.gameHistory) ? gameCache.gameHistory.find(g => `${g.title} (${g.year})` === guess.text) : null;
+          if (foundHistory) {
+            posterLink = foundHistory.posterLink;
+            movieID = foundHistory.movieID;
+            title = foundHistory.title;
+            year = foundHistory.year;
+          }
+        }
+      }
+    }
+
+    item.innerHTML = `
+      <div class="${numberClass}">${index + 1}</div>
+      <div class="guess-poster-container">
+        ${posterLink ? `<img class="guess-poster" src="${posterLink}" alt="${title} (${year}) poster">` : `<div class="guess-poster-placeholder">?</div>`}
+      </div>
+      <div class="guess-content-horizontal">
+        <div class="${titleClass}">${guess.text}</div>
+      </div>
+    `;
+
+    horizontalContainer.appendChild(item);
+  });
+
+  content.appendChild(horizontalContainer);
 }

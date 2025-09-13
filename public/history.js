@@ -62,9 +62,31 @@ function fewestGuessesInSingleWin(stats) {
 
 // ---------------- History Rendering ----------------
 
-// Load new v1 localStorage structure
-gameHistory = JSON.parse(localStorage.getItem('gameHistory')) || [];
-gameStats = JSON.parse(localStorage.getItem('gameStats')) || {};
+// Cache localStorage data to avoid repeated parsing
+class HistoryDataCache {
+  constructor() {
+    this._gameHistory = null;
+    this._gameStats = null;
+  }
+  
+  get gameHistory() {
+    if (!this._gameHistory) {
+      this._gameHistory = JSON.parse(localStorage.getItem('gameHistory')) || [];
+    }
+    return this._gameHistory;
+  }
+  
+  get gameStats() {
+    if (!this._gameStats) {
+      this._gameStats = JSON.parse(localStorage.getItem('gameStats')) || {};
+    }
+    return this._gameStats;
+  }
+}
+
+const historyCache = new HistoryDataCache();
+gameHistory = historyCache.gameHistory;
+gameStats = historyCache.gameStats;
 
 // Generates HTML for a single game (v1 localStorage)
 function generateGameHTML(game) {
@@ -163,8 +185,20 @@ function generateGameHTML(game) {
     return html;
 }
 
+// Cache DOM elements
+let historyBodyElement = null;
+
+function getHistoryBodyElement() {
+  if (!historyBodyElement) {
+    historyBodyElement = document.getElementById('historyBody');
+  }
+  return historyBodyElement;
+}
+
 function displayHistoryAndStats() {
-    const container = document.getElementById('historyBody');
+    const container = getHistoryBodyElement();
+    if (!container) return;
+    
     if (!gameHistory.length) {
         container.innerHTML += `<p>You have not played any games yet!</p>`;
         return;

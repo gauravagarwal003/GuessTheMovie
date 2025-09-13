@@ -72,28 +72,31 @@
 
         <div id="content-wrap">
             <div id="dateDisplay">
-                <span id="dateDisplayMessage"></span>
+                <a id="dateDisplayMessage"></a>
             </div>
             <div id="textDisplay">
-                <span class="message"></span>
-                <a class="text-link"></a>
-                <span class="message"></span>
+                <div id="resultDisplay">
+                    <span class="message"></span>
+                    <a class="text-link"></a>
+                    <span class="message"></span>
+                </div>
+                <a id="come-back-text"></a>
             </div>
-            
+
             <!-- Past Guesses Container -->
-                <div id="past-guesses-display" class="past-guesses-display" style="display: none;">
-                    <div class="accordion-container" onclick="toggleAccordion()">
-                        <div class="accordion-header">
-                            <div class="guess-count-badge"></div>
-                            <span class="header-title">Previous Guesses</span>
-                            <span class="expand-minimize-text">Click to expand</span>
-                        </div>
-                        <div class="accordion-content">
-                            <!-- Past guesses content will be populated here -->
-                        </div>
+            <div id="past-guesses-display" class="past-guesses-display" style="display: none;">
+                <div class="accordion-container" onclick="toggleAccordion()">
+                    <div class="accordion-header">
+                        <div class="guess-count-badge"></div>
+                        <span class="header-title">Your Guesses</span>
+                        <span class="expand-minimize-text">Click to expand</span>
                     </div>
+                    <div class="accordion-content">
+                        <!-- Past guesses content will be populated here -->
+                    </div>
+                </div>
             </div>
-            
+
             <div id="reviewContainer">
                 <div id="reviewCard" class="review-card" style="display: none;">
                     <div class="review-header">
@@ -157,7 +160,7 @@
                 <span id="profileLabel" class="footer-full">My Profile</span>
                 <span id="profileLabel" class="footer-short">My LB</span>
             </a>
-            <a href="/about#openModal" target="_blank" class="footer-item" id="contactItem">
+            <a href="/about.html" class="footer-item" id="contactItem">
                 <i class="fa-solid fa-paper-plane icon" id="contactIcon"></i>
                 <span id="contactLabel" class="footer-full">Contact Us</span>
                 <span id="contactLabel" class="footer-short">Contact</span>
