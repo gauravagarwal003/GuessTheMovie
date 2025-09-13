@@ -1,4 +1,3 @@
-
 :root {
     --LOrange: #ef8733;
     --LGreen: #66dd67;
@@ -53,19 +52,7 @@ body {
     justify-content: space-around !important;
 }
 
-@media (max-width: 400px) {
-    .review-username {
-        font-size: 20px;
-        max-width: calc(100vw - 120px);
-    }
-}
-
 @media (max-width: 560px) {
-    .review-username {
-        font-size: 22px;
-        max-width: calc(100vw - 150px);
-    }
-
     #textDisplay {
         padding-left: 10px;
         padding-right: 10px;
@@ -82,6 +69,12 @@ body {
         flex-wrap: nowrap;
         gap: 1%;
     }
+
+    .review-username {
+        font-size: 22px;
+        max-width: calc(100vw - 150px);
+    }
+
 
     .header-nav {
         padding: 0;
@@ -591,6 +584,7 @@ a:focus #profileIcon {
     margin-bottom: 0;
 }
 
+/* Username styling */
 .review-username {
     margin: 0 0 4px 0;
     font-size: 25px;
@@ -602,6 +596,7 @@ a:focus #profileIcon {
     max-width: calc(100vw - 200px);
 }
 
+/* Rating and liked container for top right */
 .review-rating-container {
     display: flex;
     flex-direction: column;
@@ -698,7 +693,6 @@ a:focus #profileIcon {
     font-size: 0.85em;
     color: gray;
     font-style: italic;
-    margin-top: 4px;
 }
 
 .incorrect_url_background {
@@ -864,12 +858,6 @@ a:focus #profileIcon {
 }
 
 @media (max-width: 460px) {
-    #submit-button {
-        padding: 10px 12px;
-        font-size: 1rem;
-        margin-left: 8px;
-    }
-
     .footer-full {
         display: none !important;
     }
@@ -877,7 +865,20 @@ a:focus #profileIcon {
     .footer-short {
         display: inline !important;
     }
+        #submit-button {
+        padding: 10px 12px;
+        font-size: 1rem;
+        margin-left: 8px;
+    }
+
 }
+@media (max-width: 400px) {
+        .review-username {
+        font-size: 20px;
+        max-width: calc(100vw - 120px);
+    }
+}
+
 
 @media (max-width: 320px) {
     /* Reduce margins and padding for a smaller container */
@@ -1028,118 +1029,156 @@ a:focus #profileIcon {
     font-style: italic;
 }
 
+
+
+.accordion-container.open .accordion-content {
+    border-radius: 0 0 4px 4px;
+    max-height: 500px; /* Adjust based on content */
+}
+
+/* Accordion content - no padding, no scrolling */
 .accordion-content {
     max-height: 0;
     overflow: hidden;
     transition: all 0.3s ease;
     background: var(--offWhite);
+    padding: 0;
 }
 
-.accordion-container.open .accordion-content {
-    max-height: 250px;
-    padding: 4px 16px;
-    border-radius: 0 0 7px 7px;
-}
-
-.guess-item {
-    padding: 6px 0;
+/* Horizontal container - no padding, no gaps, no scrolling */
+.guess-horizontal-container {
     display: flex;
-    gap: 8px;
+    flex-direction: row;
+    gap: 0;
+    align-items: flex-start; /* Changed from flex-end to flex-start */
+    overflow: hidden;
+    padding: 0;
+    justify-content: stretch;
+    width: 100%;
+    margin: 0;
+    min-height: 120px;
+}
+
+/* Remove the problematic ::after pseudo-element */
+.guess-horizontal-container::after {
+    display: none;
+}
+
+/* Each guess takes exactly 1/5 of space */
+.guess-item-horizontal {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    position: relative;
+    justify-content: flex-start; /* Add this to align content to top */
+    width: 20%;
+    min-width: 20%;
+    max-width: 20%;
+    height: 100%;
+    padding: 4px 4px; /* Add small padding for better spacing */
+    margin: 0;
+    background: rgba(255,255,255,0.08);
+    border-radius: 0;
+    gap: 4px; /* Increase gap slightly for better spacing */
+    flex-shrink: 0;
+    flex-grow: 0;
+    box-sizing: border-box;
 }
 
-.guess-item:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 3px;
-    right: 3px;
-    height: 1px;
-    background: var(--currentBackground);
+/* Remove margin between items */
+.guess-item-horizontal:not(:last-child) {
+    margin-right: 0;
 }
 
-.guess-item:last-child {
-    border-bottom: none;
+/* Minimal poster container */
+/* Ensure poster container maintains consistent height */
+.guess-poster-container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    min-height: 80px; /* Add minimum height to maintain consistent layout */
 }
 
+.guess-poster {
+    width: 85%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 2px;
+    background: #eee;
+}
+
+.guess-poster-placeholder {
+    width: 85%;
+    height: auto;
+    display: flex;
+    object-fit: cover;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 2/3;
+    background-color: gray;
+    color: #fff;
+    font-size: 1rem;
+    border-radius: 2px;
+}
+
+/* Minimal content area */
+.guess-content-horizontal {
+    text-align: center;
+    width: 100%;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* Minimal guess number */
 .guess-number {
     background: var(--calendar-red);
     color: white;
-    padding: 2px 2px;
-    border-radius: 8px;
+    padding: 1px 4px;
+    border-radius: 4px;
     font-weight: bold;
-    min-width: 16px;
+    min-width: 12px;
     text-align: center;
-    font-size: 0.8rem;
-}
-
-.guess-number:hover {
-    background: var(--calendar-red-hover);
+    font-size: 0.6rem;
+    margin: 0;
 }
 
 .guess-number.correct {
     background: var(--calendar-green);
 }
 
+.guess-number:hover {
+    background: var(--calendar-red-hover);
+}
+
 .guess-number.correct:hover {
     background: var(--calendar-green-hover);
 }
 
-.guess-content {
-    flex: 1;
-    min-width: 0;
-}
-
+/* Minimal title text */
 .guess-title {
     color: var(--LBackground);
     font-weight: 400;
-    font-size: 0.9rem;
-    line-height: 1.2;
+    font-size: 0.6rem;
+    line-height: 1.1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-break: break-word;
+    margin: 0;
+    padding: 0;
 }
 
 .guess-title.skipped {
     font-style: italic;
-    color: var(--inactiveButtonText);
     color: rgba(100, 130, 160, 0.5);
 }
 
-.guess-meta {
-    color: rgba(150, 170, 190, 0.5);
-    font-size: 0.75rem;
-    margin-top: 2px;
-}
-
-/* Review text styling */
-.review-selected {
-    color: var(--searchbarText);
-}
 
 /* Hoverable row styling */
-.hoverable-row {
-    transition: all 0.2s ease;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.hoverable-row:hover {
-    background: rgba(255, 255, 255, 0.12);
-    border-radius: 6px;
-    padding-left: 12px;
-    padding-right: 4px;
-    transform: translateX(4px);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
-
-/* Default hover: wrong guesses show red hover */
-.hoverable-row:hover .guess-number {
-    background: var(--calendar-red-hover);
-}
-
-/* Correct guesses show green hover */
-.hoverable-row:hover .guess-number.correct {
-    background: var(--calendar-green-hover);
-}
 
 /* Winning state styling */
 .past-guesses-display.won .guess-count-badge {

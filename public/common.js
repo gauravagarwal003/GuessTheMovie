@@ -1010,22 +1010,61 @@ function populateAccordionContent(guesses) {
 
   content.innerHTML = '';
 
+  // Create a horizontal container for the guesses
+  const horizontalContainer = document.createElement('div');
+  horizontalContainer.className = 'guess-horizontal-container';
+  // Set a CSS variable for the number of guesses (for spacing)
+  horizontalContainer.style.setProperty('--guess-count', guesses.length);
+
   guesses.forEach((guess, index) => {
     const item = document.createElement('div');
-    item.className = 'guess-item hoverable-row';
+    item.className = 'guess-item-horizontal';
 
     const isSkipped = guess.text === 'Skipped';
     const titleClass = isSkipped ? 'guess-title skipped' : 'guess-title';
     const numberClass = guess.isCorrect ? 'guess-number correct' : 'guess-number';
 
-    item.innerHTML = `
-            <div class="${numberClass}">${index + 1}</div>
-            <div class="guess-content">
-                <div class="${titleClass}">${guess.text}</div>
-                <div class="guess-meta review-selected">Review ${guess.reviewIndex}</div>
-            </div>
-        `;
+    // Try to get posterLink from allMovies or game history
+    let posterLink = '';
+    let movieID = '';
+    let title = '';
+    let year = '';
+    if (!isSkipped) {
+      // Extract movieID from guess.text if possible
+      const match = guess.text.match(/\((\d{4})\)$/);
+      if (match) {
+        // Try to find the movie in allMovies
+        const found = allMovies.find(m => `${m.title} (${m.year})` === guess.text);
+        if (found) {
+          posterLink = found.posterLink;
+          movieID = found.movieID;
+          title = found.title;
+          year = found.year;
+        } else {
+          // Try to find in game history
+          const foundHistory = (gameCache && gameCache.gameHistory) ? gameCache.gameHistory.find(g => `${g.title} (${g.year})` === guess.text) : null;
+          if (foundHistory) {
+            posterLink = foundHistory.posterLink;
+            movieID = foundHistory.movieID;
+            title = foundHistory.title;
+            year = foundHistory.year;
+          }
+        }
+      }
+    }
 
-    content.appendChild(item);
+    item.innerHTML = `
+      <div class="${numberClass}">${index + 1}</div>
+      <div class="guess-poster-container">
+        ${posterLink ? `<img class="guess-poster" src="${posterLink}" alt="${title} (${year}) poster">` : `<div class="guess-poster-placeholder">?</div>`}
+      </div>
+      <div class="guess-content-horizontal">
+        <div class="${titleClass}">${guess.text}</div>
+      </div>
+    `;
+
+    horizontalContainer.appendChild(item);
   });
+
+  content.appendChild(horizontalContainer);
 }
