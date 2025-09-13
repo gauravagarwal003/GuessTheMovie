@@ -375,29 +375,6 @@ body {
     display: none;
 }
 
-#coffeeItem {
-    display: inline-flex;
-    align-items: center;
-    gap: 3px;
-    padding-right: 10px;
-    text-decoration: none;
-}
-
-
-
-#coffeeLabel {
-    color: var(--coffeeColor);
-    text-decoration: underline;
-    /* Underline only the text span */
-}
-
-#coffeeIcon {
-    text-decoration: none !important;
-    /* Ensures icon remains unlined */
-    color: var(--coffeeColor);
-}
-
-
 #contactLabel {
     color: var(--LBlue);
     text-decoration: underline;
