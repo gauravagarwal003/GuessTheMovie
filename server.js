@@ -211,7 +211,7 @@ app.get('/archive', (req, res) => {
 });
 
 app.get('/about', (req, res) => {
-  const file = process.env.NODE_ENV === 'prod`suction'
+  const file = process.env.NODE_ENV === 'production'
     ? path.join(__dirname, 'dist', 'about.html')
     : path.join(__dirname, 'public', 'about.html');
   res.sendFile(file);
@@ -253,6 +253,9 @@ app.get('/archive/:date', (req, res) => {
 });
 
 // --- START SERVER ---
+app.use((req, res) => {
+  sendIncorrect(res);
+});
 
 if (process.env.NODE_ENV === 'production') {
   app.listen(port, () => {
