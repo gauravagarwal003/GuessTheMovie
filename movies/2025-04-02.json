@@ -1,0 +1,67 @@
+{
+  "date": "2025-04-02",
+  "movieID": "the-holdovers",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "10",
+      "date": "November 10, 2023",
+      "username": "jeaba",
+      "numLikes": "18817",
+      "rating": "4.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/6/6/1/5/0/5/2/shard/avtr-0-80-0-80-crop.jpg?v=78d1396164",
+      "liked": true,
+      "collapsed": false,
+      "text": "<p>STOP LETTING THAT BOY USE THE BATHROOM</p>",
+      "link": "https://letterboxd.com/jeaba/film/the-holdovers/1/"
+    },
+    {
+      "num_comments": "13",
+      "date": "December 20, 2023",
+      "username": "mary",
+      "numLikes": "5110",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/1/3/6/4/3/7/3/shard/avtr-0-80-0-80-crop.jpg?v=d6b74244c1",
+      "liked": true,
+      "collapsed": false,
+      "text": "<p>\"The shining\" if it was a heartwarming comedy.</p>",
+      "link": "https://letterboxd.com/notmerii/film/the-holdovers/"
+    },
+    {
+      "num_comments": "0",
+      "date": "November 30, 2023",
+      "username": "Ayo Edebiri",
+      "numLikes": "35659",
+      "rating": "",
+      "profilePhotoLink": "https://secure.gravatar.com/avatar/410c3a8d5c4ee5743a85165ba1e05940?rating=PG&size=80&border=&default=https%3A%2F%2Fs.ltrbxd.com%2Fstatic%2Fimg%2Favatar80-CTtJ8HSs.png",
+      "liked": true,
+      "collapsed": false,
+      "text": "<p>Very “they don’t make movies like that anymore” but then they did! Charming! Frightening New England representation!</p>",
+      "link": "https://letterboxd.com/fumilayo/film/the-holdovers/"
+    },
+    {
+      "num_comments": "19",
+      "date": "October 11, 2023",
+      "username": "patrick sproull",
+      "numLikes": "31748",
+      "rating": "4.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/3/6/7/9/1/shard/avtr-0-80-0-80-crop.jpg?v=c1591ac1d3",
+      "liked": true,
+      "collapsed": false,
+      "text": "<p>paul giamatti ran that twink academy like its the navy</p>",
+      "link": "https://letterboxd.com/patricksproull/film/the-holdovers/"
+    },
+    {
+      "num_comments": "1",
+      "date": "January 24, 2024",
+      "username": "Jay 👽",
+      "numLikes": "2069",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/4/3/4/8/7/2/shard/avtr-0-80-0-80-crop.jpg?v=aa881c84a2",
+      "liked": true,
+      "collapsed": false,
+      "text": "<p>this movie got a hold over me</p>",
+      "link": "https://letterboxd.com/vincentjello/film/the-holdovers/"
+    }
+  ]
+}

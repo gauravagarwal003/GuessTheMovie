@@ -1,0 +1,67 @@
+{
+  "date": "2025-10-13",
+  "movieID": "all-the-presidents-men",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "4",
+      "date": "December 28, 2017",
+      "username": "Charlotte Thornton",
+      "numLikes": "905",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/3/0/6/6/0/shard/avtr-0-80-0-80-crop.jpg?v=5fa651fe2a",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>literally half of this movie is just people saying \"i can't talk about that\"</p> ",
+      "link": "https://letterboxd.com/meteorrejector/film/all-the-presidents-men/"
+    },
+    {
+      "num_comments": "1",
+      "date": "March 11, 2018",
+      "username": "grace spelman",
+      "numLikes": "1431",
+      "rating": "4.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/6/6/1/0/6/6/shard/avtr-0-80-0-80-crop.jpg?v=a7ac092cf5",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>completely changed my opinion on parking garages</p> ",
+      "link": "https://letterboxd.com/gracespelman/film/all-the-presidents-men/"
+    },
+    {
+      "num_comments": "0",
+      "date": "December 26, 2023",
+      "username": "sarah squirm",
+      "numLikes": "979",
+      "rating": "",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/6/0/3/2/0/4/shard/avtr-0-80-0-80-crop.jpg?v=ff82aaa850",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>wait journalists were hot???</p> ",
+      "link": "https://letterboxd.com/sarahsquirm/film/all-the-presidents-men/"
+    },
+    {
+      "num_comments": "0",
+      "date": "September 16, 2025",
+      "username": "brendan o'hare",
+      "numLikes": "102",
+      "rating": "4.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/3/1/4/0/7/0/shard/avtr-0-80-0-80-crop.jpg?v=6fc6849268",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>Loses a bit of luster when you learn Deep Throat was just some guy who got lost in a parking garage, but still great</p> ",
+      "link": "https://letterboxd.com/brendohare/film/all-the-presidents-men/"
+    },
+    {
+      "num_comments": "6",
+      "date": "October 4, 2025",
+      "username": "Joe A",
+      "numLikes": "726",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/9/3/1/5/9/6/shard/avtr-0-80-0-80-crop.jpg?v=643145c700",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>Felt very uncanny to watch in big 2025. A corrupt administration attacking the press in an effort to conceal their crimes and destroy the public’s faith in meaningful journalism. You’d think with the advent of social media and the chronically online we’d be less forgiving of these cowardly tactics, yet here we are. </p><p>Anyways, that 1-2 combo of Redford and Hoffman is so good, sometimes I forget that the movie also <i>looks</i> incredible. Every frame buzzes with energy.</p> ",
+      "link": "https://letterboxd.com/jaragon23/film/all-the-presidents-men/"
+    }
+  ]
+}

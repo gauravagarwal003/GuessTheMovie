@@ -1,0 +1,67 @@
+{
+  "date": "2025-05-29",
+  "movieID": "star-wars",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "9",
+      "date": "August 27, 2018",
+      "username": "Patrick Willems",
+      "numLikes": "2701",
+      "rating": "4.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/6/7/4/1/9/shard/avtr-0-80-0-80-crop.jpg?v=a856408a78",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>Still superior to just about all of the 50 billion movies it inspired.</p> ",
+      "link": "https://letterboxd.com/patrickhwillems/film/star-wars/"
+    },
+    {
+      "num_comments": "13",
+      "date": "December 8, 2020",
+      "username": "liam f",
+      "numLikes": "2009",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/2/0/5/9/6/8/shard/avtr-0-80-0-80-crop.jpg?v=ab25fb02ae",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>it's all fun and games until you find out that over two billion people died in this film</p> ",
+      "link": "https://letterboxd.com/leeyim/film/star-wars/"
+    },
+    {
+      "num_comments": "18",
+      "date": "December 11, 2020",
+      "username": "river",
+      "numLikes": "12763",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/1/0/7/3/5/0/shard/avtr-0-80-0-80-crop.jpg?v=68a395d9cc",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>the powerpoint transitions never get old</p> ",
+      "link": "https://letterboxd.com/stringoflights/film/star-wars/1/"
+    },
+    {
+      "num_comments": "9",
+      "date": "October 11, 2021",
+      "username": "alor",
+      "numLikes": "1871",
+      "rating": "4.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/0/1/3/6/2/9/shard/avtr-0-80-0-80-crop.jpg?v=8ae3d90bb1",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>The cantina band deserve their own movie</p> ",
+      "link": "https://letterboxd.com/alor/film/star-wars/1/"
+    },
+    {
+      "num_comments": "0",
+      "date": "November 18, 2019",
+      "username": "Jeff 🇵🇸",
+      "numLikes": "7067",
+      "rating": "4.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/5/3/1/8/4/3/shard/avtr-0-80-0-80-crop.jpg?v=6708bb2bb9",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>When Luke looks out to the two suns.... that’s cinema baby.</p> ",
+      "link": "https://letterboxd.com/fantasticmrjeff/film/star-wars/"
+    }
+  ]
+}

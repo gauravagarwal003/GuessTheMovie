@@ -1,0 +1,67 @@
+{
+  "date": "2025-09-14",
+  "movieID": "a-star-is-born-2018",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "1",
+      "date": "November 5, 2018",
+      "username": "Framesofnick",
+      "numLikes": "383",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/8/7/3/7/4/2/shard/avtr-0-80-0-80-crop.jpg?v=4c0d7907fb",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>Severe lack of solar systems but overall a good time</p> ",
+      "link": "https://letterboxd.com/framesofnick/film/a-star-is-born-2018/"
+    },
+    {
+      "num_comments": "0",
+      "date": "January 22, 2019",
+      "username": "cinéfila... 🕯️",
+      "numLikes": "522",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/5/9/3/8/0/shard/avtr-0-80-0-80-crop.jpg?v=52ae3ecbf0",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>[sad yeehaw]</p> ",
+      "link": "https://letterboxd.com/childrenofmen/film/a-star-is-born-2018/"
+    },
+    {
+      "num_comments": "3",
+      "date": "November 28, 2019",
+      "username": "hunter strawberry",
+      "numLikes": "570",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/9/3/0/6/3/shard/avtr-0-80-0-80-crop.jpg?v=cd43aa6d08",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>bradley in this looks like what morning breath smells like</p> ",
+      "link": "https://letterboxd.com/hstrawberry/film/a-star-is-born-2018/2/"
+    },
+    {
+      "num_comments": "7",
+      "date": "October 2, 2018",
+      "username": "Matt Singer",
+      "numLikes": "778",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/8/7/8/6/shard/avtr-0-80-0-80-crop.jpg?v=fac7ed503e",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>I kind of wished I hated it, just so I could call it shallow. But I didn’t! And it’s not!</p> ",
+      "link": "https://letterboxd.com/superpulse/film/a-star-is-born-2018/"
+    },
+    {
+      "num_comments": "34",
+      "date": "October 5, 2018",
+      "username": "stevie",
+      "numLikes": "10279",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/6/0/5/1/3/shard/avtr-0-80-0-80-crop.jpg?v=bdd67732df",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>The movie ended... and it cut to black.... and the theater was completely silent.... and from the distant back of the theater.... an unseen emotional gay man let out a whimper.... “yas Gaga….”</p> ",
+      "link": "https://letterboxd.com/vontrapp/film/a-star-is-born-2018/"
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "date": "2025-05-27",
+  "movieID": "saltburn",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "18",
+      "date": "December 25, 2023",
+      "username": "Chandler Levack",
+      "numLikes": "3371",
+      "rating": "1.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/4/0/5/6/4/7/0/shard/avtr-0-80-0-80-crop.jpg?v=de27ede105",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>Parasite by Shein.</p> ",
+      "link": "https://letterboxd.com/clevack/film/saltburn/"
+    },
+    {
+      "num_comments": "16",
+      "date": "November 19, 2023",
+      "username": "Ana Salazar",
+      "numLikes": "9250",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/7/3/4/9/1/6/7/shard/avtr-0-80-0-80-crop.jpg?v=0cbf7b59e5",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>Bisexual for the bag is crazy</p> ",
+      "link": "https://letterboxd.com/thisisana/film/saltburn/"
+    },
+    {
+      "num_comments": "118",
+      "date": "November 21, 2023",
+      "username": "The Oscar Expert",
+      "numLikes": "22207",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/twitter/1/6/1/3/4/3/0/shard/http___pbs.twimg.com_profile_images_1088896385892732930_3_jXq4RJ-0-80-0-80-crop.jpg?v=e0248c58e5",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>Disappointing that it leaves the audience with absolutely nothing interesting to chew on. All the intrigue over the main character is reduced to an easy answer. The only discernible takeaway you could have from this is that wealth and beauty is something people really want and are drawn to. That's it.</p><p>It's crazy that a movie about class and the ultra-wealthy made in 2023 has so little to say. Maybe the movie wasn't trying to say anything and it just wanted to be a romp. That being said it's a pretty fun romp.</p> ",
+      "link": "https://letterboxd.com/theoscarexpert/film/saltburn/"
+    },
+    {
+      "num_comments": "122",
+      "date": "October 4, 2023",
+      "username": "zoë rose bryant",
+      "numLikes": "67307",
+      "rating": "4.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/5/0/1/5/4/7/shard/avtr-0-80-0-80-crop.jpg?v=b7291b59ad",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>a movie about how jacob elordi is simply so fucking hot that his mere existence is enough to make someone legally insane</p> ",
+      "link": "https://letterboxd.com/zoerosebryant/film/saltburn/1/"
+    },
+    {
+      "num_comments": "139",
+      "date": "November 8, 2023",
+      "username": "MxNavi",
+      "numLikes": "28777",
+      "rating": "2.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/0/1/8/2/7/5/shard/avtr-0-80-0-80-crop.jpg?v=7600c21922",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>Me finding the grave of the guy that invented Dr Pepper</p> ",
+      "link": "https://letterboxd.com/mxnavi/film/saltburn/"
+    }
+  ]
+}

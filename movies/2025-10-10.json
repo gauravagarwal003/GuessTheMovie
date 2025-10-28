@@ -1,0 +1,67 @@
+{
+  "date": "2025-10-10",
+  "movieID": "birdman-or-the-unexpected-virtue-of-ignorance",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "17",
+      "date": "January 10, 2020",
+      "username": "leon",
+      "numLikes": "3567",
+      "rating": "0.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/8/4/1/9/0/4/shard/avtr-0-80-0-80-crop.jpg?v=d1225f1503",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>i thought this was a fucking superhero movie, now im explaining themes of impotence and death to my fucking nephew</p> ",
+      "link": "https://letterboxd.com/retiredddl/film/birdman-or-the-unexpected-virtue-of-ignorance/"
+    },
+    {
+      "num_comments": "5",
+      "date": "January 4, 2019",
+      "username": "<3",
+      "numLikes": "2115",
+      "rating": "4.5",
+      "profilePhotoLink": "https://secure.gravatar.com/avatar/1625499caf539976e6a8acbe218a9a02?rating=PG&size=80&border=&default=https%3A%2F%2Fs.ltrbxd.com%2Fstatic%2Fimg%2Favatar80-CTtJ8HSs.png",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>is everyone in new york a struggling artist going through a life crisis?</p> ",
+      "link": "https://letterboxd.com/vangoth/film/birdman-or-the-unexpected-virtue-of-ignorance/"
+    },
+    {
+      "num_comments": "0",
+      "date": "December 8, 2024",
+      "username": "𓆩spike𓆪",
+      "numLikes": "152",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/9/1/6/6/9/3/6/shard/avtr-0-80-0-80-crop.jpg?v=3d1305b5fc",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>black swan for men</p> ",
+      "link": "https://letterboxd.com/nerdzola/film/birdman-or-the-unexpected-virtue-of-ignorance/"
+    },
+    {
+      "num_comments": "3",
+      "date": "March 6, 2023",
+      "username": "Dakota Joaquin",
+      "numLikes": "503",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/9/7/4/6/6/8/shard/avtr-0-80-0-80-crop.jpg?v=95cbf83d69",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>Not even a decade after starring in this film and Michael Keaton has been in 3 whole ass superhero films (4 if you wanna count Batgirl).</p><p>Ironic.</p> ",
+      "link": "https://letterboxd.com/dakotajoaquin/film/birdman-or-the-unexpected-virtue-of-ignorance/"
+    },
+    {
+      "num_comments": "1",
+      "date": "April 28, 2018",
+      "username": "amaya",
+      "numLikes": "254",
+      "rating": "2.0",
+      "profilePhotoLink": "https://secure.gravatar.com/avatar/035b877ea9b00546ffddf77093f49c3c?rating=PG&size=80&border=&default=https%3A%2F%2Fs.ltrbxd.com%2Fstatic%2Fimg%2Favatar80-CTtJ8HSs.png",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>lacks birds</p> ",
+      "link": "https://letterboxd.com/elementarii/film/birdman-or-the-unexpected-virtue-of-ignorance/"
+    }
+  ]
+}

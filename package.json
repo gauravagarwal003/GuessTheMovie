@@ -4,13 +4,14 @@
   "description": "Movie guessing game",
   "main": "server.js",
   "scripts": {
-    "dev:server": "nodemon server.js",
-    "dev:client": "vite",
-    "dev:scheduler": "nodemon scheduler.js",
-    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\" \"npm run dev:scheduler\"",
-    "build": "vite build",
-    "serve": "vite preview",
-    "start": "concurrently \"node server.js\" \"node scheduler.js\""
+    "prebuild": "node generate-manifests.js",
+    "build": "vite build && node scripts/copy-assets.js",
+    "preview": "vite preview",
+    "sync": "node sync-data.js",
+    "consolidate": "node consolidate-movies.js",
+    "consolidate:cleanup": "node consolidate-movies.js --cleanup",
+    "dev": "vite",
+    "deploy": "npm run build && gh-pages -d dist"
   },
   "engines": {
     "node": ">=18.x"

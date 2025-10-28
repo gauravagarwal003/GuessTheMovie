@@ -1,0 +1,67 @@
+{
+  "date": "2025-09-01",
+  "movieID": "spy-kids",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "0",
+      "date": "July 14, 2022",
+      "username": "Jayden 🦭",
+      "numLikes": "136",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/3/1/6/1/7/1/shard/avtr-0-80-0-80-crop.jpg?v=db28285573",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>I love how this accurately portrays sibling relationships</p> ",
+      "link": "https://letterboxd.com/sammyfabelman/film/spy-kids/"
+    },
+    {
+      "num_comments": "4",
+      "date": "October 6, 2021",
+      "username": "molly",
+      "numLikes": "351",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/2/5/9/9/2/2/shard/avtr-0-80-0-80-crop.jpg?v=dba5ae3233",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>no cause this had a BUDGET!!!!!! how did my generation grow up on this while todays kids have youtube elsa???</p> ",
+      "link": "https://letterboxd.com/m__ollymac/film/spy-kids/"
+    },
+    {
+      "num_comments": "1",
+      "date": "June 9, 2017",
+      "username": "Holly-Beth",
+      "numLikes": "732",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/5/1/8/8/7/shard/avtr-0-80-0-80-crop.jpg?v=3e58ae1ed8",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>i forgot george clooney was the president in this....... okay Robert Rodriguez go off i guess</p> ",
+      "link": "https://letterboxd.com/jurassicstark/film/spy-kids/"
+    },
+    {
+      "num_comments": "0",
+      "date": "January 11, 2019",
+      "username": "Dom",
+      "numLikes": "511",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/twitter/5/8/8/0/6/7/shard/blob-0-80-0-80-crop.png?v=ee0ded3dbf",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>At the beginning Antonio Banderas reaches into someone's pocket and takes out a photo of himself which is only awkward because I too keep a pristine photograph of beautiful Antonio Banderas in my pocket.</p> ",
+      "link": "https://letterboxd.com/domxrm/film/spy-kids/"
+    },
+    {
+      "num_comments": "0",
+      "date": "February 6, 2019",
+      "username": "megan",
+      "numLikes": "353",
+      "rating": "3.0",
+      "profilePhotoLink": "https://secure.gravatar.com/avatar/616a93395249f835c1774c6be316226b?rating=PG&size=80&border=&default=https%3A%2F%2Fs.ltrbxd.com%2Fstatic%2Fimg%2Favatar80-CTtJ8HSs.png",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>our parents can’t be spies they’re not cool enough</p> ",
+      "link": "https://letterboxd.com/sharktale/film/spy-kids/"
+    }
+  ]
+}

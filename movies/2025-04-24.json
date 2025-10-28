@@ -1,0 +1,67 @@
+{
+  "date": "2025-04-24",
+  "movieID": "dont-look-up-2021",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "10",
+      "date": "December 25, 2021",
+      "username": "comrade_yui",
+      "numLikes": "2006",
+      "rating": "1.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/twitter/8/3/3/9/9/5/shard/http___pbs.twimg.com_profile_images_1180839569819930625_6NgiJI5c-0-80-0-80-crop.jpg?v=00fc553d0f",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>a movie made by people who all think they're the smartest person in the room</p> ",
+      "link": "https://letterboxd.com/comrade_yui/film/dont-look-up-2021/"
+    },
+    {
+      "num_comments": "50",
+      "date": "December 25, 2021",
+      "username": "kj",
+      "numLikes": "16470",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/9/5/1/7/3/5/shard/avtr-0-80-0-80-crop.jpg?v=010c8d9b10",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>it’s giving live-action chicken little</p> ",
+      "link": "https://letterboxd.com/lautengcokj/film/dont-look-up-2021/"
+    },
+    {
+      "num_comments": "52",
+      "date": "January 3, 2022",
+      "username": "James (Schaffrillas)",
+      "numLikes": "7144",
+      "rating": "1.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/2/0/3/7/7/7/shard/avtr-0-80-0-80-crop.jpg?v=ff62b2f12e",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>If anything this movie may have accelerated climate change</p> ",
+      "link": "https://letterboxd.com/schaffrillas/film/dont-look-up-2021/"
+    },
+    {
+      "num_comments": "225",
+      "date": "December 24, 2021",
+      "username": "marsh boy",
+      "numLikes": "55501",
+      "rating": "2.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/4/4/6/6/7/6/shard/avtr-0-80-0-80-crop.jpg?v=2ee890682b",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>oscar-worthy performance by leo pretending to like women his own age</p> ",
+      "link": "https://letterboxd.com/apple__/film/dont-look-up-2021/"
+    },
+    {
+      "num_comments": "10",
+      "date": "December 25, 2021",
+      "username": "ellie 🎠",
+      "numLikes": "6210",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/7/9/5/4/0/1/shard/avtr-0-80-0-80-crop.jpg?v=3eae217783",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>this happened to my buddy t-rex</p> ",
+      "link": "https://letterboxd.com/venic3btch/film/dont-look-up-2021/2/"
+    }
+  ]
+}

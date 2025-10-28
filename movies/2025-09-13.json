@@ -1,0 +1,67 @@
+{
+  "date": "2025-09-13",
+  "movieID": "wonder-2017",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "1",
+      "date": "June 11, 2024",
+      "username": "🦍",
+      "numLikes": "130",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/5/4/0/3/8/3/0/shard/avtr-0-80-0-80-crop.jpg?v=7cccc34aa3",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>My favorite Dhar Mann video</p> ",
+      "link": "https://letterboxd.com/popstylefor30/film/wonder-2017/"
+    },
+    {
+      "num_comments": "3",
+      "date": "April 23, 2018",
+      "username": "kayla",
+      "numLikes": "916",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/5/5/4/4/4/7/shard/avtr-0-80-0-80-crop.jpg?v=f6f0854246",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>Um I legit ugly cried from beginning to end</p> ",
+      "link": "https://letterboxd.com/kfavs/film/wonder-2017/"
+    },
+    {
+      "num_comments": "12",
+      "date": "January 30, 2018",
+      "username": "shay",
+      "numLikes": "2602",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/8/7/9/2/6/shard/avtr-0-80-0-80-crop.jpg?v=a3a46406c3",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>i know we're living in an alternate universe because owen wilson was in this and he never said \"wow\" at least once</p> ",
+      "link": "https://letterboxd.com/willhunting/film/wonder-2017/"
+    },
+    {
+      "num_comments": "0",
+      "date": "January 4, 2021",
+      "username": "DrStrange110",
+      "numLikes": "207",
+      "rating": "4.0",
+      "profilePhotoLink": "https://secure.gravatar.com/avatar/ae7697ab4f34dbf9ffb97f44cda0460f?rating=PG&size=80&border=&default=https%3A%2F%2Fs.ltrbxd.com%2Fstatic%2Fimg%2Favatar80-CTtJ8HSs.png",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>I have lump in my throat as big as that helmet rn</p> ",
+      "link": "https://letterboxd.com/drstrange110/film/wonder-2017/"
+    },
+    {
+      "num_comments": "2",
+      "date": "November 27, 2017",
+      "username": "victoria 🌙",
+      "numLikes": "256",
+      "rating": "4.0",
+      "profilePhotoLink": "https://secure.gravatar.com/avatar/343cb422ae5fc85af38ecc15e9f22b76?rating=PG&size=80&border=&default=https%3A%2F%2Fs.ltrbxd.com%2Fstatic%2Fimg%2Favatar80-CTtJ8HSs.png",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>jacob tremblay is MY SON and he must be protected at all costs!!</p> ",
+      "link": "https://letterboxd.com/violetvalenski/film/wonder-2017/"
+    }
+  ]
+}

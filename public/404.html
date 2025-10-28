@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting... - Guess the Movie</title>
+    <script>
+        // Client-side routing for GitHub Pages
+        (function() {
+            var path = window.location.pathname;
+            
+            // Determine which page to redirect to based on path
+            var targetPage = '/';
+            
+            if (path.startsWith('/archive/')) {
+                // Archive with date: /archive/2025-10-02 -> /archive.html
+                targetPage = '/archive.html';
+            } else if (path === '/archive') {
+                // Archive landing page -> /calendar.html
+                targetPage = '/calendar.html';
+            } else if (path === '/calendar' || path === '/calendar.html') {
+                targetPage = '/calendar.html';
+            } else if (path === '/about' || path === '/about.html') {
+                targetPage = '/about.html';
+            } else if (path === '/history' || path === '/history.html') {
+                targetPage = '/history.html';
+            }
+            
+            // Store the original path for the page to read
+            sessionStorage.redirect = window.location.href;
+            
+            // Redirect to the appropriate page
+            window.location.replace(targetPage);
+        })();
+    </script>
+</head>
+<body>
+    <p>Redirecting...</p>
+</body>
+</html>

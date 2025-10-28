@@ -1,0 +1,67 @@
+{
+  "date": "2025-09-30",
+  "movieID": "wonder-woman-1984",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "20",
+      "date": "December 26, 2020",
+      "username": "James (Schaffrillas)",
+      "numLikes": "3633",
+      "rating": "2.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/2/0/3/7/7/7/shard/avtr-0-80-0-80-crop.jpg?v=ff62b2f12e",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>The Mandalorian touches a lot of people through the Make-a-Wish Foundation.</p> ",
+      "link": "https://letterboxd.com/schaffrillas/film/wonder-woman-1984/"
+    },
+    {
+      "num_comments": "33",
+      "date": "December 25, 2020",
+      "username": "Lucy",
+      "numLikes": "5997",
+      "rating": "2.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/4/7/0/0/7/shard/avtr-0-80-0-80-crop.jpg?v=5ed30980a5",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>...at least the posters are nice</p> ",
+      "link": "https://letterboxd.com/deathproof/film/wonder-woman-1984/"
+    },
+    {
+      "num_comments": "0",
+      "date": "December 26, 2020",
+      "username": "sree",
+      "numLikes": "416",
+      "rating": "2.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/9/3/8/1/7/shard/avtr-0-80-0-80-crop.jpg?v=180b4e7cdc",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>once again the furries have won</p> ",
+      "link": "https://letterboxd.com/tototoro/film/wonder-woman-1984/"
+    },
+    {
+      "num_comments": "18",
+      "date": "December 26, 2020",
+      "username": "☆ sophie ☆",
+      "numLikes": "1546",
+      "rating": "2.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/7/4/2/8/4/5/shard/avtr-0-80-0-80-crop.jpg?v=b94b4901e1",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>Honestly, I could have just watched 2.5 hours of Chris Pine discovering the 80’s and it would have been better than this film.</p> ",
+      "link": "https://letterboxd.com/sophiaplanos/film/wonder-woman-1984/"
+    },
+    {
+      "num_comments": "11",
+      "date": "January 4, 2021",
+      "username": "Jay",
+      "numLikes": "1333",
+      "rating": "1.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/9/3/4/3/7/shard/avtr-0-80-0-80-crop.jpg?v=5df987600b",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>somehow that black and white imagine video isnt the worst thing gal gadot is responsible for this year</p> ",
+      "link": "https://letterboxd.com/jay/film/wonder-woman-1984/"
+    }
+  ]
+}

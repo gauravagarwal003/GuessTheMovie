@@ -1,0 +1,247 @@
+/**
+ * Dropbox Sync Script
+ * 
+ * Downloads today's movie data from Dropbox and consolidates it.
+ * This is designed to run as a standalone script in GitHub Actions.
+ * 
+ * Requires environment variables:
+ * - DROPBOX_APP_KEY
+ * - DROPBOX_APP_SECRET
+ * - DROPBOX_REFRESH_TOKEN
+ */
+
+require('dotenv').config();
+const fs = require('fs');
+const path = require('path');
+const fetch = require('node-fetch');
+const { Dropbox } = require('dropbox');
+
+const MOVIES_DIR = path.join(__dirname, 'movies');
+
+/**
+ * Refresh the Dropbox access token using refresh token
+ */
+async function refreshAccessToken(appKey, appSecret, refreshToken) {
+  const url = "https://api.dropboxapi.com/oauth2/token";
+  const params = new URLSearchParams();
+  params.append("grant_type", "refresh_token");
+  params.append("refresh_token", refreshToken);
+  params.append("client_id", appKey);
+  params.append("client_secret", appSecret);
+
+  const response = await fetch(url, {
+    method: "POST",
+    body: params
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to refresh access token: ${await response.text()}`);
+  }
+
+  const data = await response.json();
+  return data.access_token;
+}
+
+/**
+ * Recursively download all files and subfolders from a Dropbox folder
+ */
+async function downloadFolderContents(dbx, dropboxFolderPath, localPath) {
+  if (!fs.existsSync(localPath)) {
+    fs.mkdirSync(localPath, { recursive: true });
+  }
+
+  const response = await dbx.filesListFolder({ path: dropboxFolderPath });
+  for (const entry of response.result.entries) {
+    const localEntryPath = path.join(localPath, entry.name);
+    if (entry['.tag'] === 'file') {
+      const downloadResult = await dbx.filesDownload({ path: entry.path_lower });
+      fs.writeFileSync(localEntryPath, downloadResult.result.fileBinary, 'binary');
+      console.log(`   📄 Downloaded: ${entry.name}`);
+    } else if (entry['.tag'] === 'folder') {
+      await downloadFolderContents(dbx, entry.path_lower, localEntryPath);
+    }
+  }
+}
+
+/**
+ * Download only the folder with name equal to targetFolder from dropboxPath
+ */
+async function downloadFromDropbox(dbx, dropboxPath, localPath, targetFolder) {
+  try {
+    // Ensure the local base directory exists
+    if (!fs.existsSync(localPath)) {
+      fs.mkdirSync(localPath, { recursive: true });
+    }
+
+    // Check if the target day's folder already exists locally
+    const targetLocalFolder = path.join(localPath, targetFolder);
+    if (fs.existsSync(targetLocalFolder)) {
+      console.log(`⏭️  ${targetFolder} already exists, skipping download`);
+      return false;
+    }
+
+    console.log(`📥 Downloading ${targetFolder} from Dropbox...`);
+
+    // List contents of the specified Dropbox folder
+    const response = await dbx.filesListFolder({ path: dropboxPath });
+    let found = false;
+
+    for (const entry of response.result.entries) {
+      if (entry.name === targetFolder) {
+        found = true;
+        const localEntryPath = path.join(localPath, entry.name);
+        
+        if (entry['.tag'] === 'file') {
+          const downloadResult = await dbx.filesDownload({ path: entry.path_lower });
+          fs.writeFileSync(localEntryPath, downloadResult.result.fileBinary, 'binary');
+          console.log(`   ✅ Downloaded file: ${entry.name}`);
+        } else if (entry['.tag'] === 'folder') {
+          await downloadFolderContents(dbx, entry.path_lower, localEntryPath);
+          console.log(`   ✅ Downloaded folder: ${entry.name}`);
+        }
+        return true;
+      }
+    }
+
+    if (!found) {
+      console.log(`   ⚠️  ${targetFolder} not found in Dropbox`);
+      return false;
+    }
+  } catch (error) {
+    console.error('   ❌ Error in downloadFromDropbox:', error.message);
+    throw error;
+  }
+}
+
+/**
+ * Consolidate the downloaded folder into a single JSON file
+ */
+function consolidateDownloadedMovie(dateFolder) {
+  console.log(`🔄 Consolidating ${dateFolder}...`);
+  
+  const datePath = path.join(MOVIES_DIR, dateFolder);
+  
+  if (!fs.existsSync(datePath)) {
+    console.log('   ⚠️  Date folder not found, skipping consolidation');
+    return;
+  }
+
+  // Get movie folder
+  const movieFolders = fs.readdirSync(datePath)
+    .filter(item => {
+      const itemPath = path.join(datePath, item);
+      return fs.statSync(itemPath).isDirectory() && !item.startsWith('.');
+    });
+
+  if (movieFolders.length === 0) {
+    console.log('   ⚠️  No movie folder found');
+    return;
+  }
+
+  const movieID = movieFolders[0];
+  const moviePath = path.join(datePath, movieID);
+
+  // Read all review JSON files
+  const reviewFiles = fs.readdirSync(moviePath)
+    .filter(file => file.endsWith('.json'))
+    .sort();
+
+  if (reviewFiles.length === 0) {
+    console.log('   ⚠️  No review files found');
+    return;
+  }
+
+  // Load all reviews
+  const reviews = reviewFiles.map(file => {
+    const filePath = path.join(moviePath, file);
+    const content = fs.readFileSync(filePath, 'utf8');
+    return JSON.parse(content);
+  });
+
+  // Create consolidated object
+  const consolidatedData = {
+    date: dateFolder,
+    movieID: movieID,
+    reviewCount: reviews.length,
+    reviews: reviews
+  };
+
+  // Write consolidated file
+  const outputPath = path.join(MOVIES_DIR, `${dateFolder}.json`);
+  fs.writeFileSync(outputPath, JSON.stringify(consolidatedData, null, 2), 'utf8');
+  
+  console.log(`   ✅ Created ${dateFolder}.json with ${reviews.length} reviews`);
+
+  // Clean up the folder structure
+  fs.rmSync(datePath, { recursive: true, force: true });
+  console.log(`   🗑️  Cleaned up temporary folder`);
+}
+
+/**
+ * Main sync function
+ */
+async function syncMovieData() {
+  console.log('🎬 Starting Dropbox sync...\n');
+
+  try {
+    // Validate environment variables
+    const appKey = process.env.DROPBOX_APP_KEY;
+    const appSecret = process.env.DROPBOX_APP_SECRET;
+    const refreshToken = process.env.DROPBOX_REFRESH_TOKEN;
+
+    if (!appKey || !appSecret || !refreshToken) {
+      throw new Error("Missing Dropbox configuration in environment variables.");
+    }
+
+    // Refresh the access token
+    console.log('🔑 Refreshing Dropbox access token...');
+    const accessToken = await refreshAccessToken(appKey, appSecret, refreshToken);
+    console.log('✅ Access token refreshed\n');
+
+    const dbx = new Dropbox({ accessToken, fetch });
+
+    // Define paths
+    const dropboxFolderPath = "/movies";
+    const localDownloadPath = path.join(__dirname, "movies");
+    const currentDate = new Date().toISOString().split('T')[0]; // e.g., "2025-10-27"
+
+    console.log(`📅 Target date: ${currentDate}\n`);
+
+    // Download from Dropbox
+    const downloaded = await downloadFromDropbox(
+      dbx, 
+      dropboxFolderPath, 
+      localDownloadPath, 
+      currentDate
+    );
+
+    if (downloaded) {
+      // Consolidate the downloaded data
+      consolidateDownloadedMovie(currentDate);
+      
+      console.log('\n✨ Sync completed successfully!');
+      return true;
+    } else {
+      console.log('\n⏭️  No new data to sync');
+      return false;
+    }
+
+  } catch (error) {
+    console.error("\n❌ Error in syncMovieData:", error.message);
+    throw error;
+  }
+}
+
+// Main execution
+if (require.main === module) {
+  syncMovieData()
+    .then((success) => {
+      process.exit(success ? 0 : 1);
+    })
+    .catch((error) => {
+      console.error('Fatal error:', error);
+      process.exit(1);
+    });
+}
+
+module.exports = { syncMovieData };

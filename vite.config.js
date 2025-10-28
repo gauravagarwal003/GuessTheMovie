@@ -2,25 +2,24 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
+  base: '/', // Change to '/GuessTheMovie/' if not using custom domain
   publicDir: 'public',
-  server: {
-    proxy: {
-      '/api': {
-        target: 'http://localhost:3000',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
-      },
-    },
-  },
   build: {
     outDir: 'dist',
     rollupOptions: {
+      input: {
+        main: './index.html',
+        archive: './public/archive.html',
+        calendar: './public/calendar.html',
+        about: './public/about.html',
+        history: './public/history.html',
+        incorrect: './public/incorrect_url.html'
+      },
       output: {
-        // Add hash to filenames for cache busting
         entryFileNames: 'assets/[name]-[hash].js',
         chunkFileNames: 'assets/[name]-[hash].js',
         assetFileNames: 'assets/[name]-[hash].[ext]'
       }
     }
-  },
+  }
 });

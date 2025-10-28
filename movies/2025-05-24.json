@@ -1,0 +1,67 @@
+{
+  "date": "2025-05-24",
+  "movieID": "nightcrawler",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "17",
+      "date": "June 18, 2021",
+      "username": "sun",
+      "numLikes": "893",
+      "rating": "2.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/6/7/9/2/8/4/shard/avtr-0-80-0-80-crop.jpg?v=d97b2cf295",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>His worst crime was that man bun</p> ",
+      "link": "https://letterboxd.com/sunset99/film/nightcrawler/1/"
+    },
+    {
+      "num_comments": "5",
+      "date": "February 5, 2019",
+      "username": "andrea🌹",
+      "numLikes": "5432",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/4/8/1/4/0/0/shard/avtr-0-80-0-80-crop.jpg?v=0ca9727dc7",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>freelancing is so scary the only way to properly convey it in film is through a psychological thriller</p> ",
+      "link": "https://letterboxd.com/alexlawther/film/nightcrawler/"
+    },
+    {
+      "num_comments": "7",
+      "date": "March 13, 2017",
+      "username": "c.w. scott",
+      "numLikes": "11103",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/0/5/0/0/0/shard/avtr-0-80-0-80-crop.jpg?v=5de9508fac",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>only a sociopath who studied business online would name a company anything as generic as 'video production news'</p> ",
+      "link": "https://letterboxd.com/caleb_yells/film/nightcrawler/"
+    },
+    {
+      "num_comments": "22",
+      "date": "April 2, 2022",
+      "username": "aksel",
+      "numLikes": "5877",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/4/2/2/7/8/7/shard/avtr-0-80-0-80-crop.jpg?v=1e6895c84f",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>lou bloom is literally david dobrik</p> ",
+      "link": "https://letterboxd.com/aksually/film/nightcrawler/1/"
+    },
+    {
+      "num_comments": "16",
+      "date": "January 22, 2019",
+      "username": "shannon",
+      "numLikes": "12063",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/4/4/2/4/4/shard/avtr-0-80-0-80-crop.jpg?v=241eb1b338",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>in loving memory of jake gyllenhaal... he ain’t dead but the academy keep treating him like he is</p> ",
+      "link": "https://letterboxd.com/niceguys/film/nightcrawler/3/"
+    }
+  ]
+}

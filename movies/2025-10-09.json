@@ -1,0 +1,67 @@
+{
+  "date": "2025-10-09",
+  "movieID": "hacksaw-ridge",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "2",
+      "date": "November 3, 2016",
+      "username": "Tooley I Am King",
+      "numLikes": "50",
+      "rating": "2.0",
+      "profilePhotoLink": "https://secure.gravatar.com/avatar/6a08ee1f0216bd5dcde3ffd976efb646?rating=PG&size=80&border=&default=https%3A%2F%2Fs.ltrbxd.com%2Fstatic%2Fimg%2Favatar80-CTtJ8HSs.png",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>The scene where he kicks the grenade is so funny</p> ",
+      "link": "https://letterboxd.com/ct_sexybeast/film/hacksaw-ridge/"
+    },
+    {
+      "num_comments": "0",
+      "date": "May 25, 2018",
+      "username": "Josh Lewis",
+      "numLikes": "745",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/7/1/6/5/6/shard/avtr-0-80-0-80-crop.jpg?v=a052171a7a",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>Textbook melodrama about reconciling our will to do good with our ability to inflict harm until suddenly it's a grindhouse picture about reconciling our ability to do good with our will to inflict brutal fucking savagery... Only a complete and total psychopath who loves violence but knows he should probably be ashamed of that could’ve made this. Respect.</p> ",
+      "link": "https://letterboxd.com/thejoshl/film/hacksaw-ridge/1/"
+    },
+    {
+      "num_comments": "0",
+      "date": "May 31, 2024",
+      "username": "Hailli",
+      "numLikes": "132",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/7/6/5/1/7/5/4/shard/avtr-0-80-0-80-crop.jpg?v=22ffc46f68",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>Guns bad religion good<br/>Guns bad religion good <br/>Guns bad religion good <br/>(I just saved you 139 minutes)</p> ",
+      "link": "https://letterboxd.com/hailliackerman/film/hacksaw-ridge/"
+    },
+    {
+      "num_comments": "1",
+      "date": "November 3, 2016",
+      "username": "Aaron Michael",
+      "numLikes": "320",
+      "rating": "1.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/5/4/1/8/9/shard/avtr-0-80-0-80-crop.jpg?v=38ee9731b0",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>Someone needs to teach Mel Gibson subtlety.</p> ",
+      "link": "https://letterboxd.com/subsahaaron/film/hacksaw-ridge/"
+    },
+    {
+      "num_comments": "2",
+      "date": "July 19, 2019",
+      "username": "˗ˏˋ suspirliam ˊˎ˗",
+      "numLikes": "1338",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/4/3/4/0/8/4/shard/avtr-0-80-0-80-crop.jpg?v=5f48ce5f41",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>just found out andrew russell garfield is oscarless????? shocked and appalled</p> ",
+      "link": "https://letterboxd.com/suspirliam/film/hacksaw-ridge/"
+    }
+  ]
+}

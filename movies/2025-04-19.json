@@ -1,0 +1,67 @@
+{
+  "date": "2025-04-19",
+  "movieID": "annihilation",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "13",
+      "date": "March 12, 2018",
+      "username": "yazz! *･ﾟ✧",
+      "numLikes": "4210",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/4/5/5/9/8/4/shard/avtr-0-80-0-80-crop.jpg?v=699714b237",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>dude...this was one long-ass tame impala video</p> ",
+      "link": "https://letterboxd.com/yazzjames/film/annihilation/1/"
+    },
+    {
+      "num_comments": "5",
+      "date": "February 24, 2018",
+      "username": "tru",
+      "numLikes": "4512",
+      "rating": "4.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/twitter/2/3/3/2/5/2/shard/http___pbs.twimg.com_profile_images_1449786811732172802_Ralmps_k-0-80-0-80-crop.jpg?v=517d0c5325",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>Will this be on the ap bio exam?</p> ",
+      "link": "https://letterboxd.com/truman/film/annihilation/"
+    },
+    {
+      "num_comments": "11",
+      "date": "February 21, 2018",
+      "username": "Matt Singer",
+      "numLikes": "1289",
+      "rating": "4.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/8/7/8/6/shard/avtr-0-80-0-80-crop.jpg?v=fac7ed503e",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>When people say a horror movie “made their skin crawl,” they don’t usually mean it literally. In this case, I do: This movie made me physically uncomfortable in my own skin. It’s so damn good. Full review at ScreenCrush.</p> ",
+      "link": "https://letterboxd.com/superpulse/film/annihilation/"
+    },
+    {
+      "num_comments": "4",
+      "date": "June 8, 2018",
+      "username": "sree",
+      "numLikes": "3168",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/9/3/8/1/7/shard/avtr-0-80-0-80-crop.jpg?v=180b4e7cdc",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>me: i have some questions <br/>alex garland: fuck you</p> ",
+      "link": "https://letterboxd.com/tototoro/film/annihilation/1/"
+    },
+    {
+      "num_comments": "0",
+      "date": "March 12, 2018",
+      "username": "issy 🥝",
+      "numLikes": "129",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/7/0/4/9/6/shard/avtr-0-80-0-80-crop.jpg?v=53bee05f55",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>Alex Garland’s mind...... it annihilates me sometimes</p> ",
+      "link": "https://letterboxd.com/leslieburke/film/annihilation/"
+    }
+  ]
+}

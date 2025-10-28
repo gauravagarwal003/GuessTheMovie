@@ -1,0 +1,67 @@
+{
+  "date": "2025-09-27",
+  "movieID": "king-richard",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "15",
+      "date": "November 8, 2021",
+      "username": "•°▪︎James▪︎°•",
+      "numLikes": "2385",
+      "rating": "",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/5/9/0/8/6/7/shard/avtr-0-80-0-80-crop.jpg?v=18a78ae2bd",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>A film where Jon Bernthal plays a genuinely nice guy? I never thought I'd see the day</p> ",
+      "link": "https://letterboxd.com/flanmovieman/film/king-richard/"
+    },
+    {
+      "num_comments": "0",
+      "date": "November 25, 2021",
+      "username": "ykg",
+      "numLikes": "377",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/1/3/6/2/2/6/shard/avtr-0-80-0-80-crop.jpg?v=c4cf592d63",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>Not me worrying the entire time that they’re not gonna make it</p> ",
+      "link": "https://letterboxd.com/ykg/film/king-richard/"
+    },
+    {
+      "num_comments": "3",
+      "date": "March 27, 2022",
+      "username": "Vinny Simms",
+      "numLikes": "430",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/9/5/1/4/8/0/shard/avtr-0-80-0-80-crop.jpg?v=c3838ca9ea",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>okay never mind it’s five stars please don’t bitchslap me Will</p> ",
+      "link": "https://letterboxd.com/vinny_simms/film/king-richard/1/"
+    },
+    {
+      "num_comments": "3",
+      "date": "November 20, 2021",
+      "username": "CinemaVoid 🏴‍☠️",
+      "numLikes": "2603",
+      "rating": "2.5",
+      "profilePhotoLink": "https://secure.gravatar.com/avatar/f607f73b05eb6c9d93e9be525cc3ce42?rating=PG&size=80&border=&default=https%3A%2F%2Fs.ltrbxd.com%2Fstatic%2Fimg%2Favatar80-CTtJ8HSs.png",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>Thank you Hollywood for reminding me that behind every successful child there’s an abusive parent.</p> ",
+      "link": "https://letterboxd.com/cinemavoid/film/king-richard/"
+    },
+    {
+      "num_comments": "0",
+      "date": "November 21, 2021",
+      "username": "Ethan Ethan",
+      "numLikes": "670",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/8/7/5/2/9/2/shard/avtr-0-80-0-80-crop.jpg?v=ba30746638",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>You dropped this King 🎾</p> ",
+      "link": "https://letterboxd.com/ethan_mateo/film/king-richard/"
+    }
+  ]
+}

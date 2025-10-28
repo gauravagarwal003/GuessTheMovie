@@ -1,0 +1,67 @@
+{
+  "date": "2025-05-09",
+  "movieID": "the-butterfly-effect",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "12",
+      "date": "July 21, 2017",
+      "username": "frank",
+      "numLikes": "1476",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/5/8/4/8/1/shard/avtr-0-80-0-80-crop.jpg?v=564072db84",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>What an ugly poster</p> ",
+      "link": "https://letterboxd.com/frankdarko/film/the-butterfly-effect/"
+    },
+    {
+      "num_comments": "1",
+      "date": "March 25, 2019",
+      "username": "amanda",
+      "numLikes": "1013",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/4/1/2/1/5/5/shard/avtr-0-80-0-80-crop.jpg?v=2fc97127a8",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>the directors cut ending has to be one of the most fucked up things i've ever seen</p> ",
+      "link": "https://letterboxd.com/miagypsygoth/film/the-butterfly-effect/1/"
+    },
+    {
+      "num_comments": "28",
+      "date": "August 20, 2017",
+      "username": "scoobert doo (aka mo)",
+      "numLikes": "3130",
+      "rating": "4.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/twitter/3/9/2/4/0/6/shard/http___pbs.twimg.com_profile_images_1203851116825305089_Ngq1WMpZ-0-80-0-80-crop.jpg?v=976cb1b07a",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>this movie used to make me cry in high school..... but i ain't no little bitch anymore.... i've played life is strange..... i know what real pain is</p> ",
+      "link": "https://letterboxd.com/jamesbong/film/the-butterfly-effect/"
+    },
+    {
+      "num_comments": "0",
+      "date": "February 6, 2021",
+      "username": "callum",
+      "numLikes": "249",
+      "rating": "2.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/7/9/2/6/2/8/shard/avtr-0-80-0-80-crop.jpg?v=c8be7987c2",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>so true child actor logan lerman</p> ",
+      "link": "https://letterboxd.com/filmcal/film/the-butterfly-effect/"
+    },
+    {
+      "num_comments": "7",
+      "date": "August 29, 2020",
+      "username": "mia",
+      "numLikes": "662",
+      "rating": "2.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/8/8/5/9/6/8/shard/avtr-0-80-0-80-crop.jpg?v=5e44b80bbd",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>i too would like to reach deep into my past to change the future (e.g. stopping myself from watching this)</p> ",
+      "link": "https://letterboxd.com/cherrygloss/film/the-butterfly-effect/"
+    }
+  ]
+}

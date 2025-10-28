@@ -28,6 +28,34 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@700&display=swap" rel="stylesheet">
     <script>
+        // If the original request path is an archive page like /archive/2025-10-02,
+        // redirect the browser to the real static file /archive.html while
+        // preserving the original path in sessionStorage so archive.html can
+        // restore it into history (without reloading).
+        (function() {
+            try {
+                var p = window.location.pathname || '/';
+                if (p.startsWith('/archive/')) {
+                    sessionStorage.redirect = p;
+                    // Use replace so the browsing history doesn't keep the temporary URL
+                    window.location.replace('/archive.html');
+                }
+            } catch (e) {
+                // ignore
+            }
+        })();
+    </script>
+
+    <script>
+        // Handle client-side routing for GitHub Pages (restore redirected path if present)
+        (function() {
+            var redirect = sessionStorage.redirect;
+            delete sessionStorage.redirect;
+            if (redirect && redirect !== location.href) {
+                history.replaceState(null, null, redirect);
+            }
+        })();
+        
         if ('scrollRestoration' in history) {
             history.scrollRestoration = 'manual';
         }
@@ -49,7 +77,7 @@
                     <span class="today-button-text header-short">Today</span>
                 </button>
 
-                <button id="archiveButton" class="header-nav" onclick="location.href='/archive'">
+                <button id="archiveButton" class="header-nav" onclick="location.href='/calendar'">
                     <i class="fa-solid fa-box-archive icon" id="archiveIcon"></i>
                     <span class="archive-button-text header-full">Past Movies</span>
                     <span class="archive-button-text header-short">Archive</span>

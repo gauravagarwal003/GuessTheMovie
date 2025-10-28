@@ -1,0 +1,67 @@
+{
+  "date": "2025-03-13",
+  "movieID": "the-truman-show",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "3",
+      "date": "January 17, 2023",
+      "username": "Hank",
+      "numLikes": "1357",
+      "rating": "4.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/6/3/6/2/1/3/6/shard/avtr-0-80-0-80-crop.jpg?v=fe9a5cbcf4",
+      "liked": true,
+      "collapsed": false,
+      "text": "<p>This film made me put tape over my laptop camera</p>",
+      "link": "https://letterboxd.com/hanklay/film/the-truman-show/"
+    },
+    {
+      "num_comments": "24",
+      "date": "June 13, 2021",
+      "username": "James (Schaffrillas)",
+      "numLikes": "21216",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/2/0/3/7/7/7/shard/avtr-0-80-0-80-crop.jpg?v=ff62b2f12e",
+      "liked": false,
+      "collapsed": false,
+      "text": "<p>The most fun and lighthearted horror movie ever made</p>",
+      "link": "https://letterboxd.com/schaffrillas/film/the-truman-show/"
+    },
+    {
+      "num_comments": "171",
+      "date": "August 15, 2017",
+      "username": "shay",
+      "numLikes": "26191",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/8/7/9/2/6/shard/avtr-0-80-0-80-crop.jpg?v=a3a46406c3",
+      "liked": true,
+      "collapsed": false,
+      "text": "<p>if i lived in a town where everyone looked like a republican i'd wanna leave too</p>",
+      "link": "https://letterboxd.com/willhunting/film/the-truman-show/1/"
+    },
+    {
+      "num_comments": "1",
+      "date": "January 1, 2024",
+      "username": "Jay",
+      "numLikes": "2072",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/9/3/4/3/7/shard/avtr-0-80-0-80-crop.jpg?v=d555961e98",
+      "liked": true,
+      "collapsed": false,
+      "text": "<p>poor guy is gonna leave a world where everything revolved around him to learn about taxes</p>",
+      "link": "https://letterboxd.com/jay/film/the-truman-show/"
+    },
+    {
+      "num_comments": "2",
+      "date": "January 22, 2021",
+      "username": "Maddie",
+      "numLikes": "949",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/4/0/4/6/7/9/shard/avtr-0-80-0-80-crop.jpg?v=d6c6fa8d57",
+      "liked": true,
+      "collapsed": false,
+      "text": "<p>Imagine being an extra in this movie... You would be an extra, playing an actor, playing an extra. Think about that long enough and tell me that doesn’t make you want to <i>walk into the ocean. </i></p>",
+      "link": "https://letterboxd.com/maddiemadison/film/the-truman-show/1/"
+    }
+  ]
+}

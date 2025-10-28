@@ -1,0 +1,67 @@
+{
+  "date": "2025-05-22",
+  "movieID": "romeo-juliet-1996",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "0",
+      "date": "January 23, 2022",
+      "username": "Karsten",
+      "numLikes": "14465",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/twitter/4/9/0/4/5/7/shard/http___pbs.twimg.com_profile_images_1001935353740177414_9ZQ0Noe4-0-80-0-80-crop.jpg?v=2627a755b4",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>you don’t go into this thinking there are gonna be two radiohead songs</p> ",
+      "link": "https://letterboxd.com/kurstboy/film/romeo-juliet-1996/"
+    },
+    {
+      "num_comments": "4",
+      "date": "June 1, 2018",
+      "username": "chloe",
+      "numLikes": "605",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/twitter/5/2/0/0/7/2/shard/http___pbs.twimg.com_profile_images_1034236669434777600_ErpGumfh-0-80-0-80-crop.jpg?v=01be3976b4",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>no one has ANY idea what they are saying let’s be honest</p> ",
+      "link": "https://letterboxd.com/chloelily_/film/romeo-juliet-1996/"
+    },
+    {
+      "num_comments": "5",
+      "date": "October 31, 2016",
+      "username": "👽hayley👽",
+      "numLikes": "3197",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/4/3/2/5/1/shard/avtr-0-80-0-80-crop.jpg?v=2a1530312b",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>puts the LIT in english literature</p> ",
+      "link": "https://letterboxd.com/apocalypsenow/film/romeo-juliet-1996/"
+    },
+    {
+      "num_comments": "2",
+      "date": "October 31, 2019",
+      "username": "𝐝𝐞𝐣𝐚𝐯𝐮𝐢𝐧𝐟𝐢𝐥𝐦",
+      "numLikes": "5417",
+      "rating": "4.5",
+      "profilePhotoLink": "https://secure.gravatar.com/avatar/0bb332093a7e92c18e16dd34be84482b?rating=PG&size=80&border=&default=https%3A%2F%2Fs.ltrbxd.com%2Fstatic%2Fimg%2Favatar80-CTtJ8HSs.png",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>imagine having a choice between young leo + paul rudd. yeah ok bitch your life is <b>so</b> hard.</p> ",
+      "link": "https://letterboxd.com/naomzn/film/romeo-juliet-1996/1/"
+    },
+    {
+      "num_comments": "4",
+      "date": "September 22, 2020",
+      "username": "john",
+      "numLikes": "2628",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/0/3/2/4/3/9/shard/avtr-0-80-0-80-crop.jpg?v=1017db180a",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>You can all say this sucks, but this is literally how ridiculous Shakespeare is.</p> ",
+      "link": "https://letterboxd.com/jjbjr/film/romeo-juliet-1996/"
+    }
+  ]
+}

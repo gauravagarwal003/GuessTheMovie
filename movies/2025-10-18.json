@@ -1,0 +1,67 @@
+{
+  "date": "2025-10-18",
+  "movieID": "zack-snyders-justice-league",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "9",
+      "date": "March 17, 2021",
+      "username": "Zayden",
+      "numLikes": "1577",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/8/5/8/0/6/7/shard/avtr-0-80-0-80-crop.jpg?v=2cfaf60ca9",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>This is the best possible version of the worst possible thing</p> ",
+      "link": "https://letterboxd.com/zaydentomson/film/zack-snyders-justice-league/"
+    },
+    {
+      "num_comments": "0",
+      "date": "April 2, 2021",
+      "username": "pilot",
+      "numLikes": "92",
+      "rating": "",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/4/2/7/0/8/shard/avtr-0-80-0-80-crop.jpg?v=47f5d29a8d",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>without all the slow motion this could’ve been 1hr 40m</p> ",
+      "link": "https://letterboxd.com/pilot/film/zack-snyders-justice-league/"
+    },
+    {
+      "num_comments": "129",
+      "date": "March 16, 2021",
+      "username": "hunter strawberry",
+      "numLikes": "10189",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/9/3/0/6/3/shard/avtr-0-80-0-80-crop.jpg?v=cf2591225c",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>Martin Scorsese having tears in his eyes, opens his notebook and scratches out a single word:</p><p><br/>n̶o̶t̶ cinema</p> ",
+      "link": "https://letterboxd.com/hstrawberry/film/zack-snyders-justice-league/"
+    },
+    {
+      "num_comments": "0",
+      "date": "March 18, 2021",
+      "username": "Sean Gilman",
+      "numLikes": "322",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/twitter/2/5/5/6/6/shard/http___pbs.twimg.com_profile_images_1114599490906808320_bm4uc4J2-0-80-0-80-crop.png?v=67adeabeb6",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>Obviously all superhero movies should be four hours long and afraid of primary colors.</p> ",
+      "link": "https://letterboxd.com/theendofcinema/film/zack-snyders-justice-league/"
+    },
+    {
+      "num_comments": "10",
+      "date": "March 19, 2021",
+      "username": "Bobby",
+      "numLikes": "992",
+      "rating": "3.0",
+      "profilePhotoLink": "https://secure.gravatar.com/avatar/bb9f6c0db80106280674e3605d50b0d8?rating=PG&size=80&border=&default=https%3A%2F%2Fs.ltrbxd.com%2Fstatic%2Fimg%2Favatar80-CTtJ8HSs.png",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>joss whedon took a hot stinky diarrhea and zack snyder said duuuude nononononono like THIS and then he took a huge regular crap.</p> ",
+      "link": "https://letterboxd.com/bobbby/film/zack-snyders-justice-league/"
+    }
+  ]
+}

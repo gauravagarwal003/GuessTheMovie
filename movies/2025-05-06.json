@@ -1,0 +1,67 @@
+{
+  "date": "2025-05-06",
+  "movieID": "ready-player-one",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "12",
+      "date": "March 18, 2022",
+      "username": "comrade_yui",
+      "numLikes": "1083",
+      "rating": "0.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/twitter/8/3/3/9/9/5/shard/http___pbs.twimg.com_profile_images_1180839569819930625_6NgiJI5c-0-80-0-80-crop.jpg?v=00fc553d0f",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>funko pop futurism</p> ",
+      "link": "https://letterboxd.com/comrade_yui/film/ready-player-one/2/"
+    },
+    {
+      "num_comments": "2",
+      "date": "June 18, 2018",
+      "username": "georgina",
+      "numLikes": "440",
+      "rating": "2.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/1/1/9/0/6/shard/avtr-0-80-0-80-crop.jpg?v=0afc6486cb",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>maybe we need to start bullying nerds again</p> ",
+      "link": "https://letterboxd.com/colinfirths/film/ready-player-one/"
+    },
+    {
+      "num_comments": "1",
+      "date": "October 6, 2023",
+      "username": "James (Schaffrillas)",
+      "numLikes": "5391",
+      "rating": "1.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/2/0/3/7/7/7/shard/avtr-0-80-0-80-crop.jpg?v=ff62b2f12e",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>There was not a single frame of this movie where I thought to myself \"Steven Spielberg directed this\"</p> ",
+      "link": "https://letterboxd.com/schaffrillas/film/ready-player-one/"
+    },
+    {
+      "num_comments": "0",
+      "date": "December 12, 2018",
+      "username": "sophie",
+      "numLikes": "146",
+      "rating": "2.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/3/7/3/2/5/shard/avtr-0-80-0-80-crop.jpg?v=1d19016187",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p><b>spielberg</b>: please... give me more than one star<br/><b>me</b>: nah bitch<br/><b>spielberg</b>: here... have an 80s soundtrack and tye sheridan's lips<br/><b>me</b>: maybe... 2 stars</p> ",
+      "link": "https://letterboxd.com/sophiedarcy/film/ready-player-one/1/"
+    },
+    {
+      "num_comments": "16",
+      "date": "April 5, 2018",
+      "username": "andrea🌹",
+      "numLikes": "3433",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/4/8/1/4/0/0/shard/avtr-0-80-0-80-crop.jpg?v=0ca9727dc7",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>every teenage boy who has no personality traits besides being good at video games and recognizing references due to all the time he spends on reddit threads: god i’m so fucking valid</p> ",
+      "link": "https://letterboxd.com/alexlawther/film/ready-player-one/"
+    }
+  ]
+}

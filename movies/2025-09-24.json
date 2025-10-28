@@ -1,0 +1,67 @@
+{
+  "date": "2025-09-24",
+  "movieID": "chinatown",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "5",
+      "date": "May 13, 2025",
+      "username": "eddyburback",
+      "numLikes": "392",
+      "rating": "",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/9/7/8/7/9/0/1/shard/avtr-0-80-0-80-crop.jpg?v=493d5a438c",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>this is exactly why I’ve refused to pay my LADWP bill for years</p> ",
+      "link": "https://letterboxd.com/eddyburback/film/chinatown/"
+    },
+    {
+      "num_comments": "1",
+      "date": "March 8, 2019",
+      "username": "Marcy Webb",
+      "numLikes": "769",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/twitter/1/8/8/7/9/1/shard/http___pbs.twimg.com_profile_images_1575495785512173572_U28DvDBy-0-80-0-80-crop.jpg?v=59e7784bcf",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>watching this on International Women’s Day was a mistake</p> ",
+      "link": "https://letterboxd.com/hulksmash/film/chinatown/"
+    },
+    {
+      "num_comments": "2",
+      "date": "January 19, 2018",
+      "username": "Brad Boi",
+      "numLikes": "744",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/0/2/8/8/9/shard/avtr-0-80-0-80-crop.jpg?v=9e2a615c44",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>I swear I could watch Jack Nicholson take a shit for two hours and I’d be like, “what a performance”</p> ",
+      "link": "https://letterboxd.com/bluraybrad/film/chinatown/"
+    },
+    {
+      "num_comments": "3",
+      "date": "August 26, 2025",
+      "username": "Preet",
+      "numLikes": "201",
+      "rating": "4.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/0/6/1/2/2/6/0/shard/avtr-0-80-0-80-crop.jpg?v=8450ce89fe",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>being a nosey detective ain’t good for your nose</p> ",
+      "link": "https://letterboxd.com/chatterb0xd/film/chinatown/"
+    },
+    {
+      "num_comments": "12",
+      "date": "August 3, 2020",
+      "username": "Jack",
+      "numLikes": "3071",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/4/7/2/1/6/1/shard/avtr-0-80-0-80-crop.jpg?v=f6ac805d0d",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>crazy how Polanski made a film about a Los Angeles run by misogynistic, predatory men 🤔 very, very interesting</p> ",
+      "link": "https://letterboxd.com/juliendonkeyboi/film/chinatown/"
+    }
+  ]
+}

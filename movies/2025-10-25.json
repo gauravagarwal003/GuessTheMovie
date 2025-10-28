@@ -1,0 +1,67 @@
+{
+  "date": "2025-10-25",
+  "movieID": "bambi",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "0",
+      "date": "April 13, 2024",
+      "username": "mátt 🧸",
+      "numLikes": "136",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/9/8/8/5/3/4/2/shard/avtr-0-80-0-80-crop.jpg?v=f106d5b0ae",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>this movie is a reminder that humans are pieces of shit</p> ",
+      "link": "https://letterboxd.com/mattjpg/film/bambi/"
+    },
+    {
+      "num_comments": "2",
+      "date": "November 24, 2018",
+      "username": "Ray",
+      "numLikes": "198",
+      "rating": "2.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/8/8/9/2/shard/avtr-0-80-0-80-crop.jpg?v=12decfcb17",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>The first half is literally for babies and then the characters grow up and get real horny</p> ",
+      "link": "https://letterboxd.com/garfofgalaxy/film/bambi/"
+    },
+    {
+      "num_comments": "0",
+      "date": "January 27, 2022",
+      "username": "sun",
+      "numLikes": "98",
+      "rating": "2.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/6/7/9/2/8/4/shard/avtr-0-80-0-80-crop.jpg?v=d97b2cf295",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>What type of pathetic low life trophy hunts</p> ",
+      "link": "https://letterboxd.com/sunset99/film/bambi/"
+    },
+    {
+      "num_comments": "0",
+      "date": "June 8, 2018",
+      "username": "Neil Bahadur",
+      "numLikes": "136",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/twitter/8/6/7/0/7/shard/http___pbs.twimg.com_profile_images_1123843020925939715_SCJjkcd2-0-80-0-80-crop.png?v=6739535b8e",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>Another day in the animal kingdom</p> ",
+      "link": "https://letterboxd.com/neilbahadur/film/bambi/1/"
+    },
+    {
+      "num_comments": "3",
+      "date": "December 30, 2019",
+      "username": "Scott Tobias",
+      "numLikes": "481",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/twitter/4/3/4/3/8/shard/http___a0.twimg.com_profile_images_337969777_audition.jpg-0-80-0-80-crop.jpg?v=994610f02a",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>Maybe my favorite Disney movie. Just staggeringly beautiful to look at, and so much more delicate and subtle and unsentimental a “circle of life” film than <i>The Lion King</i> would be half a century later. Death is a part of life, kids. That was the lesson this morning.</p> ",
+      "link": "https://letterboxd.com/scotttobias/film/bambi/"
+    }
+  ]
+}

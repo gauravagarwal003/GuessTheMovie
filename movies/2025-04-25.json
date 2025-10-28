@@ -1,0 +1,67 @@
+{
+  "date": "2025-04-25",
+  "movieID": "joker-2019",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "47",
+      "date": "May 14, 2021",
+      "username": "Framesofnick",
+      "numLikes": "1567",
+      "rating": "2.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/8/7/3/7/4/2/shard/avtr-0-80-0-80-crop.jpg?v=4c0d7907fb",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>Lowering my score again fuck this movie</p> ",
+      "link": "https://letterboxd.com/framesofnick/film/joker-2019/1/"
+    },
+    {
+      "num_comments": "22",
+      "date": "June 26, 2022",
+      "username": "demi adejuyigbe",
+      "numLikes": "1498",
+      "rating": "",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/4/3/0/5/shard/avtr-0-80-0-80-crop.jpg?v=1db8f5608c",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>would be so scary if this guy was real</p> ",
+      "link": "https://letterboxd.com/demiadejuyigbe/film/joker-2019/2/"
+    },
+    {
+      "num_comments": "82",
+      "date": "October 24, 2019",
+      "username": "sree",
+      "numLikes": "2456",
+      "rating": "1.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/9/3/8/1/7/shard/avtr-0-80-0-80-crop.jpg?v=180b4e7cdc",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>incels going into the theatre: hope this doesn't awaken anything in me</p> ",
+      "link": "https://letterboxd.com/tototoro/film/joker-2019/"
+    },
+    {
+      "num_comments": "2198",
+      "date": "January 12, 2020",
+      "username": "Joao",
+      "numLikes": "30998",
+      "rating": "1.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/6/6/1/1/9/6/shard/avtr-0-80-0-80-crop.jpg?v=2402480114",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>if you’ve never swam in the ocean then of course a pool seems deep.</p> ",
+      "link": "https://letterboxd.com/softglas/film/joker-2019/1/"
+    },
+    {
+      "num_comments": "8",
+      "date": "February 24, 2020",
+      "username": "Stephanie",
+      "numLikes": "4072",
+      "rating": "1.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/6/4/9/6/2/shard/avtr-0-80-0-80-crop.jpg?v=29d854886f",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>I wasn't sure if this was about mental illness then there was a close up of Arthur writing \"mental illness,\" and then I was like oh this is about mental illness.</p> ",
+      "link": "https://letterboxd.com/fakefilmfan/film/joker-2019/"
+    }
+  ]
+}

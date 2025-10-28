@@ -1,0 +1,67 @@
+{
+  "date": "2025-05-14",
+  "movieID": "candyman-2021",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "4",
+      "date": "August 24, 2021",
+      "username": "Brian Tallerico",
+      "numLikes": "392",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/6/1/1/0/9/shard/avtr-0-80-0-80-crop.jpg?v=c7e92360a4",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>A movie about places shaped by violence that conveys that through discomfiting framing and forced perspective. It’s a major horror movie with intense direction and performances. </p><p>Also give it all the sound design awards. Create some new ones.</p> ",
+      "link": "https://letterboxd.com/briantt/film/candyman-2021/"
+    },
+    {
+      "num_comments": "5",
+      "date": "August 26, 2021",
+      "username": "vasco",
+      "numLikes": "1757",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/0/3/6/2/0/2/shard/avtr-0-80-0-80-crop.jpg?v=f453b51130",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>the girl that went back for her vape? iconic!</p> ",
+      "link": "https://letterboxd.com/vascomunoz/film/candyman-2021/"
+    },
+    {
+      "num_comments": "0",
+      "date": "August 29, 2021",
+      "username": "clementine",
+      "numLikes": "633",
+      "rating": "4.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/2/3/3/6/4/4/shard/avtr-0-80-0-80-crop.jpg?v=6d81971aa2",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>like i’m really not gonna say that shit tbh</p> ",
+      "link": "https://letterboxd.com/ilyclemmie/film/candyman-2021/"
+    },
+    {
+      "num_comments": "1",
+      "date": "August 27, 2021",
+      "username": "freya.",
+      "numLikes": "1413",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/9/7/6/7/7/1/shard/avtr-0-80-0-80-crop.jpg?v=0cfd4f33ee",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>there was a bee trapped in the cinema with us and i think it really heightened the experience</p> ",
+      "link": "https://letterboxd.com/freyainthcities/film/candyman-2021/"
+    },
+    {
+      "num_comments": "7",
+      "date": "August 31, 2021",
+      "username": "Jay",
+      "numLikes": "2484",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/9/3/4/3/7/shard/avtr-0-80-0-80-crop.jpg?v=d555961e98",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>[holding hands with yahya abdul-mateen ii]</p><p>me: babe your hands are so cold</p><p>yahya: thats me hook</p> ",
+      "link": "https://letterboxd.com/jay/film/candyman-2021/"
+    }
+  ]
+}

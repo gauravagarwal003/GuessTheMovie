@@ -1,0 +1,67 @@
+{
+  "date": "2025-03-15",
+  "movieID": "civil-war-2024",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "13",
+      "date": "April 11, 2024",
+      "username": "james💫",
+      "numLikes": "8431",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/1/0/4/8/3/2/shard/avtr-0-80-0-80-crop.jpg?v=7991dcdfec",
+      "liked": true,
+      "collapsed": false,
+      "text": "<p>me trying to get the perfect pic for my instagram story</p>",
+      "link": "https://letterboxd.com/cineaccess/film/civil-war-2024/"
+    },
+    {
+      "num_comments": "13",
+      "date": "April 11, 2024",
+      "username": "Bryan Espitia",
+      "numLikes": "3157",
+      "rating": "2.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/8/8/9/4/3/shard/avtr-0-80-0-80-crop.jpg?v=051f271a5f",
+      "liked": false,
+      "collapsed": false,
+      "text": "<p>They didn’t have to change anything about JCPenney, that’s just how they look now</p>",
+      "link": "https://letterboxd.com/rickdeckard/film/civil-war-2024/"
+    },
+    {
+      "num_comments": "65",
+      "date": "April 14, 2024",
+      "username": "ConnorEatsPants",
+      "numLikes": "6565",
+      "rating": "2.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/6/8/9/5/9/8/shard/avtr-0-80-0-80-crop.jpg?v=2c28f8007c",
+      "liked": false,
+      "collapsed": false,
+      "text": "<p>Somehow this managed to have less political depth than the Captain America Civil War</p>",
+      "link": "https://letterboxd.com/connoreatspants/film/civil-war-2024/"
+    },
+    {
+      "num_comments": "0",
+      "date": "April 28, 2024",
+      "username": "Karsten",
+      "numLikes": "8637",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/twitter/4/9/0/4/5/7/shard/http___pbs.twimg.com_profile_images_1001935353740177414_9ZQ0Noe4-0-80-0-80-crop.jpg?v=2627a755b4",
+      "liked": false,
+      "collapsed": false,
+      "text": "<p>spent the whole movie excited to see jesse plemons and then wanted that scene to be over as soon as possible</p>",
+      "link": "https://letterboxd.com/kurstboy/film/civil-war-2024/"
+    },
+    {
+      "num_comments": "0",
+      "date": "April 10, 2024",
+      "username": "Lucy",
+      "numLikes": "2165",
+      "rating": "",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/4/7/0/0/7/shard/avtr-0-80-0-80-crop.jpg?v=5ed30980a5",
+      "liked": false,
+      "collapsed": false,
+      "text": "<p>cinematically this is stunning. solid acting, tons of suspense, striking choices in framing and editing. and yet despite it all… completely lacks a point of view and rings hollow. sure it’s good, but not good enough to rest solely on a “war is bad question mark exclamation point” sensibility 🤷‍♀️</p>",
+      "link": "https://letterboxd.com/deathproof/film/civil-war-2024/"
+    }
+  ]
+}

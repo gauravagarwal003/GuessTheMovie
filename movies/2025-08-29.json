@@ -1,0 +1,67 @@
+{
+  "date": "2025-08-29",
+  "movieID": "the-blind-side",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "0",
+      "date": "April 18, 2022",
+      "username": "Cindy",
+      "numLikes": "414",
+      "rating": "1.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/2/9/4/9/9/0/shard/avtr-0-80-0-80-crop.jpg?v=7d85cb6715",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>I... did not expect this movie to be so Republican</p> ",
+      "link": "https://letterboxd.com/readwithcindy/film/the-blind-side/"
+    },
+    {
+      "num_comments": "0",
+      "date": "November 3, 2019",
+      "username": "Jay",
+      "numLikes": "1182",
+      "rating": "0.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/4/1/1/4/0/7/shard/avtr-0-80-0-80-crop.jpg?v=ec79b52032",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>Is this the prequel to the white family in Get Out?</p><p><br/>Update: this has aged very well.</p> ",
+      "link": "https://letterboxd.com/rajedilantern/film/the-blind-side/"
+    },
+    {
+      "num_comments": "14",
+      "date": "March 30, 2012",
+      "username": "Silent J",
+      "numLikes": "345",
+      "rating": "0.5",
+      "profilePhotoLink": "https://secure.gravatar.com/avatar/a149b887819595697f840550356c629b?rating=PG&size=80&border=&default=https%3A%2F%2Fs.ltrbxd.com%2Fstatic%2Fimg%2Favatar80-CTtJ8HSs.png",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>How can such a true story feel so fake?</p> ",
+      "link": "https://letterboxd.com/silentjoe13/film/the-blind-side/"
+    },
+    {
+      "num_comments": "1",
+      "date": "May 14, 2017",
+      "username": "Tess",
+      "numLikes": "306",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/twitter/8/8/9/0/3/shard/http___pbs.twimg.com_profile_images_1040914082159767553_tEs_nK9v-0-80-0-80-crop.jpg?v=4b2e4c1900",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>I can't believe they gave Sandra Bullock her Oscar for Gravity four years early.</p> ",
+      "link": "https://letterboxd.com/gilliananderson/film/the-blind-side/"
+    },
+    {
+      "num_comments": "11",
+      "date": "September 22, 2018",
+      "username": "arielletoub",
+      "numLikes": "1742",
+      "rating": "1.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/twitter/7/3/6/9/7/2/shard/http___pbs.twimg.com_profile_images_779513828874870786_Ezi_nQRk-0-80-0-80-crop.jpg?v=3ff0787284",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>*slaps dvd case* this bad boy can fit so many fuckin white savior complexes in it</p> ",
+      "link": "https://letterboxd.com/arielletoub/film/the-blind-side/"
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "date": "2025-09-22",
+  "movieID": "brave-2012",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "24",
+      "date": "June 6, 2021",
+      "username": "sun",
+      "numLikes": "4825",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/6/7/9/2/8/4/shard/avtr-0-80-0-80-crop.jpg?v=d97b2cf295",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p><i><b>Lady Bird</b></i> for kids</p> ",
+      "link": "https://letterboxd.com/sunset99/film/brave-2012/"
+    },
+    {
+      "num_comments": "10",
+      "date": "December 16, 2020",
+      "username": "𝑚𝑖𝑙𝑙𝑠˚✩*ੈ˚",
+      "numLikes": "1230",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/3/3/5/1/6/9/shard/avtr-0-80-0-80-crop.jpg?v=d6a12176df",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>i had to google if there were bears in scotland</p> ",
+      "link": "https://letterboxd.com/milliie/film/brave-2012/"
+    },
+    {
+      "num_comments": "3",
+      "date": "July 29, 2020",
+      "username": "james💫",
+      "numLikes": "1012",
+      "rating": "2.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/1/0/4/8/3/2/shard/avtr-0-80-0-80-crop.jpg?v=7991dcdfec",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>Pixar only made this to show off how beautiful their hair animation is</p> ",
+      "link": "https://letterboxd.com/demyvarda/film/brave-2012/"
+    },
+    {
+      "num_comments": "0",
+      "date": "May 7, 2023",
+      "username": "Sloaner 🐣",
+      "numLikes": "389",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/7/0/6/3/9/2/8/shard/avtr-0-80-0-80-crop.jpg?v=9795771a1d",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>my new biggest fear: ginger triplets.</p> ",
+      "link": "https://letterboxd.com/sloany_/film/brave-2012/"
+    },
+    {
+      "num_comments": "0",
+      "date": "November 24, 2020",
+      "username": "Ella Kemp",
+      "numLikes": "602",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/5/6/8/4/0/8/shard/avtr-0-80-0-80-crop.jpg?v=9a921fff0a",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>Why are there no dragons there should be at least one dragon what’s braver than a dragon</p> ",
+      "link": "https://letterboxd.com/ellakemp/film/brave-2012/"
+    }
+  ]
+}

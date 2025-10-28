@@ -1,0 +1,67 @@
+{
+  "date": "2025-05-02",
+  "movieID": "bird-box",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "2",
+      "date": "December 27, 2018",
+      "username": "Jay",
+      "numLikes": "1616",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/9/3/4/3/7/shard/avtr-0-80-0-80-crop.jpg?v=d555961e98",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>huge moment for the visual impaired</p> ",
+      "link": "https://letterboxd.com/jay/film/bird-box/1/"
+    },
+    {
+      "num_comments": "18",
+      "date": "December 28, 2018",
+      "username": "sree",
+      "numLikes": "6589",
+      "rating": "2.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/9/3/8/1/7/shard/avtr-0-80-0-80-crop.jpg?v=180b4e7cdc",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>who the fuck wants to live so bad</p> ",
+      "link": "https://letterboxd.com/tototoro/film/bird-box/"
+    },
+    {
+      "num_comments": "2",
+      "date": "January 10, 2022",
+      "username": "Arnon🪐",
+      "numLikes": "478",
+      "rating": "1.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/7/3/2/3/7/2/shard/avtr-0-80-0-80-crop.jpg?v=ac731151ad",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>movie so shit I too wore a blindfold</p> ",
+      "link": "https://letterboxd.com/arnonpangan/film/bird-box/"
+    },
+    {
+      "num_comments": "2",
+      "date": "December 16, 2018",
+      "username": "luana",
+      "numLikes": "679",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/4/4/2/6/7/shard/avtr-0-80-0-80-crop.jpg?v=63fee8fd17",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>hmmm..,, can u imagine living with sandra bullock and not be able to look at her??¿</p> ",
+      "link": "https://letterboxd.com/robertlangdon/film/bird-box/"
+    },
+    {
+      "num_comments": "1",
+      "date": "December 26, 2018",
+      "username": "rudi",
+      "numLikes": "878",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/twitter/6/7/2/0/7/2/shard/http___pbs.twimg.com_profile_images_1376482977387925507_OC3TuSUv-0-80-0-80-crop.jpg?v=73dd540a37",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>when she put the bird in the box... <b>legendary</b><b> </b></p> ",
+      "link": "https://letterboxd.com/rudimh/film/bird-box/"
+    }
+  ]
+}

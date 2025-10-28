@@ -1,0 +1,67 @@
+{
+  "date": "2025-10-03",
+  "movieID": "the-lego-batman-movie",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "1",
+      "date": "May 20, 2017",
+      "username": "cinéfila... 🕯️",
+      "numLikes": "5658",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/5/9/3/8/0/shard/avtr-0-80-0-80-crop.jpg?v=52ae3ecbf0",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>they got ralph fiennes to say \"master dick\" like five times</p> ",
+      "link": "https://letterboxd.com/childrenofmen/film/the-lego-batman-movie/"
+    },
+    {
+      "num_comments": "2",
+      "date": "February 4, 2017",
+      "username": "Carrie",
+      "numLikes": "2418",
+      "rating": "4.0",
+      "profilePhotoLink": "https://s.ltrbxd.com/static/img/avatar80-CTtJ8HSs.png",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>Hey Deadpool, THIS is how you do a self-aware superhero movie</p> ",
+      "link": "https://letterboxd.com/carriec/film/the-lego-batman-movie/"
+    },
+    {
+      "num_comments": "5",
+      "date": "February 11, 2024",
+      "username": "Johnny2Cellos",
+      "numLikes": "225",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/twitter/1/0/8/8/0/5/7/shard/http___pbs.twimg.com_profile_images_1506017996195565568_kfo1rsmo-0-80-0-80-crop.jpg?v=2580baf114",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>The Academy nominated Boss Baby over this 🤬</p> ",
+      "link": "https://letterboxd.com/johnny2cellos/film/the-lego-batman-movie/"
+    },
+    {
+      "num_comments": "1",
+      "date": "February 28, 2019",
+      "username": "Ellie ✨",
+      "numLikes": "337",
+      "rating": "4.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/0/8/9/5/5/shard/avtr-0-80-0-80-crop.jpg?v=7d37ac9450",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>developing a theory that every character will arnett has ever played is at least a 3 on the kinsey scale and depressed</p> ",
+      "link": "https://letterboxd.com/davidfinchher/film/the-lego-batman-movie/3/"
+    },
+    {
+      "num_comments": "13",
+      "date": "February 12, 2017",
+      "username": "guilherme",
+      "numLikes": "10368",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/twitter/1/8/0/3/7/9/shard/https___pbs.twimg.com_profile_images_1657120526953848832_auuMK822-0-80-0-80-crop.jpg?v=d8fdd17e32",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>how does zack snyder sleep at night knowing a lego movie ended all his movies</p> ",
+      "link": "https://letterboxd.com/olivierassayas/film/the-lego-batman-movie/"
+    }
+  ]
+}

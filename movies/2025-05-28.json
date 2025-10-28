@@ -1,0 +1,67 @@
+{
+  "date": "2025-05-28",
+  "movieID": "the-godfather",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "68",
+      "date": "June 26, 2018",
+      "username": "Karsten",
+      "numLikes": "5866",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/twitter/4/9/0/4/5/7/shard/http___pbs.twimg.com_profile_images_1001935353740177414_9ZQ0Noe4-0-80-0-80-crop.jpg?v=2627a755b4",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>I was sooooo ready to say this was overhyped but nope, it’s as good as everyone says it is. On to part 2.</p> ",
+      "link": "https://letterboxd.com/kurstboy/film/the-godfather/"
+    },
+    {
+      "num_comments": "35",
+      "date": "January 29, 2014",
+      "username": "ScreeningNotes",
+      "numLikes": "3560",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/9/0/0/1/0/shard/avtr-0-80-0-80-crop.jpg?v=4a19a4a506",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>I think you get kicked off Letterboxd if you don't give it 5 stars</p> ",
+      "link": "https://letterboxd.com/screeningnotes/film/the-godfather/"
+    },
+    {
+      "num_comments": "40",
+      "date": "June 5, 2018",
+      "username": "Hannah",
+      "numLikes": "21443",
+      "rating": "",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/twitter/4/7/7/6/9/2/shard/http___pbs.twimg.com_profile_images_906892352706543616_cD773pne-0-80-0-80-crop.jpg?v=304abca312",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>haha they made that scene from zootopia into a movie</p> ",
+      "link": "https://letterboxd.com/wizardchurch/film/the-godfather/"
+    },
+    {
+      "num_comments": "0",
+      "date": "July 21, 2021",
+      "username": "jools",
+      "numLikes": "2507",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/2/9/5/3/8/6/shard/avtr-0-80-0-80-crop.jpg?v=1dd4243ca6",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>i love italians i wish they were real</p> ",
+      "link": "https://letterboxd.com/poisntvz/film/the-godfather/1/"
+    },
+    {
+      "num_comments": "22",
+      "date": "February 25, 2017",
+      "username": "Ellie ✨",
+      "numLikes": "4484",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/0/8/9/5/5/shard/avtr-0-80-0-80-crop.jpg?v=7d37ac9450",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>why have you all been pretending for 45 goddamn years that you can understand a word marlon brando says in this movie without subtitles</p> ",
+      "link": "https://letterboxd.com/davidfinchher/film/the-godfather/2/"
+    }
+  ]
+}

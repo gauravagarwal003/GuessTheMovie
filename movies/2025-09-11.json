@@ -1,0 +1,67 @@
+{
+  "date": "2025-09-11",
+  "movieID": "the-parent-trap-1998",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "2",
+      "date": "June 27, 2020",
+      "username": "molly",
+      "numLikes": "704",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/5/2/2/9/0/9/shard/avtr-0-80-0-80-crop.jpg?v=fcacfb5a71",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>this has the happiest ending to any movie ever</p> ",
+      "link": "https://letterboxd.com/mollyy/film/the-parent-trap-1998/2/"
+    },
+    {
+      "num_comments": "3",
+      "date": "July 13, 2021",
+      "username": "🫥",
+      "numLikes": "2197",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/7/5/5/1/4/5/shard/avtr-0-80-0-80-crop.jpg?v=d8b32c5b88",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>who the fuck is teaching all these 11 year olds poker</p> ",
+      "link": "https://letterboxd.com/hollywoodsdead/film/the-parent-trap-1998/1/"
+    },
+    {
+      "num_comments": "24",
+      "date": "April 4, 2021",
+      "username": "Leah 🥀",
+      "numLikes": "7343",
+      "rating": "4.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/2/6/5/0/5/7/shard/avtr-0-80-0-80-crop.jpg?v=188c69d7a5",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>i really thought that the mom was princess diana for my entire childhood</p> ",
+      "link": "https://letterboxd.com/leahp22/film/the-parent-trap-1998/"
+    },
+    {
+      "num_comments": "32",
+      "date": "June 16, 2019",
+      "username": "áine",
+      "numLikes": "3463",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/6/3/2/5/4/0/shard/avtr-0-80-0-80-crop.jpg?v=505356ab03",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>fuck your zodiac sign, which parent are you more attracted to in this movie?</p> ",
+      "link": "https://letterboxd.com/aineburke00/film/the-parent-trap-1998/"
+    },
+    {
+      "num_comments": "1",
+      "date": "July 17, 2020",
+      "username": "trav",
+      "numLikes": "503",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/6/7/1/1/0/3/shard/avtr-0-80-0-80-crop.jpg?v=117894c237",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>the energy between lindsay lohan and her co star lindsay lohan is THERE i can just feel it in the air</p> ",
+      "link": "https://letterboxd.com/phattrav/film/the-parent-trap-1998/"
+    }
+  ]
+}

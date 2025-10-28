@@ -1,0 +1,67 @@
+{
+  "date": "2025-09-12",
+  "movieID": "3-idiots",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "4",
+      "date": "September 12, 2021",
+      "username": "Spotless",
+      "numLikes": "200",
+      "rating": "2.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/6/9/7/7/4/3/shard/avtr-0-80-0-80-crop.jpg?v=daf531b301",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>Can’t relate since I have no friends</p> ",
+      "link": "https://letterboxd.com/spotlessfilms/film/3-idiots/"
+    },
+    {
+      "num_comments": "1",
+      "date": "August 10, 2022",
+      "username": "camile",
+      "numLikes": "51",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/2/7/6/6/9/4/shard/avtr-0-80-0-80-crop.jpg?v=b453ba29da",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>i didn't expect it to be a musical, and certainly didn't expect it to be 3 hours long.</p> ",
+      "link": "https://letterboxd.com/jackwill/film/3-idiots/"
+    },
+    {
+      "num_comments": "3",
+      "date": "August 25, 2019",
+      "username": "sydney",
+      "numLikes": "267",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/twitter/3/7/8/0/3/shard/http___pbs.twimg.com_profile_images_774478953394221056_chCnM1fl-0-80-0-80-crop.jpg?v=070a649897",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>love to see manic pixie dream bros pulling light hijinks with their besties, getting in touch with feelings, and following their dreams, but i absolutely cannot with that baby scene!!</p> ",
+      "link": "https://letterboxd.com/campbart/film/3-idiots/"
+    },
+    {
+      "num_comments": "10",
+      "date": "July 4, 2021",
+      "username": "arool",
+      "numLikes": "313",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/6/4/2/2/1/6/shard/avtr-0-80-0-80-crop.jpg?v=05bd25558d",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>LMAO the white people are so mad in these reviews</p> ",
+      "link": "https://letterboxd.com/arool/film/3-idiots/"
+    },
+    {
+      "num_comments": "3",
+      "date": "January 5, 2017",
+      "username": "Priyanka",
+      "numLikes": "246",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/7/5/0/4/7/shard/avtr-0-80-0-80-crop.jpg?v=f01f61c4c7",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>If I didn't love this movie, am I really Indian???</p> ",
+      "link": "https://letterboxd.com/pkapoor97/film/3-idiots/"
+    }
+  ]
+}

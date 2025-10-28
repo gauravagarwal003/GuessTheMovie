@@ -1,0 +1,67 @@
+{
+  "date": "2025-08-22",
+  "movieID": "a-quiet-place-2018",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "60",
+      "date": "April 5, 2018",
+      "username": "David Sims",
+      "numLikes": "10639",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/twitter/3/2/9/2/1/shard/http___pbs.twimg.com_profile_images_528305771478802433_6iLOt6hB-0-80-0-80-crop.jpg?v=695e427d2c",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>MAYBE GO LIVE BY THE HOOVER DAM OR SOMETHING JEEZ</p> ",
+      "link": "https://letterboxd.com/davidlsims/film/a-quiet-place-2018/"
+    },
+    {
+      "num_comments": "12",
+      "date": "May 16, 2018",
+      "username": "lauren",
+      "numLikes": "5413",
+      "rating": "4.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/5/2/3/9/1/shard/avtr-0-80-0-80-crop.jpg?v=cfb96da0cd",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>everyone walking around barefoot like it’s a fucking quentin tarantino fantasy</p> ",
+      "link": "https://letterboxd.com/nycsubwayrat/film/a-quiet-place-2018/"
+    },
+    {
+      "num_comments": "75",
+      "date": "April 14, 2018",
+      "username": "Eli Hayes",
+      "numLikes": "7457",
+      "rating": "4.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/twitter/7/8/2/2/0/shard/http___pbs.twimg.com_profile_images_1254940980228304897_WBK1ASWC-0-80-0-80-crop.jpg?v=4b86569ec6",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>A film made the way in which cinema is meant to be seen: so that the asshole sitting next to you, scarfing down popcorn like a rabid squirrel, actually <i>feels</i> like an asshole, in addition to merely being one.</p> ",
+      "link": "https://letterboxd.com/elihayes/film/a-quiet-place-2018/"
+    },
+    {
+      "num_comments": "1",
+      "date": "April 4, 2018",
+      "username": "Ashton",
+      "numLikes": "2883",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/9/6/2/9/6/shard/avtr-0-80-0-80-crop.jpg?v=e98fac361a",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p><b>someone in the movie</b>: *makes a noise* </p><p><b>the movie</b>: *gives a jim halpert fourth-wall breaking look to the audience*</p> ",
+      "link": "https://letterboxd.com/ashtonkinley/film/a-quiet-place-2018/"
+    },
+    {
+      "num_comments": "7",
+      "date": "April 7, 2018",
+      "username": "Robin",
+      "numLikes": "2490",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/1/4/1/5/4/shard/avtr-0-80-0-80-crop.jpg?v=d6515636f3",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>I feel so represented as a noise-sensitive monster</p> ",
+      "link": "https://letterboxd.com/annreinking/film/a-quiet-place-2018/"
+    }
+  ]
+}

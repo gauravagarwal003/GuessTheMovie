@@ -1,0 +1,67 @@
+{
+  "date": "2025-08-13",
+  "movieID": "were-the-millers",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "0",
+      "date": "June 9, 2022",
+      "username": "⠀ ೀ ⠀ hazel r. ⠀ ⠀",
+      "numLikes": "1786",
+      "rating": "4.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/3/0/6/6/6/9/shard/avtr-0-80-0-80-crop.jpg?v=56c3f0f365",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>it’s kind of like little miss sunshine but for straight people</p> ",
+      "link": "https://letterboxd.com/bikininoir/film/were-the-millers/"
+    },
+    {
+      "num_comments": "0",
+      "date": "November 29, 2020",
+      "username": "aaron",
+      "numLikes": "1270",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/6/4/1/1/5/6/shard/avtr-0-80-0-80-crop.jpg?v=c0d565b34c",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>alexa play waterfalls by tlc</p> ",
+      "link": "https://letterboxd.com/aarnwlsn/film/were-the-millers/"
+    },
+    {
+      "num_comments": "0",
+      "date": "October 4, 2021",
+      "username": "mads",
+      "numLikes": "91",
+      "rating": "4.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/9/7/9/3/0/9/shard/avtr-0-80-0-80-crop.jpg?v=e798426f58",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>every other film with the found family trope wishes it was this good</p> ",
+      "link": "https://letterboxd.com/madsbox/film/were-the-millers/"
+    },
+    {
+      "num_comments": "1",
+      "date": "November 24, 2020",
+      "username": "gwen",
+      "numLikes": "5560",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/5/2/8/8/9/5/shard/avtr-0-80-0-80-crop.jpg?v=633026ac8a",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p><i>“wait you guys are getting paid?” </i></p><p>kinda the best line in cinematic history idk</p> ",
+      "link": "https://letterboxd.com/phqntomthrd/film/were-the-millers/"
+    },
+    {
+      "num_comments": "6",
+      "date": "March 12, 2021",
+      "username": "clara",
+      "numLikes": "2189",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/2/7/0/0/2/8/shard/avtr-0-80-0-80-crop.jpg?v=5a7b08d0f2",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>oh to be will poulter and get to simultaneously make out with jennifer aniston and emma roberts</p> ",
+      "link": "https://letterboxd.com/clarabreen/film/were-the-millers/"
+    }
+  ]
+}

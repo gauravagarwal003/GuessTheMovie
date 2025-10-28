@@ -1,7 +1,7 @@
 migrateLocalStorage();
 
 document.addEventListener('DOMContentLoaded', async function initializeGame() {
-    fetch('/api/dates')
+    fetch('/dates.json')
         .then(response => response.json())
         .then(data => {
             const movieDates = new Set(data.dates);

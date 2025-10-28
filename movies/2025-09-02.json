@@ -1,0 +1,67 @@
+{
+  "date": "2025-09-02",
+  "movieID": "inside-man",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "5",
+      "date": "February 5, 2021",
+      "username": "Jamelle Bouie",
+      "numLikes": "415",
+      "rating": "4.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/twitter/2/3/6/4/8/5/shard/http___pbs.twimg.com_profile_images_744161270010642433_zPomllLY-0-80-0-80-crop.jpg?v=b78693d15d",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>i have never lived in new york but with every watch i appreciate how much this is one of the most New York movies of the last 25 years, and probably the <i>most </i>New York movie since “The Taking of Pelham 123.”</p> ",
+      "link": "https://letterboxd.com/jbouie/film/inside-man/"
+    },
+    {
+      "num_comments": "10",
+      "date": "July 15, 2020",
+      "username": "Mike Ginn",
+      "numLikes": "4614",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/8/9/7/8/1/6/shard/avtr-0-80-0-80-crop.jpg?v=ec0c7972cc",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>I have this character, he’s the most normal cop in the world, that’s his thing he’s just really really normal. I think I’ll cast, hmm... Willem Dafoe.</p> ",
+      "link": "https://letterboxd.com/shutupmikeginn/film/inside-man/"
+    },
+    {
+      "num_comments": "0",
+      "date": "March 24, 2006",
+      "username": "Kyle",
+      "numLikes": "103",
+      "rating": "",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/5/8/9/0/3/9/shard/avtr-0-80-0-80-crop.jpg?v=5a26774b42",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>Do you think someone’s ever written a script for a heist film and thought to themselves, ‘I reckon I could actually pull this off’?</p> ",
+      "link": "https://letterboxd.com/kylecarragher/film/inside-man/"
+    },
+    {
+      "num_comments": "0",
+      "date": "August 20, 2025",
+      "username": "Dan Monaghan",
+      "numLikes": "41",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/0/0/1/5/7/3/4/shard/avtr-0-80-0-80-crop.jpg?v=e3a04188db",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>Gotta love Spike using a Bollywood track for the opening credits simply for the vibes</p> ",
+      "link": "https://letterboxd.com/reel_takes/film/inside-man/"
+    },
+    {
+      "num_comments": "0",
+      "date": "August 31, 2023",
+      "username": "Haris",
+      "numLikes": "119",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/5/8/4/6/0/5/6/shard/avtr-0-80-0-80-crop.jpg?v=725c9a2e3a",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>This was a fun one to watch. Spike Lee did a great job of taking an otherwise oversaturated genre and implementing his own twist on it. The general premise and way the story unfolds is very unique and was intriguing to watch, although it does admittedly get slightly overindulgent at times. There’s definitely a lot of convoluted plot holes that really hold the film back, but the star power of Jodie Foster, Willem Dafoe and in particular Denzel is more than enough to make up for it.</p> ",
+      "link": "https://letterboxd.com/haris4pf/film/inside-man/"
+    }
+  ]
+}

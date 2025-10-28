@@ -1,0 +1,67 @@
+{
+  "date": "2025-03-20",
+  "movieID": "the-lego-movie",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "11",
+      "date": "April 27, 2021",
+      "username": "aksel",
+      "numLikes": "582",
+      "rating": "4.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/4/2/2/7/8/7/shard/avtr-0-80-0-80-crop.jpg?v=1e6895c84f",
+      "liked": true,
+      "collapsed": false,
+      "text": "<p>This is like Toontown Online levels of anti-capitalist. So creative and funny, i was so pleasantly surprised by this.. defo one of my fav animated movies</p>",
+      "link": "https://letterboxd.com/aksually/film/the-lego-movie/"
+    },
+    {
+      "num_comments": "2",
+      "date": "April 20, 2022",
+      "username": "maiapog",
+      "numLikes": "221",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/4/5/9/2/0/0/7/shard/avtr-0-80-0-80-crop.jpg?v=44d9699b25",
+      "liked": true,
+      "collapsed": false,
+      "text": "<p>The movie <i>Free Guy</i> tried to make and failed</p>",
+      "link": "https://letterboxd.com/maiapog/film/the-lego-movie/"
+    },
+    {
+      "num_comments": "7",
+      "date": "February 20, 2014",
+      "username": "Sally Jane Black",
+      "numLikes": "143",
+      "rating": "",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/6/3/3/6/2/shard/avtr-0-80-0-80-crop.jpg?v=41fcd43888",
+      "liked": false,
+      "collapsed": true,
+      "text": "<p>Going into this, I had three concerns:</p><p>(1) Would this feel like a commercial?<br/>(2) Would this suffer because of the hype?<br/>(3) I hate CGI.</p><p>And the results were mixed. </p><p>While the film smartly used a certain amount of self-aware humor to side step some of the awkwardness of the product placement, it still had a few moments that felt somewhat more like advertising than storytelling. The random inclusion of the Millennium Falcon, for instance, felt somewhat shoehorned, and…</p>",
+      "link": "https://letterboxd.com/fuchsiadyke/film/the-lego-movie/"
+    },
+    {
+      "num_comments": "6",
+      "date": "April 28, 2022",
+      "username": "Viktor",
+      "numLikes": "333",
+      "rating": "",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/4/6/2/4/5/6/shard/avtr-0-80-0-80-crop.jpg?v=62f8105917",
+      "liked": true,
+      "collapsed": false,
+      "text": "<p>Lord business is Elon Musk</p>",
+      "link": "https://letterboxd.com/viktor_csullog/film/the-lego-movie/"
+    },
+    {
+      "num_comments": "0",
+      "date": "February 28, 2015",
+      "username": "adambolt",
+      "numLikes": "1738",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/4/6/6/3/7/7/shard/avtr-0-80-0-80-crop.jpg?v=6d2d5edf03",
+      "liked": true,
+      "collapsed": false,
+      "text": "<p>THIS is how you do an ad. </p><p>Now if you'll excuse me I have an urge to go buy some LEGO</p>",
+      "link": "https://letterboxd.com/adambolt/film/the-lego-movie/"
+    }
+  ]
+}

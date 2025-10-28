@@ -527,20 +527,36 @@ function clearMovieList() {
   if (movieList) movieList.innerHTML = '';
 }
 
-// Fetch the JSON data for the reviews based on the movie ID, date, and review index
-async function fetchData(movieID, date, index) {
+// Fetch all movie data for a given date (now fetches single consolidated JSON file)
+async function fetchMovieData(date) {
   try {
-    const response = await fetch(`/api/json?date=${date}&name=${movieID}&index=${index}`);
-    if (response.status === 404) return;
-    const jsonData = await response.json();
-    allReviewJSONs.push(jsonData);
-    if (index === 0) {
-      currentReviewJSONs.push(jsonData);
+    const response = await fetch(`/movies/${date}.json`);
+    if (!response.ok) {
+      console.error(`Movie data not found for ${date}`);
+      return null;
     }
-
+    const data = await response.json();
+    
+    // Populate allReviewJSONs with all reviews
+    allReviewJSONs = data.reviews || [];
+    
+    // Set the first review as current
+    if (allReviewJSONs.length > 0) {
+      currentReviewJSONs = [allReviewJSONs[0]];
+    }
+    
+    return data;
   } catch (error) {
-    console.error('Error fetching JSONs:', error);
+    console.error('Error fetching movie data:', error);
+    return null;
   }
+}
+
+// Legacy function for compatibility - now just returns review from allReviewJSONs
+async function fetchData(movieID, date, index) {
+  // This function is kept for compatibility but data is now loaded via fetchMovieData
+  // Reviews are already in allReviewJSONs array
+  return;
 }
 
 // Display the current review based on the review index
@@ -830,18 +846,20 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
     });
     initializeFuse();
 
-    let response = '';
-    if (archiveDate) {
-      response = await fetch('/api/get-movie?date=' + archiveDate);
-    }
-    else {
-      response = await fetch('/api/get-movie');
-    }
-    if (!response.ok) throw new Error('Network response was not ok');
-    const data = await response.json();
+    // Fetch dates manifest to get latest date
+    const datesResponse = await fetch('/dates.json');
+    if (!datesResponse.ok) throw new Error('Could not load dates manifest');
+    const datesData = await datesResponse.json();
+    
+    // Determine which date to use
+    const targetDate = archiveDate || datesData.latestDate;
+    
+    // Fetch movie data for the target date
+    const movieData = await fetchMovieData(targetDate);
+    if (!movieData) throw new Error(`No movie data found for ${targetDate}`);
 
-    correctMovieID = data.movieID;
-    correctMovieDate = data.date;
+    correctMovieID = movieData.movieID;
+    correctMovieDate = movieData.date;
     formattedMovieDate = new Date(correctMovieDate).toLocaleDateString('en-US', {
       timeZone: 'UTC',
       year: 'numeric',
@@ -862,9 +880,8 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
       correctMovieObject = allMovies.find(movie => movie.movieID === correctMovieID);
     }
 
-    for (let i = 0; i < MAX_GUESSES; i++) {
-      await fetchData(correctMovieID, correctMovieDate, i);
-    }
+    // Reviews are already loaded via fetchMovieData, no need to fetch individually
+    // The old fetchData loop is no longer needed
 
     let game_in_progress = loadOngoingGame(correctMovieID, correctMovieDate);
 

@@ -1,0 +1,67 @@
+{
+  "date": "2025-09-07",
+  "movieID": "citizen-kane",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "66",
+      "date": "February 17, 2020",
+      "username": "Penny",
+      "numLikes": "3113",
+      "rating": "2.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/0/4/8/4/5/1/shard/avtr-0-80-0-80-crop.jpg?v=cbb84e9d67",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>Anyone who says this is their favorite movie is lying.</p> ",
+      "link": "https://letterboxd.com/greenpatina/film/citizen-kane/"
+    },
+    {
+      "num_comments": "22",
+      "date": "June 4, 2018",
+      "username": "cinéfila... 🕯️",
+      "numLikes": "4056",
+      "rating": "",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/5/9/3/8/0/shard/avtr-0-80-0-80-crop.jpg?v=52ae3ecbf0",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>watching an almost universally loved work of art and not connecting with it in any way whatsoever has got to be one of my least favorite film-related experiences</p> ",
+      "link": "https://letterboxd.com/childrenofmen/film/citizen-kane/"
+    },
+    {
+      "num_comments": "4",
+      "date": "June 23, 2023",
+      "username": "mary",
+      "numLikes": "291",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/5/2/1/5/2/4/9/shard/avtr-0-80-0-80-crop.jpg?v=74a2780a48",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>this is so succession coded</p> ",
+      "link": "https://letterboxd.com/henryspencerirl/film/citizen-kane/"
+    },
+    {
+      "num_comments": "6",
+      "date": "October 19, 2020",
+      "username": "Vinny Simms",
+      "numLikes": "179",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/9/5/1/4/8/0/shard/avtr-0-80-0-80-crop.jpg?v=c3838ca9ea",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>I finally watched the first movie</p> ",
+      "link": "https://letterboxd.com/vinny_simms/film/citizen-kane/"
+    },
+    {
+      "num_comments": "0",
+      "date": "December 6, 2021",
+      "username": "brendan o'hare",
+      "numLikes": "421",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/3/1/4/0/7/0/shard/avtr-0-80-0-80-crop.jpg?v=6fc6849268",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>I think it could be a pretty good bit if my last words were also “rosebud”</p> ",
+      "link": "https://letterboxd.com/brendohare/film/citizen-kane/1/"
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "date": "2025-05-20",
+  "movieID": "booksmart",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "5",
+      "date": "May 26, 2019",
+      "username": "Lucy",
+      "numLikes": "2169",
+      "rating": "4.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/4/7/0/0/7/shard/avtr-0-80-0-80-crop.jpg?v=5ed30980a5",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>doesn’t need to be compared to anything else because it feels so fresh, like lightning in a bottle. i sometimes forget how good it feels to laugh until after a movie like this, it was even better a second time. and the visual flair and killer soundtrack is sticking with me, the underwater pool scene is definitely one of the most gratifying scenes of the year. i’m so happy this is the real deal</p> ",
+      "link": "https://letterboxd.com/deathproof/film/booksmart/1/"
+    },
+    {
+      "num_comments": "39",
+      "date": "April 15, 2019",
+      "username": "davidehrlich",
+      "numLikes": "8491",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/twitter/3/2/1/9/2/shard/http___pbs.twimg.com_profile_images_1015061849321164801_S527QFnk-0-80-0-80-crop.jpg?v=e236c36c50",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>literally every movie should be set during senior year of high school. no exceptions.</p> ",
+      "link": "https://letterboxd.com/davidehrlich/film/booksmart/"
+    },
+    {
+      "num_comments": "12",
+      "date": "July 1, 2020",
+      "username": "aaron",
+      "numLikes": "4523",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/6/4/1/1/5/6/shard/avtr-0-80-0-80-crop.jpg?v=c0d565b34c",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>this is superbad for girls and the gays</p> ",
+      "link": "https://letterboxd.com/aarnwlsn/film/booksmart/1/"
+    },
+    {
+      "num_comments": "15",
+      "date": "June 11, 2019",
+      "username": "Jay",
+      "numLikes": "2943",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/9/3/4/3/7/shard/avtr-0-80-0-80-crop.jpg?v=d555961e98",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>olivia didnt have to wilde out this hard</p> ",
+      "link": "https://letterboxd.com/jay/film/booksmart/"
+    },
+    {
+      "num_comments": "3",
+      "date": "May 27, 2019",
+      "username": "˗ˏˋ suspirliam ˊˎ˗",
+      "numLikes": "510",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/4/3/4/0/8/4/shard/avtr-0-80-0-80-crop.jpg?v=5f48ce5f41",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>being smart isn’t about books or exam results or what university you get into! being smart is about recognising this film for what it is: a masterpiece!!!!!! intellectuals support this movie! be an intellectual!</p> ",
+      "link": "https://letterboxd.com/suspirliam/film/booksmart/2/"
+    }
+  ]
+}

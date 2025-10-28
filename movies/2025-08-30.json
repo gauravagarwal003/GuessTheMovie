@@ -1,0 +1,67 @@
+{
+  "date": "2025-08-30",
+  "movieID": "the-lion-king-2019",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "55",
+      "date": "July 19, 2019",
+      "username": "demi adejuyigbe",
+      "numLikes": "5598",
+      "rating": "",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/4/3/0/5/shard/avtr-0-80-0-80-crop.jpg?v=d30fb53f51",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>this is going to sound extremely stupid but my big problem with this movie is that nobody has eyebrows and i truly believe the movie would be fine if everybody just had eyebrows</p> ",
+      "link": "https://letterboxd.com/demiadejuyigbe/film/the-lion-king-2019/"
+    },
+    {
+      "num_comments": "13",
+      "date": "March 7, 2020",
+      "username": "DirkH",
+      "numLikes": "424",
+      "rating": "1.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/4/6/6/3/shard/avtr-0-80-0-80-crop.jpg?v=df233e2eeb",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>Definitive proof that clones have no soul.</p> ",
+      "link": "https://letterboxd.com/dirkh/film/the-lion-king-2019/"
+    },
+    {
+      "num_comments": "11",
+      "date": "July 19, 2019",
+      "username": "Logan Kenny",
+      "numLikes": "955",
+      "rating": "1.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/0/5/6/4/5/shard/avtr-0-80-0-80-crop.jpg?v=303947a9a4",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>how is it underlit? it’s made by a fucking computer! they could just adjust the goddamn lights, none of this is real!</p> ",
+      "link": "https://letterboxd.com/arkhamoutlaw10/film/the-lion-king-2019/"
+    },
+    {
+      "num_comments": "6",
+      "date": "July 25, 2019",
+      "username": "Evan",
+      "numLikes": "429",
+      "rating": "2.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/4/8/5/8/3/shard/avtr-0-80-0-80-crop.jpg?v=0359b72ac9",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>Can you feel the love this afternoon?</p> ",
+      "link": "https://letterboxd.com/pointbreakfan/film/the-lion-king-2019/"
+    },
+    {
+      "num_comments": "16",
+      "date": "July 18, 2019",
+      "username": "David Sims",
+      "numLikes": "1383",
+      "rating": "1.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/twitter/3/2/9/2/1/shard/http___pbs.twimg.com_profile_images_528305771478802433_6iLOt6hB-0-80-0-80-crop.jpg?v=695e427d2c",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>that sure was a lot of lions</p> ",
+      "link": "https://letterboxd.com/davidlsims/film/the-lion-king-2019/"
+    }
+  ]
+}

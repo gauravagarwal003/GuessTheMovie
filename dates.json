@@ -1,0 +1,824 @@
+{
+  "generatedAt": "2025-10-28T01:29:52.184Z",
+  "totalDates": 163,
+  "latestDate": "2025-10-27",
+  "dates": [
+    "2025-03-07",
+    "2025-03-08",
+    "2025-03-09",
+    "2025-03-10",
+    "2025-03-11",
+    "2025-03-12",
+    "2025-03-13",
+    "2025-03-14",
+    "2025-03-15",
+    "2025-03-16",
+    "2025-03-17",
+    "2025-03-18",
+    "2025-03-19",
+    "2025-03-20",
+    "2025-03-21",
+    "2025-03-22",
+    "2025-03-23",
+    "2025-03-24",
+    "2025-03-25",
+    "2025-03-26",
+    "2025-03-27",
+    "2025-03-28",
+    "2025-03-29",
+    "2025-03-30",
+    "2025-03-31",
+    "2025-04-01",
+    "2025-04-02",
+    "2025-04-03",
+    "2025-04-04",
+    "2025-04-05",
+    "2025-04-06",
+    "2025-04-07",
+    "2025-04-08",
+    "2025-04-09",
+    "2025-04-10",
+    "2025-04-11",
+    "2025-04-12",
+    "2025-04-13",
+    "2025-04-14",
+    "2025-04-15",
+    "2025-04-16",
+    "2025-04-17",
+    "2025-04-18",
+    "2025-04-19",
+    "2025-04-20",
+    "2025-04-21",
+    "2025-04-22",
+    "2025-04-23",
+    "2025-04-24",
+    "2025-04-25",
+    "2025-04-26",
+    "2025-04-27",
+    "2025-04-28",
+    "2025-04-29",
+    "2025-04-30",
+    "2025-05-01",
+    "2025-05-02",
+    "2025-05-03",
+    "2025-05-04",
+    "2025-05-05",
+    "2025-05-06",
+    "2025-05-07",
+    "2025-05-08",
+    "2025-05-09",
+    "2025-05-10",
+    "2025-05-11",
+    "2025-05-12",
+    "2025-05-13",
+    "2025-05-14",
+    "2025-05-15",
+    "2025-05-16",
+    "2025-05-17",
+    "2025-05-18",
+    "2025-05-19",
+    "2025-05-20",
+    "2025-05-21",
+    "2025-05-22",
+    "2025-05-23",
+    "2025-05-24",
+    "2025-05-25",
+    "2025-05-26",
+    "2025-05-27",
+    "2025-05-28",
+    "2025-05-29",
+    "2025-08-10",
+    "2025-08-11",
+    "2025-08-12",
+    "2025-08-13",
+    "2025-08-14",
+    "2025-08-15",
+    "2025-08-16",
+    "2025-08-17",
+    "2025-08-18",
+    "2025-08-19",
+    "2025-08-20",
+    "2025-08-21",
+    "2025-08-22",
+    "2025-08-23",
+    "2025-08-24",
+    "2025-08-25",
+    "2025-08-26",
+    "2025-08-27",
+    "2025-08-28",
+    "2025-08-29",
+    "2025-08-30",
+    "2025-08-31",
+    "2025-09-01",
+    "2025-09-02",
+    "2025-09-03",
+    "2025-09-04",
+    "2025-09-05",
+    "2025-09-06",
+    "2025-09-07",
+    "2025-09-08",
+    "2025-09-09",
+    "2025-09-10",
+    "2025-09-11",
+    "2025-09-12",
+    "2025-09-13",
+    "2025-09-14",
+    "2025-09-15",
+    "2025-09-16",
+    "2025-09-17",
+    "2025-09-18",
+    "2025-09-19",
+    "2025-09-20",
+    "2025-09-21",
+    "2025-09-22",
+    "2025-09-23",
+    "2025-09-24",
+    "2025-09-25",
+    "2025-09-26",
+    "2025-09-27",
+    "2025-09-28",
+    "2025-09-29",
+    "2025-09-30",
+    "2025-10-01",
+    "2025-10-02",
+    "2025-10-03",
+    "2025-10-04",
+    "2025-10-05",
+    "2025-10-06",
+    "2025-10-07",
+    "2025-10-08",
+    "2025-10-09",
+    "2025-10-10",
+    "2025-10-11",
+    "2025-10-12",
+    "2025-10-13",
+    "2025-10-14",
+    "2025-10-15",
+    "2025-10-16",
+    "2025-10-17",
+    "2025-10-18",
+    "2025-10-19",
+    "2025-10-20",
+    "2025-10-21",
+    "2025-10-22",
+    "2025-10-23",
+    "2025-10-24",
+    "2025-10-25",
+    "2025-10-26",
+    "2025-10-27"
+  ],
+  "metadata": {
+    "2025-03-07": {
+      "movieID": "legally-blonde",
+      "reviewCount": 5
+    },
+    "2025-03-08": {
+      "movieID": "se7en",
+      "reviewCount": 5
+    },
+    "2025-03-09": {
+      "movieID": "the-hunger-games",
+      "reviewCount": 5
+    },
+    "2025-03-10": {
+      "movieID": "alien",
+      "reviewCount": 5
+    },
+    "2025-03-11": {
+      "movieID": "the-secret-life-of-walter-mitty-2013",
+      "reviewCount": 5
+    },
+    "2025-03-12": {
+      "movieID": "the-incredibles",
+      "reviewCount": 5
+    },
+    "2025-03-13": {
+      "movieID": "the-truman-show",
+      "reviewCount": 5
+    },
+    "2025-03-14": {
+      "movieID": "the-hangover",
+      "reviewCount": 5
+    },
+    "2025-03-15": {
+      "movieID": "civil-war-2024",
+      "reviewCount": 5
+    },
+    "2025-03-16": {
+      "movieID": "catch-me-if-you-can-2002",
+      "reviewCount": 5
+    },
+    "2025-03-17": {
+      "movieID": "wicked-2024",
+      "reviewCount": 5
+    },
+    "2025-03-18": {
+      "movieID": "oceans-eleven-2001",
+      "reviewCount": 5
+    },
+    "2025-03-19": {
+      "movieID": "mamma-mia",
+      "reviewCount": 5
+    },
+    "2025-03-20": {
+      "movieID": "the-lego-movie",
+      "reviewCount": 5
+    },
+    "2025-03-21": {
+      "movieID": "whiplash-2014",
+      "reviewCount": 5
+    },
+    "2025-03-22": {
+      "movieID": "the-interview-2014",
+      "reviewCount": 5
+    },
+    "2025-03-23": {
+      "movieID": "la-la-land",
+      "reviewCount": 5
+    },
+    "2025-03-24": {
+      "movieID": "lady-bird",
+      "reviewCount": 5
+    },
+    "2025-03-25": {
+      "movieID": "chef",
+      "reviewCount": 5
+    },
+    "2025-03-26": {
+      "movieID": "knives-out-2019",
+      "reviewCount": 5
+    },
+    "2025-03-27": {
+      "movieID": "source-code",
+      "reviewCount": 5
+    },
+    "2025-03-28": {
+      "movieID": "twilight-2008",
+      "reviewCount": 5
+    },
+    "2025-03-29": {
+      "movieID": "baby-driver",
+      "reviewCount": 5
+    },
+    "2025-03-30": {
+      "movieID": "barbie",
+      "reviewCount": 5
+    },
+    "2025-03-31": {
+      "movieID": "thor-love-and-thunder",
+      "reviewCount": 5
+    },
+    "2025-04-01": {
+      "movieID": "mean-girls",
+      "reviewCount": 5
+    },
+    "2025-04-02": {
+      "movieID": "the-holdovers",
+      "reviewCount": 5
+    },
+    "2025-04-03": {
+      "movieID": "pride-prejudice",
+      "reviewCount": 5
+    },
+    "2025-04-04": {
+      "movieID": "bones-and-all",
+      "reviewCount": 5
+    },
+    "2025-04-05": {
+      "movieID": "the-terminator",
+      "reviewCount": 5
+    },
+    "2025-04-06": {
+      "movieID": "shutter-island",
+      "reviewCount": 5
+    },
+    "2025-04-07": {
+      "movieID": "reservoir-dogs",
+      "reviewCount": 5
+    },
+    "2025-04-08": {
+      "movieID": "gone-girl",
+      "reviewCount": 5
+    },
+    "2025-04-09": {
+      "movieID": "interstellar",
+      "reviewCount": 5
+    },
+    "2025-04-10": {
+      "movieID": "the-departed",
+      "reviewCount": 5
+    },
+    "2025-04-11": {
+      "movieID": "oppenheimer-2023",
+      "reviewCount": 5
+    },
+    "2025-04-12": {
+      "movieID": "dont-worry-darling",
+      "reviewCount": 5
+    },
+    "2025-04-13": {
+      "movieID": "inception",
+      "reviewCount": 5
+    },
+    "2025-04-14": {
+      "movieID": "in-the-mood-for-love",
+      "reviewCount": 5
+    },
+    "2025-04-15": {
+      "movieID": "saw",
+      "reviewCount": 5
+    },
+    "2025-04-16": {
+      "movieID": "the-devil-wears-prada",
+      "reviewCount": 5
+    },
+    "2025-04-17": {
+      "movieID": "anatomy-of-a-fall",
+      "reviewCount": 5
+    },
+    "2025-04-18": {
+      "movieID": "top-gun-maverick",
+      "reviewCount": 5
+    },
+    "2025-04-19": {
+      "movieID": "annihilation",
+      "reviewCount": 5
+    },
+    "2025-04-20": {
+      "movieID": "sorry-to-bother-you",
+      "reviewCount": 5
+    },
+    "2025-04-21": {
+      "movieID": "the-wolf-of-wall-street",
+      "reviewCount": 5
+    },
+    "2025-04-22": {
+      "movieID": "when-harry-met-sally",
+      "reviewCount": 5
+    },
+    "2025-04-23": {
+      "movieID": "500-days-of-summer",
+      "reviewCount": 5
+    },
+    "2025-04-24": {
+      "movieID": "dont-look-up-2021",
+      "reviewCount": 5
+    },
+    "2025-04-25": {
+      "movieID": "joker-2019",
+      "reviewCount": 5
+    },
+    "2025-04-26": {
+      "movieID": "dune-2021",
+      "reviewCount": 5
+    },
+    "2025-04-27": {
+      "movieID": "ratatouille",
+      "reviewCount": 5
+    },
+    "2025-04-28": {
+      "movieID": "the-florida-project",
+      "reviewCount": 5
+    },
+    "2025-04-29": {
+      "movieID": "the-martian",
+      "reviewCount": 5
+    },
+    "2025-04-30": {
+      "movieID": "the-great-gatsby-2013",
+      "reviewCount": 5
+    },
+    "2025-05-01": {
+      "movieID": "the-wizard-of-oz-1939",
+      "reviewCount": 5
+    },
+    "2025-05-02": {
+      "movieID": "bird-box",
+      "reviewCount": 5
+    },
+    "2025-05-03": {
+      "movieID": "snowpiercer",
+      "reviewCount": 5
+    },
+    "2025-05-04": {
+      "movieID": "white-chicks",
+      "reviewCount": 5
+    },
+    "2025-05-05": {
+      "movieID": "free-guy",
+      "reviewCount": 5
+    },
+    "2025-05-06": {
+      "movieID": "ready-player-one",
+      "reviewCount": 5
+    },
+    "2025-05-07": {
+      "movieID": "oceans-eight",
+      "reviewCount": 5
+    },
+    "2025-05-08": {
+      "movieID": "i-am-legend",
+      "reviewCount": 5
+    },
+    "2025-05-09": {
+      "movieID": "the-butterfly-effect",
+      "reviewCount": 5
+    },
+    "2025-05-10": {
+      "movieID": "passengers-2016",
+      "reviewCount": 5
+    },
+    "2025-05-11": {
+      "movieID": "nobody-2021",
+      "reviewCount": 5
+    },
+    "2025-05-12": {
+      "movieID": "the-intouchables",
+      "reviewCount": 5
+    },
+    "2025-05-13": {
+      "movieID": "men-2022",
+      "reviewCount": 5
+    },
+    "2025-05-14": {
+      "movieID": "candyman-2021",
+      "reviewCount": 5
+    },
+    "2025-05-15": {
+      "movieID": "jojo-rabbit",
+      "reviewCount": 5
+    },
+    "2025-05-16": {
+      "movieID": "coraline",
+      "reviewCount": 5
+    },
+    "2025-05-17": {
+      "movieID": "into-the-wild",
+      "reviewCount": 5
+    },
+    "2025-05-18": {
+      "movieID": "chicago",
+      "reviewCount": 5
+    },
+    "2025-05-19": {
+      "movieID": "cloverfield",
+      "reviewCount": 5
+    },
+    "2025-05-20": {
+      "movieID": "booksmart",
+      "reviewCount": 5
+    },
+    "2025-05-21": {
+      "movieID": "schindlers-list",
+      "reviewCount": 5
+    },
+    "2025-05-22": {
+      "movieID": "romeo-juliet-1996",
+      "reviewCount": 5
+    },
+    "2025-05-23": {
+      "movieID": "prisoners",
+      "reviewCount": 5
+    },
+    "2025-05-24": {
+      "movieID": "nightcrawler",
+      "reviewCount": 5
+    },
+    "2025-05-25": {
+      "movieID": "back-to-the-future-part-ii",
+      "reviewCount": 5
+    },
+    "2025-05-26": {
+      "movieID": "the-little-mermaid",
+      "reviewCount": 5
+    },
+    "2025-05-27": {
+      "movieID": "saltburn",
+      "reviewCount": 5
+    },
+    "2025-05-28": {
+      "movieID": "the-godfather",
+      "reviewCount": 5
+    },
+    "2025-05-29": {
+      "movieID": "star-wars",
+      "reviewCount": 5
+    },
+    "2025-08-10": {
+      "movieID": "game-night",
+      "reviewCount": 5
+    },
+    "2025-08-11": {
+      "movieID": "the-accountant-2016",
+      "reviewCount": 5
+    },
+    "2025-08-12": {
+      "movieID": "quantum-of-solace",
+      "reviewCount": 5
+    },
+    "2025-08-13": {
+      "movieID": "were-the-millers",
+      "reviewCount": 5
+    },
+    "2025-08-14": {
+      "movieID": "blade-runner",
+      "reviewCount": 5
+    },
+    "2025-08-15": {
+      "movieID": "mission-impossible",
+      "reviewCount": 5
+    },
+    "2025-08-16": {
+      "movieID": "speak-no-evil-2024",
+      "reviewCount": 5
+    },
+    "2025-08-17": {
+      "movieID": "wolfs",
+      "reviewCount": 5
+    },
+    "2025-08-18": {
+      "movieID": "the-super-mario-bros-movie",
+      "reviewCount": 5
+    },
+    "2025-08-19": {
+      "movieID": "no-hard-feelings-2023",
+      "reviewCount": 5
+    },
+    "2025-08-20": {
+      "movieID": "dune",
+      "reviewCount": 5
+    },
+    "2025-08-21": {
+      "movieID": "28-days-later",
+      "reviewCount": 5
+    },
+    "2025-08-22": {
+      "movieID": "a-quiet-place-2018",
+      "reviewCount": 5
+    },
+    "2025-08-23": {
+      "movieID": "soul-2020",
+      "reviewCount": 5
+    },
+    "2025-08-24": {
+      "movieID": "tenet",
+      "reviewCount": 5
+    },
+    "2025-08-25": {
+      "movieID": "encanto",
+      "reviewCount": 5
+    },
+    "2025-08-26": {
+      "movieID": "uncut-gems",
+      "reviewCount": 5
+    },
+    "2025-08-27": {
+      "movieID": "training-day",
+      "reviewCount": 5
+    },
+    "2025-08-28": {
+      "movieID": "yesterday-2019",
+      "reviewCount": 5
+    },
+    "2025-08-29": {
+      "movieID": "the-blind-side",
+      "reviewCount": 5
+    },
+    "2025-08-30": {
+      "movieID": "the-lion-king-2019",
+      "reviewCount": 5
+    },
+    "2025-08-31": {
+      "movieID": "ghostbusters",
+      "reviewCount": 5
+    },
+    "2025-09-01": {
+      "movieID": "spy-kids",
+      "reviewCount": 5
+    },
+    "2025-09-02": {
+      "movieID": "inside-man",
+      "reviewCount": 5
+    },
+    "2025-09-03": {
+      "movieID": "doctor-strange-2016",
+      "reviewCount": 5
+    },
+    "2025-09-04": {
+      "movieID": "gone-with-the-wind",
+      "reviewCount": 5
+    },
+    "2025-09-05": {
+      "movieID": "how-to-lose-a-guy-in-10-days",
+      "reviewCount": 5
+    },
+    "2025-09-06": {
+      "movieID": "war-dogs-2016",
+      "reviewCount": 5
+    },
+    "2025-09-07": {
+      "movieID": "citizen-kane",
+      "reviewCount": 5
+    },
+    "2025-09-08": {
+      "movieID": "the-mask-1994",
+      "reviewCount": 5
+    },
+    "2025-09-09": {
+      "movieID": "the-cat-in-the-hat-2003",
+      "reviewCount": 5
+    },
+    "2025-09-10": {
+      "movieID": "cloudy-with-a-chance-of-meatballs",
+      "reviewCount": 5
+    },
+    "2025-09-11": {
+      "movieID": "the-parent-trap-1998",
+      "reviewCount": 5
+    },
+    "2025-09-12": {
+      "movieID": "3-idiots",
+      "reviewCount": 5
+    },
+    "2025-09-13": {
+      "movieID": "wonder-2017",
+      "reviewCount": 5
+    },
+    "2025-09-14": {
+      "movieID": "a-star-is-born-2018",
+      "reviewCount": 5
+    },
+    "2025-09-15": {
+      "movieID": "moneyball",
+      "reviewCount": 5
+    },
+    "2025-09-16": {
+      "movieID": "the-founder",
+      "reviewCount": 5
+    },
+    "2025-09-17": {
+      "movieID": "hamilton-2020",
+      "reviewCount": 5
+    },
+    "2025-09-18": {
+      "movieID": "titane",
+      "reviewCount": 5
+    },
+    "2025-09-19": {
+      "movieID": "top-gun",
+      "reviewCount": 5
+    },
+    "2025-09-20": {
+      "movieID": "the-green-knight",
+      "reviewCount": 5
+    },
+    "2025-09-21": {
+      "movieID": "pig-2021",
+      "reviewCount": 5
+    },
+    "2025-09-22": {
+      "movieID": "brave-2012",
+      "reviewCount": 5
+    },
+    "2025-09-23": {
+      "movieID": "red-notice",
+      "reviewCount": 5
+    },
+    "2025-09-24": {
+      "movieID": "chinatown",
+      "reviewCount": 5
+    },
+    "2025-09-25": {
+      "movieID": "the-hobbit-an-unexpected-journey",
+      "reviewCount": 5
+    },
+    "2025-09-26": {
+      "movieID": "jaws",
+      "reviewCount": 5
+    },
+    "2025-09-27": {
+      "movieID": "king-richard",
+      "reviewCount": 5
+    },
+    "2025-09-28": {
+      "movieID": "spree-2020",
+      "reviewCount": 5
+    },
+    "2025-09-29": {
+      "movieID": "spencer-2021",
+      "reviewCount": 5
+    },
+    "2025-09-30": {
+      "movieID": "wonder-woman-1984",
+      "reviewCount": 5
+    },
+    "2025-10-01": {
+      "movieID": "once-upon-a-time-in-hollywood",
+      "reviewCount": 5
+    },
+    "2025-10-02": {
+      "movieID": "logan-lucky",
+      "reviewCount": 5
+    },
+    "2025-10-03": {
+      "movieID": "the-lego-batman-movie",
+      "reviewCount": 5
+    },
+    "2025-10-04": {
+      "movieID": "the-menu-2022",
+      "reviewCount": 5
+    },
+    "2025-10-05": {
+      "movieID": "glass-onion",
+      "reviewCount": 5
+    },
+    "2025-10-06": {
+      "movieID": "8-mile",
+      "reviewCount": 5
+    },
+    "2025-10-07": {
+      "movieID": "1917",
+      "reviewCount": 5
+    },
+    "2025-10-08": {
+      "movieID": "charlie-and-the-chocolate-factory",
+      "reviewCount": 5
+    },
+    "2025-10-09": {
+      "movieID": "hacksaw-ridge",
+      "reviewCount": 5
+    },
+    "2025-10-10": {
+      "movieID": "birdman-or-the-unexpected-virtue-of-ignorance",
+      "reviewCount": 5
+    },
+    "2025-10-11": {
+      "movieID": "ex-machina-2015",
+      "reviewCount": 5
+    },
+    "2025-10-12": {
+      "movieID": "the-worst-person-in-the-world",
+      "reviewCount": 5
+    },
+    "2025-10-13": {
+      "movieID": "all-the-presidents-men",
+      "reviewCount": 5
+    },
+    "2025-10-14": {
+      "movieID": "marcel-the-shell-with-shoes-on-2021",
+      "reviewCount": 5
+    },
+    "2025-10-15": {
+      "movieID": "porco-rosso",
+      "reviewCount": 5
+    },
+    "2025-10-16": {
+      "movieID": "the-conversation",
+      "reviewCount": 5
+    },
+    "2025-10-17": {
+      "movieID": "old-2021",
+      "reviewCount": 5
+    },
+    "2025-10-18": {
+      "movieID": "zack-snyders-justice-league",
+      "reviewCount": 5
+    },
+    "2025-10-19": {
+      "movieID": "lord-of-war",
+      "reviewCount": 5
+    },
+    "2025-10-20": {
+      "movieID": "percy-jackson-the-olympians-the-lightning-thief",
+      "reviewCount": 5
+    },
+    "2025-10-21": {
+      "movieID": "san-andreas",
+      "reviewCount": 5
+    },
+    "2025-10-22": {
+      "movieID": "mrs-doubtfire",
+      "reviewCount": 5
+    },
+    "2025-10-23": {
+      "movieID": "back-to-the-future",
+      "reviewCount": 5
+    },
+    "2025-10-24": {
+      "movieID": "happy-gilmore",
+      "reviewCount": 5
+    },
+    "2025-10-25": {
+      "movieID": "bambi",
+      "reviewCount": 5
+    },
+    "2025-10-26": {
+      "movieID": "ace-ventura-pet-detective",
+      "reviewCount": 5
+    },
+    "2025-10-27": {
+      "movieID": "enola-holmes",
+      "reviewCount": 5
+    }
+  }
+}

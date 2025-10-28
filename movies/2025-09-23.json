@@ -1,0 +1,67 @@
+{
+  "date": "2025-09-23",
+  "movieID": "red-notice",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "3",
+      "date": "November 14, 2021",
+      "username": "MovieBoy",
+      "numLikes": "438",
+      "rating": "1.5",
+      "profilePhotoLink": "https://secure.gravatar.com/avatar/9e4bd6230ca5954dfcb75693b7a783e9?rating=PG&size=80&border=&default=https%3A%2F%2Fs.ltrbxd.com%2Fstatic%2Fimg%2Favatar80-CTtJ8HSs.png",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>Watching this feels like watching one of those fake movies in the background of another movie. You will not find a more soulless film.  </p><p>1.5/5 eggs</p> ",
+      "link": "https://letterboxd.com/undyingcheese/film/red-notice/"
+    },
+    {
+      "num_comments": "23",
+      "date": "November 6, 2021",
+      "username": "Bryan Espitia",
+      "numLikes": "6657",
+      "rating": "2.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/8/8/9/4/3/shard/avtr-0-80-0-80-crop.jpg?v=051f271a5f",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>The Rock must have some sort of clause in his contract that says he has to end up in the jungle at some point in every movie</p> ",
+      "link": "https://letterboxd.com/rickdeckard/film/red-notice/"
+    },
+    {
+      "num_comments": "0",
+      "date": "November 15, 2021",
+      "username": "kj",
+      "numLikes": "383",
+      "rating": "2.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/9/5/1/7/3/5/shard/avtr-0-80-0-80-crop.jpg?v=010c8d9b10",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>netflix made this movie just to post captioned screenshots on twitter</p> ",
+      "link": "https://letterboxd.com/lautengcokj/film/red-notice/"
+    },
+    {
+      "num_comments": "2",
+      "date": "November 18, 2021",
+      "username": "Ethan Colburn",
+      "numLikes": "411",
+      "rating": "1.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/9/5/9/5/4/8/shard/avtr-0-80-0-80-crop.jpg?v=79336aef11",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>You know Ryan Reynolds is just playing Ryan Reynolds when Ryan Reynolds starts drinking Ryan Reynolds’ gin.</p> ",
+      "link": "https://letterboxd.com/cineflek/film/red-notice/"
+    },
+    {
+      "num_comments": "20",
+      "date": "November 13, 2021",
+      "username": "Josh Lewis",
+      "numLikes": "3569",
+      "rating": "1.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/7/1/6/5/6/shard/avtr-0-80-0-80-crop.jpg?v=a052171a7a",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>They spent $200m assembling the most cursed trio of famous people imaginable, who couldn't have less chemistry if they tried, and then let them all explain the heist plot at each other and improv their shticks for 2 hours in front of a camera and called it a movie. An \"original\" movie that is somehow still a generic white noise amalgamation of pretty much every current shitty action-comedy franchise blockbuster trend. Just in case you didn't get what it was going for Ryan Reynolds literally whistles the <i>Indiana Jones</i> theme.</p> ",
+      "link": "https://letterboxd.com/thejoshl/film/red-notice/"
+    }
+  ]
+}

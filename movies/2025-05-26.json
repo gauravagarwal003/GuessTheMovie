@@ -1,0 +1,67 @@
+{
+  "date": "2025-05-26",
+  "movieID": "the-little-mermaid",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "4",
+      "date": "November 19, 2019",
+      "username": "Max Power",
+      "numLikes": "1763",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/twitter/9/9/8/2/1/6/shard/http___pbs.twimg.com_profile_images_1062102247868416000_TXI5cIVg-0-80-0-80-crop.jpg?v=41a698b6aa",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>A good lesson on the importance of contract law.</p> ",
+      "link": "https://letterboxd.com/maxrpower/film/the-little-mermaid/"
+    },
+    {
+      "num_comments": "3",
+      "date": "April 18, 2021",
+      "username": "cookie",
+      "numLikes": "268",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/4/0/0/8/1/shard/avtr-0-80-0-80-crop.jpg?v=0b53933ad8",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>plz dont judge my movie choices im going thru a lot right now and this is about as much conflict as i can handle</p> ",
+      "link": "https://letterboxd.com/cuqui/film/the-little-mermaid/"
+    },
+    {
+      "num_comments": "0",
+      "date": "July 9, 2020",
+      "username": "gwen",
+      "numLikes": "639",
+      "rating": "4.5",
+      "profilePhotoLink": "https://secure.gravatar.com/avatar/9233bb8285283c04833b0ca5295bb255?rating=PG&size=80&border=&default=https%3A%2F%2Fs.ltrbxd.com%2Fstatic%2Fimg%2Favatar80-CTtJ8HSs.png",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>one star added for the fact every song is a banger</p> ",
+      "link": "https://letterboxd.com/gwendobbs99/film/the-little-mermaid/"
+    },
+    {
+      "num_comments": "4",
+      "date": "September 25, 2022",
+      "username": "PappyGtalksFilm",
+      "numLikes": "363",
+      "rating": "4.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/6/1/5/6/1/8/1/shard/avtr-0-80-0-80-crop.jpg?v=bb4a060f2e",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>They just don't make movies like this any more... so they should stop trying to remake them.</p> ",
+      "link": "https://letterboxd.com/pappygtalksfilm/film/the-little-mermaid/"
+    },
+    {
+      "num_comments": "2",
+      "date": "April 4, 2017",
+      "username": "Robin",
+      "numLikes": "1566",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/1/4/1/5/4/shard/avtr-0-80-0-80-crop.jpg?v=d6515636f3",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>My favorite disney princess named after a font.</p> ",
+      "link": "https://letterboxd.com/annreinking/film/the-little-mermaid/"
+    }
+  ]
+}
