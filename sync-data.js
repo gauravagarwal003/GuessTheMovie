@@ -92,22 +92,7 @@ async function downloadFromDropbox(dbx, dropboxPath, localPath, targetFolder) {
     }
 
     // Debug: show what we found in the Dropbox folder
-    try {
-      console.log('   📂 Dropbox folder entries:', entries.map(e => `${e.name} (${e['.tag']})`).join(', '));
-      
-      // TEMPORARY DEBUG: Specifically check for 2025-10-28.json
-      const targetFile = entries.find(e => e.name === '2025-10-28.json');
-      if (targetFile) {
-        console.log('   ✅ DEBUG: Found 2025-10-28.json in Dropbox!');
-        console.log(`      - Full path: ${targetFile.path_display || targetFile.path_lower}`);
-        console.log(`      - Type: ${targetFile['.tag']}`);
-        console.log(`      - ID: ${targetFile.id || 'N/A'}`);
-      } else {
-        console.log('   ❌ DEBUG: 2025-10-28.json NOT found in entries list');
-      }
-    } catch (e) {
-      // ignore logging errors
-    }
+    console.log(`   📂 Found ${entries.length} items in Dropbox folder`);
 
     let found = false;
 
@@ -221,13 +206,6 @@ async function syncMovieData() {
     const appSecret = process.env.DROPBOX_APP_SECRET;
     const refreshToken = process.env.DROPBOX_REFRESH_TOKEN;
 
-    // TEMPORARY DEBUG: Check if env vars are present (without revealing values)
-    console.log('🔍 DEBUG: Environment variables check:');
-    console.log(`   - DROPBOX_APP_KEY: ${appKey ? `present (length: ${appKey.length})` : 'MISSING'}`);
-    console.log(`   - DROPBOX_APP_SECRET: ${appSecret ? `present (length: ${appSecret.length})` : 'MISSING'}`);
-    console.log(`   - DROPBOX_REFRESH_TOKEN: ${refreshToken ? `present (length: ${refreshToken.length})` : 'MISSING'}`);
-    console.log('');
-
     if (!appKey || !appSecret || !refreshToken) {
       throw new Error("Missing Dropbox configuration in environment variables.");
     }
@@ -247,9 +225,6 @@ async function syncMovieData() {
     const targetDate = process.argv[2] || todayDate;
 
     console.log(`📅 Target date: ${targetDate}\n`);
-
-    // TEMPORARY DEBUG: Show what we're looking for
-    console.log(`🔍 DEBUG: Looking for file: "${targetDate}.json" or folder: "${targetDate}"\n`);
 
     // Download from Dropbox
     const result = await downloadFromDropbox(
