@@ -1,10 +1,7 @@
 name: Sync Movie Data
 
 on:
-  schedule:
-    # Runs daily at 9:00 PM PST (5:00 AM UTC next day)
-    - cron: '0 5 * * *'
-  workflow_dispatch: # Allows manual triggering
+  workflow_dispatch: # Manual triggering only (automatic sync now handled by Cloudflare Worker)
 
 jobs:
   sync:
