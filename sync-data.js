@@ -82,24 +82,56 @@ async function downloadFromDropbox(dbx, dropboxPath, localPath, targetFolder) {
 
     console.log(`📥 Downloading ${targetFolder} from Dropbox...`);
 
-    // List contents of the specified Dropbox folder
-    const response = await dbx.filesListFolder({ path: dropboxPath });
+    // List contents of the specified Dropbox folder (with pagination)
+    let entries = [];
+    let listResponse = await dbx.filesListFolder({ path: dropboxPath });
+    entries = entries.concat(listResponse.result.entries || []);
+    while (listResponse.result.has_more) {
+      listResponse = await dbx.filesListFolderContinue({ cursor: listResponse.result.cursor });
+      entries = entries.concat(listResponse.result.entries || []);
+    }
+
+    // Debug: show what we found in the Dropbox folder
+    try {
+      console.log('   📂 Dropbox folder entries:', entries.map(e => `${e.name} (${e['.tag']})`).join(', '));
+      
+      // TEMPORARY DEBUG: Specifically check for 2025-10-28.json
+      const targetFile = entries.find(e => e.name === '2025-10-28.json');
+      if (targetFile) {
+        console.log('   ✅ DEBUG: Found 2025-10-28.json in Dropbox!');
+        console.log(`      - Full path: ${targetFile.path_display || targetFile.path_lower}`);
+        console.log(`      - Type: ${targetFile['.tag']}`);
+        console.log(`      - ID: ${targetFile.id || 'N/A'}`);
+      } else {
+        console.log('   ❌ DEBUG: 2025-10-28.json NOT found in entries list');
+      }
+    } catch (e) {
+      // ignore logging errors
+    }
+
     let found = false;
 
-    for (const entry of response.result.entries) {
-      if (entry.name === targetFolder) {
+    // First, check whether a consolidated JSON file exists: <targetFolder>.json
+    const expectedFileName = `${targetFolder}.json`;
+
+    for (const entry of entries) {
+      // Direct file (consolidated JSON) case
+      if (entry.name === expectedFileName && entry['.tag'] === 'file') {
+        found = true;
+        const localFilePath = path.join(localPath, expectedFileName);
+        const downloadResult = await dbx.filesDownload({ path: entry.path_lower });
+        fs.writeFileSync(localFilePath, downloadResult.result.fileBinary, 'binary');
+        console.log(`   ✅ Downloaded consolidated JSON: ${entry.name}`);
+        return { downloaded: true, type: 'file' };
+      }
+
+      // Folder case (legacy / original format): folder name equals targetFolder
+      if (entry.name === targetFolder && entry['.tag'] === 'folder') {
         found = true;
         const localEntryPath = path.join(localPath, entry.name);
-        
-        if (entry['.tag'] === 'file') {
-          const downloadResult = await dbx.filesDownload({ path: entry.path_lower });
-          fs.writeFileSync(localEntryPath, downloadResult.result.fileBinary, 'binary');
-          console.log(`   ✅ Downloaded file: ${entry.name}`);
-        } else if (entry['.tag'] === 'folder') {
-          await downloadFolderContents(dbx, entry.path_lower, localEntryPath);
-          console.log(`   ✅ Downloaded folder: ${entry.name}`);
-        }
-        return true;
+        await downloadFolderContents(dbx, entry.path_lower, localEntryPath);
+        console.log(`   ✅ Downloaded folder: ${entry.name}`);
+        return { downloaded: true, type: 'folder' };
       }
     }
 
@@ -189,6 +221,13 @@ async function syncMovieData() {
     const appSecret = process.env.DROPBOX_APP_SECRET;
     const refreshToken = process.env.DROPBOX_REFRESH_TOKEN;
 
+    // TEMPORARY DEBUG: Check if env vars are present (without revealing values)
+    console.log('🔍 DEBUG: Environment variables check:');
+    console.log(`   - DROPBOX_APP_KEY: ${appKey ? `present (length: ${appKey.length})` : 'MISSING'}`);
+    console.log(`   - DROPBOX_APP_SECRET: ${appSecret ? `present (length: ${appSecret.length})` : 'MISSING'}`);
+    console.log(`   - DROPBOX_REFRESH_TOKEN: ${refreshToken ? `present (length: ${refreshToken.length})` : 'MISSING'}`);
+    console.log('');
+
     if (!appKey || !appSecret || !refreshToken) {
       throw new Error("Missing Dropbox configuration in environment variables.");
     }
@@ -203,23 +242,31 @@ async function syncMovieData() {
     // Define paths
     const dropboxFolderPath = "/movies";
     const localDownloadPath = path.join(__dirname, "movies");
-    const currentDate = new Date().toISOString().split('T')[0]; // e.g., "2025-10-27"
+    const todayDate = new Date().toISOString().split('T')[0]; // e.g., "2025-10-27"
+    // Allow optional CLI arg: `node sync-data.js 2025-10-01`
+    const targetDate = process.argv[2] || todayDate;
 
-    console.log(`📅 Target date: ${currentDate}\n`);
+    console.log(`📅 Target date: ${targetDate}\n`);
+
+    // TEMPORARY DEBUG: Show what we're looking for
+    console.log(`🔍 DEBUG: Looking for file: "${targetDate}.json" or folder: "${targetDate}"\n`);
 
     // Download from Dropbox
-    const downloaded = await downloadFromDropbox(
-      dbx, 
-      dropboxFolderPath, 
-      localDownloadPath, 
-      currentDate
+    const result = await downloadFromDropbox(
+      dbx,
+      dropboxFolderPath,
+      localDownloadPath,
+      targetDate
     );
 
-    if (downloaded) {
-      // Consolidate the downloaded data
-      consolidateDownloadedMovie(currentDate);
-      
-      console.log('\n✨ Sync completed successfully!');
+    if (result && result.downloaded) {
+      if (result.type === 'folder') {
+        // Consolidate the downloaded folder into a single JSON
+        consolidateDownloadedMovie(targetDate);
+        console.log('\n✨ Sync completed successfully (folder consolidated)!');
+      } else if (result.type === 'file') {
+        console.log('\n✨ Sync completed successfully (consolidated JSON downloaded)!');
+      }
       return true;
     } else {
       console.log('\n⏭️  No new data to sync');
@@ -234,9 +281,11 @@ async function syncMovieData() {
 
 // Main execution
 if (require.main === module) {
+  // Treat "no new data" as a successful run (exit 0).
+  // Only non-recoverable exceptions will exit with code 1.
   syncMovieData()
-    .then((success) => {
-      process.exit(success ? 0 : 1);
+    .then(() => {
+      process.exit(0);
     })
     .catch((error) => {
       console.error('Fatal error:', error);

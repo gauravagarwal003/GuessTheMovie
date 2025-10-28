@@ -25,6 +25,17 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: DEBUG - Check secrets availability
+        run: |
+          echo "🔍 Checking if secrets are accessible..."
+          node -e "console.log('DROPBOX_APP_KEY:', process.env.DROPBOX_APP_KEY ? 'present (length: ' + process.env.DROPBOX_APP_KEY.length + ')' : 'MISSING')"
+          node -e "console.log('DROPBOX_APP_SECRET:', process.env.DROPBOX_APP_SECRET ? 'present (length: ' + process.env.DROPBOX_APP_SECRET.length + ')' : 'MISSING')"
+          node -e "console.log('DROPBOX_REFRESH_TOKEN:', process.env.DROPBOX_REFRESH_TOKEN ? 'present (length: ' + process.env.DROPBOX_REFRESH_TOKEN.length + ')' : 'MISSING')"
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+
       - name: Sync movie data from Dropbox
         env:
           DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
