@@ -11,7 +11,11 @@
     "consolidate": "node consolidate-movies.js",
     "consolidate:cleanup": "node consolidate-movies.js --cleanup",
     "dev": "vite",
-    "deploy": "npm run build && gh-pages -d dist"
+    "deploy": "npm run build && gh-pages -d dist",
+    "cf:deploy": "npm run build && wrangler pages deploy dist",
+    "cf:worker:deploy": "wrangler deploy",
+    "cf:worker:tail": "wrangler tail",
+    "cf:worker:trigger": "wrangler deploy --test-scheduled"
   },
   "engines": {
     "node": ">=18.x"

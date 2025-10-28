@@ -1,0 +1,14 @@
+name = "guess-the-movie-sync"
+compatibility_date = "2025-10-28"
+main = "workers/sync-worker.js"
+
+# This is a standalone Worker (not Pages)
+# Environment variables (set using: wrangler secret put SECRET_NAME)
+# DROPBOX_APP_KEY
+# DROPBOX_APP_SECRET
+# DROPBOX_REFRESH_TOKEN
+# GITHUB_TOKEN (for committing back to repo)
+
+# Cron trigger for daily movie sync (9:00 PM PST = 4:00 AM UTC next day)
+[triggers]
+crons = ["0 4 * * *"]
