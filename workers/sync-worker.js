@@ -18,6 +18,12 @@ export default {
       // Download movie data from Dropbox
       const movieData = await downloadTodaysMovies(accessToken);
 
+      // If no data, exit gracefully
+      if (!movieData) {
+        console.log('No movie data to sync today');
+        return new Response('No data to sync', { status: 200 });
+      }
+
       // Commit to GitHub using GitHub API
       await commitToGitHub(env.GITHUB_TOKEN, movieData);
 
@@ -71,18 +77,29 @@ async function refreshAccessToken(appKey, appSecret, refreshToken) {
  */
 async function downloadTodaysMovies(accessToken) {
   const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
-  const dropboxPath = `/GuessTheMovie/${today}.json`;
-
+  
+  // Try the consolidated file first (newer format)
+  const consolidatedPath = `/movies/${today}.json`;
+  
   const response = await fetch('https://content.dropboxapi.com/2/files/download', {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${accessToken}`,
-      'Dropbox-API-Arg': JSON.stringify({ path: dropboxPath })
+      'Dropbox-API-Arg': JSON.stringify({ path: consolidatedPath })
     }
   });
 
   if (!response.ok) {
-    throw new Error(`Failed to download from Dropbox: ${await response.text()}`);
+    const errorText = await response.text();
+    console.error(`Dropbox download error (${response.status}):`, errorText);
+    
+    // If file doesn't exist (404), that's okay - no data to sync today
+    if (response.status === 409) {
+      console.log(`No movie file found for ${today} - skipping sync`);
+      return null;
+    }
+    
+    throw new Error(`Failed to download from Dropbox (${response.status}): ${errorText}`);
   }
 
   return await response.json();
@@ -105,7 +122,8 @@ async function commitToGitHub(githubToken, movieData) {
       {
         headers: {
           'Authorization': `token ${githubToken}`,
-          'Accept': 'application/vnd.github.v3+json'
+          'Accept': 'application/vnd.github.v3+json',
+          'User-Agent': 'Cloudflare-Worker-Movie-Sync'
         }
       }
     );
@@ -118,7 +136,11 @@ async function commitToGitHub(githubToken, movieData) {
   }
 
   // Create or update the file
-  const content = btoa(JSON.stringify(movieData, null, 2));
+  // Use proper UTF-8 encoding for GitHub API (base64)
+  const encoder = new TextEncoder();
+  const data = encoder.encode(JSON.stringify(movieData, null, 2));
+  const content = btoa(String.fromCharCode(...data));
+  
   const body = {
     message: `🎬 Update movie data for ${today}`,
     content: content,
@@ -140,7 +162,8 @@ async function commitToGitHub(githubToken, movieData) {
       headers: {
         'Authorization': `token ${githubToken}`,
         'Accept': 'application/vnd.github.v3+json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'User-Agent': 'Cloudflare-Worker-Movie-Sync'
       },
       body: JSON.stringify(body)
     }
