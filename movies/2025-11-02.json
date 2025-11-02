@@ -1,0 +1,67 @@
+{
+  "date": "2025-11-02",
+  "movieID": "bohemian-rhapsody",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "12",
+      "date": "February 24, 2019",
+      "username": "Spencer",
+      "numLikes": "1083",
+      "rating": "1.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/6/7/2/6/2/shard/avtr-0-80-0-80-crop.jpg?v=d1b45cb370",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>the wrong singer died</p> ",
+      "link": "https://letterboxd.com/thelonelyphoton/film/bohemian-rhapsody/"
+    },
+    {
+      "num_comments": "11",
+      "date": "December 1, 2018",
+      "username": "Logan Kenny",
+      "numLikes": "394",
+      "rating": "1.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/0/5/6/4/5/shard/avtr-0-80-0-80-crop.jpg?v=303947a9a4",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>hates queer men almost as much as it hates its audience</p> ",
+      "link": "https://letterboxd.com/arkhamoutlaw10/film/bohemian-rhapsody/"
+    },
+    {
+      "num_comments": "6",
+      "date": "December 3, 2018",
+      "username": "amaya",
+      "numLikes": "256",
+      "rating": "1.0",
+      "profilePhotoLink": "https://secure.gravatar.com/avatar/035b877ea9b00546ffddf77093f49c3c?rating=PG&size=80&border=&default=https%3A%2F%2Fs.ltrbxd.com%2Fstatic%2Fimg%2Favatar80-CTtJ8HSs.png",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>the CGI at the live aid concert..... to quote a friend: \"it looks like they're playing fifa\"</p> ",
+      "link": "https://letterboxd.com/elementarii/film/bohemian-rhapsody/"
+    },
+    {
+      "num_comments": "3",
+      "date": "January 22, 2019",
+      "username": "jeff",
+      "numLikes": "278",
+      "rating": "1.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/1/2/6/2/3/shard/avtr-0-80-0-80-crop.jpg?v=ce126eda0b",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>i literally googled \"what year did freddie mercury die\" in the middle of the movie to gage how much garbage i still had to sit through so yeah it was bad</p> ",
+      "link": "https://letterboxd.com/notjeffknight/film/bohemian-rhapsody/"
+    },
+    {
+      "num_comments": "0",
+      "date": "November 3, 2018",
+      "username": "Madison 🎭",
+      "numLikes": "194",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/twitter/3/9/5/5/0/6/shard/http___pbs.twimg.com_profile_images_1661183365284786179_LCNdPuIj-0-80-0-80-crop.jpg?v=0792710f8b",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>rami Malek’s teeth prosthetics will WIN best performance by a lead actor</p> ",
+      "link": "https://letterboxd.com/madihatesfilm/film/bohemian-rhapsody/"
+    }
+  ]
+}
