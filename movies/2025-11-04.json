@@ -1,0 +1,67 @@
+{
+  "date": "2025-11-04",
+  "movieID": "final-destination",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "7",
+      "date": "May 24, 2025",
+      "username": "amaya",
+      "numLikes": "294",
+      "rating": "3.0",
+      "profilePhotoLink": "https://secure.gravatar.com/avatar/035b877ea9b00546ffddf77093f49c3c?rating=PG&size=80&border=&default=https%3A%2F%2Fs.ltrbxd.com%2Fstatic%2Fimg%2Favatar80-CTtJ8HSs.png",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>deserved for trying to go to france</p> ",
+      "link": "https://letterboxd.com/elementarii/film/final-destination/2/"
+    },
+    {
+      "num_comments": "9",
+      "date": "February 13, 2020",
+      "username": "amaya",
+      "numLikes": "11409",
+      "rating": "4.0",
+      "profilePhotoLink": "https://secure.gravatar.com/avatar/035b877ea9b00546ffddf77093f49c3c?rating=PG&size=80&border=&default=https%3A%2F%2Fs.ltrbxd.com%2Fstatic%2Fimg%2Favatar80-CTtJ8HSs.png",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>oh to be a 2000s horror movie character. unapologetically dumb, driving to nine inch nails songs, rocking low rise jeans, bangs, lipgloss always applied somehow</p> ",
+      "link": "https://letterboxd.com/elementarii/film/final-destination/"
+    },
+    {
+      "num_comments": "4",
+      "date": "July 8, 2019",
+      "username": "˗ˏˋzoee´ˎ˗",
+      "numLikes": "5662",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/5/2/9/0/3/0/shard/avtr-0-80-0-80-crop.jpg?v=689fb81f44",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>I am now afraid to do anything ever again</p> ",
+      "link": "https://letterboxd.com/valentines/film/final-destination/"
+    },
+    {
+      "num_comments": "3",
+      "date": "May 28, 2025",
+      "username": "aaron",
+      "numLikes": "435",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/6/4/1/1/5/6/shard/avtr-0-80-0-80-crop.jpg?v=c0d565b34c",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>do you think about this movie every time you step foot on a plane or are you normal?</p> ",
+      "link": "https://letterboxd.com/aarnwlsn/film/final-destination/1/"
+    },
+    {
+      "num_comments": "8",
+      "date": "February 3, 2020",
+      "username": "ian",
+      "numLikes": "1783",
+      "rating": "2.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/0/8/9/0/1/9/shard/avtr-0-80-0-80-crop.jpg?v=8734afc8de",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>I don't know about you guys but I was cheering against them the whole time </p><p>go go death, just choke them already!!!</p> ",
+      "link": "https://letterboxd.com/iancurtys/film/final-destination/"
+    }
+  ]
+}
