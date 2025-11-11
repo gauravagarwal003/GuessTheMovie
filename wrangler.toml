@@ -9,6 +9,6 @@ main = "workers/sync-worker.js"
 # DROPBOX_REFRESH_TOKEN
 # GITHUB_TOKEN (for committing back to repo)
 
-# Cron trigger for daily movie sync (9:00 PM PST = 4:00 AM UTC next day)
+# Cron trigger for daily movie sync (9:00 PM PST = 5:00 AM UTC next day)
 [triggers]
-crons = ["0 4 * * *"]
+crons = ["0 5 * * *"]
