@@ -1,0 +1,67 @@
+{
+  "date": "2025-11-08",
+  "movieID": "it-2017",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "14",
+      "date": "September 4, 2019",
+      "username": "clementine",
+      "numLikes": "2877",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/2/3/3/6/4/4/shard/avtr-0-80-0-80-crop.jpg?v=6d81971aa2",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>can these kids PLEASE lock their bikes up they're gonna get stolen</p> ",
+      "link": "https://letterboxd.com/ilyclemmie/film/it-2017/"
+    },
+    {
+      "num_comments": "6",
+      "date": "September 8, 2017",
+      "username": "Emma",
+      "numLikes": "857",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/4/0/8/9/7/8/shard/avtr-0-80-0-80-crop.jpg?v=ef804d34dd",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>The young cast is so great I think WB should wait 27 years to make the 2nd film.</p> ",
+      "link": "https://letterboxd.com/santasuprsleigh/film/it-2017/"
+    },
+    {
+      "num_comments": "0",
+      "date": "September 22, 2017",
+      "username": "Stephanie",
+      "numLikes": "327",
+      "rating": "2.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/6/4/9/6/2/shard/avtr-0-80-0-80-crop.jpg?v=29d854886f",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>Receding hair line, ginger hair, eyes looking in both directions. Ed Sheeran deserves at least an Oscar nom for this.</p> ",
+      "link": "https://letterboxd.com/fakefilmfan/film/it-2017/"
+    },
+    {
+      "num_comments": "17",
+      "date": "September 7, 2017",
+      "username": "Adam",
+      "numLikes": "5046",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/5/8/0/4/shard/avtr-0-80-0-80-crop.jpg?v=6dc15272b4",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>Stephen King really fucking hates children</p> ",
+      "link": "https://letterboxd.com/finchet/film/it-2017/"
+    },
+    {
+      "num_comments": "2",
+      "date": "October 5, 2017",
+      "username": "sree",
+      "numLikes": "1434",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/9/3/8/1/7/shard/avtr-0-80-0-80-crop.jpg?v=180b4e7cdc",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>i lost it when peniswise did the fucking jig</p> ",
+      "link": "https://letterboxd.com/tototoro/film/it-2017/1/"
+    }
+  ]
+}
