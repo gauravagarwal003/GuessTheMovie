@@ -1,0 +1,67 @@
+{
+  "date": "2025-11-13",
+  "movieID": "zodiac",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "5",
+      "date": "September 8, 2021",
+      "username": "kj",
+      "numLikes": "2378",
+      "rating": "4.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/9/5/1/7/3/5/shard/avtr-0-80-0-80-crop.jpg?v=010c8d9b10",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>this is my favorite movie about astrology</p> ",
+      "link": "https://letterboxd.com/lautengcokj/film/zodiac/"
+    },
+    {
+      "num_comments": "2",
+      "date": "June 18, 2017",
+      "username": "shannon",
+      "numLikes": "1816",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/4/4/2/4/4/shard/avtr-0-80-0-80-crop.jpg?v=241eb1b338",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>david fincher, jake gyllenhaal, robert downey jr. and mark ruffalo are all my dads. happy father's day to my four (4) parents</p> ",
+      "link": "https://letterboxd.com/niceguys/film/zodiac/"
+    },
+    {
+      "num_comments": "8",
+      "date": "November 4, 2024",
+      "username": "riley savage",
+      "numLikes": "716",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/3/2/7/0/0/7/9/shard/avtr-0-80-0-80-crop.jpg?v=edb7818b02",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>we gotta catch this guy</p> ",
+      "link": "https://letterboxd.com/hivemindriley/film/zodiac/"
+    },
+    {
+      "num_comments": "13",
+      "date": "February 16, 2019",
+      "username": "angela",
+      "numLikes": "6331",
+      "rating": "4.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/8/8/6/7/7/0/shard/avtr-0-80-0-80-crop.jpg?v=f633999205",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>THE BITCH REALLY WENT DOWN INTO THE BASEMENT OH MY GOD WHO DOES THAT</p> ",
+      "link": "https://letterboxd.com/willpoulter/film/zodiac/"
+    },
+    {
+      "num_comments": "1",
+      "date": "January 20, 2021",
+      "username": "Brianna",
+      "numLikes": "365",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/8/7/0/2/4/shard/avtr-0-80-0-80-crop.jpg?v=94dfbcad13",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>disturbingly compelling evidence against ted cruz as a suspect</p> ",
+      "link": "https://letterboxd.com/justbrianna/film/zodiac/1/"
+    }
+  ]
+}
