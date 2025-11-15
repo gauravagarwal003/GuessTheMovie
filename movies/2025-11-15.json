@@ -1,0 +1,67 @@
+{
+  "date": "2025-11-15",
+  "movieID": "isle-of-dogs-2018",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "0",
+      "date": "July 6, 2023",
+      "username": "James (Schaffrillas)",
+      "numLikes": "2030",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/2/0/3/7/7/7/shard/avtr-0-80-0-80-crop.jpg?v=ff62b2f12e",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>The only time in recorded history when Greta Gerwig made a movie worse</p> ",
+      "link": "https://letterboxd.com/schaffrillas/film/isle-of-dogs-2018/"
+    },
+    {
+      "num_comments": "3",
+      "date": "October 20, 2022",
+      "username": "Jay",
+      "numLikes": "2209",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/9/3/4/3/7/shard/avtr-0-80-0-80-crop.jpg?v=5eb71abf10",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>bold choice for the first film to watch with my cat, i cant say she was the biggest fan</p> ",
+      "link": "https://letterboxd.com/jay/film/isle-of-dogs-2018/4/"
+    },
+    {
+      "num_comments": "14",
+      "date": "April 3, 2018",
+      "username": "alex",
+      "numLikes": "5910",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/5/7/9/0/8/0/shard/avtr-0-80-0-80-crop.jpg?v=87637d9a25",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>sometimes i hate when animated movies cast big name actors because then i spend the whole film playing Whose Voice Is That</p> ",
+      "link": "https://letterboxd.com/amyelliot/film/isle-of-dogs-2018/"
+    },
+    {
+      "num_comments": "2",
+      "date": "December 4, 2024",
+      "username": "jeaba",
+      "numLikes": "393",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/6/6/1/5/0/5/2/shard/avtr-0-80-0-80-crop.jpg?v=78d1396164",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>these dogs should be given the right to vote</p> ",
+      "link": "https://letterboxd.com/jeaba/film/isle-of-dogs-2018/1/"
+    },
+    {
+      "num_comments": "7",
+      "date": "March 28, 2018",
+      "username": "antonio",
+      "numLikes": "388",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/4/3/5/8/1/7/shard/avtr-0-80-0-80-crop.jpg?v=d3878e0d82",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>just because you own every kurosawa criterion release doesn’t mean you know anything about japan, wes.</p> ",
+      "link": "https://letterboxd.com/faretheewell/film/isle-of-dogs-2018/"
+    }
+  ]
+}
