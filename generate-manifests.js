@@ -24,9 +24,10 @@ function generateManifests() {
 
   // Get all .json files in movies directory
   const movieFiles = fs.readdirSync(MOVIES_DIR)
-    .filter(file => file.endsWith('.json') && /^\d{4}-\d{2}-\d{2}\.json$/.test(file))
-    .map(file => file.replace('.json', ''))
-    .sort();
+    .filter(file => typeof file === 'string' && file.trim().endsWith('.json') && /^\d{4}-\d{2}-\d{2}\.json$/.test(file.trim()))
+    .map(file => file.trim().replace('.json', ''))
+    // sort by actual date value to avoid lexical anomalies
+    .sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
 
   if (movieFiles.length === 0) {
     console.error('❌ No movie JSON files found!');
