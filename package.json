@@ -11,6 +11,7 @@
     "consolidate": "node consolidate-movies.js",
     "consolidate:cleanup": "node consolidate-movies.js --cleanup",
     "dev": "vite",
+    "dev:ngrok": "node ./scripts/dev-ngrok.js",
     "deploy": "npm run build && gh-pages -d dist",
     "cf:deploy": "npm run build && wrangler pages deploy dist",
     "cf:worker:deploy": "wrangler deploy",
