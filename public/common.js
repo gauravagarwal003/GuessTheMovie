@@ -372,13 +372,12 @@ function finishGame(wonGame) {
   gameWon = wonGame;
   gameOverMessage = wonGame ? "You got it! " : "You lost. ";
   if (resultDisplay) {
-    resultDisplay.innerHTML = `${gameOverMessage}<span class="message"></span><a href="https://letterboxd.com/film/${correctMovieID}" class="text-link" target="_blank">${correctMovieObject.title} (${correctMovieObject.year})</a><span class="message"> is the correct movie.</span><br>`;
+    resultDisplay.innerHTML = `${gameOverMessage}<span class="message"></span><a>${correctMovieObject.title} (${correctMovieObject.year})</a><span class="message"> is the correct movie.</span><br>`;
     const comeBackText = document.getElementById('come-back-text');
     if (comeBackText) {
       comeBackText.textContent = "Come back tomorrow for a new movie or use the archive to play past movies!";
     }
   }
-
 
   // Update the past guesses accordion for finished games
   const previousGuessesItems = formatPreviousGuesses(collectedGuesses);
@@ -394,7 +393,8 @@ function finishGame(wonGame) {
   if (reviewNumButtons) {
     reviewNumButtons.style.marginRight = "0px";
   }
-  document.getElementById('search').remove();
+  const searchElem = document.getElementById('search');
+  if (searchElem) searchElem.remove();
 
   // Add movie poster to page
   const img = document.createElement('img');
@@ -407,8 +407,10 @@ function finishGame(wonGame) {
   } else {
     console.error('Movie poster div with id movie_poster not found');
   }
-  existingDiv.setAttribute("href", "https://letterboxd.com/film/" + correctMovieID);
-  existingDiv.setAttribute("target", "_blank");
+  if (existingDiv) {
+    existingDiv.setAttribute("href", "https://letterboxd.com/film/" + correctMovieID);
+    existingDiv.setAttribute("target", "_blank");
+  }
   const searchRow = document.getElementById('search-row');
   if (searchRow) {
     searchRow.remove();
@@ -427,6 +429,35 @@ function finishGame(wonGame) {
     let status = (incorrectGuessCount < MAX_GUESSES) ? 'won' : 'lost';
     finishOngoingGame(status);
   }
+
+  // Reveal the static affiliate container (if present) and update its content/link
+  try {
+    const aff = document.getElementById('affiliate-offers');
+    if (aff) {
+      const movieTitle = (correctMovieObject && correctMovieObject.title) ? correctMovieObject.title : '';
+      // Use a search-link for Amazon (replace tag with real associate tag)
+      const AFF_URL = movieTitle
+        ? 'https://www.amazon.com/s?k=' + encodeURIComponent(movieTitle + ' prime video') + '&tag=YOUR_ASSOCIATE_TAG'
+        : 'https://www.amazon.com/?tag=YOUR_ASSOCIATE_TAG';
+      const inner = aff.querySelector('.affiliate-inner');
+      if (inner) {
+        inner.innerHTML = `
+          <div class="where-heading">Where to watch</div>
+          <div class="where-links">
+            <a class="where-link" href="${AFF_URL}" target="_blank" rel="noopener noreferrer">
+              <i class="fa-brands fa-amazon icon" aria-hidden="true"></i>
+              <span>Amazon / Prime Video</span>
+            </a>
+          </div>
+        `;
+      }
+      aff.classList.add('visible');
+      aff.setAttribute('aria-hidden', 'false');
+    }
+  } catch (e) {
+    console.error('Failed to update affiliate container:', e);
+  }
+
   displayCurrentReview(currentReviewIndex);
 }
 
@@ -569,9 +600,6 @@ function displayCurrentReview(index = 1) {
     return;
   }
   reviewCard.style.display = 'block';
-
-  // ...existing code...
-  // ...existing code...
 
   // Profile photo
   const profileImg = document.getElementById('reviewProfilePhoto');

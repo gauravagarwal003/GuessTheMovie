@@ -53,6 +53,10 @@ body {
 }
 
 @media (max-width: 560px) {
+    .footer-affiliate {
+        font-size: 0.5rem !important;
+    }
+
     #textDisplay {
         padding-left: 10px;
         padding-right: 10px;
@@ -359,7 +363,7 @@ body {
 
 #footer {
     width: 100%;
-    height: 2.5rem;
+    height: 3rem;
     /* MUST BE SAME AS PADDING-BOTTOM OF CONTENT WRAP */
     position: fixed;
     bottom: 0;
@@ -368,6 +372,13 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column; /* Stack content vertically */
+}
+
+.footer-item-container {
+    display: flex;
+    justify-content: center;
+    margin-top: -5px;
 }
 
 .header-short,
@@ -519,7 +530,86 @@ a:focus #profileIcon {
     color: var(--bonewhite) !important;
 }
 
+.footer-affiliate {
+    font-size: 0.6rem;
+    color: var(--inactiveButtonText);
+    margin-top: 2px;
+    text-align: center; /* Center the text */
+}
 
+/* Affiliate offers container (static in HTML now) */
+#affiliate-offers {
+    margin: 12px auto;
+    max-width: 720px;
+    text-align: center;
+    color: var(--bonewhite);
+    font-size: 1rem;
+    padding: 8px 12px;
+    box-sizing: border-box;
+    display: none; /* default hidden; shown only when game is over */
+}
+
+#affiliate-offers.visible {
+    display: block;
+}
+
+#affiliate-offers .affiliate-inner {
+    display: inline-block;
+    background: rgba(255,255,255,0.04);
+    padding: 10px 14px;
+    border-radius: 6px;
+    min-width: 200px;
+}
+
+/* Where-to-watch specific styles */
+#affiliate-offers .where-heading {
+    font-weight: 700;
+    font-size: 1.05rem;
+    margin-bottom: 6px;
+    color: var(--bonewhite);
+}
+
+#affiliate-offers .where-subtitle {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 8px;
+}
+
+#affiliate-offers .where-links {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: center;
+    justify-content: center;
+}
+
+#affiliate-offers .where-link {
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+    padding: 6px 10px;
+    border-radius: 6px;
+    color: var(--LBlue); /* changed from var(--bonewhite) */
+    text-decoration: none;
+    background: rgba(255,255,255,0.02);
+    transition: background 0.15s ease;
+}
+
+#affiliate-offers .where-link:hover {
+    background: rgba(255,255,255,0.06);
+}
+
+#affiliate-offers .where-link .icon {
+    font-size: 1.1rem;
+    width: 1.2rem;
+    text-align: center;
+    color: var(--offWhite);
+}
+
+@media (max-width: 560px) {
+    #affiliate-offers .affiliate-inner { width: 100%; padding: 8px; }
+    #affiliate-offers .where-subtitle { font-size: 0.9rem; }
+}
 
 .visually-hidden {
     position: absolute !important;

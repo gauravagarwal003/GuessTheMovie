@@ -91,6 +91,19 @@
                 <a id="come-back-text"></a>
             </div>
 
+            <!-- Affiliate offers (static) -->
+            <div id="affiliate-offers" aria-hidden="true">
+                <div class="affiliate-inner">
+                    <div class="where-heading">Where to watch</div>
+                    <div class="where-links">
+                        <a class="where-link" href="https://www.amazon.com/" target="_blank" rel="noopener noreferrer">
+                            <i class="fa-brands fa-amazon icon" aria-hidden="true"></i>
+                            <span>Amazon / Prime Video</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
             <!-- Past Guesses Container -->
             <div id="past-guesses-display" class="past-guesses-display" style="display: none;">
                 <div class="accordion-container" onclick="toggleAccordion()">
@@ -157,17 +170,19 @@
 
         </div>
         <footer id="footer">
-            <a href="https://letterboxd.com/gaurava/" target="_blank" class="footer-item" id="profileItem">
-                <img src="/LBColorLogo.png" alt="My Letterboxd Profile" id="profileIcon" class="footer-image" />
-                <span id="profileLabel" class="footer-full">My Profile</span>
-                <span id="profileLabel" class="footer-short">My LB</span>
-            </a>
-            <a href="/about.html" class="footer-item" id="contactItem">
-                <i class="fa-solid fa-paper-plane icon" id="contactIcon"></i>
-                <span id="contactLabel" class="footer-full">Contact Us</span>
-                <span id="contactLabel" class="footer-short">Contact</span>
-            </a>
-
+            <div class="footer-item-container">
+                <a href="https://letterboxd.com/gaurava/" target="_blank" class="footer-item" id="profileItem">
+                    <img src="/LBColorLogo.png" alt="My Letterboxd Profile" id="profileIcon" class="footer-image" />
+                    <span id="profileLabel" class="footer-full">My Profile</span>
+                    <span id="profileLabel" class="footer-short">My LB</span>
+                </a>
+                <a href="/about.html" class="footer-item" id="contactItem">
+                    <i class="fa-solid fa-paper-plane icon" id="contactIcon"></i>
+                    <span id="contactLabel" class="footer-full">Contact Us</span>
+                    <span id="contactLabel" class="footer-short">Contact</span>
+                </a>
+            </div>
+            <span class="footer-affiliate">Some movie links on this site are affiliate links. As an Amazon Associate, I earn from qualifying purchases.</span>
         </footer>
     </main>
 
