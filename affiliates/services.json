@@ -1,0 +1,20 @@
+{
+  "amazon-dvd": {
+    "id": "amazon-dvd",
+    "title": "Amazon (DVD)",
+    "icon": {
+      "type": "svg",
+      "value": "public/images/amazon.svg",
+      "alt": "Amazon logo"
+    }
+  },
+  "prime-video": {
+    "id": "prime-video",
+    "title": "Prime Video (Rent/Buy)",
+    "icon": {
+      "type": "svg",
+      "value": "public/images/prime-video.svg",
+      "alt": "Prime Video logo"
+    }
+  }
+}
