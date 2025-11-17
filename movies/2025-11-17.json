@@ -1,0 +1,67 @@
+{
+  "date": "2025-11-17",
+  "movieID": "titanic-1997",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "4",
+      "date": "September 14, 2016",
+      "username": "Kairit",
+      "numLikes": "1830",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/3/7/1/3/4/shard/avtr-0-80-0-80-crop.jpg?v=9a15e06632",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>water is evil</p> ",
+      "link": "https://letterboxd.com/gainsbourg/film/titanic-1997/"
+    },
+    {
+      "num_comments": "0",
+      "date": "May 9, 2021",
+      "username": "yas 🇵🇸",
+      "numLikes": "4065",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/5/6/6/3/5/6/shard/avtr-0-80-0-80-crop.jpg?v=4c6f8248d4",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>when that one guy said “only women! no men!” so true x</p> ",
+      "link": "https://letterboxd.com/f1lmslut/film/titanic-1997/1/"
+    },
+    {
+      "num_comments": "7",
+      "date": "December 15, 2022",
+      "username": "cookie",
+      "numLikes": "2548",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/4/0/0/8/1/shard/avtr-0-80-0-80-crop.jpg?v=0b53933ad8",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>love this old lady just having a bunch of framed photos of kate winslet on her nightstand</p> ",
+      "link": "https://letterboxd.com/cuqui/film/titanic-1997/"
+    },
+    {
+      "num_comments": "8",
+      "date": "February 13, 2023",
+      "username": "Jay",
+      "numLikes": "3119",
+      "rating": "4.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/9/3/4/3/7/shard/avtr-0-80-0-80-crop.jpg?v=5eb71abf10",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>leftie snowflake boat DESTROYED by republican iceberg</p> ",
+      "link": "https://letterboxd.com/jay/film/titanic-1997/"
+    },
+    {
+      "num_comments": "12",
+      "date": "October 24, 2016",
+      "username": "robert",
+      "numLikes": "8468",
+      "rating": "",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/9/2/4/2/3/shard//avtr-0-80-0-80-crop.jpg?v=904be25dd2",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>haha wow fucked up if true</p> ",
+      "link": "https://letterboxd.com/robertdavid/film/titanic-1997/"
+    }
+  ]
+}
