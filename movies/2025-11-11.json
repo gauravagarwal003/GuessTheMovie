@@ -4,10 +4,22 @@
   "reviewCount": 5,
   "reviews": [
     {
+      "num_comments": "0",
+      "date": "November 7, 2020",
+      "username": "liam f",
+      "numLikes": "503",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/2/0/5/9/6/8/shard/avtr-0-80-0-80-crop.jpg?v=ab25fb02ae",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>easily the most expensive guitar tutorial in history</p> ",
+      "link": "https://letterboxd.com/leeyim/film/coco-2017/1/"
+    },
+    {
       "num_comments": "12",
       "date": "February 18, 2018",
       "username": "andrea🌹",
-      "numLikes": "4792",
+      "numLikes": "4818",
       "rating": "5.0",
       "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/4/8/1/4/0/0/shard/avtr-0-80-0-80-crop.jpg?v=0ca9727dc7",
       "liked": true,
@@ -19,7 +31,7 @@
       "num_comments": "19",
       "date": "November 29, 2017",
       "username": "Matt Singer",
-      "numLikes": "11161",
+      "numLikes": "11223",
       "rating": "4.0",
       "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/8/7/8/6/shard/avtr-0-80-0-80-crop.jpg?v=fac7ed503e",
       "liked": true,
@@ -31,7 +43,7 @@
       "num_comments": "2",
       "date": "November 29, 2017",
       "username": "amanda",
-      "numLikes": "2426",
+      "numLikes": "2447",
       "rating": "4.0",
       "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/4/3/9/5/4/shard/avtr-0-80-0-80-crop.jpg?v=e97e7465ee",
       "liked": true,
@@ -40,22 +52,10 @@
       "link": "https://letterboxd.com/amanda_marie/film/coco-2017/1/"
     },
     {
-      "num_comments": "0",
-      "date": "November 7, 2020",
-      "username": "liam f",
-      "numLikes": "496",
-      "rating": "5.0",
-      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/2/0/5/9/6/8/shard/avtr-0-80-0-80-crop.jpg?v=ab25fb02ae",
-      "liked": true,
-      "collapsed": false,
-      "text": " <p>easily the most expensive guitar tutorial in history</p> ",
-      "link": "https://letterboxd.com/leeyim/film/coco-2017/1/"
-    },
-    {
       "num_comments": "3",
       "date": "June 9, 2020",
       "username": "wobbleup",
-      "numLikes": "174",
+      "numLikes": "178",
       "rating": "4.0",
       "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/9/7/5/2/2/1/shard/avtr-0-80-0-80-crop.png?v=9b0ddbad9a",
       "liked": true,
@@ -65,7 +65,7 @@
     }
   ],
   "affiliate_links": {
-    "amazon-dvd": "https://amzn.to/49pv5Ys",
-    "prime-video": "https://amzn.to/4oQu2pk"
+    "amazon-dvd": "https://amzn.to/4pjsRhP",
+    "prime-video": "https://amzn.to/44hXsnN"
   }
 }
