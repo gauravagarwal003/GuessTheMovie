@@ -400,7 +400,7 @@ body {
 
 a:hover #profileIcon,
 a:focus #profileIcon {
-    content: url("/LBBWLogo.png");
+    content: url("/images/LBBWLogo.png");
 }
 
 
