@@ -439,12 +439,35 @@ function finishGame(wonGame) {
         const movieTitle = (correctMovieObject && correctMovieObject.title) ? correctMovieObject.title : '';
 
         // Try to load services definitions (title + icon info)
-        let services = {};
+        // Default services (safe fallback without network). These will be used
+        // when the JSON isn't available or fetch fails. Keep minimal defaults
+        // so affiliate rendering still works.
+        let services = {
+          "amazon-dvd": {
+            "id": "amazon-dvd",
+            "title": "Amazon (DVD)",
+            "icon": { "type": "svg", "value": "/images/amazon.svg", "alt": "Amazon logo" }
+          },
+          "prime-video": {
+            "id": "prime-video",
+            "title": "Prime Video (Rent/Buy)",
+            "icon": { "type": "svg", "value": "/images/prime-video.svg", "alt": "Prime Video logo" }
+          }
+        };
+
+        // Attempt to fetch an external services.json placed under affiliates/.
+        // Use a URL relative to the current page so this works whether the site
+        // is hosted at root or under a subpath (GitHub Pages, Cloudflare Pages, etc).
         try {
-          const res = await fetch('/affiliates/services.json', { cache: 'no-cache' });
-          if (res.ok) services = await res.json();
+          const servicesUrl = new URL('affiliates/services.json', window.location.href).href;
+          const res = await fetch(servicesUrl, { cache: 'no-cache' });
+          if (res.ok) {
+            const fetched = await res.json();
+            // merge fetched keys over defaults
+            services = Object.assign({}, services, fetched);
+          }
         } catch (e) {
-          console.warn('Could not load affiliates/services.json, falling back to defaults', e);
+          // silent fallback to defaults (avoid noisy console errors)
         }
 
         // If the movie JSON contains explicit affiliate links, prefer those
