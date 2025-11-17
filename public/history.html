@@ -24,7 +24,7 @@
 
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css">
-    <link rel="icon" type="image/x-icon" href="/just_logo.png">
+    <link rel="icon" type="image/x-icon" href="/images/just_logo.png">
     <link rel="stylesheet" href="/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -52,7 +52,7 @@
         <header id="header">
             <div class="header-content">
                 <!-- Logo -->
-                <img src="/logo_and_text.png" alt="Guess the Movie Logo" class="logo">
+                <img src="/images/logo_and_text.png" alt="Guess the Movie Logo" class="logo">
 
                 <!-- Buttons -->
                 <button id="todayButton" class="header-nav" onclick="location.href='/'">
@@ -85,19 +85,33 @@
             <div id="historyBody"></div>
         </div>
 
+        <!-- Affiliate offers (static) -->
+        <div id="affiliate-offers" aria-hidden="true">
+            <div class="affiliate-inner">
+                <div class="where-heading">Where to watch</div>
+                <div class="where-links">
+                    <a class="where-link" href="https://www.amazon.com/" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-brands fa-amazon icon" aria-hidden="true"></i>
+                        <span>Amazon / Prime Video</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
         <footer id="footer">
-            <a href="https://letterboxd.com/gaurava/" target="_blank" class="footer-item" id="profileItem">
-                <img src="/LBColorLogo.png" alt="My Letterboxd Profile" id="profileIcon" class="footer-image" />
-                <span id="profileLabel" class="footer-full">My Profile</span>
-                <span id="profileLabel" class="footer-short">My LB</span>
-            </a>
-
-            <a href="/about.html" class="footer-item" id="contactItem">
-                <i class="fa-solid fa-paper-plane icon" id="contactIcon"></i>
-                <span id="contactLabel" class="footer-full">Contact Us</span>
-                <span id="contactLabel" class="footer-short">Contact</span>
-            </a>
-
+            <div class="footer-item-container">
+                <a href="https://letterboxd.com/gaurava/" target="_blank" class="footer-item" id="profileItem">
+                    <img src="/images/LBColorLogo.png" alt="My Letterboxd Profile" id="profileIcon" class="footer-image" />
+                    <span id="profileLabel" class="footer-full">My Profile</span>
+                    <span id="profileLabel" class="footer-short">My LB</span>
+                </a>
+                <a href="/about.html" class="footer-item" id="contactItem">
+                    <i class="fa-solid fa-paper-plane icon" id="contactIcon"></i>
+                    <span id="contactLabel" class="footer-full">Contact Us</span>
+                    <span id="contactLabel" class="footer-short">Contact</span>
+                </a>
+            </div>
+            <span class="footer-affiliate">Some movie links on this site are affiliate links. As an Amazon Associate, I earn from qualifying purchases.</span>
         </footer>
     </main>
 
