@@ -434,25 +434,82 @@ function finishGame(wonGame) {
   try {
     const aff = document.getElementById('affiliate-offers');
     if (aff) {
-      const movieTitle = (correctMovieObject && correctMovieObject.title) ? correctMovieObject.title : '';
-      // Use a search-link for Amazon (replace tag with real associate tag)
-      const AFF_URL = movieTitle
-        ? 'https://www.amazon.com/s?k=' + encodeURIComponent(movieTitle + ' prime video') + '&tag=YOUR_ASSOCIATE_TAG'
-        : 'https://www.amazon.com/?tag=YOUR_ASSOCIATE_TAG';
-      const inner = aff.querySelector('.affiliate-inner');
-      if (inner) {
-        inner.innerHTML = `
-          <div class="where-heading">Where to watch</div>
-          <div class="where-links">
-            <a class="where-link" href="${AFF_URL}" target="_blank" rel="noopener noreferrer">
-              <i class="fa-brands fa-amazon icon" aria-hidden="true"></i>
-              <span>Amazon / Prime Video</span>
-            </a>
-          </div>
-        `;
-      }
-      aff.classList.add('visible');
-      aff.setAttribute('aria-hidden', 'false');
+      // Build the affiliate links dynamically using affiliates/services.json
+      (async function() {
+        const movieTitle = (correctMovieObject && correctMovieObject.title) ? correctMovieObject.title : '';
+
+        // Try to load services definitions (title + icon info)
+        let services = {};
+        try {
+          const res = await fetch('/affiliates/services.json', { cache: 'no-cache' });
+          if (res.ok) services = await res.json();
+        } catch (e) {
+          console.warn('Could not load affiliates/services.json, falling back to defaults', e);
+        }
+
+        // If the movie JSON contains explicit affiliate links, prefer those
+        const movieAffiliates = (correctMovieObject && correctMovieObject.affiliate_links) ? correctMovieObject.affiliate_links : null;
+
+        // Helper to build link HTML for a given service id and href
+        const buildLinkHtml = (id, href) => {
+          const svc = services[id] || {};
+          const title = svc.title || (id === 'amazon-dvd' ? 'Amazon / DVD' : (id === 'prime-video' ? 'Prime Video — Buy / Rent' : id));
+
+          // Build icon HTML
+          let iconHtml = '';
+          if (svc.icon) {
+            if (svc.icon.type === 'svg' && svc.icon.value) {
+              const src = svc.icon.value.replace(/^public\//, '/');
+              iconHtml = `<img class="icon" src="${src}" alt="${(svc.icon.alt || title)}" />`;
+            } else if (svc.icon.type === 'fa' && svc.icon.value) {
+              iconHtml = `<i class="${svc.icon.value} icon" aria-hidden="true"></i>`;
+            }
+          }
+          if (!iconHtml) {
+            if (id === 'amazon-dvd') iconHtml = '<i class="fa-brands fa-amazon icon" aria-hidden="true"></i>';
+            else iconHtml = '<i class="fa-solid fa-play icon" aria-hidden="true"></i>';
+          }
+
+          const aria = `aria-label="${title} (opens in new tab)"`;
+          return `<a class="where-link" href="${href}" target="_blank" rel="sponsored noopener noreferrer" ${aria}>${iconHtml}<span>${title}</span></a>`;
+        };
+
+        let whereLinksHtml = '';
+
+        if (movieAffiliates && Object.keys(movieAffiliates).length > 0) {
+          // Preserve a sensible order if possible, otherwise use keys as-is
+          const desiredOrder = ['amazon-dvd', 'prime-video'];
+          const keys = Object.keys(movieAffiliates);
+          // Order keys: those in desiredOrder first (in that order), then others
+          const ordered = [...desiredOrder.filter(k => keys.includes(k)), ...keys.filter(k => !desiredOrder.includes(k))];
+
+          whereLinksHtml = ordered.map(id => {
+            const href = movieAffiliates[id] || movieAffiliates[id.toLowerCase()] || movieAffiliates[id.replace('_', '-')] || '';
+            if (!href) return '';
+            return buildLinkHtml(id, href);
+          }).filter(Boolean).join('');
+        }
+
+        const inner = aff.querySelector('.affiliate-inner');
+        // Only render the affiliate block if we have at least one movie-provided link
+        if (whereLinksHtml && whereLinksHtml.trim().length > 0) {
+          if (inner) {
+            inner.innerHTML = `
+              <div class="where-heading">Where to watch</div>
+              <div class="where-links">
+                ${whereLinksHtml}
+              </div>
+            `;
+          }
+          aff.classList.add('visible');
+          aff.setAttribute('aria-hidden', 'false');
+        } else {
+          // Ensure the affiliate container is hidden when there are no movie-specific links
+          if (inner) inner.innerHTML = '';
+          aff.classList.remove('visible');
+          aff.setAttribute('aria-hidden', 'true');
+        }
+      })();
     }
   } catch (e) {
     console.error('Failed to update affiliate container:', e);
@@ -906,6 +963,12 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
       };
     } else {
       correctMovieObject = allMovies.find(movie => movie.movieID === correctMovieID);
+    }
+
+    // If movie JSON contains affiliate links, attach them to correctMovieObject so finishGame can use them
+    if (movieData && movieData.affiliate_links && Object.keys(movieData.affiliate_links).length > 0) {
+      if (!correctMovieObject) correctMovieObject = {};
+      correctMovieObject.affiliate_links = movieData.affiliate_links;
     }
 
     // Reviews are already loaded via fetchMovieData, no need to fetch individually
