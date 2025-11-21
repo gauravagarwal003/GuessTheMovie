@@ -1,0 +1,71 @@
+{
+  "date": "2025-11-21",
+  "movieID": "requiem-for-a-dream",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "23",
+      "date": "July 1, 2019",
+      "username": "rodolfo",
+      "numLikes": "11830",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/4/7/7/5/5/2/shard/avtr-0-80-0-80-crop.jpg?v=4110801836",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>i can’t believe i got jump scared by a refrigerator</p> ",
+      "link": "https://letterboxd.com/filmrodolfo/film/requiem-for-a-dream/"
+    },
+    {
+      "num_comments": "24",
+      "date": "December 23, 2019",
+      "username": "p e r s i a 🍒",
+      "numLikes": "12717",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/4/8/3/5/9/2/shard/avtr-0-80-0-80-crop.jpg?v=af479976da",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>This was an incredible movie but I am never ever ever ever ever EVER going to watch it again.</p> ",
+      "link": "https://letterboxd.com/hauteprincesses/film/requiem-for-a-dream/"
+    },
+    {
+      "num_comments": "17",
+      "date": "August 19, 2018",
+      "username": "Chris Owens",
+      "numLikes": "4173",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/4/2/3/5/0/shard/avtr-0-80-0-80-crop.jpg?v=e0302184d5",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>this film should be required viewing for elementary school students everywhere lol no way they ever even think of doing drugs after this one.</p> ",
+      "link": "https://letterboxd.com/deadpegasus/film/requiem-for-a-dream/"
+    },
+    {
+      "num_comments": "10",
+      "date": "January 2, 2017",
+      "username": "kyle",
+      "numLikes": "2761",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/twitter/2/2/9/6/7/4/shard/http___pbs.twimg.com_profile_images_732938258024431616_qDT7AV5L-0-80-0-80-crop.jpg?v=7a6cefeb61",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>i felt bad for everyone but jared leto</p> ",
+      "link": "https://letterboxd.com/kyledunne/film/requiem-for-a-dream/"
+    },
+    {
+      "num_comments": "12",
+      "date": "January 9, 2021",
+      "username": "aaron",
+      "numLikes": "4830",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/6/4/1/1/5/6/shard/avtr-0-80-0-80-crop.jpg?v=c0d565b34c",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>in the nicest possible way, is darren aronofsky actually okay?</p> ",
+      "link": "https://letterboxd.com/aarnwlsn/film/requiem-for-a-dream/"
+    }
+  ],
+  "affiliate_links": {
+    "amazon-dvd": "https://amzn.to/4i8ESV9",
+    "prime-video": "https://amzn.to/4nWJ4bD"
+  }
+}
