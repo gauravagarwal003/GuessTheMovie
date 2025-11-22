@@ -391,18 +391,15 @@ body {
     text-decoration: underline;
 }
 
-#contactIcon {
-    text-decoration: none !important;
-    color: var(--LBlue);
-    margin-top: 3px;
-}
-
-
 a:hover #profileIcon,
 a:focus #profileIcon {
     content: url("/images/LBBWLogo.png");
 }
 
+#supportLabel {
+    color: var(--coffeeColor);
+    text-decoration: underline;
+}   
 
 #profileLabel {
     color: var(--LOrange);
@@ -1024,10 +1021,24 @@ a:focus #profileIcon {
     text-decoration: underline;
 }
 
+#supportIcon {
+    text-decoration: none !important;
+    color: var(--coffeeColor);
+    margin-top: 3px;
+}
+
 #contactIcon {
     text-decoration: none !important;
     color: var(--LBlue);
     margin-top: 3px;
+}
+
+#supportItem {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    padding-right: 10px;
+    text-decoration: none;
 }
 
 #contactItem {
