@@ -1,0 +1,71 @@
+{
+  "date": "2025-11-26",
+  "movieID": "the-imitation-game",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "0",
+      "date": "December 28, 2014",
+      "username": "russman",
+      "numLikes": "75",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/3/4/0/4/shard/avtr-0-80-0-80-crop.jpg?v=045035e12b",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>The game isn't Simon Says</p> ",
+      "link": "https://letterboxd.com/russman/film/the-imitation-game/"
+    },
+    {
+      "num_comments": "0",
+      "date": "April 10, 2021",
+      "username": "alyssa",
+      "numLikes": "684",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/5/8/1/2/3/5/shard/avtr-0-80-0-80-crop.jpg?v=0aa47c7b87",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>woman in stem keira knightley is my motivation to get through calculus</p> ",
+      "link": "https://letterboxd.com/awwpup/film/the-imitation-game/"
+    },
+    {
+      "num_comments": "0",
+      "date": "June 21, 2021",
+      "username": "Gabriel Presley",
+      "numLikes": "67",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/7/8/7/9/8/3/shard/avtr-0-80-0-80-crop.jpg?v=6ca57d4194",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>For a film covering a very important gay mans story, this has a really straight vibe</p> ",
+      "link": "https://letterboxd.com/gabe_presley/film/the-imitation-game/"
+    },
+    {
+      "num_comments": "0",
+      "date": "May 7, 2020",
+      "username": "adambolt",
+      "numLikes": "343",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/4/6/6/3/7/7/shard/avtr-0-80-0-80-crop.jpg?v=6d2d5edf03",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>Wow those Germans really made them solve Captchas huh</p> ",
+      "link": "https://letterboxd.com/adambolt/film/the-imitation-game/"
+    },
+    {
+      "num_comments": "11",
+      "date": "January 11, 2015",
+      "username": "lauraud",
+      "numLikes": "3170",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/5/3/8/7/shard/avtr-0-80-0-80-crop.jpg?v=dbf02f71e2",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>I'm getting a little bit tired of Benedict Cumberbatch always being cast as the \"autistic genius\" but I'm never going to get tired of Benedict Cumberbatch.</p> ",
+      "link": "https://letterboxd.com/karst/film/the-imitation-game/"
+    }
+  ],
+  "affiliate_links": {
+    "amazon-dvd": "https://amzn.to/446TIp6",
+    "prime-video": "https://amzn.to/3WYemnA"
+  }
+}
