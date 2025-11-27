@@ -1,0 +1,71 @@
+{
+  "date": "2025-11-27",
+  "movieID": "crazy-rich-asians",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "0",
+      "date": "March 14, 2025",
+      "username": "flynn",
+      "numLikes": "177",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/1/5/0/9/7/6/shard/avtr-0-80-0-80-crop.jpg?v=493b209d04",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>Did you even go on a plane if you didn’t watch this</p> ",
+      "link": "https://letterboxd.com/flynnslicker/film/crazy-rich-asians/1/"
+    },
+    {
+      "num_comments": "6",
+      "date": "February 10, 2019",
+      "username": "☀️",
+      "numLikes": "2022",
+      "rating": "1.0",
+      "profilePhotoLink": "https://s.ltrbxd.com/static/img/avatar80-CTtJ8HSs.png",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>I'm too marxist for this</p> ",
+      "link": "https://letterboxd.com/jacquesdoran/film/crazy-rich-asians/"
+    },
+    {
+      "num_comments": "3",
+      "date": "October 12, 2018",
+      "username": "Patrick Willems",
+      "numLikes": "2343",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/6/7/4/1/9/shard/avtr-0-80-0-80-crop.jpg?v=a856408a78",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>Finally a movie that recognizes Ken Jeong works best in very small, concentrated doses.</p> ",
+      "link": "https://letterboxd.com/patrickhwillems/film/crazy-rich-asians/"
+    },
+    {
+      "num_comments": "3",
+      "date": "August 18, 2018",
+      "username": "cody",
+      "numLikes": "6434",
+      "rating": "3.5",
+      "profilePhotoLink": "https://secure.gravatar.com/avatar/43360749ae5055e9401acdb59527be8b?rating=PG&size=80&border=&default=https%3A%2F%2Fs.ltrbxd.com%2Fstatic%2Fimg%2Favatar80-CTtJ8HSs.png",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>challenging your boyfriends mom who hates you to mahjong is big dick energy</p> ",
+      "link": "https://letterboxd.com/codycorrall/film/crazy-rich-asians/"
+    },
+    {
+      "num_comments": "2",
+      "date": "July 10, 2020",
+      "username": "sree",
+      "numLikes": "1238",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/9/3/8/1/7/shard/avtr-0-80-0-80-crop.jpg?v=180b4e7cdc",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>not a white person in sight... just asians vibing</p> ",
+      "link": "https://letterboxd.com/tototoro/film/crazy-rich-asians/2/"
+    }
+  ],
+  "affiliate_links": {
+    "amazon-dvd": "https://amzn.to/4rczN28",
+    "prime-video": "https://amzn.to/43YI8N1"
+  }
+}
