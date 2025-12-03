@@ -1,0 +1,71 @@
+{
+  "date": "2025-12-03",
+  "movieID": "bullet-train",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "0",
+      "date": "September 27, 2022",
+      "username": "trainwrecktim",
+      "numLikes": "329",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/8/9/1/4/5/7/shard/avtr-0-80-0-80-crop.jpg?v=d7095e7ac5",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>I didn’t realize there were so many white people in Japan!</p> ",
+      "link": "https://letterboxd.com/trainwrecktim/film/bullet-train/"
+    },
+    {
+      "num_comments": "27",
+      "date": "August 2, 2022",
+      "username": "dumbsville",
+      "numLikes": "4071",
+      "rating": "4.0",
+      "profilePhotoLink": "https://secure.gravatar.com/avatar/e404538fd34784f069b1959ebb0eec1c?rating=PG&size=80&border=&default=https%3A%2F%2Fs.ltrbxd.com%2Fstatic%2Fimg%2Favatar80-CTtJ8HSs.png",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>I’m surprised the critic score is so mid on this one, this was a blast! It’s Scott Pilgrim John Wick, which means it’s an instant like for me.</p> ",
+      "link": "https://letterboxd.com/dumbsville/film/bullet-train/"
+    },
+    {
+      "num_comments": "25",
+      "date": "July 28, 2024",
+      "username": "Patrick Willems",
+      "numLikes": "960",
+      "rating": "",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/6/7/4/1/9/shard/avtr-0-80-0-80-crop.jpg?v=a856408a78",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>We were overdue for an annoying post-Tarantino post-Guy Ritchie overly stylish way too clever crime action comedy. This generation's Lucky Number Slevin</p> ",
+      "link": "https://letterboxd.com/patrickhwillems/film/bullet-train/"
+    },
+    {
+      "num_comments": "7",
+      "date": "August 3, 2022",
+      "username": "ZaraGwen",
+      "numLikes": "1731",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/8/0/9/6/3/shard/avtr-0-80-0-80-crop.jpg?v=cf19bf5268",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>No words, just thirsting over Aaron Taylor-Johnson</p> ",
+      "link": "https://letterboxd.com/zaragwen/film/bullet-train/"
+    },
+    {
+      "num_comments": "32",
+      "date": "August 2, 2022",
+      "username": "jonathan fujii",
+      "numLikes": "21569",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/2/7/3/1/1/1/shard/avtr-0-80-0-80-crop.jpg?v=d4d52d1e8d",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>Why is everyone so good looking on this damn train</p> ",
+      "link": "https://letterboxd.com/jonathanfujii/film/bullet-train/"
+    }
+  ],
+  "affiliate_links": {
+    "amazon-dvd": "https://amzn.to/4rtBurX",
+    "prime-video": "https://amzn.to/3MnVmg5"
+  }
+}
