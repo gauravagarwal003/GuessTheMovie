@@ -1,0 +1,68 @@
+{
+  "date": "2025-12-07",
+  "movieID": "turning-red",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "10",
+      "date": "March 16, 2022",
+      "username": "Patrick Willems",
+      "numLikes": "2564",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/6/7/4/1/9/shard/avtr-0-80-0-80-crop.jpg?v=a856408a78",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>Realizing the scariest of all movie premises for me is “the main character is in eighth grade”</p> ",
+      "link": "https://letterboxd.com/patrickhwillems/film/turning-red/"
+    },
+    {
+      "num_comments": "0",
+      "date": "March 14, 2022",
+      "username": "readwithcindy",
+      "numLikes": "221",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/2/9/4/9/9/0/shard/avtr-0-80-0-80-crop.jpg?v=ea65ba59ed",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>This movie is about embracing your inner furry</p> ",
+      "link": "https://letterboxd.com/readwithcindy/film/turning-red/"
+    },
+    {
+      "num_comments": "34",
+      "date": "March 11, 2022",
+      "username": "👽 Zara 👽",
+      "numLikes": "13772",
+      "rating": "4.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/6/9/8/3/9/shard/avtr-0-80-0-80-crop.jpg?v=9990888652",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>really appreciate how it captures the essence of being 13 and your mum discovering your cringey anime inspired fanart</p> ",
+      "link": "https://letterboxd.com/barbiesswanlake/film/turning-red/"
+    },
+    {
+      "num_comments": "18",
+      "date": "March 4, 2022",
+      "username": "jonathan fujii",
+      "numLikes": "6067",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/2/7/3/1/1/1/shard/avtr-0-80-0-80-crop.jpg?v=d4d52d1e8d",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>Something about Asian food in animated films hit different</p> ",
+      "link": "https://letterboxd.com/jonathanfujii/film/turning-red/1/"
+    },
+    {
+      "num_comments": "102",
+      "date": "March 11, 2022",
+      "username": "Framesofnick",
+      "numLikes": "8883",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/8/7/3/7/4/2/shard/avtr-0-80-0-80-crop.jpg?v=4c0d7907fb",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>PERIODS? IN MY DISNEY MOVIE????? THIS IS OUTRAGEOUS!!!</p> ",
+      "link": "https://letterboxd.com/framesofnick/film/turning-red/"
+    }
+  ],
+  "affiliate_links": {}
+}
