@@ -1,0 +1,71 @@
+{
+  "date": "2025-12-18",
+  "movieID": "i-know-what-you-did-last-summer",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "15",
+      "date": "September 12, 2020",
+      "username": "lucy",
+      "numLikes": "4444",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/0/5/0/3/7/4/shard/avtr-0-80-0-80-crop.jpg?v=b57616ac88",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>cant stop singing the shawn mendes song now</p> ",
+      "link": "https://letterboxd.com/mistyspaulson/film/i-know-what-you-did-last-summer/"
+    },
+    {
+      "num_comments": "5",
+      "date": "August 7, 2020",
+      "username": "The Horror of Marna Larsen",
+      "numLikes": "1331",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/8/4/7/6/4/shard/avtr-0-80-0-80-crop.jpg?v=a76fed6df3",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>Ok, everyone just calm down. All we need to do is find the one person in this New England fishing town who owns a slicker.</p> ",
+      "link": "https://letterboxd.com/marna/film/i-know-what-you-did-last-summer/"
+    },
+    {
+      "num_comments": "7",
+      "date": "November 1, 2020",
+      "username": "kayla",
+      "numLikes": "1333",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/5/5/4/4/4/7/shard/avtr-0-80-0-80-crop.jpg?v=f6f0854246",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>Want to watch Scary Movie so bad now</p> ",
+      "link": "https://letterboxd.com/kfavs/film/i-know-what-you-did-last-summer/"
+    },
+    {
+      "num_comments": "0",
+      "date": "November 2, 2025",
+      "username": "AbandonChimp",
+      "numLikes": "169",
+      "rating": "2.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/7/5/2/3/3/7/shard/avtr-0-80-0-80-crop.jpg?v=ecb9e02d72",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>GIven his career trajectory, you'd be forgiven for thinking that Ryan Phillippe was the one hit by the car.</p> ",
+      "link": "https://letterboxd.com/abandonchimp/film/i-know-what-you-did-last-summer/"
+    },
+    {
+      "num_comments": "1",
+      "date": "October 23, 2020",
+      "username": "𝐇𝐞𝐚𝐭𝐡𝐞𝐫 🌷",
+      "numLikes": "4578",
+      "rating": "2.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/7/7/4/7/7/0/shard/avtr-0-80-0-80-crop.jpg?v=68428a5dc8",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>I mean I know they made a pact and shit but I would’ve told my mom the second I got home, just saying.</p> ",
+      "link": "https://letterboxd.com/ladieswholunch/film/i-know-what-you-did-last-summer/"
+    }
+  ],
+  "affiliate_links": {
+    "amazon-dvd": "https://amzn.to/48CKdAP",
+    "prime-video": "https://amzn.to/44rr8Pw"
+  }
+}
