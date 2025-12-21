@@ -1,0 +1,71 @@
+{
+  "date": "2025-12-21",
+  "movieID": "point-break",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "0",
+      "date": "February 26, 2025",
+      "username": "theo",
+      "numLikes": "163",
+      "rating": "2.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/7/5/5/0/8/9/2/shard/avtr-0-80-0-80-crop.jpg?v=7ed9175bd5",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>there’s way too much testosterone in this movie</p> ",
+      "link": "https://letterboxd.com/whentheometfilm/film/point-break/"
+    },
+    {
+      "num_comments": "2",
+      "date": "March 29, 2021",
+      "username": "Muriel",
+      "numLikes": "2165",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/6/0/9/5/3/7/shard/avtr-0-80-0-80-crop.jpg?v=638796b6fd",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>white boy summer</p> ",
+      "link": "https://letterboxd.com/murielcampos/film/point-break/"
+    },
+    {
+      "num_comments": "0",
+      "date": "December 15, 2022",
+      "username": "Matt Singer",
+      "numLikes": "1023",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/8/7/8/6/shard/avtr-0-80-0-80-crop.jpg?v=fac7ed503e",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>Did a surfboard write this?</p> ",
+      "link": "https://letterboxd.com/superpulse/film/point-break/"
+    },
+    {
+      "num_comments": "1",
+      "date": "February 7, 2024",
+      "username": "Bobby Wagner",
+      "numLikes": "1056",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/8/0/5/6/2/3/2/shard/avtr-0-80-0-80-crop.jpg?v=aaee350c38",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>HEAT for people who are good at beach volleyball</p> ",
+      "link": "https://letterboxd.com/bobbywags/film/point-break/"
+    },
+    {
+      "num_comments": "3",
+      "date": "June 25, 2021",
+      "username": "Christina",
+      "numLikes": "268",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/4/1/0/5/3/7/0/shard/avtr-0-80-0-80-crop.jpg?v=0f02c8fe2c",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>lol the part where patrick swayze and i would do just about anything for 90s keanu reeves</p> ",
+      "link": "https://letterboxd.com/millenniummambo/film/point-break/1/"
+    }
+  ],
+  "affiliate_links": {
+    "amazon-dvd": "https://amzn.to/4iXDwNc",
+    "prime-video": "https://amzn.to/4pJnSrr"
+  }
+}
