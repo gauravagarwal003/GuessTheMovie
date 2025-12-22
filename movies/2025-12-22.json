@@ -1,0 +1,68 @@
+{
+  "date": "2025-12-22",
+  "movieID": "friends-with-benefits",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "2",
+      "date": "August 7, 2019",
+      "username": "ﾟ✧(｡♡ ‿ ♡｡)･ﾟ✧",
+      "numLikes": "154",
+      "rating": "1.5",
+      "profilePhotoLink": "https://secure.gravatar.com/avatar/8cb8e2321ddb75844bca45ac02efd0fb?rating=PG&size=80&border=&default=https%3A%2F%2Fs.ltrbxd.com%2Fstatic%2Fimg%2Favatar80-CTtJ8HSs.png",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>this was just a film about new york propaganda</p> ",
+      "link": "https://letterboxd.com/yuqxn/film/friends-with-benefits/"
+    },
+    {
+      "num_comments": "0",
+      "date": "April 11, 2025",
+      "username": "daniel",
+      "numLikes": "89",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/4/2/5/0/7/7/4/shard/avtr-0-80-0-80-crop.jpg?v=220b52b553",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>why did you get andy samberg and emma stone for this movie and give them a total screentime of one minute</p> ",
+      "link": "https://letterboxd.com/danielremod/film/friends-with-benefits/"
+    },
+    {
+      "num_comments": "0",
+      "date": "August 13, 2020",
+      "username": "Arlo McLean",
+      "numLikes": "3606",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/twitter/4/5/0/6/2/4/shard/http___pbs.twimg.com_profile_images_1005683572362043392_X_EkvLnG-0-80-0-80-crop.jpg?v=c11309b45f",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>you had me at gay woody harrelson</p> ",
+      "link": "https://letterboxd.com/theslayerbuffy/film/friends-with-benefits/"
+    },
+    {
+      "num_comments": "1",
+      "date": "June 10, 2018",
+      "username": "Robin",
+      "numLikes": "260",
+      "rating": "2.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/1/4/1/5/4/shard/avtr-0-80-0-80-crop.jpg?v=d6515636f3",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>The potential this could have if there was someone other than Justin Timberlake</p> ",
+      "link": "https://letterboxd.com/annreinking/film/friends-with-benefits/1/"
+    },
+    {
+      "num_comments": "0",
+      "date": "November 20, 2024",
+      "username": "🦍",
+      "numLikes": "85",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/5/4/0/3/8/3/0/shard/avtr-0-80-0-80-crop.jpg?v=7cccc34aa3",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>When the situationship starts to get a bit serious</p> ",
+      "link": "https://letterboxd.com/popstylefor30/film/friends-with-benefits/"
+    }
+  ],
+  "affiliate_links": {}
+}
