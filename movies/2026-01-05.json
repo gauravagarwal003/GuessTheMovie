@@ -1,0 +1,71 @@
+{
+  "date": "2026-01-05",
+  "movieID": "good-time",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "6",
+      "date": "August 28, 2017",
+      "username": "Lucy",
+      "numLikes": "3687",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/4/7/0/0/7/shard/avtr-0-80-0-80-crop.jpg?v=5ed30980a5",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>i'm never drinking sprite again</p> ",
+      "link": "https://letterboxd.com/deathproof/film/good-time/"
+    },
+    {
+      "num_comments": "0",
+      "date": "January 15, 2020",
+      "username": "9VOLT",
+      "numLikes": "1227",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/twitter/7/1/3/4/7/4/shard/http___pbs.twimg.com_profile_images_813721567842672641_j98Y6jMk-0-80-0-80-crop.jpg?v=3f83b41b25",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>just my opinion but it didn’t look like anyone in this movie had a good time</p> ",
+      "link": "https://letterboxd.com/9volt/film/good-time/"
+    },
+    {
+      "num_comments": "2",
+      "date": "November 8, 2017",
+      "username": "matt lynch",
+      "numLikes": "494",
+      "rating": "3.0",
+      "profilePhotoLink": "https://secure.gravatar.com/avatar/fb4cae3779fcedc4f707ee7359b12a3e?rating=PG&size=80&border=&default=https%3A%2F%2Fs.ltrbxd.com%2Fstatic%2Fimg%2Favatar80-CTtJ8HSs.png",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>Blotter acid on a Pepe the Frog picture kind of sums this up. I'm not really buying it as a twisted examination of white privilege (at least not a very good one), but it is excessively stylish, propulsive, percussive.</p> ",
+      "link": "https://letterboxd.com/colonelmortimer/film/good-time/"
+    },
+    {
+      "num_comments": "0",
+      "date": "May 14, 2020",
+      "username": "aaron",
+      "numLikes": "450",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/6/4/1/1/5/6/shard/avtr-0-80-0-80-crop.jpg?v=c0d565b34c",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>nothing like a safdie brothers film to send my anxiety through the roof</p> ",
+      "link": "https://letterboxd.com/aarnwlsn/film/good-time/"
+    },
+    {
+      "num_comments": "14",
+      "date": "September 2, 2017",
+      "username": "Marian",
+      "numLikes": "2204",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/3/9/4/8/9/shard/avtr-0-80-0-80-crop.jpg?v=c0af9ceabb",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>mostly what i got out of this was an intimate familiarity with every single pore on robert pattinson's face</p> ",
+      "link": "https://letterboxd.com/marianjune/film/good-time/"
+    }
+  ],
+  "affiliate_links": {
+    "amazon-dvd": "https://amzn.to/49AnTIt",
+    "prime-video": "https://amzn.to/3N5SDZ9"
+  }
+}
