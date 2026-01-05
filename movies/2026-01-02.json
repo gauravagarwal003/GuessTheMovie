@@ -1,0 +1,56 @@
+{
+  "date": "2026-01-02",
+  "movieID": "charlottes-web-2006",
+  "reviewCount": 4,
+  "reviews": [
+    {
+      "num_comments": "1",
+      "date": "July 13, 2021",
+      "username": "pharb🍉✝️",
+      "numLikes": "82",
+      "rating": "2.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/3/1/9/6/4/7/shard/avtr-0-80-0-80-crop.jpg?v=e1b48e1455",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>Steve Buscemi bathes in buttermilk and is nearly murdered by André 3000.</p> ",
+      "link": "https://letterboxd.com/braydopotato/film/charlottes-web-2006/"
+    },
+    {
+      "num_comments": "1",
+      "date": "July 14, 2020",
+      "username": "jessica",
+      "numLikes": "303",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/5/7/0/3/7/2/shard/avtr-0-80-0-80-crop.jpg?v=850436ca1f",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>lowkey made me vegetarian</p> ",
+      "link": "https://letterboxd.com/jessicaydig/film/charlottes-web-2006/"
+    },
+    {
+      "num_comments": "0",
+      "date": "May 14, 2025",
+      "username": "mia ৎ୭",
+      "numLikes": "9",
+      "rating": "2.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/0/8/5/8/6/2/7/shard/avtr-0-80-0-80-crop.jpg?v=6d85cd824c",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>i know this is a classic childhood film but something about live action talking animals…unsettling</p> ",
+      "link": "https://letterboxd.com/chaiskeleton/film/charlottes-web-2006/"
+    },
+    {
+      "num_comments": "1",
+      "date": "February 9, 2021",
+      "username": "Matt_Samahl",
+      "numLikes": "22",
+      "rating": "2.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/9/5/1/2/0/4/shard/avtr-0-80-0-80-crop.jpg?v=a0dca30891",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>At least it's better than babe</p> ",
+      "link": "https://letterboxd.com/matt_samahl/film/charlottes-web-2006/"
+    }
+  ],
+  "affiliate_links": {}
+}

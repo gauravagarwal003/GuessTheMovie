@@ -1,0 +1,71 @@
+{
+  "date": "2026-01-01",
+  "movieID": "harold-kumar-go-to-white-castle",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "5",
+      "date": "August 20, 2023",
+      "username": "jeaba",
+      "numLikes": "117",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/6/6/1/5/0/5/2/shard/avtr-0-80-0-80-crop.jpg?v=78d1396164",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>this movie hits so different when you live in new jersey</p> ",
+      "link": "https://letterboxd.com/jeaba/film/harold-kumar-go-to-white-castle/1/"
+    },
+    {
+      "num_comments": "1",
+      "date": "May 8, 2022",
+      "username": "owen2613",
+      "numLikes": "356",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/4/0/5/4/5/4/3/shard/avtr-0-80-0-80-crop.jpg?v=2966549b35",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>greatest fucking advert ever</p> ",
+      "link": "https://letterboxd.com/owen2613/film/harold-kumar-go-to-white-castle/"
+    },
+    {
+      "num_comments": "0",
+      "date": "August 16, 2021",
+      "username": "Nea Ching(y)",
+      "numLikes": "56",
+      "rating": "4.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/8/8/2/2/8/5/shard/avtr-0-80-0-80-crop.jpg?v=b63cdaa33c",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>no movie has done more for Asian American representation!!!!</p> ",
+      "link": "https://letterboxd.com/thegaychingy/film/harold-kumar-go-to-white-castle/"
+    },
+    {
+      "num_comments": "2",
+      "date": "April 11, 2021",
+      "username": "bira",
+      "numLikes": "95",
+      "rating": "4.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/0/6/2/8/2/8/shard/avtr-0-80-0-80-crop.jpg?v=cf08475bde",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>this movie makes me want to eat 30 sliders, 5 french fries, and 4 large cherry cokes #food #yaoi</p> ",
+      "link": "https://letterboxd.com/putitaboutique/film/harold-kumar-go-to-white-castle/"
+    },
+    {
+      "num_comments": "0",
+      "date": "January 7, 2015",
+      "username": "Gavin Charles",
+      "numLikes": "71",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/6/7/0/3/7/shard/avtr-0-80-0-80-crop.jpg?v=1d00b9ea23",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>The definitive American stoner comedy of the 2000's</p> ",
+      "link": "https://letterboxd.com/gavincmb/film/harold-kumar-go-to-white-castle/"
+    }
+  ],
+  "affiliate_links": {
+    "amazon-dvd": "https://amzn.to/4pqv5f3",
+    "prime-video": "https://amzn.to/3Yntb3H"
+  }
+}

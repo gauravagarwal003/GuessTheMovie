@@ -1,0 +1,71 @@
+{
+  "date": "2026-01-03",
+  "movieID": "blood-diamond",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "0",
+      "date": "April 15, 2021",
+      "username": "ally",
+      "numLikes": "56",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/1/8/6/7/3/9/shard/avtr-0-80-0-80-crop.jpg?v=a30a392776",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>if you’re interested in seeing people die watch this</p> ",
+      "link": "https://letterboxd.com/allybull/film/blood-diamond/"
+    },
+    {
+      "num_comments": "0",
+      "date": "May 26, 2020",
+      "username": "lady_ana",
+      "numLikes": "47",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/6/1/6/3/4/9/8/shard/avtr-0-80-0-80-crop.jpg?v=1913b4d8de",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>Unfortunately, this is the sad and cruel reality of what happens in many underdeveloped countries, and all of this is just for the benefit of a few people.</p> ",
+      "link": "https://letterboxd.com/lady_ana/film/blood-diamond/"
+    },
+    {
+      "num_comments": "4",
+      "date": "January 19, 2022",
+      "username": "comrade_yui",
+      "numLikes": "266",
+      "rating": "0.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/8/3/3/9/9/5/shard/avtr-0-80-0-80-crop.jpg?v=14b38adb59",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>did not finish. too tasteful to be trashy fun, too exploitative to say anything outside of a couple centrist neoliberal talking points. the worst aspects of both generic 2000s action stylistics and oscarbait tedium, a music video for colonizers.</p> ",
+      "link": "https://letterboxd.com/comrade_yui/film/blood-diamond/"
+    },
+    {
+      "num_comments": "0",
+      "date": "November 29, 2024",
+      "username": "theo",
+      "numLikes": "205",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/7/5/5/0/8/9/2/shard/avtr-0-80-0-80-crop.jpg?v=7ed9175bd5",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>leo’s accent took me by surprise</p> ",
+      "link": "https://letterboxd.com/whentheometfilm/film/blood-diamond/"
+    },
+    {
+      "num_comments": "0",
+      "date": "March 4, 2021",
+      "username": "lola gumball",
+      "numLikes": "193",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/twitter/4/0/1/1/3/7/shard/http___pbs.twimg.com_profile_images_1431372450315575302_qVJ_gO4s-0-80-0-80-crop.jpg?v=7b98c1e53c",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>one pink diamond got all these men off their nut</p> ",
+      "link": "https://letterboxd.com/bethanylola/film/blood-diamond/"
+    }
+  ],
+  "affiliate_links": {
+    "amazon-dvd": "https://amzn.to/4q6dhH2",
+    "prime-video": "https://amzn.to/4pm1NOo"
+  }
+}

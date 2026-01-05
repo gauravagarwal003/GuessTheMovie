@@ -1,0 +1,71 @@
+{
+  "date": "2026-01-04",
+  "movieID": "star-trek",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "1",
+      "date": "August 8, 2021",
+      "username": "Molly",
+      "numLikes": "654",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/1/0/9/4/0/8/shard/avtr-0-80-0-80-crop.jpg?v=232cf8e316",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>This movie opens with a big chaotic action sequence in space and then cuts to a title card that says: IOWA</p> ",
+      "link": "https://letterboxd.com/fyouflipflops/film/star-trek/"
+    },
+    {
+      "num_comments": "0",
+      "date": "May 12, 2019",
+      "username": "Erik 🎼",
+      "numLikes": "265",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/4/1/3/4/8/shard/avtr-0-80-0-80-crop.jpg?v=f7a04a320a",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>jj abrams really keeps that thang (lens flares) on him</p> ",
+      "link": "https://letterboxd.com/enniomorricone/film/star-trek/"
+    },
+    {
+      "num_comments": "11",
+      "date": "April 14, 2023",
+      "username": "Colin the dude",
+      "numLikes": "37",
+      "rating": "2.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/twitter/1/1/0/1/4/shard/http___pbs.twimg.com_profile_images_1101387988964204544_9VEJTTVU-0-80-0-80-crop.png?v=23bd2f2f0d",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>A Michael Bay movie minus the teenage vulgarity. I'm afraid I'm closing the Pod Bay doors on this one. It's just too loud and dumb for my old man brain. Karl Urban innocent.</p> ",
+      "link": "https://letterboxd.com/colintroy/film/star-trek/"
+    },
+    {
+      "num_comments": "0",
+      "date": "November 8, 2020",
+      "username": "bauti",
+      "numLikes": "68",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/0/9/3/5/7/shard/avtr-0-80-0-80-crop.jpg?v=4643b71611",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>chris pine got choked 3 times in this movie</p> ",
+      "link": "https://letterboxd.com/bauti/film/star-trek/"
+    },
+    {
+      "num_comments": "0",
+      "date": "September 22, 2025",
+      "username": "Horror Syndrome",
+      "numLikes": "61",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/3/5/4/6/4/5/8/shard/avtr-0-80-0-80-crop.jpg?v=c6d10cb9e4",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>Hey, want to become captain of the Enterprise? Just insult Spock's mama and get your ass kicked a bunch of times.</p> ",
+      "link": "https://letterboxd.com/cswood/film/star-trek/"
+    }
+  ],
+  "affiliate_links": {
+    "amazon-dvd": "https://amzn.to/4prnpcm",
+    "prime-video": "https://amzn.to/3YoPN3N"
+  }
+}

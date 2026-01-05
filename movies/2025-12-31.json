@@ -1,0 +1,71 @@
+{
+  "date": "2025-12-31",
+  "movieID": "coming-to-america",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "1",
+      "date": "February 13, 2021",
+      "username": "David Sims",
+      "numLikes": "194",
+      "rating": "4.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/twitter/3/2/9/2/1/shard/http___pbs.twimg.com_profile_images_528305771478802433_6iLOt6hB-0-80-0-80-crop.jpg?v=695e427d2c",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>john amos popping up at the end just slays me</p> ",
+      "link": "https://letterboxd.com/davidlsims/film/coming-to-america/"
+    },
+    {
+      "num_comments": "0",
+      "date": "September 13, 2021",
+      "username": "adambolt",
+      "numLikes": "787",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/4/6/6/3/7/7/shard/avtr-0-80-0-80-crop.jpg?v=6d2d5edf03",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>when i finally visit america i expect it to be exactly like this</p> ",
+      "link": "https://letterboxd.com/adambolt/film/coming-to-america/"
+    },
+    {
+      "num_comments": "0",
+      "date": "December 25, 2025",
+      "username": "Horror Syndrome",
+      "numLikes": "93",
+      "rating": "4.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/3/5/4/6/4/5/8/shard/avtr-0-80-0-80-crop.jpg?v=c6d10cb9e4",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>James Earl Jones once again playing an evil overbearing father who must be redeemed by his noble Jedi son.</p> ",
+      "link": "https://letterboxd.com/cswood/film/coming-to-america/"
+    },
+    {
+      "num_comments": "1",
+      "date": "February 12, 2025",
+      "username": "andy",
+      "numLikes": "48",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/9/7/3/8/2/9/1/shard/avtr-0-80-0-80-crop.jpg?v=60c2e5b932",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p><i>Crazy Rich Africans</i></p> ",
+      "link": "https://letterboxd.com/andylaw/film/coming-to-america/"
+    },
+    {
+      "num_comments": "0",
+      "date": "October 5, 2025",
+      "username": "Zach",
+      "numLikes": "53",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/4/9/1/7/5/4/1/shard/avtr-0-80-0-80-crop.jpg?v=3778bcbcf3",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>I had no idea Eddie Murphy played more than one role until the movie was over</p> ",
+      "link": "https://letterboxd.com/zacharymewborn2/film/coming-to-america/"
+    }
+  ],
+  "affiliate_links": {
+    "amazon-dvd": "https://amzn.to/4968DD9",
+    "prime-video": "https://amzn.to/4aJOILw"
+  }
+}
