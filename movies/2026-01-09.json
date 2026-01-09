@@ -1,0 +1,71 @@
+{
+  "date": "2026-01-09",
+  "movieID": "rush-2013",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "0",
+      "date": "February 5, 2014",
+      "username": "Matt Singer",
+      "numLikes": "753",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/8/7/8/6/shard/avtr-0-80-0-80-crop.jpg?v=fac7ed503e",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>Good movie, bad title.</p> ",
+      "link": "https://letterboxd.com/superpulse/film/rush-2013/"
+    },
+    {
+      "num_comments": "6",
+      "date": "April 9, 2018",
+      "username": "Mari",
+      "numLikes": "451",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/8/9/2/6/4/shard/avtr-0-80-0-80-crop.jpg?v=3e75b97777",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>after i first ever watched this i vowed i would become a professional race car driver and now half a decade later .... i still dont have a license</p> ",
+      "link": "https://letterboxd.com/bubbleboy/film/rush-2013/"
+    },
+    {
+      "num_comments": "0",
+      "date": "July 19, 2025",
+      "username": "Rafi",
+      "numLikes": "159",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/6/4/3/0/1/8/6/shard/avtr-0-80-0-80-crop.jpg?v=b2adbcde5f",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>Amps up the drama, sure, but how the movie shows the core rivalry between Hunt and Lauda really sells the emotion. Even if it twists a few facts, it captures that intense clash of fire vs precision so well.</p> ",
+      "link": "https://letterboxd.com/rafee7/film/rush-2013/"
+    },
+    {
+      "num_comments": "2",
+      "date": "July 6, 2023",
+      "username": "bre",
+      "numLikes": "1462",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/2/6/1/0/5/9/shard/avtr-0-80-0-80-crop.jpg?v=56b30eb4b6",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>if there is one thing about formula 1 there is always going to be a pair of gay little rivals</p> ",
+      "link": "https://letterboxd.com/brebear/film/rush-2013/3/"
+    },
+    {
+      "num_comments": "0",
+      "date": "February 10, 2024",
+      "username": "JP",
+      "numLikes": "52",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/6/1/5/0/4/4/0/shard/avtr-0-80-0-80-crop.jpg?v=8145a8b3f4",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>It starts off a bit slow, but once it gets going it’s great. Two great performances from Chris Hemsworth and Daniel Brühl. The racing scenes are electric and the score from Hans Zimmer really helps add to them. When it comes to racing movies, I'd rather just watch Ford v Ferrari, but this one is still a great time. </p><p>Ron Howard Ranked</p> ",
+      "link": "https://letterboxd.com/jp_24/film/rush-2013/"
+    }
+  ],
+  "affiliate_links": {
+    "amazon-dvd": "https://amzn.to/49nHDO2",
+    "prime-video": "https://amzn.to/496n8Xw"
+  }
+}
