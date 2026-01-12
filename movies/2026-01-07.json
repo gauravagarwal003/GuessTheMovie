@@ -1,0 +1,68 @@
+{
+  "date": "2026-01-07",
+  "movieID": "the-platform",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "24",
+      "date": "March 30, 2020",
+      "username": "Lucy",
+      "numLikes": "8140",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/4/7/0/0/7/shard/avtr-0-80-0-80-crop.jpg?v=5ed30980a5",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>location: underneath jeff bezos’ house</p> ",
+      "link": "https://letterboxd.com/deathproof/film/the-platform/"
+    },
+    {
+      "num_comments": "3",
+      "date": "April 9, 2020",
+      "username": "Roman Kirby",
+      "numLikes": "3727",
+      "rating": "",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/5/5/6/9/6/0/shard/avtr-0-80-0-80-crop.jpg?v=51d59c1b16",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>This is the most fucked up Mukbang I’ve ever seen.</p> ",
+      "link": "https://letterboxd.com/romankirby/film/the-platform/"
+    },
+    {
+      "num_comments": "8",
+      "date": "January 9, 2025",
+      "username": "Joel Haver",
+      "numLikes": "252",
+      "rating": "2.0",
+      "profilePhotoLink": "https://secure.gravatar.com/avatar/78aff47ffe905330ab5e768f4e3ffd5e?rating=PG&size=80&border=&default=https%3A%2F%2Fs.ltrbxd.com%2Fstatic%2Fimg%2Favatar80-CTtJ8HSs.png",
+      "liked": false,
+      "collapsed": true,
+      "text": "  <p>I like the small scale unique concept, but man this really blows it. It’s simultaneously so in your face with its allegory, but then muddies it with weird rules and turns and it makes no real sense by the end. This sort of Netflix style filmmaking, which feels a lot the TV style of filmmaking that keeps me from watching any TV shows, is so execution based and nothing else. They light the scenes, they get the shots, they make…</p>  ",
+      "link": "https://letterboxd.com/joelhaver/film/the-platform/"
+    },
+    {
+      "num_comments": "1",
+      "date": "March 29, 2020",
+      "username": "danne",
+      "numLikes": "305",
+      "rating": "",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/8/1/4/1/shard/avtr-0-80-0-80-crop.jpg?v=cb6bee336f",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>v<br/>e<br/>r<br/>t<br/>i<br/>c<br/>a<br/>l</p><p>s<br/>n<br/>o<br/>w<br/>p<br/>i<br/>e<br/>r<br/>c<br/>e<br/>r</p> ",
+      "link": "https://letterboxd.com/mellowdanne/film/the-platform/"
+    },
+    {
+      "num_comments": "3",
+      "date": "January 23, 2023",
+      "username": "Vonny Simarmata",
+      "numLikes": "76",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/7/1/3/4/8/2/shard/avtr-0-80-0-80-crop.jpg?v=6ced722cc9",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>if everyone just ate their favorite food and left the rest, there would be enough for everyone</p> ",
+      "link": "https://letterboxd.com/vonnysimarmata/film/the-platform/"
+    }
+  ],
+  "affiliate_links": {}
+}
