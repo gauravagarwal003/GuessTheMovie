@@ -1,0 +1,71 @@
+{
+  "date": "2026-01-13",
+  "movieID": "the-upside",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "0",
+      "date": "August 19, 2019",
+      "username": "☀️",
+      "numLikes": "12",
+      "rating": "2.5",
+      "profilePhotoLink": "https://s.ltrbxd.com/static/img/avatar80-CTtJ8HSs.png",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>terrifying that you can be the world’s greatest actress and still get roles like this</p> ",
+      "link": "https://letterboxd.com/jacquesdoran/film/the-upside/"
+    },
+    {
+      "num_comments": "0",
+      "date": "November 2, 2025",
+      "username": "SS Kanch",
+      "numLikes": "16",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/7/6/0/3/4/8/7/shard/avtr-0-80-0-80-crop.jpg?v=15cdd36c03",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>An unnecessary remake but a fun enjoyable movie nonetheless</p> ",
+      "link": "https://letterboxd.com/saikonakanchi/film/the-upside/"
+    },
+    {
+      "num_comments": "1",
+      "date": "August 3, 2017",
+      "username": "Brian Haver-Scanlon",
+      "numLikes": "91",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/5/8/9/1/2/shard/avtr-0-80-0-80-crop.jpg?v=0a2c478fc3",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>I want Kevin Hart to stick a catheter in more peeholes if it means he'll be this charming.</p> ",
+      "link": "https://letterboxd.com/rockhaver/film/the-upside/"
+    },
+    {
+      "num_comments": "3",
+      "date": "February 18, 2021",
+      "username": "Blue_J_Cinema",
+      "numLikes": "21",
+      "rating": "2.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/9/8/1/7/7/8/shard/avtr-0-80-0-80-crop.jpg?v=a16a6ce660",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>There is a scene where Bryan Cranston’s character gets his ears massaged. His ears are his erogenous zones and he gets turned on. I think it’s safe to say that was truly the moment where Walt became Heisenberg</p> ",
+      "link": "https://letterboxd.com/blue_j_cinema/film/the-upside/"
+    },
+    {
+      "num_comments": "0",
+      "date": "June 19, 2025",
+      "username": "☠️Ray Zags☠️",
+      "numLikes": "28",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/2/4/6/3/9/2/8/shard/avtr-0-80-0-80-crop.jpg?v=d58e1e3e1f",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>As a quadriplegic, givin’  this the gimp seal of approval 🦼</p> ",
+      "link": "https://letterboxd.com/zagadonuts/film/the-upside/"
+    }
+  ],
+  "affiliate_links": {
+    "amazon-dvd": "https://amzn.to/3Nduwba",
+    "prime-video": "https://amzn.to/4jyv86Y"
+  }
+}
