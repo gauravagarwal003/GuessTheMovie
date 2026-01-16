@@ -1,0 +1,71 @@
+{
+  "date": "2026-01-16",
+  "movieID": "limitless",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "9",
+      "date": "May 8, 2021",
+      "username": "I’m The Only Juan",
+      "numLikes": "1365",
+      "rating": "2.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/6/5/5/3/5/7/shard/avtr-0-80-0-80-crop.jpg?v=4cfe9ad51f",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>This movie smells like Axe Body Spray.</p> ",
+      "link": "https://letterboxd.com/betchjs/film/limitless/"
+    },
+    {
+      "num_comments": "0",
+      "date": "October 26, 2015",
+      "username": "Nathan Rabin",
+      "numLikes": "151",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/4/9/4/4/shard/avtr-0-80-0-80-crop.jpg?v=4380b97778",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>An enjoyable dumb movie about the most smartest dude ever.</p> ",
+      "link": "https://letterboxd.com/nathanrabin/film/limitless/"
+    },
+    {
+      "num_comments": "2",
+      "date": "March 28, 2021",
+      "username": "Jake Alda Coffey",
+      "numLikes": "426",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/6/4/8/1/4/0/shard/avtr-0-80-0-80-crop.jpg?v=0e57cdf03b",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>Nobody plays fast talking douchebags better than Bradley Cooper</p> ",
+      "link": "https://letterboxd.com/jakealdacoffey/film/limitless/"
+    },
+    {
+      "num_comments": "3",
+      "date": "January 11, 2026",
+      "username": "Ze Dos Marmelos 🍐",
+      "numLikes": "35",
+      "rating": "2.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/6/1/0/9/5/6/3/shard/avtr-0-80-0-80-crop.jpg?v=b798f1fb15",
+      "liked": false,
+      "collapsed": false,
+      "text": " <blockquote><p>\"Humans only use 20% of their brain\"</p></blockquote><p>After watching this I feel that number is extremely generous</p> ",
+      "link": "https://letterboxd.com/zedosmarmelos/film/limitless/"
+    },
+    {
+      "num_comments": "1",
+      "date": "December 23, 2019",
+      "username": "Bethany",
+      "numLikes": "434",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/7/9/0/5/8/shard/avtr-0-80-0-80-crop.jpg?v=da8dd80d79",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>i would probably best describe myself as similar to bradley cooper in this film <i>before</i> he takes the pills (when he's just a pathetic, depressed, aspiring writer piece of shit lusting over abbie cornish)</p> ",
+      "link": "https://letterboxd.com/bethanyinfilm/film/limitless/"
+    }
+  ],
+  "affiliate_links": {
+    "amazon-dvd": "https://amzn.to/3NjcsfE",
+    "prime-video": "https://amzn.to/4swil9k"
+  }
+}
