@@ -1,0 +1,70 @@
+{
+  "date": "2026-01-18",
+  "movieID": "babylon-2022",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "0",
+      "date": "December 16, 2022",
+      "username": "matt lynch",
+      "numLikes": "5880",
+      "rating": "1.5",
+      "profilePhotoLink": "https://secure.gravatar.com/avatar/fb4cae3779fcedc4f707ee7359b12a3e?rating=PG&size=80&border=&default=https%3A%2F%2Fs.ltrbxd.com%2Fstatic%2Fimg%2Favatar80-CTtJ8HSs.png",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>Makes the eternal mistake of reminding you of much better movies you could be watching, only in this case it's like a hundred of them.</p> ",
+      "link": "https://letterboxd.com/colonelmortimer/film/babylon-2022/"
+    },
+    {
+      "num_comments": "3",
+      "date": "December 27, 2022",
+      "username": "emily",
+      "numLikes": "654",
+      "rating": "4.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/5/6/2/3/8/0/shard/avtr-0-80-0-80-crop.jpg?v=3d0eba70b1",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>I laughed, I cried, I listened to jazz</p> ",
+      "link": "https://letterboxd.com/concertjunkie/film/babylon-2022/"
+    },
+    {
+      "num_comments": "0",
+      "date": "December 23, 2022",
+      "username": "mathew",
+      "numLikes": "2934",
+      "rating": "",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/6/2/5/3/4/8/8/shard/avtr-0-80-0-80-crop.jpg?v=db5dae115a",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>if the wolf of wall street, the great gatsby, and once upon a time in hollywood had a three-way</p> ",
+      "link": "https://letterboxd.com/melodramafilms/film/babylon-2022/1/"
+    },
+    {
+      "num_comments": "6",
+      "date": "December 24, 2022",
+      "username": "stevie",
+      "numLikes": "4717",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/6/0/5/1/3/shard/avtr-0-80-0-80-crop.jpg?v=bdd67732df",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>Tobey Maguire actually didn’t even know he was on a film set</p> ",
+      "link": "https://letterboxd.com/vontrapp/film/babylon-2022/"
+    },
+    {
+      "num_comments": "10",
+      "date": "December 22, 2022",
+      "username": "james💫",
+      "numLikes": "7737",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/1/0/4/8/3/2/shard/avtr-0-80-0-80-crop.jpg?v=7991dcdfec",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>damien chazelle checking off every possible bodily fluid he could show in this film</p> ",
+      "link": "https://letterboxd.com/demyvarda/film/babylon-2022/"
+    }
+  ],
+  "affiliate_links": {
+    "amazon-dvd": "https://amzn.to/4qP9A8B"
+  }
+}
