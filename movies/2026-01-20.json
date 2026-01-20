@@ -1,0 +1,71 @@
+{
+  "date": "2026-01-20",
+  "movieID": "godzilla-vs-kong",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "0",
+      "date": "April 6, 2021",
+      "username": "comrade_yui",
+      "numLikes": "106",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/8/3/3/9/9/5/shard/avtr-0-80-0-80-crop.jpg?v=14b38adb59",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>HOLLOW EARTH IS REAL</p> ",
+      "link": "https://letterboxd.com/comrade_yui/film/godzilla-vs-kong/1/"
+    },
+    {
+      "num_comments": "3",
+      "date": "March 31, 2021",
+      "username": "esther",
+      "numLikes": "1275",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/7/7/4/9/8/shard/avtr-0-80-0-80-crop.jpg?v=f847f6e0b6",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>delightful film about two funny guys who are really big</p> ",
+      "link": "https://letterboxd.com/estheronfilm/film/godzilla-vs-kong/"
+    },
+    {
+      "num_comments": "5",
+      "date": "March 31, 2021",
+      "username": "alor",
+      "numLikes": "2622",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/0/1/3/6/2/9/shard/avtr-0-80-0-80-crop.jpg?v=7e7b243d22",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>nooo don't destroy the entire city you're so sexy aha</p> ",
+      "link": "https://letterboxd.com/alor/film/godzilla-vs-kong/"
+    },
+    {
+      "num_comments": "15",
+      "date": "March 30, 2021",
+      "username": "Lindsey Romain",
+      "numLikes": "2004",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/5/5/5/9/1/shard/avtr-0-80-0-80-crop.jpg?v=affd40f357",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>Would have bumped this up a star if the monsters kissed.</p> ",
+      "link": "https://letterboxd.com/lindseyromain/film/godzilla-vs-kong/"
+    },
+    {
+      "num_comments": "0",
+      "date": "April 4, 2021",
+      "username": "davidehrlich",
+      "numLikes": "3636",
+      "rating": "0.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/twitter/3/2/1/9/2/shard/http___pbs.twimg.com_profile_images_1015061849321164801_S527QFnk-0-80-0-80-crop.jpg?v=e236c36c50",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>I can only get so pressed over a direct to video thing about a giant ape fighting a nuclear dinosaur but good god what happened to movies</p> ",
+      "link": "https://letterboxd.com/davidehrlich/film/godzilla-vs-kong/"
+    }
+  ],
+  "affiliate_links": {
+    "amazon-dvd": "https://amzn.to/3NlbGPp",
+    "prime-video": "https://amzn.to/49sJwKS"
+  }
+}
