@@ -7,7 +7,7 @@ import re
 import sys
 import time
 from pathlib import Path
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlsplit, urlunsplit
 
 import requests
 from bs4 import BeautifulSoup
@@ -18,6 +18,7 @@ CSV_PATH = ROOT / "public" / "movies.csv"
 POPULAR_URL = "https://letterboxd.com/films/popular/this/month/"
 FILM_SLUG_RE = re.compile(r"/film/([^/?#]+)/?")
 MAX_FILMS = 200
+POPULAR_PAGES_TO_FETCH = 3
 
 SESSION_HEADERS = {
     "User-Agent": (
@@ -156,14 +157,36 @@ def read_catalog_ids():
 def fetch_popular_films():
     session = requests.Session()
     session.headers.update(SESSION_HEADERS)
+    films = []
+    seen_ids = set()
+
     page_html = paced_get(session, POPULAR_URL, "https://letterboxd.com/", delay=0.5)
     page = BeautifulSoup(page_html, "html.parser")
     browser_list = page.select_one(".productions-browser-list .js-csi[data-src]")
     if not browser_list:
         raise RuntimeError("Letterboxd's browse page did not expose its film-list endpoint.")
-    list_url = urljoin(POPULAR_URL, browser_list["data-src"])
-    cards_html = paced_get(session, list_url, POPULAR_URL, delay=2, ajax=True)
-    films = film_cards(cards_html)
+
+    endpoint = urlsplit(urljoin(POPULAR_URL, browser_list["data-src"]))
+    for page_number in range(1, POPULAR_PAGES_TO_FETCH + 1):
+        page_path = endpoint.path
+        if page_number > 1:
+            page_path = f"{page_path.rstrip('/')}/page/{page_number}/"
+        list_url = urlunsplit((endpoint.scheme, endpoint.netloc, page_path, endpoint.query, endpoint.fragment))
+        page_referer = POPULAR_URL if page_number == 1 else urljoin(POPULAR_URL, f"page/{page_number}/")
+        cards_html = paced_get(
+            session,
+            list_url,
+            page_referer,
+            delay=2,
+            ajax=True,
+        )
+        page_films = film_cards(cards_html)
+        for film in page_films:
+            if film["movieID"] not in seen_ids:
+                films.append(film)
+                seen_ids.add(film["movieID"])
+        print(f"Page {page_number}: found {len(page_films)} films.")
+
     if not films:
         raise RuntimeError(
             "No film cards found on Letterboxd's monthly popular page. "
@@ -192,7 +215,7 @@ def fetch_popular_films():
             new_films.append({key: film[key] for key in ("movieID", "title", "year", "posterLink")})
         else:
             print(f"Skipping {film['movieID']}: incomplete film metadata.")
-    return new_films
+    return new_films, len(films)
 
 
 def append_missing_films(films):
@@ -234,13 +257,16 @@ def append_missing_films(films):
 
 def main():
     try:
-        films = fetch_popular_films()
+        films, page_film_count = fetch_popular_films()
         added = append_missing_films(films)
     except (OSError, requests.RequestException, RuntimeError, ValueError, csv.Error) as error:
         print(f"Catalog update failed: {error}", file=sys.stderr)
         return 1
 
-    print(f"Read {len(films)} usable films from Letterboxd's monthly popular page.")
+    print(
+        f"Letterboxd's monthly popular page listed {page_film_count} films; "
+        f"{len(films)} were missing from the catalog."
+    )
     if added:
         print(f"Added {len(added)} new films to {CSV_PATH.relative_to(ROOT)}:")
         for film in added:
