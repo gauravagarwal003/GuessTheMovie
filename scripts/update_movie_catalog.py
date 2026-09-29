@@ -2,110 +2,197 @@
 """Append films from Letterboxd's monthly popular page to public/movies.csv."""
 
 import csv
+import json
 import re
 import sys
-from html.parser import HTMLParser
+import time
 from pathlib import Path
-from urllib.error import HTTPError, URLError
 from urllib.parse import urljoin
-from urllib.request import Request, urlopen
+
+import requests
+from bs4 import BeautifulSoup
 
 
 ROOT = Path(__file__).resolve().parent.parent
 CSV_PATH = ROOT / "public" / "movies.csv"
 POPULAR_URL = "https://letterboxd.com/films/popular/this/month/"
 FILM_SLUG_RE = re.compile(r"/film/([^/?#]+)/?")
+MAX_FILMS = 200
+
+SESSION_HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+    ),
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.9",
+}
 
 
-class PopularFilmsParser(HTMLParser):
-    """Read the film-poster cards embedded in Letterboxd's HTML response."""
+def paced_get(session, url, referer, delay, ajax=False):
+    if delay:
+        print(f"Sleeping {delay:g} seconds before request...")
+        time.sleep(delay)
+    headers = {
+        "Referer": referer,
+        "Accept-Encoding": "gzip, deflate",
+        "DNT": "1",
+        "Connection": "keep-alive",
+        "Upgrade-Insecure-Requests": "1",
+        "Sec-Fetch-Dest": "document",
+        "Sec-Fetch-Mode": "navigate",
+        "Sec-Fetch-Site": "same-origin",
+        "Sec-Fetch-User": "?1",
+        "Cache-Control": "max-age=0",
+    }
+    if ajax:
+        headers.update({
+            "X-Requested-With": "XMLHttpRequest",
+            "Accept": "text/html, */*; q=0.01",
+            "Sec-Fetch-Dest": "empty",
+            "Sec-Fetch-Mode": "cors",
+        })
+    response = session.get(url, headers=headers, timeout=15)
+    print(f"GET {url} -> {response.status_code}")
+    if response.status_code == 403:
+        raise RuntimeError(
+            "Letterboxd returned HTTP 403. The session headers and pacing used by "
+            "review_selector_app.py were applied, but this request is still blocked."
+        )
+    response.raise_for_status()
+    if "window._cf_chl_opt" in response.text or "Just a moment" in response.text:
+        raise RuntimeError(
+            "Letterboxd returned a Cloudflare challenge page instead of film data. "
+            "The request session, browser headers, and pacing were applied, but the challenge was not passed."
+        )
+    return response.text
 
-    def __init__(self):
-        super().__init__(convert_charrefs=True)
-        self.films = []
-        self.current = None
-        self.div_depth = 0
 
-    def handle_starttag(self, tag, attrs):
-        attrs = dict(attrs)
-        classes = attrs.get("class", "").split()
+def card_poster(card):
+    image = card.find("img")
+    if not image:
+        return ""
+    poster = image.get("data-src") or image.get("data-original") or image.get("src") or ""
+    if not poster:
+        srcset = image.get("data-srcset") or image.get("srcset") or ""
+        if srcset:
+            poster = srcset.split(",", 1)[0].strip().split()[0]
+    return poster.strip()
 
-        if tag == "div" and self.current is None and "film-poster" in classes:
-            self.current = {
-                "slug": attrs.get("data-film-slug") or attrs.get("data-film-link") or "",
-                "title": attrs.get("data-film-name") or "",
-                "year": attrs.get("data-film-release-year") or "",
-                "poster": "",
-            }
-            self.div_depth = 1
-            return
 
-        if self.current is None:
-            return
+def film_cards(html):
+    soup = BeautifulSoup(html, "html.parser")
+    cards = []
+    seen = set()
 
-        if tag == "div":
-            self.div_depth += 1
-        elif tag == "img" and not self.current["poster"]:
-            poster = attrs.get("data-src") or attrs.get("data-original") or attrs.get("src") or ""
-            if not poster and attrs.get("srcset"):
-                poster = attrs["srcset"].split(",", 1)[0].strip().split()[0]
-            self.current["poster"] = poster
+    # Current Letterboxd browse results use LazyPoster components inside li.posteritem.
+    for container in soup.select("li.posteritem"):
+        component = container.select_one("[data-item-slug]")
+        if not component:
+            continue
+        movie_id = component.get("data-item-slug", "").strip("/").split("/")[-1]
+        if not movie_id or movie_id in seen:
+            continue
+        seen.add(movie_id)
+        cards.append({
+            "movieID": movie_id,
+            "title": "",
+            "year": "",
+            "posterLink": "",
+            "detailsEndpoint": component.get("data-details-endpoint") or f"/film/{movie_id}/json/",
+        })
+        if len(cards) >= MAX_FILMS:
+            return cards
 
-    def handle_endtag(self, tag):
-        if tag != "div" or self.current is None:
-            return
-        self.div_depth -= 1
-        if self.div_depth == 0:
-            self.films.append(self.current)
-            self.current = None
+    if cards:
+        return cards
+
+    # Retain support for Letterboxd's older poster-container markup.
+    for container in soup.select("li.poster-container"):
+        film_div = container.select_one("div.really-lazy-load[data-film-slug]")
+        if not film_div:
+            film_div = container.select_one("div.film-poster[data-film-slug]")
+        if not film_div:
+            film_div = container.select_one("[data-film-slug]")
+        if not film_div:
+            continue
+
+        match = FILM_SLUG_RE.search(film_div.get("data-film-slug", ""))
+        if not match:
+            continue
+        movie_id = match.group(1)
+        if movie_id in seen:
+            continue
+        seen.add(movie_id)
+        poster = card_poster(container)
+
+        cards.append({
+            "movieID": movie_id,
+            "title": (film_div.get("data-film-name") or "").strip(),
+            "year": (film_div.get("data-film-release-year") or "").strip(),
+            "posterLink": urljoin(POPULAR_URL, poster) if poster else "",
+            "detailsEndpoint": f"/film/{movie_id}/json/",
+        })
+        if len(cards) >= MAX_FILMS:
+            break
+    return cards
+
+
+def read_catalog_ids():
+    if not CSV_PATH.is_file():
+        raise RuntimeError(f"Catalog CSV not found: {CSV_PATH}")
+    with CSV_PATH.open("r", encoding="utf-8-sig", newline="") as catalog:
+        reader = csv.DictReader(catalog)
+        columns = ["movieID", "title", "year", "posterLink"]
+        if reader.fieldnames != columns:
+            raise RuntimeError(f"Unexpected CSV columns: {reader.fieldnames!r}; expected {columns!r}")
+        return {
+            row["movieID"].strip().lower()
+            for row in reader
+            if row.get("movieID")
+        }
 
 
 def fetch_popular_films():
-    request = Request(
-        POPULAR_URL,
-        headers={"User-Agent": "GuessTheMovieCatalog/1.0 (monthly public film catalog refresh)"},
-    )
-    try:
-        with urlopen(request, timeout=30) as response:
-            if response.status != 200:
-                raise RuntimeError(f"Letterboxd returned HTTP {response.status}")
-            html = response.read().decode("utf-8", errors="replace")
-    except HTTPError as error:
-        if error.code in (403, 429):
-            raise RuntimeError(
-                f"Letterboxd returned HTTP {error.code}; its anti-bot or rate limit blocked the request. "
-                "No catalog changes were made."
-            ) from error
-        raise RuntimeError(f"Letterboxd returned HTTP {error.code}") from error
-    except URLError as error:
-        raise RuntimeError(f"Could not reach Letterboxd: {error.reason}") from error
-
-    parser = PopularFilmsParser()
-    parser.feed(html)
-    parser.close()
-
-    films = []
-    for film in parser.films:
-        slug_match = FILM_SLUG_RE.search(film["slug"])
-        title = film["title"].strip()
-        year = film["year"].strip()
-        poster_source = film["poster"].strip()
-        poster = urljoin(POPULAR_URL, poster_source)
-        if not slug_match or not title or not year.isdigit() or not poster_source or not poster.startswith("https://"):
-            continue
-        films.append({
-            "movieID": slug_match.group(1),
-            "title": title,
-            "year": year,
-            "posterLink": poster,
-        })
-
+    session = requests.Session()
+    session.headers.update(SESSION_HEADERS)
+    page_html = paced_get(session, POPULAR_URL, "https://letterboxd.com/", delay=0.5)
+    page = BeautifulSoup(page_html, "html.parser")
+    browser_list = page.select_one(".productions-browser-list .js-csi[data-src]")
+    if not browser_list:
+        raise RuntimeError("Letterboxd's browse page did not expose its film-list endpoint.")
+    list_url = urljoin(POPULAR_URL, browser_list["data-src"])
+    cards_html = paced_get(session, list_url, POPULAR_URL, delay=2, ajax=True)
+    films = film_cards(cards_html)
     if not films:
         raise RuntimeError(
-            "No usable film cards were found in Letterboxd's response. "
-            "The page may have changed or returned a bot challenge; no catalog changes were made."
+            "No film cards found on Letterboxd's monthly popular page. "
+            "The page markup may have changed or returned a bot challenge."
         )
-    return films
+
+    existing_ids = read_catalog_ids()
+    new_films = []
+    for film in films:
+        if film["movieID"].lower() in existing_ids:
+            continue
+
+        if not film["title"] or not film["year"].isdigit() or not film["posterLink"]:
+            detail_url = urljoin(POPULAR_URL, film["detailsEndpoint"])
+            detail_text = paced_get(session, detail_url, POPULAR_URL, delay=2, ajax=True)
+            try:
+                details = json.loads(detail_text)
+            except json.JSONDecodeError as error:
+                raise RuntimeError(f"Letterboxd returned invalid film metadata for {film['movieID']}.") from error
+            film["title"] = film["title"] or str(details.get("name") or "").strip()
+            film["year"] = film["year"] or str(details.get("releaseYear") or "").strip()
+            poster = details.get("image230") or details.get("image150") or ""
+            film["posterLink"] = film["posterLink"] or (urljoin(detail_url, poster) if poster else "")
+
+        if film["title"] and film["year"].isdigit() and film["posterLink"].startswith("https://"):
+            new_films.append({key: film[key] for key in ("movieID", "title", "year", "posterLink")})
+        else:
+            print(f"Skipping {film['movieID']}: incomplete film metadata.")
+    return new_films
 
 
 def append_missing_films(films):
@@ -114,11 +201,9 @@ def append_missing_films(films):
 
     with CSV_PATH.open("r", encoding="utf-8-sig", newline="") as catalog:
         reader = csv.DictReader(catalog)
-        expected_columns = ["movieID", "title", "year", "posterLink"]
-        if reader.fieldnames != expected_columns:
-            raise RuntimeError(
-                f"Unexpected CSV columns: {reader.fieldnames!r}; expected {expected_columns!r}"
-            )
+        columns = ["movieID", "title", "year", "posterLink"]
+        if reader.fieldnames != columns:
+            raise RuntimeError(f"Unexpected CSV columns: {reader.fieldnames!r}; expected {columns!r}")
         existing_ids = {
             row["movieID"].strip().lower()
             for row in reader
@@ -138,7 +223,11 @@ def append_missing_films(films):
             with CSV_PATH.open("ab") as catalog:
                 catalog.write(b"\n")
         with CSV_PATH.open("a", encoding="utf-8", newline="") as catalog:
-            writer = csv.DictWriter(catalog, fieldnames=["movieID", "title", "year", "posterLink"], lineterminator="\n")
+            writer = csv.DictWriter(
+                catalog,
+                fieldnames=["movieID", "title", "year", "posterLink"],
+                lineterminator="\n",
+            )
             writer.writerows(added)
     return added
 
@@ -147,11 +236,11 @@ def main():
     try:
         films = fetch_popular_films()
         added = append_missing_films(films)
-    except (OSError, RuntimeError, ValueError, csv.Error) as error:
+    except (OSError, requests.RequestException, RuntimeError, ValueError, csv.Error) as error:
         print(f"Catalog update failed: {error}", file=sys.stderr)
         return 1
 
-    print(f"Read {len(films)} films from Letterboxd's monthly popular page.")
+    print(f"Read {len(films)} usable films from Letterboxd's monthly popular page.")
     if added:
         print(f"Added {len(added)} new films to {CSV_PATH.relative_to(ROOT)}:")
         for film in added:

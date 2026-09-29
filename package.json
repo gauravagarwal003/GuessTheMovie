@@ -8,7 +8,7 @@
     "build": "vite build && node scripts/copy-assets.js && node scripts/copy-affiliates.js",
     "preview": "vite preview",
     "sync": "node sync-data.js",
-    "catalog:update": "python3 scripts/update_movie_catalog.py",
+    "catalog:update": "node scripts/run-catalog-update.js",
     "consolidate": "node consolidate-movies.js",
     "consolidate:cleanup": "node consolidate-movies.js --cleanup",
     "dev": "vite",
