@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2025-12-03T07:34:51.798Z",
-  "totalDates": 185,
-  "latestDate": "2025-12-03",
+  "generatedAt": "2026-10-21T04:08:35.822Z",
+  "totalDates": 277,
+  "latestDate": "2026-10-21",
   "dates": [
     "2025-03-07",
     "2025-03-08",
@@ -187,7 +187,99 @@
     "2025-11-15",
     "2025-11-16",
     "2025-11-17",
-    "2025-12-03"
+    "2025-11-18",
+    "2025-11-19",
+    "2025-11-20",
+    "2025-11-21",
+    "2025-11-22",
+    "2025-11-23",
+    "2025-11-24",
+    "2025-11-25",
+    "2025-11-26",
+    "2025-11-27",
+    "2025-11-28",
+    "2025-11-29",
+    "2025-11-30",
+    "2025-12-01",
+    "2025-12-02",
+    "2025-12-03",
+    "2025-12-04",
+    "2025-12-05",
+    "2025-12-06",
+    "2025-12-07",
+    "2025-12-08",
+    "2025-12-09",
+    "2025-12-10",
+    "2025-12-11",
+    "2025-12-12",
+    "2025-12-13",
+    "2025-12-14",
+    "2025-12-15",
+    "2025-12-16",
+    "2025-12-17",
+    "2025-12-18",
+    "2025-12-19",
+    "2025-12-20",
+    "2025-12-21",
+    "2025-12-22",
+    "2025-12-23",
+    "2025-12-24",
+    "2025-12-25",
+    "2025-12-26",
+    "2025-12-27",
+    "2025-12-28",
+    "2025-12-29",
+    "2025-12-30",
+    "2025-12-31",
+    "2026-01-01",
+    "2026-01-02",
+    "2026-01-03",
+    "2026-01-04",
+    "2026-01-05",
+    "2026-01-06",
+    "2026-01-07",
+    "2026-01-08",
+    "2026-01-09",
+    "2026-01-10",
+    "2026-01-11",
+    "2026-01-12",
+    "2026-01-13",
+    "2026-01-14",
+    "2026-01-15",
+    "2026-01-16",
+    "2026-01-17",
+    "2026-01-18",
+    "2026-01-19",
+    "2026-01-20",
+    "2026-02-14",
+    "2026-02-15",
+    "2026-02-16",
+    "2026-02-17",
+    "2026-02-18",
+    "2026-02-19",
+    "2026-02-20",
+    "2026-02-21",
+    "2026-02-22",
+    "2026-02-23",
+    "2026-02-24",
+    "2026-02-25",
+    "2026-02-26",
+    "2026-02-27",
+    "2026-02-28",
+    "2026-03-01",
+    "2026-03-02",
+    "2026-03-03",
+    "2026-03-04",
+    "2026-03-05",
+    "2026-03-06",
+    "2026-03-07",
+    "2026-03-08",
+    "2026-03-09",
+    "2026-03-10",
+    "2026-03-11",
+    "2026-03-12",
+    "2026-03-13",
+    "2026-10-21"
   ],
   "metadata": {
     "2025-03-07": {
@@ -926,8 +1018,376 @@
       "movieID": "titanic-1997",
       "reviewCount": 5
     },
+    "2025-11-18": {
+      "movieID": "cruella",
+      "reviewCount": 5
+    },
+    "2025-11-19": {
+      "movieID": "van-helsing",
+      "reviewCount": 5
+    },
+    "2025-11-20": {
+      "movieID": "rush-hour",
+      "reviewCount": 5
+    },
+    "2025-11-21": {
+      "movieID": "requiem-for-a-dream",
+      "reviewCount": 5
+    },
+    "2025-11-22": {
+      "movieID": "the-joy-luck-club",
+      "reviewCount": 5
+    },
+    "2025-11-23": {
+      "movieID": "fargo",
+      "reviewCount": 5
+    },
+    "2025-11-24": {
+      "movieID": "die-hard",
+      "reviewCount": 5
+    },
+    "2025-11-25": {
+      "movieID": "blackkklansman",
+      "reviewCount": 5
+    },
+    "2025-11-26": {
+      "movieID": "the-imitation-game",
+      "reviewCount": 5
+    },
+    "2025-11-27": {
+      "movieID": "crazy-rich-asians",
+      "reviewCount": 5
+    },
+    "2025-11-28": {
+      "movieID": "ant-man-and-the-wasp-quantumania",
+      "reviewCount": 5
+    },
+    "2025-11-29": {
+      "movieID": "the-darjeeling-limited",
+      "reviewCount": 5
+    },
+    "2025-11-30": {
+      "movieID": "napoleon-2023",
+      "reviewCount": 5
+    },
+    "2025-12-01": {
+      "movieID": "m3gan",
+      "reviewCount": 5
+    },
+    "2025-12-02": {
+      "movieID": "avatar-the-way-of-water",
+      "reviewCount": 5
+    },
     "2025-12-03": {
       "movieID": "bullet-train",
+      "reviewCount": 5
+    },
+    "2025-12-04": {
+      "movieID": "bodies-bodies-bodies",
+      "reviewCount": 5
+    },
+    "2025-12-05": {
+      "movieID": "the-godfather-part-ii",
+      "reviewCount": 5
+    },
+    "2025-12-06": {
+      "movieID": "anyone-but-you",
+      "reviewCount": 5
+    },
+    "2025-12-07": {
+      "movieID": "turning-red",
+      "reviewCount": 5
+    },
+    "2025-12-08": {
+      "movieID": "juno",
+      "reviewCount": 5
+    },
+    "2025-12-09": {
+      "movieID": "the-princess-and-the-frog",
+      "reviewCount": 5
+    },
+    "2025-12-10": {
+      "movieID": "the-big-short",
+      "reviewCount": 5
+    },
+    "2025-12-11": {
+      "movieID": "jungle-cruise",
+      "reviewCount": 5
+    },
+    "2025-12-12": {
+      "movieID": "free-solo",
+      "reviewCount": 5
+    },
+    "2025-12-13": {
+      "movieID": "blonde-2022",
+      "reviewCount": 5
+    },
+    "2025-12-14": {
+      "movieID": "american-pie",
+      "reviewCount": 5
+    },
+    "2025-12-15": {
+      "movieID": "the-terminal",
+      "reviewCount": 5
+    },
+    "2025-12-16": {
+      "movieID": "captain-phillips",
+      "reviewCount": 5
+    },
+    "2025-12-17": {
+      "movieID": "spies-in-disguise",
+      "reviewCount": 5
+    },
+    "2025-12-18": {
+      "movieID": "i-know-what-you-did-last-summer",
+      "reviewCount": 5
+    },
+    "2025-12-19": {
+      "movieID": "the-man-from-uncle",
+      "reviewCount": 5
+    },
+    "2025-12-20": {
+      "movieID": "knock-at-the-cabin",
+      "reviewCount": 5
+    },
+    "2025-12-21": {
+      "movieID": "point-break",
+      "reviewCount": 5
+    },
+    "2025-12-22": {
+      "movieID": "friends-with-benefits",
+      "reviewCount": 5
+    },
+    "2025-12-23": {
+      "movieID": "before-sunrise",
+      "reviewCount": 5
+    },
+    "2025-12-24": {
+      "movieID": "men-in-black",
+      "reviewCount": 5
+    },
+    "2025-12-25": {
+      "movieID": "f9",
+      "reviewCount": 5
+    },
+    "2025-12-26": {
+      "movieID": "ponyo",
+      "reviewCount": 5
+    },
+    "2025-12-27": {
+      "movieID": "chicken-little-2005",
+      "reviewCount": 5
+    },
+    "2025-12-28": {
+      "movieID": "sweeney-todd-the-demon-barber-of-fleet-street-2007",
+      "reviewCount": 5
+    },
+    "2025-12-29": {
+      "movieID": "steve-jobs",
+      "reviewCount": 5
+    },
+    "2025-12-30": {
+      "movieID": "neighbors-2014",
+      "reviewCount": 5
+    },
+    "2025-12-31": {
+      "movieID": "coming-to-america",
+      "reviewCount": 5
+    },
+    "2026-01-01": {
+      "movieID": "harold-kumar-go-to-white-castle",
+      "reviewCount": 5
+    },
+    "2026-01-02": {
+      "movieID": "charlottes-web-2006",
+      "reviewCount": 5
+    },
+    "2026-01-03": {
+      "movieID": "blood-diamond",
+      "reviewCount": 5
+    },
+    "2026-01-04": {
+      "movieID": "star-trek",
+      "reviewCount": 5
+    },
+    "2026-01-05": {
+      "movieID": "good-time",
+      "reviewCount": 5
+    },
+    "2026-01-06": {
+      "movieID": "the-northman",
+      "reviewCount": 5
+    },
+    "2026-01-07": {
+      "movieID": "the-platform",
+      "reviewCount": 5
+    },
+    "2026-01-08": {
+      "movieID": "suicide-squad-2016",
+      "reviewCount": 5
+    },
+    "2026-01-09": {
+      "movieID": "rush-2013",
+      "reviewCount": 5
+    },
+    "2026-01-10": {
+      "movieID": "air-2023",
+      "reviewCount": 5
+    },
+    "2026-01-11": {
+      "movieID": "the-voyeurs-2021",
+      "reviewCount": 5
+    },
+    "2026-01-12": {
+      "movieID": "white-men-cant-jump",
+      "reviewCount": 5
+    },
+    "2026-01-13": {
+      "movieID": "the-upside",
+      "reviewCount": 5
+    },
+    "2026-01-14": {
+      "movieID": "solo-a-star-wars-story",
+      "reviewCount": 5
+    },
+    "2026-01-15": {
+      "movieID": "the-meg",
+      "reviewCount": 5
+    },
+    "2026-01-16": {
+      "movieID": "limitless",
+      "reviewCount": 5
+    },
+    "2026-01-17": {
+      "movieID": "manchester-by-the-sea",
+      "reviewCount": 5
+    },
+    "2026-01-18": {
+      "movieID": "babylon-2022",
+      "reviewCount": 5
+    },
+    "2026-01-19": {
+      "movieID": "straight-outta-compton",
+      "reviewCount": 5
+    },
+    "2026-01-20": {
+      "movieID": "godzilla-vs-kong",
+      "reviewCount": 5
+    },
+    "2026-02-14": {
+      "movieID": "atomic-blonde",
+      "reviewCount": 5
+    },
+    "2026-02-15": {
+      "movieID": "the-heat",
+      "reviewCount": 5
+    },
+    "2026-02-16": {
+      "movieID": "over-the-hedge",
+      "reviewCount": 5
+    },
+    "2026-02-17": {
+      "movieID": "pearl-2022",
+      "reviewCount": 5
+    },
+    "2026-02-18": {
+      "movieID": "skyfall",
+      "reviewCount": 5
+    },
+    "2026-02-19": {
+      "movieID": "ant-man-and-the-wasp",
+      "reviewCount": 5
+    },
+    "2026-02-20": {
+      "movieID": "the-proposal-2009",
+      "reviewCount": 5
+    },
+    "2026-02-21": {
+      "movieID": "murder-mystery",
+      "reviewCount": 5
+    },
+    "2026-02-22": {
+      "movieID": "john-carter",
+      "reviewCount": 5
+    },
+    "2026-02-23": {
+      "movieID": "sound-of-metal",
+      "reviewCount": 5
+    },
+    "2026-02-24": {
+      "movieID": "brother-bear",
+      "reviewCount": 5
+    },
+    "2026-02-25": {
+      "movieID": "aftersun",
+      "reviewCount": 5
+    },
+    "2026-02-26": {
+      "movieID": "knock-knock-2015",
+      "reviewCount": 5
+    },
+    "2026-02-27": {
+      "movieID": "starship-troopers",
+      "reviewCount": 5
+    },
+    "2026-02-28": {
+      "movieID": "sleepless-in-seattle",
+      "reviewCount": 5
+    },
+    "2026-03-01": {
+      "movieID": "enders-game",
+      "reviewCount": 5
+    },
+    "2026-03-02": {
+      "movieID": "safe-house-2012",
+      "reviewCount": 5
+    },
+    "2026-03-03": {
+      "movieID": "et-the-extra-terrestrial",
+      "reviewCount": 5
+    },
+    "2026-03-04": {
+      "movieID": "trolls",
+      "reviewCount": 5
+    },
+    "2026-03-05": {
+      "movieID": "the-texas-chain-saw-massacre",
+      "reviewCount": 5
+    },
+    "2026-03-06": {
+      "movieID": "red-eye",
+      "reviewCount": 5
+    },
+    "2026-03-07": {
+      "movieID": "the-emoji-movie",
+      "reviewCount": 5
+    },
+    "2026-03-08": {
+      "movieID": "300",
+      "reviewCount": 5
+    },
+    "2026-03-09": {
+      "movieID": "four-weddings-and-a-funeral",
+      "reviewCount": 5
+    },
+    "2026-03-10": {
+      "movieID": "the-pink-panther",
+      "reviewCount": 5
+    },
+    "2026-03-11": {
+      "movieID": "weekend-at-bernies",
+      "reviewCount": 5
+    },
+    "2026-03-12": {
+      "movieID": "the-aviator",
+      "reviewCount": 5
+    },
+    "2026-03-13": {
+      "movieID": "the-little-things-2021",
+      "reviewCount": 5
+    },
+    "2026-10-21": {
+      "movieID": "marty-supreme",
       "reviewCount": 5
     }
   }

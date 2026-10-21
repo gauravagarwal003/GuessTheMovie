@@ -99,7 +99,7 @@ def film_cards(html):
             "movieID": movie_id,
             "title": "",
             "year": "",
-            "posterLink": "",
+            "posterLink": card_poster(container),
             "detailsEndpoint": component.get("data-details-endpoint") or f"/film/{movie_id}/json/",
         })
         if len(cards) >= MAX_FILMS:
@@ -199,7 +199,7 @@ def fetch_popular_films():
         if film["movieID"].lower() in existing_ids:
             continue
 
-        if not film["title"] or not film["year"].isdigit() or not film["posterLink"]:
+        if not film["title"] or not film["year"].isdigit() or not film["posterLink"] or "a.ltrbxd.com" not in film["posterLink"]:
             detail_url = urljoin(POPULAR_URL, film["detailsEndpoint"])
             detail_text = paced_get(session, detail_url, POPULAR_URL, delay=2, ajax=True)
             try:
@@ -208,8 +208,24 @@ def fetch_popular_films():
                 raise RuntimeError(f"Letterboxd returned invalid film metadata for {film['movieID']}.") from error
             film["title"] = film["title"] or str(details.get("name") or "").strip()
             film["year"] = film["year"] or str(details.get("releaseYear") or "").strip()
-            poster = details.get("image230") or details.get("image150") or ""
-            film["posterLink"] = film["posterLink"] or (urljoin(detail_url, poster) if poster else "")
+            
+            # If posterLink is still missing or not pointing to the image CDN, scrape the film page LD+JSON
+            if not film["posterLink"] or "a.ltrbxd.com" not in film["posterLink"]:
+                try:
+                    film_url = f"https://letterboxd.com/film/{film['movieID']}/"
+                    film_html = paced_get(session, film_url, POPULAR_URL, delay=1)
+                    film_soup = BeautifulSoup(film_html, "html.parser")
+                    ld_tag = film_soup.find("script", type="application/ld+json")
+                    if ld_tag and ld_tag.string:
+                        content = ld_tag.string
+                        s_idx = content.find("/* <![CDATA[ */") + len("/* <![CDATA[ */")
+                        e_idx = content.find("/* ]]> */")
+                        ld_data = json.loads(content[s_idx:e_idx].strip())
+                        img = ld_data.get("image")
+                        if img and "a.ltrbxd.com" in img:
+                            film["posterLink"] = img.replace("-0-600-0-900-crop.", "-0-230-0-345-crop.")
+                except Exception as e:
+                    print(f"Warning: Failed to fetch LD+JSON poster for {film['movieID']}: {e}")
 
         if film["title"] and film["year"].isdigit() and film["posterLink"].startswith("https://"):
             new_films.append({key: film[key] for key in ("movieID", "title", "year", "posterLink")})
