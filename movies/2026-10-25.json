@@ -1,0 +1,71 @@
+{
+  "date": "2026-10-09",
+  "movieID": "bugonia",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "0",
+      "date": "November 14, 2025",
+      "username": "Blue Ghosts",
+      "numLikes": "1702",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/2/4/0/2/0/7/shard/avtr-0-80-0-80-crop.jpg?v=920cf2b35c",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>Thinking about how life is beautiful and meaningful and how simultaneously we destroy that and take it for granted. And also the things we do to sooth ourselves from our reality. The stories we make up and the lies we tell. The cocoons we wrap ourselves in.</p> ",
+      "link": "https://letterboxd.com/blueghosts/film/bugonia/1/"
+    },
+    {
+      "num_comments": "0",
+      "date": "August 28, 2025",
+      "username": "davidehrlich",
+      "numLikes": "33289",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/twitter/3/2/1/9/2/shard/http___pbs.twimg.com_profile_images_1015061849321164801_S527QFnk-0-80-0-80-crop.jpg?v=e236c36c50",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>indescribably perfect use of Chappell Roan's \"Good Luck, Babe!\"</p> ",
+      "link": "https://letterboxd.com/davidehrlich/film/bugonia/"
+    },
+    {
+      "num_comments": "2",
+      "date": "October 25, 2025",
+      "username": "margaux",
+      "numLikes": "973",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/6/2/5/5/6/3/5/shard/avtr-0-80-0-80-crop.jpg?v=b55b948caa",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>don't let the reddit conspiracy theorists see this</p> ",
+      "link": "https://letterboxd.com/bobferguson/film/bugonia/1/"
+    },
+    {
+      "num_comments": "32",
+      "date": "December 2, 2025",
+      "username": "timtamtitus",
+      "numLikes": "26106",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/5/9/6/7/2/0/3/shard/avtr-0-80-0-80-crop.jpg?v=fff1f80714",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>she’s bald! she’s bald and people with hair torture the bald!</p> ",
+      "link": "https://letterboxd.com/timtamtitus/film/bugonia/"
+    },
+    {
+      "num_comments": "1",
+      "date": "October 17, 2025",
+      "username": "Kylo",
+      "numLikes": "1958",
+      "rating": "4.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/1/4/8/3/7/3/shard/avtr-0-80-0-80-crop.jpg?v=6a267d31f1",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>I bought right into Emma Stone’s chic evil capitalism. Guess I’m never leaving the office before 5:30 again.</p> ",
+      "link": "https://letterboxd.com/kyloz/film/bugonia/"
+    }
+  ],
+  "affiliate_links": {
+    "amazon-dvd": "https://link.amazon/B01SLEldN",
+    "prime-video": "https://link.amazon/A0i9gYZJi"
+  }
+}
