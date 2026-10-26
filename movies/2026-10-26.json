@@ -1,0 +1,71 @@
+{
+  "date": "2026-10-26",
+  "movieID": "elemental-2023",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "5",
+      "date": "June 17, 2023",
+      "username": "Jessica Wessica",
+      "numLikes": "2196",
+      "rating": "2.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/5/2/6/8/1/0/2/shard/avtr-0-80-0-80-crop.jpg?v=15ac569ce3",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>I thought metaphors were supposed to make things <i>easier</i> to understand</p> ",
+      "link": "https://letterboxd.com/flatescargots/film/elemental-2023/"
+    },
+    {
+      "num_comments": "0",
+      "date": "June 17, 2023",
+      "username": "kass ⊹˚·",
+      "numLikes": "1832",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/8/3/7/1/3/5/9/shard/avtr-0-80-0-80-crop.jpg?v=d90e4fe936",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>children of immigrant parents: is this fucking play about us?</p> ",
+      "link": "https://letterboxd.com/kassxo/film/elemental-2023/"
+    },
+    {
+      "num_comments": "10",
+      "date": "June 21, 2023",
+      "username": "Ethan ☻",
+      "numLikes": "2127",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/7/6/3/2/6/7/4/shard/avtr-0-80-0-80-crop.jpg?v=7c3725f80a",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>Infinite cobblestone generator</p> ",
+      "link": "https://letterboxd.com/yameiionline/film/elemental-2023/"
+    },
+    {
+      "num_comments": "14",
+      "date": "June 17, 2023",
+      "username": "Sarah (just2good)",
+      "numLikes": "634",
+      "rating": "1.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/2/6/8/4/8/5/shard/avtr-0-80-0-80-crop.jpg?v=6e8ebbd403",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>Cookie cutter forbidden romance with some very undercooked characters. Bad script. Lamely predictable. About two fun chase sequences, first act is especially boring. Overlong, edit it better. Zootopia with less engaging characters and more on-the-nose anti-xenophobia messages. Some interesting concepts but the world is very inconsistent in how the elements react and things just don’t make sense beyond the formulaic chemistry.</p> ",
+      "link": "https://letterboxd.com/just2good/film/elemental-2023/"
+    },
+    {
+      "num_comments": "2",
+      "date": "June 20, 2023",
+      "username": "Rob Winward",
+      "numLikes": "149",
+      "rating": "2.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/8/8/2/1/5/0/shard/avtr-0-80-0-80-crop.jpg?v=d9961b31b9",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>what if they made a film based on the hit 2009 game called fireboy &amp; watergirl 1: forest temple :)</p> ",
+      "link": "https://letterboxd.com/robwinz/film/elemental-2023/"
+    }
+  ],
+  "affiliate_links": {
+    "amazon-dvd": "https://link.amazon/B08cLArzz",
+    "prime-video": "https://link.amazon/A0dPUEAl4"
+  }
+}
