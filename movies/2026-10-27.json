@@ -1,0 +1,68 @@
+{
+  "date": "2026-10-27",
+  "movieID": "the-killer-2023",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "26",
+      "date": "October 27, 2023",
+      "username": "Marshall 🔪",
+      "numLikes": "3887",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/6/7/5/9/1/6/6/shard/avtr-0-80-0-80-crop.jpg?v=725ac76a62",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>An introspective look into the mind of somebody that listens to The Smiths too much</p> ",
+      "link": "https://letterboxd.com/marshayame/film/the-killer-2023/"
+    },
+    {
+      "num_comments": "11",
+      "date": "October 28, 2023",
+      "username": "Patrick Willems",
+      "numLikes": "2555",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/6/7/4/1/9/shard/avtr-0-80-0-80-crop.jpg?v=a856408a78",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>Gotta see it again to decide if this adds up to more than just an incredibly well-made low-stakes genre experiment but either way I had such a blast</p> ",
+      "link": "https://letterboxd.com/patrickhwillems/film/the-killer-2023/"
+    },
+    {
+      "num_comments": "1",
+      "date": "November 11, 2023",
+      "username": "Hungkat",
+      "numLikes": "283",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/5/3/4/3/0/3/shard/avtr-0-80-0-80-crop.png?v=d1344c6d9b",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>This one goes out to the folks browsing through Netflix’s action catalog and wanting to see a hit man shooting people but instead have to watch him order rental cars for nearly two hours. Good film!</p> ",
+      "link": "https://letterboxd.com/kun/film/the-killer-2023/1/"
+    },
+    {
+      "num_comments": "0",
+      "date": "October 26, 2023",
+      "username": "matt lynch",
+      "numLikes": "2929",
+      "rating": "3.5",
+      "profilePhotoLink": "https://secure.gravatar.com/avatar/fb4cae3779fcedc4f707ee7359b12a3e?rating=PG&size=80&border=&default=https%3A%2F%2Fs.ltrbxd.com%2Fstatic%2Fimg%2Favatar80-CTtJ8HSs.png",
+      "liked": true,
+      "collapsed": false,
+      "text": " <p>We should all feel blessed that David Fincher put his considerable skills to a cheap piece of Europacorp trash like this.</p> ",
+      "link": "https://letterboxd.com/colonelmortimer/film/the-killer-2023/"
+    },
+    {
+      "num_comments": "2",
+      "date": "September 4, 2023",
+      "username": "izzy",
+      "numLikes": "2754",
+      "rating": "2.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/twitter/4/6/8/2/8/9/shard/http___pbs.twimg.com_profile_images_1243242073412833280_KQFU0HoH-0-80-0-80-crop.jpg?v=fe95d165a9",
+      "liked": false,
+      "collapsed": false,
+      "text": " <p>michael fassbender for the whole time:<br/>🧢 💭<br/>🙎🏼‍♂️<br/>👕<br/>👖</p> ",
+      "link": "https://letterboxd.com/cinemaparadisa/film/the-killer-2023/"
+    }
+  ],
+  "affiliate_links": {}
+}
