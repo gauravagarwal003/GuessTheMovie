@@ -41,6 +41,32 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
             console.error('Failed to parse game history:', e);
             userGames = [];
         }
+
+        // Older archive JSON could have a `date` value that disagreed with its
+        // filename. The manifest is generated from archive filenames, so use
+        // its movieID-to-date mapping to repair saved local game history.
+        const canonicalDateByMovieId = new Map(
+            Object.entries(data && data.metadata && typeof data.metadata === 'object' ? data.metadata : {})
+                .filter(([, movie]) => movie && movie.movieID)
+                .map(([date, movie]) => [String(movie.movieID).trim().toLowerCase(), date])
+        );
+        let historyMigrated = false;
+        for (const game of userGames) {
+            if (!game || typeof game !== 'object' || !game.id) continue;
+            const canonicalDate = canonicalDateByMovieId.get(String(game.id).trim().toLowerCase());
+            if (canonicalDate && game.date !== canonicalDate) {
+                game.date = canonicalDate;
+                historyMigrated = true;
+            }
+        }
+        if (historyMigrated) {
+            try {
+                localStorage.setItem('gameHistory', JSON.stringify(userGames));
+            } catch (e) {
+                console.error('Failed to save migrated game history:', e);
+            }
+        }
+
         const completedDates = new Set(userGames.map(game => game.date));
 
         // Calendar variables

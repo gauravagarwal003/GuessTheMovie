@@ -983,7 +983,9 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
     if (!movieData) throw new Error(`No movie data found for ${targetDate}`);
 
     correctMovieID = movieData.movieID;
-    correctMovieDate = movieData.date;
+    // The manifest/archive URL is keyed by the canonical archive filename.
+    // Prefer that date so an inconsistent JSON `date` cannot misfile game history.
+    correctMovieDate = targetDate;
     formattedMovieDate = new Date(correctMovieDate).toLocaleDateString('en-US', {
       timeZone: 'UTC',
       year: 'numeric',
