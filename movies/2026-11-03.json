@@ -1,0 +1,76 @@
+{
+  "date": "2026-11-03",
+  "movieID": "ford-v-ferrari",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "5",
+      "date": "February 2, 2020",
+      "username": "James (Schaffrillas)",
+      "numLikes": "1225",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/2/0/3/7/7/7/shard/avtr-0-80-0-80-crop.jpg?v=ff62b2f12e",
+      "liked": false,
+      "collapsed": false,
+      "text": "\n<p>I can't decide what's more shocking; the fact that this movie was actually pretty great, or the fact that this is the second Best Picture nominee this year where Tracy Letts plays a stuffy old rich dude who I don't like at first but actually starts to grow on me over time</p>\n",
+      "link": "https://letterboxd.com/schaffrillas/film/ford-v-ferrari/",
+      "spoiler": false
+    },
+    {
+      "num_comments": "12",
+      "date": "October 11, 2019",
+      "username": "Jay",
+      "numLikes": "3473",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/9/3/4/3/7/shard/avtr-0-80-0-80-crop.jpg?v=39f7913a9f",
+      "liked": true,
+      "collapsed": false,
+      "text": "\n<p>i hate to say i hope i dont sound ridiculous i dont know who <b>Le Mans</b> is. he could be walking down the street, i wouldnt know a thing. sorry to <b>Le Mans</b>.</p>\n",
+      "link": "https://letterboxd.com/jay/film/ford-v-ferrari/",
+      "spoiler": false
+    },
+    {
+      "num_comments": "1",
+      "date": "July 30, 2023",
+      "username": "Sloaner 🍓",
+      "numLikes": "522",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/7/0/6/3/9/2/8/shard/avtr-0-80-0-80-crop.jpg?v=6eea47a52e",
+      "liked": true,
+      "collapsed": false,
+      "text": "\n<p>matt damon was chewing the FUCK outta that gum</p>\n",
+      "link": "https://letterboxd.com/sloany_/film/ford-v-ferrari/",
+      "spoiler": false
+    },
+    {
+      "num_comments": "17",
+      "date": "November 18, 2019",
+      "username": "Patrick Willems",
+      "numLikes": "5744",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/6/7/4/1/9/shard/avtr-0-80-0-80-crop.jpg?v=a856408a78",
+      "liked": false,
+      "collapsed": false,
+      "text": "\n<p>I loved this movie, I love watching movie stars play people who are very good at their jobs, and I guess I love cars now. In related news, I am now a 55-year-old suburban dad.</p>\n",
+      "link": "https://letterboxd.com/patrickhwillems/film/ford-v-ferrari/",
+      "spoiler": false
+    },
+    {
+      "num_comments": "4",
+      "date": "June 24, 2022",
+      "username": "James Parker",
+      "numLikes": "365",
+      "rating": "4.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/5/1/5/0/6/8/0/shard/avtr-0-80-0-80-crop.jpg?v=46f850df08",
+      "liked": true,
+      "collapsed": false,
+      "text": "\n<p>I would happily pay to watch a movie of just Christian Bale chirping at other drivers in various moods as he passes them</p>\n",
+      "link": "https://letterboxd.com/cosmicfreak/film/ford-v-ferrari/",
+      "spoiler": false
+    }
+  ],
+  "affiliate_links": {
+    "amazon-dvd": "https://link.amazon/B00ig4HP7",
+    "prime-video": "https://link.amazon/A07ZlsypA"
+  }
+}
