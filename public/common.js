@@ -522,6 +522,7 @@ function finishGame(wonGame) {
               <div class="where-links">
                 ${whereLinksHtml}
               </div>
+              <div class="affiliate-disclosure">Some links on this site are affiliate links. Purchases made through these links may support the site at no extra cost to you.</div>
             `;
           }
           aff.classList.add('visible');

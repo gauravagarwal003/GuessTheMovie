@@ -53,10 +53,6 @@ body {
 }
 
 @media (max-width: 560px) {
-    .footer-affiliate {
-        font-size: 0.5rem !important;
-    }
-
     #textDisplay {
         padding-left: 10px;
         padding-right: 10px;
@@ -527,13 +523,6 @@ a:focus #profileIcon {
     color: var(--bonewhite) !important;
 }
 
-.footer-affiliate {
-    font-size: 0.6rem;
-    color: var(--inactiveButtonText);
-    margin-top: 2px;
-    text-align: center; /* Center the text */
-}
-
 /* Affiliate offers container (static in HTML now) */
 #affiliate-offers {
     margin: 12px auto;
@@ -564,6 +553,13 @@ a:focus #profileIcon {
     font-size: 1.05rem;
     margin-bottom: 6px;
     color: var(--bonewhite);
+}
+
+#affiliate-offers .affiliate-disclosure {
+    margin-top: 8px;
+    color: var(--inactiveButtonText);
+    font-size: 0.7rem;
+    line-height: 1.35;
 }
 
 #affiliate-offers .where-subtitle {
