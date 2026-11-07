@@ -545,6 +545,7 @@ a:focus #profileIcon {
     padding: 10px 14px;
     border-radius: 6px;
     min-width: 200px;
+    box-sizing: border-box;
 }
 
 /* Where-to-watch specific styles */
