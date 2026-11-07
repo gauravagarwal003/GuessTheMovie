@@ -570,7 +570,8 @@ a:focus #profileIcon {
 
 #affiliate-offers .where-links {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 6px;
     align-items: center;
     justify-content: center;
