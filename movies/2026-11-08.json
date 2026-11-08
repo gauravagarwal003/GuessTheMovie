@@ -1,0 +1,76 @@
+{
+  "date": "2026-11-08",
+  "movieID": "blade",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "2",
+      "date": "May 21, 2021",
+      "username": "Justin LaLiberty",
+      "numLikes": "1732",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/6/2/1/7/shard/avtr-0-80-0-80-crop.jpg?v=78bf678c46",
+      "liked": true,
+      "collapsed": false,
+      "text": "\n<p>I love how the cool vampires at the cool vampire party are watching Mortal Kombat 1995 on VHS</p>\n",
+      "link": "https://letterboxd.com/jlalibs/film/blade/3/",
+      "spoiler": false
+    },
+    {
+      "num_comments": "0",
+      "date": "February 28, 2021",
+      "username": "Tatiana Sofia🧼",
+      "numLikes": "385",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/0/2/4/1/7/3/shard/avtr-0-80-0-80-crop.jpg?v=296c422aa3",
+      "liked": false,
+      "collapsed": false,
+      "text": "\n<p>every single character: *walks around with black leather 90's jackets*</p><p>Me: <i>ICONIC</i></p>\n",
+      "link": "https://letterboxd.com/tatiana_sofia/film/blade/",
+      "spoiler": false
+    },
+    {
+      "num_comments": "3",
+      "date": "August 5, 2021",
+      "username": "allie bug",
+      "numLikes": "751",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/7/0/6/1/1/2/shard/avtr-0-80-0-80-crop.jpg?v=67d7b7733b",
+      "liked": true,
+      "collapsed": false,
+      "text": "\n<p>mom said it’s my turn to go to a nightclub and get devoured by vampires while it’s pouring blood</p>\n",
+      "link": "https://letterboxd.com/ghostlydeetz/film/blade/",
+      "spoiler": false
+    },
+    {
+      "num_comments": "3",
+      "date": "October 18, 2025",
+      "username": "Horror Syndrome",
+      "numLikes": "205",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/3/5/4/6/4/5/8/shard/avtr-0-80-0-80-crop.jpg?v=c39e633d4c",
+      "liked": true,
+      "collapsed": false,
+      "text": "\n<p>This movie just received a 10 minute standing ovation in my living room for being one of the greatest things ever made. MCU peaked in 1998.</p>\n",
+      "link": "https://letterboxd.com/horrorsyndrome/film/blade/",
+      "spoiler": false
+    },
+    {
+      "num_comments": "19",
+      "date": "June 20, 2020",
+      "username": "Patrick Willems",
+      "numLikes": "8322",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/6/7/4/1/9/shard/avtr-0-80-0-80-crop.jpg?v=a856408a78",
+      "liked": false,
+      "collapsed": false,
+      "text": "\n<p>Wesley Snipes understands how to move and pose in a comic book movie better than any actor in history</p>\n",
+      "link": "https://letterboxd.com/patrickhwillems/film/blade/",
+      "spoiler": false
+    }
+  ],
+  "affiliate_links": {
+    "amazon-dvd": "https://link.amazon/B0bIaH7Uk",
+    "prime-video": "https://link.amazon/A041Zvrl2"
+  }
+}
