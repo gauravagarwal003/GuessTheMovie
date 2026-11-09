@@ -1,0 +1,76 @@
+{
+  "date": "2026-11-09",
+  "movieID": "remember-the-titans",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "14",
+      "date": "October 25, 2012",
+      "username": "Silent J",
+      "numLikes": "2050",
+      "rating": "2.5",
+      "profilePhotoLink": "https://secure.gravatar.com/avatar/a149b887819595697f840550356c629b?rating=PG&size=80&border=&default=https%3A%2F%2Fs.ltrbxd.com%2Fstatic%2Fimg%2Favatar80-CTtJ8HSs.png",
+      "liked": false,
+      "collapsed": false,
+      "text": "\n<p>I already forgot them.</p>\n",
+      "link": "https://letterboxd.com/silentjoe13/film/remember-the-titans/",
+      "spoiler": false
+    },
+    {
+      "num_comments": "2",
+      "date": "August 1, 2020",
+      "username": "Conner Wilson",
+      "numLikes": "1182",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/5/3/3/8/5/2/shard/avtr-0-80-0-80-crop.jpg?v=baca07e9b3",
+      "liked": false,
+      "collapsed": false,
+      "text": "\n<p>They call it the locker room because that’s where you lock lips with your homies 😳😳😳</p>\n",
+      "link": "https://letterboxd.com/connerjw/film/remember-the-titans/",
+      "spoiler": false
+    },
+    {
+      "num_comments": "2",
+      "date": "July 25, 2021",
+      "username": "boomsheekajones",
+      "numLikes": "1045",
+      "rating": "",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/0/7/9/4/7/9/shard/avtr-0-80-0-80-crop.jpg?v=a87107afdf",
+      "liked": true,
+      "collapsed": false,
+      "text": "\n<p>I still have no clue how Football works but I’m glad racism is over.</p>\n",
+      "link": "https://letterboxd.com/boomsheekajones/film/remember-the-titans/",
+      "spoiler": false
+    },
+    {
+      "num_comments": "4",
+      "date": "May 23, 2023",
+      "username": "sarah",
+      "numLikes": "1831",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/4/6/5/6/3/2/shard/avtr-0-80-0-80-crop.jpg?v=9072951b25",
+      "liked": true,
+      "collapsed": false,
+      "text": "\n<p>ryan gosling looks like he’s never played a day of any sport in his life</p>\n",
+      "link": "https://letterboxd.com/sarahabob/film/remember-the-titans/",
+      "spoiler": false
+    },
+    {
+      "num_comments": "4",
+      "date": "November 18, 2020",
+      "username": "Patrick Willems",
+      "numLikes": "2186",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/6/7/4/1/9/shard/avtr-0-80-0-80-crop.jpg?v=a856408a78",
+      "liked": false,
+      "collapsed": false,
+      "text": "\n<p>All I want in life is for Denzel Washington to look at me and nod approvingly</p>\n",
+      "link": "https://letterboxd.com/patrickhwillems/film/remember-the-titans/",
+      "spoiler": false
+    }
+  ],
+  "affiliate_links": {
+    "amazon-dvd": "https://link.amazon/B09VFVEdo",
+    "prime-video": "https://link.amazon/A00Z5cO2H"
+  }
+}
