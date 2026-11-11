@@ -1,0 +1,76 @@
+{
+  "date": "2026-11-11",
+  "movieID": "avatar",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "7",
+      "date": "December 31, 2019",
+      "username": "Georgia Coley",
+      "numLikes": "842",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/0/0/1/8/2/shard/avtr-0-80-0-80-crop.jpg?v=20fee2c76f",
+      "liked": true,
+      "collapsed": false,
+      "text": "\n<p>I had never seen this from beginning to end until now. Why do the VFX in this 10 year old movie somehow still hold up better than CATS (2019)?</p>\n",
+      "link": "https://letterboxd.com/georgia_coley/film/avatar/",
+      "spoiler": false
+    },
+    {
+      "num_comments": "35",
+      "date": "April 3, 2017",
+      "username": "Astaldar",
+      "numLikes": "3559",
+      "rating": "1.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/0/2/7/7/2/shard/avtr-0-80-0-80-crop.jpg?v=1f797fbc69",
+      "liked": false,
+      "collapsed": false,
+      "text": "\n<p>My cousin was genuinely frustrated and angry with me when I disregarded this as \"Pocahontas In Space.\"</p>\n",
+      "link": "https://letterboxd.com/astaldar/film/avatar/",
+      "spoiler": false
+    },
+    {
+      "num_comments": "46",
+      "date": "January 25, 2020",
+      "username": "Mike Ginn",
+      "numLikes": "19618",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/8/9/7/8/1/6/shard/avtr-0-80-0-80-crop.jpg?v=5f59de8201",
+      "liked": false,
+      "collapsed": false,
+      "text": "\n<p>Through a biotech miracle, a white guy gets to have dreads</p>\n",
+      "link": "https://letterboxd.com/shutupmikeginn/film/avatar/",
+      "spoiler": false
+    },
+    {
+      "num_comments": "8",
+      "date": "October 20, 2017",
+      "username": "megan",
+      "numLikes": "2755",
+      "rating": "1.0",
+      "profilePhotoLink": "https://secure.gravatar.com/avatar/616a93395249f835c1774c6be316226b?rating=PG&size=80&border=&default=https%3A%2F%2Fs.ltrbxd.com%2Fstatic%2Fimg%2Favatar80-CTtJ8HSs.png",
+      "liked": false,
+      "collapsed": false,
+      "text": "\n<p>“why are they all blue?” - my grandmother</p>\n",
+      "link": "https://letterboxd.com/sharktale/film/avatar/1/",
+      "spoiler": false
+    },
+    {
+      "num_comments": "0",
+      "date": "December 18, 2025",
+      "username": "Columned",
+      "numLikes": "711",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/7/8/6/5/4/7/5/shard/avtr-0-80-0-80-crop.jpg?v=b0ac2304d5",
+      "liked": true,
+      "collapsed": false,
+      "text": "\n<p>Y'all mind if a white boy speak a little Na'vi?</p>\n",
+      "link": "https://letterboxd.com/columned/film/avatar/1/",
+      "spoiler": false
+    }
+  ],
+  "affiliate_links": {
+    "amazon-dvd": "https://link.amazon/B0benqBnJ",
+    "prime-video": "https://link.amazon/A0hRd8Ev6"
+  }
+}
