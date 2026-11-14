@@ -1,0 +1,76 @@
+{
+  "date": "2026-11-13",
+  "movieID": "hot-fuzz",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "9",
+      "date": "January 4, 2019",
+      "username": "˗ˏˋ suspirliam ˊˎ˗",
+      "numLikes": "4409",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/4/3/4/0/8/4/shard/avtr-0-80-0-80-crop.jpg?v=45afae616a",
+      "liked": false,
+      "collapsed": false,
+      "text": "\n<p>it's like a less furry Zootopia (2016)</p>\n",
+      "link": "https://letterboxd.com/suspirliam/film/hot-fuzz/2/",
+      "spoiler": false
+    },
+    {
+      "num_comments": "4",
+      "date": "September 19, 2021",
+      "username": "•lily•",
+      "numLikes": "2899",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/0/7/2/4/5/2/shard/avtr-0-80-0-80-crop.jpg?v=159443557f",
+      "liked": true,
+      "collapsed": false,
+      "text": "\n<p>Olivia colman saying <i>“nothing like a bit of girl on girl” </i>and then winning an oscar for her performance in a film about girl on girl 11 years later is kind of beautiful tbh</p>\n",
+      "link": "https://letterboxd.com/sapphicquinn/film/hot-fuzz/",
+      "spoiler": false
+    },
+    {
+      "num_comments": "4",
+      "date": "July 17, 2017",
+      "username": "Eli Hayes",
+      "numLikes": "1836",
+      "rating": "5.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/twitter/7/8/2/2/0/shard/http___pbs.twimg.com_profile_images_1254940980228304897_WBK1ASWC-0-80-0-80-crop.jpg?v=4b86569ec6",
+      "liked": true,
+      "collapsed": false,
+      "text": "\n<p>cult(ure)</p>\n",
+      "link": "https://letterboxd.com/elihayes/film/hot-fuzz/1/",
+      "spoiler": false
+    },
+    {
+      "num_comments": "5",
+      "date": "May 12, 2022",
+      "username": "VitaminC",
+      "numLikes": "2978",
+      "rating": "4.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/4/7/6/0/9/7/7/shard/avtr-0-80-0-80-crop.jpg?v=30460b5c48",
+      "liked": true,
+      "collapsed": false,
+      "text": "\n<p>ah yes, England's biggest threat - old people</p>\n",
+      "link": "https://letterboxd.com/vitaminc1/film/hot-fuzz/",
+      "spoiler": false
+    },
+    {
+      "num_comments": "18",
+      "date": "August 22, 2019",
+      "username": "James (Schaffrillas)",
+      "numLikes": "3210",
+      "rating": "4.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/2/0/3/7/7/7/shard/avtr-0-80-0-80-crop.jpg?v=ff62b2f12e",
+      "liked": false,
+      "collapsed": false,
+      "text": "\n<p>A bit of a slow burn at times and those twat side cops are really irritating. But the payoff is beyond phenomenal; this is a fantastic, hilarious murder mystery turned action masterwork, where every line of dialogue can and will come back later in some shape or form. An step up from Shaun of the Dead in terms of tight direction and an even tighter screenplay.</p>\n",
+      "link": "https://letterboxd.com/schaffrillas/film/hot-fuzz/",
+      "spoiler": false
+    }
+  ],
+  "affiliate_links": {
+    "amazon-dvd": "https://link.amazon/B0jha99Fg",
+    "prime-video": "https://link.amazon/A03iRlpkN"
+  }
+}
