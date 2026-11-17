@@ -79,8 +79,56 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
             monthYearSpan: document.getElementById("month-year"),
             calendarGrid: document.getElementById("calendar-grid"),
             prevBtn: document.getElementById("prev-month"),
-            nextBtn: document.getElementById("next-month")
+            nextBtn: document.getElementById("next-month"),
+            gapMessage: document.getElementById("archive-gap-message"),
+            neighborNav: document.getElementById("archive-neighbors"),
+            previousGameBtn: document.getElementById("previous-game"),
+            nextGameBtn: document.getElementById("next-game")
         };
+        const sortedMovieDates = Array.from(movieDates).sort();
+        let highlightedArchiveDate = null;
+
+        function formatArchiveDate(dateString) {
+            const [year, month, day] = dateString.split('-').map(Number);
+            return new Intl.DateTimeFormat('en-US', {
+                month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC'
+            }).format(new Date(Date.UTC(year, month - 1, day)));
+        }
+
+        function updateNeighborLinks(month, year) {
+            const monthStart = `${year}-${String(month + 1).padStart(2, '0')}-01`;
+            const monthEnd = `${year}-${String(month + 1).padStart(2, '0')}-${String(new Date(year, month + 1, 0).getDate()).padStart(2, '0')}`;
+            const hasGamesThisMonth = sortedMovieDates.some(date => date >= monthStart && date <= monthEnd);
+            const previousDate = sortedMovieDates.filter(date => date < monthStart).pop();
+            const nextDate = sortedMovieDates.find(date => date > monthEnd);
+
+            if (calendarElements.gapMessage) {
+                calendarElements.gapMessage.hidden = hasGamesThisMonth;
+                calendarElements.gapMessage.textContent = previousDate || nextDate
+                    ? 'No games this month. Jump to the nearest games:'
+                    : 'No games are available in the archive yet.';
+            }
+            if (calendarElements.neighborNav) calendarElements.neighborNav.hidden = hasGamesThisMonth || (!previousDate && !nextDate);
+
+            [
+                [calendarElements.previousGameBtn, previousDate, 'Previous game'],
+                [calendarElements.nextGameBtn, nextDate, 'Next game']
+            ].forEach(([button, date, label]) => {
+                if (!button) return;
+                button.hidden = !date;
+                button.textContent = date ? `${label} · ${formatArchiveDate(date)}` : '';
+                button.setAttribute('aria-label', date ? `${label}, ${formatArchiveDate(date)}` : label);
+                button.onclick = date ? function () {
+                    const [targetYear, targetMonth] = date.split('-').map(Number);
+                    currentYear = targetYear;
+                    currentMonth = targetMonth - 1;
+                    highlightedArchiveDate = date;
+                    renderCalendar(currentMonth, currentYear);
+                    const targetCell = calendarElements.calendarGrid.querySelector('[data-date="' + date + '"]');
+                    if (targetCell) targetCell.focus();
+                } : null;
+            });
+        }
 
         function renderCalendar(month, year) {
             if (!calendarElements.calendarGrid || !calendarElements.monthYearSpan) {
@@ -94,6 +142,7 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
             const monthNames = ["January", "February", "March", "April", "May", "June",
                 "July", "August", "September", "October", "November", "December"];
             calendarElements.monthYearSpan.textContent = `${monthNames[month]} ${year}`;
+            updateNeighborLinks(month, year);
 
             // Get the day of the week the month starts on (0=Sunday)
             const firstDay = new Date(year, month, 1).getDay();
@@ -119,13 +168,27 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
                 let dayStr = String(day).padStart(2, '0');
                 let monthStr = String(month + 1).padStart(2, '0');
                 let dateStr = `${year}-${monthStr}-${dayStr}`;
+                cell.dataset.date = dateStr;
 
                 // If there is a movie for this date, create a clickable link; otherwise, create plain text.
                 if (movieDates.has(dateStr)) {
+                    cell.tabIndex = 0;
+                    cell.setAttribute('role', 'link');
+                    cell.setAttribute('aria-label', `Play game from ${formatArchiveDate(dateStr)}`);
                     cell.onclick = function () {
                         window.location.href = "/archive/" + dateStr;
                     };
+                    cell.onkeydown = function (event) {
+                        if (event.key === 'Enter' || event.key === ' ') {
+                            event.preventDefault();
+                            window.location.href = "/archive/" + dateStr;
+                        }
+                    };
                     cell.textContent = day; // Display the day number
+                    if (dateStr === highlightedArchiveDate) {
+                        cell.classList.add('neighbor-movie-cell');
+                        cell.setAttribute('aria-current', 'date');
+                    }
                 } else {
                     let span = document.createElement("span");
                     span.textContent = day;

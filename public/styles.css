@@ -847,6 +847,49 @@ a:focus #profileIcon {
     font-size: 1.5rem;
 }
 
+#archive-neighbors {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 0 0 18px;
+}
+
+#archive-gap-message {
+    margin: 0 0 2px;
+    color: var(--bonewhite);
+    font-size: 0.95rem;
+}
+
+#archive-neighbors button {
+    padding: 7px 0;
+    background: transparent;
+    color: var(--bonewhite);
+    font-size: 0.9rem;
+    text-align: left;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+#archive-neighbors button:last-child {
+    text-align: right;
+}
+
+#archive-neighbors button:hover,
+#archive-neighbors button:focus-visible {
+    color: var(--LGreen);
+}
+
+#archive-neighbors button:focus-visible,
+#prev-month:focus-visible,
+#next-month:focus-visible {
+    outline: 2px solid var(--LGreen);
+    outline-offset: 3px;
+}
+
+#archive-neighbors button[hidden] {
+    display: none;
+}
+
 #month-year:hover {
     color: var(--LGreen);
 }
@@ -902,6 +945,11 @@ a:focus #profileIcon {
 }
 .incomplete-calendar-cell:hover {
     background-color: var(--calendar-yellow-hover);
+}
+
+.neighbor-movie-cell {
+    outline: 3px solid var(--LGreen);
+    outline-offset: 1px;
 }
 
 
