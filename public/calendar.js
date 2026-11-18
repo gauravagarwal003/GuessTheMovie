@@ -116,7 +116,8 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
             ].forEach(([button, date, label]) => {
                 if (!button) return;
                 button.hidden = !date;
-                button.textContent = date ? `${label} · ${formatArchiveDate(date)}` : '';
+                const dateLabel = button.querySelector('.archive-neighbor-date');
+                if (dateLabel) dateLabel.textContent = date ? formatArchiveDate(date) : '';
                 button.setAttribute('aria-label', date ? `${label}, ${formatArchiveDate(date)}` : label);
                 button.onclick = date ? function () {
                     const [targetYear, targetMonth] = date.split('-').map(Number);

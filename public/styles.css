@@ -848,46 +848,116 @@ a:focus #profileIcon {
 }
 
 #archive-neighbors {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px;
-    margin: 0 0 18px;
+    margin: 8px 0 18px;
 }
 
 #archive-gap-message {
-    margin: 0 0 2px;
+    margin: 0;
     color: var(--bonewhite);
     font-size: 0.95rem;
 }
 
-#archive-neighbors button {
-    padding: 7px 0;
-    background: transparent;
+#archive-neighbors .archive-neighbor {
+    display: flex;
+    min-width: 0;
+    min-height: 64px;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border: 1px solid rgba(249, 246, 238, 0.18);
+    border-radius: 8px;
+    background: var(--LBackground);
     color: var(--bonewhite);
-    font-size: 0.9rem;
+    cursor: pointer;
     text-align: left;
-    text-decoration: underline;
-    text-underline-offset: 3px;
+    transition: border-color 150ms ease, background-color 150ms ease, transform 150ms ease;
 }
 
-#archive-neighbors button:last-child {
+#archive-neighbors .archive-neighbor:hover {
+    transform: translateY(-1px);
+}
+
+#archive-neighbors .archive-neighbor .icon {
+    flex: 0 0 auto;
+    font-size: 1rem;
+}
+
+#archive-neighbors .previous-neighbor:hover,
+#archive-neighbors .previous-neighbor:focus-visible {
+    border-color: var(--LOrange);
+    background: rgba(239, 135, 51, 0.12);
+}
+
+#archive-neighbors .previous-neighbor .icon {
+    color: var(--LOrange);
+}
+
+#archive-neighbors .next-neighbor {
+    justify-content: flex-end;
     text-align: right;
 }
 
-#archive-neighbors button:hover,
-#archive-neighbors button:focus-visible {
-    color: var(--LGreen);
+#archive-neighbors .next-neighbor:hover,
+#archive-neighbors .next-neighbor:focus-visible {
+    border-color: var(--LBlue);
+    background: rgba(102, 185, 239, 0.12);
 }
 
-#archive-neighbors button:focus-visible,
+#archive-neighbors .next-neighbor .icon {
+    color: var(--LBlue);
+}
+
+.archive-neighbor-copy {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.archive-neighbor-label {
+    color: var(--inactiveButtonText);
+    font-size: 0.75rem;
+    line-height: 1.2;
+}
+
+.archive-neighbor-date {
+    overflow-wrap: anywhere;
+    font-size: 0.95rem;
+    line-height: 1.25;
+}
+
+#archive-neighbors .archive-neighbor:focus-visible,
 #prev-month:focus-visible,
 #next-month:focus-visible {
     outline: 2px solid var(--LGreen);
     outline-offset: 3px;
 }
 
-#archive-neighbors button[hidden] {
+#archive-neighbors .archive-neighbor[hidden] {
     display: none;
+}
+
+#archive-neighbors[hidden] {
+    display: none;
+}
+
+@media (max-width: 420px) {
+    #archive-neighbors {
+        gap: 8px;
+    }
+
+    #archive-neighbors .archive-neighbor {
+        min-height: 60px;
+        gap: 8px;
+        padding: 9px 10px;
+    }
+
+    .archive-neighbor-date {
+        font-size: 0.85rem;
+    }
 }
 
 #month-year:hover {

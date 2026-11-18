@@ -91,8 +91,20 @@
                 </div>
                 <p id="archive-gap-message" hidden>No games this month. Jump to the nearest games:</p>
                 <nav id="archive-neighbors" aria-label="Jump to another archive game" hidden>
-                    <button id="previous-game" type="button"></button>
-                    <button id="next-game" type="button"></button>
+                    <button id="previous-game" class="archive-neighbor previous-neighbor" type="button">
+                        <i class="fa-solid fa-arrow-left-long icon" aria-hidden="true"></i>
+                        <span class="archive-neighbor-copy">
+                            <span class="archive-neighbor-label">Previous game</span>
+                            <span class="archive-neighbor-date"></span>
+                        </span>
+                    </button>
+                    <button id="next-game" class="archive-neighbor next-neighbor" type="button">
+                        <span class="archive-neighbor-copy">
+                            <span class="archive-neighbor-label">Next game</span>
+                            <span class="archive-neighbor-date"></span>
+                        </span>
+                        <i class="fa-solid fa-arrow-right-long icon" aria-hidden="true"></i>
+                    </button>
                 </nav>
                 <div id="calendar-days-header">
                     <div class="day-long">Sun</div>
