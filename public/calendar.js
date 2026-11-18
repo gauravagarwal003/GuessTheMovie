@@ -85,7 +85,6 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
             nextGameBtn: document.getElementById("next-game")
         };
         const sortedMovieDates = Array.from(movieDates).sort();
-        let highlightedArchiveDate = null;
 
         function formatArchiveDate(dateString) {
             const [year, month, day] = dateString.split('-').map(Number);
@@ -116,7 +115,6 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
                     const [targetYear, targetMonth] = date.split('-').map(Number);
                     currentYear = targetYear;
                     currentMonth = targetMonth - 1;
-                    highlightedArchiveDate = date;
                     renderCalendar(currentMonth, currentYear);
                     const targetCell = calendarElements.calendarGrid.querySelector('[data-date="' + date + '"]');
                     if (targetCell) targetCell.focus();
@@ -179,10 +177,6 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
                         }
                     };
                     cell.textContent = day; // Display the day number
-                    if (dateStr === highlightedArchiveDate) {
-                        cell.classList.add('neighbor-movie-cell');
-                        cell.setAttribute('aria-current', 'date');
-                    }
                 } else {
                     let span = document.createElement("span");
                     span.textContent = day;

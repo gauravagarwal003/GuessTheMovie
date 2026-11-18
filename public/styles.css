@@ -1038,12 +1038,6 @@ a:focus #profileIcon {
     background-color: var(--calendar-yellow-hover);
 }
 
-.neighbor-movie-cell {
-    outline: 3px solid var(--LGreen);
-    outline-offset: 1px;
-}
-
-
 #calendar-days-header {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
