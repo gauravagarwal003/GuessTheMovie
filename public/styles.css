@@ -828,6 +828,11 @@ a:focus #profileIcon {
     background-color: transparent;
     color: var(--bonewhite);
     border-radius: 4px;
+    border: 0;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    cursor: pointer;
 }
 
 #prev-month:hover {
@@ -839,124 +844,140 @@ a:focus #profileIcon {
 }
 
 #calendar-header {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
     align-items: center;
     margin-bottom: 10px;
     color: var(--bonewhite);
     font-size: 1.5rem;
+    column-gap: 6px;
 }
 
-#archive-neighbors {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
-    margin: 8px 0 18px;
+.calendar-nav-side {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: 5px;
+}
+
+.previous-nav-side {
+    justify-content: flex-start;
+}
+
+.next-nav-side {
+    justify-content: flex-end;
 }
 
 #archive-gap-message {
-    margin: 0;
+    margin: 0 0 8px;
     color: var(--bonewhite);
     font-size: 0.95rem;
 }
 
-#archive-neighbors .archive-neighbor {
-    display: flex;
-    min-width: 0;
-    min-height: 64px;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 14px;
-    border: 1px solid rgba(249, 246, 238, 0.18);
-    border-radius: 8px;
-    background: var(--LBackground);
-    color: var(--bonewhite);
-    cursor: pointer;
-    text-align: left;
-    transition: border-color 150ms ease, background-color 150ms ease, transform 150ms ease;
+#month-year {
+    white-space: nowrap;
+    text-align: center;
 }
 
-#archive-neighbors .archive-neighbor:hover {
-    transform: translateY(-1px);
-}
-
-#archive-neighbors .archive-neighbor .icon {
-    flex: 0 0 auto;
-    font-size: 1rem;
-}
-
-#archive-neighbors .previous-neighbor:hover,
-#archive-neighbors .previous-neighbor:focus-visible {
-    border-color: var(--LOrange);
-    background: rgba(239, 135, 51, 0.12);
-}
-
-#archive-neighbors .previous-neighbor .icon {
-    color: var(--LOrange);
-}
-
-#archive-neighbors .next-neighbor {
-    justify-content: flex-end;
-    text-align: right;
-}
-
-#archive-neighbors .next-neighbor:hover,
-#archive-neighbors .next-neighbor:focus-visible {
-    border-color: var(--LBlue);
-    background: rgba(102, 185, 239, 0.12);
-}
-
-#archive-neighbors .next-neighbor .icon {
-    color: var(--LBlue);
-}
-
-.archive-neighbor-copy {
+.archive-neighbor {
     display: flex;
     min-width: 0;
     flex-direction: column;
-    gap: 3px;
+    align-items: flex-start;
+    gap: 2px;
+    padding: 4px 3px;
+    border: 0;
+    border-radius: 4px;
+    background: transparent;
+    color: var(--bonewhite);
+    cursor: pointer;
+    text-align: left;
+    line-height: 1.15;
+}
+
+.archive-neighbor:hover .archive-neighbor-date {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.previous-neighbor:hover {
+    background: rgba(239, 135, 51, 0.12);
+}
+
+.next-neighbor {
+    align-items: flex-end;
+    text-align: right;
+}
+
+.next-neighbor:hover {
+    background: rgba(102, 185, 239, 0.12);
 }
 
 .archive-neighbor-label {
     color: var(--inactiveButtonText);
-    font-size: 0.75rem;
-    line-height: 1.2;
+    font-size: 0.7rem;
+    white-space: nowrap;
 }
 
 .archive-neighbor-date {
-    overflow-wrap: anywhere;
-    font-size: 0.95rem;
-    line-height: 1.25;
+    color: var(--bonewhite);
+    font-size: 0.82rem;
+    white-space: nowrap;
 }
 
-#archive-neighbors .archive-neighbor:focus-visible,
-#prev-month:focus-visible,
-#next-month:focus-visible {
-    outline: 2px solid var(--LGreen);
-    outline-offset: 3px;
-}
-
-#archive-neighbors .archive-neighbor[hidden] {
+.neighbor-label-short {
     display: none;
 }
 
-#archive-neighbors[hidden] {
+.previous-neighbor:focus-visible,
+.next-neighbor:focus-visible,
+#prev-month:focus-visible,
+#next-month:focus-visible {
+    outline: 2px solid var(--LGreen);
+    outline-offset: 2px;
+}
+
+.archive-neighbor[hidden] {
     display: none;
 }
 
 @media (max-width: 420px) {
-    #archive-neighbors {
-        gap: 8px;
+    #calendar-header {
+        column-gap: 2px;
     }
 
-    #archive-neighbors .archive-neighbor {
-        min-height: 60px;
-        gap: 8px;
-        padding: 9px 10px;
+    .calendar-nav-side {
+        gap: 1px;
+    }
+
+    #prev-month,
+    #next-month {
+        width: 28px;
+        height: 30px;
+    }
+
+    #month-year {
+        font-size: 0.9rem;
+    }
+
+    .archive-neighbor {
+        padding: 3px 2px;
+    }
+
+    .neighbor-label-full {
+        display: none;
+    }
+
+    .neighbor-label-short {
+        display: inline;
+    }
+
+    .archive-neighbor-label {
+        font-size: 0.7rem;
     }
 
     .archive-neighbor-date {
-        font-size: 0.85rem;
+        font-size: 0.72rem;
     }
 }
 

@@ -84,28 +84,23 @@
             <!-- Calendar container -->
             <div id="calendar-container">
                 <div id="calendar-header">
-                    <button id="prev-month"><i class="fa-solid fa-arrow-left icon" id="arrowLeftIcon"></i></button>
+                    <div class="calendar-nav-side previous-nav-side">
+                        <button id="prev-month" type="button" aria-label="Previous month"><i class="fa-solid fa-arrow-left icon" id="arrowLeftIcon"></i></button>
+                        <button id="previous-game" class="archive-neighbor previous-neighbor" type="button">
+                            <span class="archive-neighbor-label"><span class="neighbor-label-full">Closest game before</span><span class="neighbor-label-short">Closest before</span></span>
+                            <span class="archive-neighbor-date"></span>
+                        </button>
+                    </div>
                     <span id="month-year"></span>
-                    <button id="next-month"> <i class="fa-solid fa-arrow-right icon" id="arrowRightIcon"></i>
-                    </button>
+                    <div class="calendar-nav-side next-nav-side">
+                        <button id="next-game" class="archive-neighbor next-neighbor" type="button">
+                            <span class="archive-neighbor-label"><span class="neighbor-label-full">Closest game after</span><span class="neighbor-label-short">Closest after</span></span>
+                            <span class="archive-neighbor-date"></span>
+                        </button>
+                        <button id="next-month" type="button" aria-label="Next month"><i class="fa-solid fa-arrow-right icon" id="arrowRightIcon"></i></button>
+                    </div>
                 </div>
-                <p id="archive-gap-message" hidden>No games this month. Jump to the nearest games:</p>
-                <nav id="archive-neighbors" aria-label="Jump to another archive game" hidden>
-                    <button id="previous-game" class="archive-neighbor previous-neighbor" type="button">
-                        <i class="fa-solid fa-arrow-left-long icon" aria-hidden="true"></i>
-                        <span class="archive-neighbor-copy">
-                            <span class="archive-neighbor-label">Previous game</span>
-                            <span class="archive-neighbor-date"></span>
-                        </span>
-                    </button>
-                    <button id="next-game" class="archive-neighbor next-neighbor" type="button">
-                        <span class="archive-neighbor-copy">
-                            <span class="archive-neighbor-label">Next game</span>
-                            <span class="archive-neighbor-date"></span>
-                        </span>
-                        <i class="fa-solid fa-arrow-right-long icon" aria-hidden="true"></i>
-                    </button>
-                </nav>
+                <p id="archive-gap-message" hidden>No games this month</p>
                 <div id="calendar-days-header">
                     <div class="day-long">Sun</div>
                     <div class="day-short">S</div>

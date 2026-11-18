@@ -81,7 +81,6 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
             prevBtn: document.getElementById("prev-month"),
             nextBtn: document.getElementById("next-month"),
             gapMessage: document.getElementById("archive-gap-message"),
-            neighborNav: document.getElementById("archive-neighbors"),
             previousGameBtn: document.getElementById("previous-game"),
             nextGameBtn: document.getElementById("next-game")
         };
@@ -102,20 +101,14 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
             const previousDate = sortedMovieDates.filter(date => date < monthStart).pop();
             const nextDate = sortedMovieDates.find(date => date > monthEnd);
 
-            if (calendarElements.gapMessage) {
-                calendarElements.gapMessage.hidden = hasGamesThisMonth;
-                calendarElements.gapMessage.textContent = previousDate || nextDate
-                    ? 'No games this month. Jump to the nearest games:'
-                    : 'No games are available in the archive yet.';
-            }
-            if (calendarElements.neighborNav) calendarElements.neighborNav.hidden = hasGamesThisMonth || (!previousDate && !nextDate);
+            if (calendarElements.gapMessage) calendarElements.gapMessage.hidden = hasGamesThisMonth;
 
             [
-                [calendarElements.previousGameBtn, previousDate, 'Previous game'],
-                [calendarElements.nextGameBtn, nextDate, 'Next game']
+                [calendarElements.previousGameBtn, previousDate, 'Closest game before'],
+                [calendarElements.nextGameBtn, nextDate, 'Closest game after']
             ].forEach(([button, date, label]) => {
                 if (!button) return;
-                button.hidden = !date;
+                button.hidden = !date || hasGamesThisMonth;
                 const dateLabel = button.querySelector('.archive-neighbor-date');
                 if (dateLabel) dateLabel.textContent = date ? formatArchiveDate(date) : '';
                 button.setAttribute('aria-label', date ? `${label}, ${formatArchiveDate(date)}` : label);
