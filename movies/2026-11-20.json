@@ -1,0 +1,76 @@
+{
+  "date": "2026-11-20",
+  "movieID": "longlegs",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "106",
+      "date": "July 11, 2024",
+      "username": "owen",
+      "numLikes": "34567",
+      "rating": "1.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/5/1/8/3/2/2/shard/avtr-0-80-0-80-crop.jpg?v=7096aeae2b",
+      "liked": false,
+      "collapsed": false,
+      "text": "\n<p>I don’t really know what I expected but there was way more Bill Clinton screen time than I was both mentally and physically prepared for.</p>\n",
+      "link": "https://letterboxd.com/owenpatnaude/film/longlegs/",
+      "spoiler": false
+    },
+    {
+      "num_comments": "0",
+      "date": "July 13, 2024",
+      "username": "joshua ciccone",
+      "numLikes": "4015",
+      "rating": "",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/1/7/1/0/1/8/shard/avtr-0-80-0-80-crop.jpg?v=2850716549",
+      "liked": true,
+      "collapsed": false,
+      "text": "\n<p>what if da joker was catholic</p>\n",
+      "link": "https://letterboxd.com/joshtenet/film/longlegs/",
+      "spoiler": false
+    },
+    {
+      "num_comments": "3",
+      "date": "July 10, 2024",
+      "username": "mathew",
+      "numLikes": "319",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/6/2/5/3/4/8/8/shard/avtr-0-80-0-80-crop.jpg?v=db5dae115a",
+      "liked": false,
+      "collapsed": false,
+      "text": "\n<p>Neon's marketing for this film really did wonders because, as I felt slightly dissatisfied when I left the theaters, I saw that Maika's heartbeat thing on my phone and went, \"That scene is nuts! Loved it.\"</p>\n",
+      "link": "https://letterboxd.com/melodramafilms/film/longlegs/",
+      "spoiler": false
+    },
+    {
+      "num_comments": "42",
+      "date": "June 17, 2024",
+      "username": "jmoreau",
+      "numLikes": "13938",
+      "rating": "4.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/4/5/4/4/5/5/0/shard/avtr-0-80-0-80-crop.jpg?v=9195e86693",
+      "liked": false,
+      "collapsed": false,
+      "text": "\n<p>Can somebody match Nicolas Cage’s freak?</p>\n",
+      "link": "https://letterboxd.com/jmoreau/film/longlegs/",
+      "spoiler": false
+    },
+    {
+      "num_comments": "17",
+      "date": "July 11, 2024",
+      "username": "Sophie Holsinger",
+      "numLikes": "6020",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/9/0/6/0/7/9/shard/avtr-0-80-0-80-crop.jpg?v=ade04e3e30",
+      "liked": false,
+      "collapsed": false,
+      "text": "\n<p>Has its moments, but never felt truly original nor wholly fleshed out enough for me. My favorite part was the opening scene/credits reveal and aspect ratio change, so although it hit the ground running, those legs weren't long enough!</p>\n",
+      "link": "https://letterboxd.com/imce0bitch/film/longlegs/",
+      "spoiler": false
+    }
+  ],
+  "affiliate_links": {
+    "amazon-dvd": "https://link.amazon/B07i7cwsH",
+    "prime-video": "https://link.amazon/A0cRNw6Dj"
+  }
+}
