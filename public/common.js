@@ -137,7 +137,9 @@ let ongoingGame = null;
 function loadOngoingGame(correctMovieID, correctMovieDate) {
   let game = globalGameHistory.find(g => g.id === correctMovieID && g.status === 'incomplete');
   if (game) {
-    ongoingGame = { ...game };
+    // Keep the live game linked to its history record so each resumed guess
+    // is persisted immediately instead of only being written at game end.
+    ongoingGame = game;
     collectedGuesses = [...(game.guesses || [])];
     incorrectGuessCount = collectedGuesses.length;
     return true;
@@ -293,6 +295,7 @@ function selectMovie(guessedMovieID) {
   const guessedMovie = allMovies.find(movie => movie.movieID === guessedMovieID);
   const isCorrectMovie = guessedMovieID === correctMovieID;
 
+  dismissHowToPlay();
   startOngoingGame(correctMovieID, correctMovieDate);
 
   if (isCorrectMovie) {
@@ -338,17 +341,16 @@ function handleSubmit() {
     return;
   }
 
-  // Search for movies using Fuse or fallback
+  // Do not silently submit a fuzzy match. A partial title can rank a different
+  // movie first, so require the player to choose one of the visible suggestions.
   const filteredMovies = searchMovies(searchQuery);
 
   if (filteredMovies.length > 0) {
-    const firstMovie = filteredMovies[0];
-    searchInput.value = `${firstMovie.title} (${firstMovie.year})`;
-    clearMovieList();
-    selectMovie(firstMovie.movieID);
-  } else {
-    handleGuess(null);
+    showToast('Choose a movie from the suggestions, or clear the search to skip.');
+    return;
   }
+
+  showToast('No matching movie found. Clear the search to skip.');
 }
 
 // Extracted search logic for reusability
@@ -566,6 +568,7 @@ function handleGuess(guess) {
   }
 
   incorrectGuessCount++;
+  dismissHowToPlay();
 
   // Calculate remaining guesses and format previous guesses
   const remainingGuesses = MAX_GUESSES - incorrectGuessCount;
@@ -705,6 +708,27 @@ function launchWinConfetti() {
   }
 }
 
+function updateHowToPlay() {
+  const guide = document.getElementById('how-to-play');
+  if (!guide) return;
+
+  const hasPlayedBefore = gameCache.gameHistory.some(game =>
+    game.status === 'won' || game.status === 'lost' || (game.guesses || []).length > 0
+  );
+  const dismissed = localStorage.getItem('howToPlayDismissed') === '1';
+  guide.hidden = hasPlayedBefore || dismissed;
+}
+
+function dismissHowToPlay() {
+  const guide = document.getElementById('how-to-play');
+  if (guide) guide.hidden = true;
+  try {
+    localStorage.setItem('howToPlayDismissed', '1');
+  } catch (error) {
+    // The game remains playable when browser storage is unavailable.
+  }
+}
+
 // -------------------------------------------------------------
 // Native End-of-Game Screen Dashboard
 // -------------------------------------------------------------
@@ -780,6 +804,7 @@ function updateStatusBar() {
   const leftEl = statusBar.querySelector('.status-left');
   const dateEl = document.getElementById('status-movie-date');
   const pillEl = document.getElementById('status-progress-pill');
+  const progressEl = document.getElementById('status-guesses-text');
 
   let movieNum = '';
   if (window.datesManifestData && Array.isArray(window.datesManifestData.dates)) {
@@ -800,7 +825,10 @@ function updateStatusBar() {
       dateEl.textContent = '';
     }
     if (pillEl) {
-      pillEl.innerHTML = '';
+      if (progressEl) {
+        progressEl.textContent = '';
+        progressEl.hidden = true;
+      }
     }
   } else {
     statusBar.classList.remove('lost');
@@ -811,14 +839,19 @@ function updateStatusBar() {
       dateEl.textContent = dateText;
     }
     if (pillEl) {
+      if (progressEl) progressEl.hidden = false;
       if (gameOver && gameWon) {
         const reviewCount = collectedGuesses.length;
-        const reviewText = reviewCount === 1 ? 'Won in 1 review' : `Won in ${reviewCount} reviews`;
-        pillEl.innerHTML = `<span class="guesses-pill won"><i class="fa-solid fa-check icon"></i> ${reviewText}</span>`;
+        const reviewText = reviewCount === 1 ? 'Won in 1 guess' : `Won in ${reviewCount} guesses`;
+        if (progressEl) progressEl.innerHTML = `<i class="fa-solid fa-check icon"></i> ${reviewText}`;
+        if (progressEl) progressEl.classList.add('won');
       } else {
         const remainingGuesses = MAX_GUESSES - incorrectGuessCount;
         const guessString = remainingGuesses === 1 ? "1 Guess Left" : `${remainingGuesses} Guesses Left`;
-        pillEl.innerHTML = `<span class="guesses-pill">${guessString}</span>`;
+        if (progressEl) {
+          progressEl.textContent = guessString;
+          progressEl.classList.remove('won');
+        }
       }
     }
   }
@@ -832,13 +865,18 @@ function startCountdownTimer() {
     const previewElems = document.querySelectorAll('.countdown-preview');
     if (!timerElem && previewElems.length === 0) return;
     const now = new Date();
-    // 12:00 AM EST (America/New_York)
-    const estNowStr = now.toLocaleString("en-US", { timeZone: "America/New_York" });
-    const estNow = new Date(estNowStr);
-    const estMidnight = new Date(estNow);
-    estMidnight.setHours(24, 0, 0, 0);
-
-    const diff = Math.max(0, estMidnight - estNow);
+    // Read the Eastern wall clock directly. Parsing a localized date string
+    // as local time shifts the countdown for visitors outside that timezone.
+    const eastern = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'America/New_York',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hourCycle: 'h23'
+    }).formatToParts(now);
+    const parts = Object.fromEntries(eastern.map(part => [part.type, part.value]));
+    const elapsedToday = Number(parts.hour) * 3600000 + Number(parts.minute) * 60000 + Number(parts.second) * 1000;
+    const diff = Math.max(0, 86400000 - elapsedToday);
     const h = String(Math.floor(diff / 3600000)).padStart(2, '0');
     const m = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
     const s = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
@@ -1333,6 +1371,10 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
 
     // Update unified status bar
     updateStatusBar();
+    updateHowToPlay();
+
+    const dismissGuideButton = document.getElementById('dismiss-how-to-play');
+    if (dismissGuideButton) dismissGuideButton.addEventListener('click', dismissHowToPlay);
   }
   catch (error) {
     console.error('Error during initialization:', error);

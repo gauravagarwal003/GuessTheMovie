@@ -110,8 +110,18 @@
             <div id="game-status-bar" class="unified-status-bar">
                 <div class="status-left"><i class="fa-solid fa-film icon"></i> <strong id="status-movie-num">Movie</strong></div>
                 <div class="status-center" id="status-movie-date"></div>
-                <div class="status-right" id="status-progress-pill"><span class="guesses-pill" id="status-guesses-text">5 Guesses Left</span></div>
+                <div class="status-right" id="status-progress-pill">
+                    <span class="guesses-pill" id="status-guesses-text">5 Guesses Left</span>
+                </div>
             </div>
+
+            <aside id="how-to-play" class="how-to-play" aria-label="How to play" hidden>
+                <div>
+                    <strong>New here?</strong>
+                    <span>Read the review, guess the movie, and unlock another clue when you miss. You get five guesses.</span>
+                </div>
+                <button type="button" id="dismiss-how-to-play" aria-label="Dismiss how to play">Got it</button>
+            </aside>
 
             <div id="textDisplay" style="display: none;">
                 <div id="resultDisplay"></div>
