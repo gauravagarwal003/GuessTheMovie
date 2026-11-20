@@ -289,6 +289,58 @@ body {
     padding-left: 2px;
 }
 
+.how-to-play {
+    max-width: 680px;
+    margin: 0 auto 14px;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    color: var(--bonewhite);
+    background: rgba(20, 20, 25, 0.55);
+    border-radius: 8px;
+    line-height: 1.4;
+}
+
+.how-to-play[hidden] {
+    display: none;
+}
+
+.how-to-play > div {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px 8px;
+}
+
+.how-to-play strong {
+    color: var(--LOrange);
+    white-space: nowrap;
+}
+
+.how-to-play button {
+    flex: 0 0 auto;
+    padding: 5px 10px;
+    color: var(--bonewhite);
+    background: transparent;
+    border: 1px solid rgba(249, 246, 238, 0.35);
+    border-radius: 16px;
+    cursor: pointer;
+}
+
+.how-to-play button:hover,
+.how-to-play button:focus-visible {
+    border-color: var(--bonewhite);
+}
+
+@media (max-width: 560px) {
+    .how-to-play {
+        margin: 0 8px 12px;
+        align-items: flex-start;
+    }
+}
+
 #submit-button {
     background-color: var(--calendar-green-hover);
     color: var(--bonewhite);
@@ -1883,6 +1935,10 @@ a:focus #profileIcon {
     align-items: center;
     gap: 5px;
     letter-spacing: 0.2px;
+}
+
+.unified-status-bar .guesses-pill[hidden] {
+    display: none;
 }
 
 .unified-status-bar .guesses-pill.won {
