@@ -74,6 +74,19 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
         let currentMonth = currentDate.getMonth();
         let currentYear = currentDate.getFullYear();
 
+        const sortedMovieDates = Array.from(movieDates).sort();
+
+        // If current month has no games, default calendar view to latest month with games
+        if (data && data.latestDate) {
+            const [latY, latM] = data.latestDate.split('-').map(Number);
+            const mStart = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-01`;
+            const mEnd = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(new Date(currentYear, currentMonth + 1, 0).getDate()).padStart(2, '0')}`;
+            if (!sortedMovieDates.some(date => date >= mStart && date <= mEnd)) {
+                currentYear = latY;
+                currentMonth = latM - 1;
+            }
+        }
+
         // Cache DOM elements
         const calendarElements = {
             monthYearSpan: document.getElementById("month-year"),
@@ -82,9 +95,9 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
             nextBtn: document.getElementById("next-month"),
             gapMessage: document.getElementById("archive-gap-message"),
             previousGameBtn: document.getElementById("previous-game"),
-            nextGameBtn: document.getElementById("next-game")
+            nextGameBtn: document.getElementById("next-game"),
+            calendarContainer: document.getElementById("calendar-container")
         };
-        const sortedMovieDates = Array.from(movieDates).sort();
 
         function formatArchiveDate(dateString) {
             const [year, month, day] = dateString.split('-').map(Number);
@@ -101,6 +114,27 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
             const nextDate = sortedMovieDates.find(date => date > monthEnd);
 
             if (calendarElements.gapMessage) calendarElements.gapMessage.hidden = hasGamesThisMonth;
+
+            // Boundary clamping: disable navigation into empty months
+            if (calendarElements.prevBtn) {
+                if (!previousDate) {
+                    calendarElements.prevBtn.classList.add('archive-nav-disabled');
+                    calendarElements.prevBtn.disabled = true;
+                } else {
+                    calendarElements.prevBtn.classList.remove('archive-nav-disabled');
+                    calendarElements.prevBtn.disabled = false;
+                }
+            }
+
+            if (calendarElements.nextBtn) {
+                if (!nextDate) {
+                    calendarElements.nextBtn.classList.add('archive-nav-disabled');
+                    calendarElements.nextBtn.disabled = true;
+                } else {
+                    calendarElements.nextBtn.classList.remove('archive-nav-disabled');
+                    calendarElements.nextBtn.disabled = false;
+                }
+            }
 
             [
                 [calendarElements.previousGameBtn, previousDate, 'Closest game before'],
@@ -231,6 +265,20 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
 
         // Initial render even if dates.json failed — calendar will show "no-movie" cells
         renderCalendar(currentMonth, currentYear);
+
+        window.playRandomUnplayedGame = function() {
+            const unplayed = sortedMovieDates.filter(d => !completedDates.has(d));
+            let targetDate;
+            if (unplayed.length > 0) {
+                targetDate = unplayed[Math.floor(Math.random() * unplayed.length)];
+            } else {
+                alert("You've completed every game in the archive! Replaying a random favorite 🎬");
+                targetDate = sortedMovieDates[Math.floor(Math.random() * sortedMovieDates.length)];
+            }
+            if (targetDate) {
+                window.location.href = '/archive/' + targetDate;
+            }
+        };
 
         // Helpful debug: log when manifest appears to be empty
         if (movieDates.size === 0) {

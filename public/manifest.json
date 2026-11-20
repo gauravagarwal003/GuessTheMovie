@@ -1,0 +1,17 @@
+{
+  "name": "Guess The Movie",
+  "short_name": "GuessMovie",
+  "description": "Daily interactive Letterboxd movie guessing challenge.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#141419",
+  "theme_color": "#141419",
+  "icons": [
+    {
+      "src": "/images/just_logo.png",
+      "sizes": "277x321",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

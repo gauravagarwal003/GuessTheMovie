@@ -85,8 +85,8 @@ class HistoryDataCache {
 }
 
 const historyCache = new HistoryDataCache();
-gameHistory = historyCache.gameHistory;
-gameStats = historyCache.gameStats;
+let gameHistory = historyCache.gameHistory;
+let gameStats = historyCache.gameStats;
 
 // Generates HTML for a single game (v1 localStorage)
 function generateGameHTML(game) {
@@ -141,9 +141,9 @@ function generateGameHTML(game) {
                     const correctness = currentMovieId === game.id ? 'correctly' : 'incorrectly';
                     
                     if (sameMovieCount === 1) {
-                        guessItems.push(`${correctness} guessed <a href="https://letterboxd.com/film/${movie.movieID}/" target="_blank" class="text-link"><u>${movie.title} (${movie.year})</u></a>`);
+                        guessItems.push(`${correctness} guessed ${movie.title} (${movie.year})`);
                     } else {
-                        guessItems.push(`${correctness} guessed <a href="https://letterboxd.com/film/${movie.movieID}/" target="_blank" class="text-link"><u>${movie.title} (${movie.year})</u></a> ${sameMovieCount} times`);
+                        guessItems.push(`${correctness} guessed ${movie.title} (${movie.year}) ${sameMovieCount} times`);
                     }
                 }
             }
@@ -208,7 +208,7 @@ function displayHistoryAndStats() {
     container.innerHTML += `<h2 class="history-about-subheading" >Your Stats</h2>`;
     container.innerHTML += `<p>You've played ${gameStats.gamesFinished || 0} games and won ${gameStats.gamesWon || 0}, giving you a win percentage of ${gameStats.winPercentage || 0}%.</p>`;
     container.innerHTML += `<p>Average guesses per win: ${(gameStats.averageGuesses || 0).toFixed(2)}</p>`;
-    if (gameStats.fastestWin !== undefined) container.innerHTML += `<p>Fastest win (fewest guesses): ${gameStats.fastestWin}</p>`;
+    if (gameStats.fastestWin != null) container.innerHTML += `<p>Fastest win (fewest guesses): ${gameStats.fastestWin}</p>`;
 
     // --- Calculated stats from v1 gameHistory ---
     const currentStreak = calculateCurrentStreak(gameHistory);
@@ -216,11 +216,21 @@ function displayHistoryAndStats() {
     const longestWinStreak = longestWinningStreak(gameHistory);
     const totalMoviesGuessed = totalUniqueMoviesGuessed(gameHistory);
 
-    container.innerHTML += `<p>Current streak: ${currentStreak.streak} ${currentStreak.type}</p>`;
+    if (currentStreak.streak > 0) {
+        const typeLabel = currentStreak.type === 'win'
+            ? (currentStreak.streak === 1 ? 'win' : 'wins')
+            : (currentStreak.streak === 1 ? 'loss' : 'losses');
+        container.innerHTML += `<p>Current streak: ${currentStreak.streak} ${typeLabel}</p>`;
+    } else {
+        container.innerHTML += `<p>Current streak: 0</p>`;
+    }
     if (mostGuessed) container.innerHTML += `<p>Most guessed movie: ${mostGuessed}</p>`;
     if (longestWinStreak > 0) container.innerHTML += `<p>Longest win streak: ${longestWinStreak}</p>`;
     if (totalMoviesGuessed === 1) container.innerHTML += `<p>Unique movies guessed: 1</p>`;
     else if (totalMoviesGuessed > 0) container.innerHTML += `<p>Unique movies guessed: ${totalMoviesGuessed}</p>`;
+
+    // --- Guess Distribution Bar Chart ---
+    container.innerHTML += generateGuessDistributionHTML(gameHistory);
 
     // --- History ---
     container.innerHTML += `<h2 class="history-about-subheading" >Your Game History</h2>`;
@@ -228,14 +238,52 @@ function displayHistoryAndStats() {
     sortedGames.forEach(game => container.innerHTML += generateGameHTML(game));
 }
 
+// Generates the horizontal chart for wins by guess (Guess 1..5 arranged side-by-side)
+function generateGuessDistributionHTML(games) {
+    const wonGames = (games || []).filter(g => g.status === 'won');
+    const counts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+    wonGames.forEach(g => {
+        const num = (g.guesses && g.guesses.length) || 0;
+        if (counts[num] !== undefined) counts[num]++;
+    });
+
+    const maxVal = Math.max(1, ...Object.values(counts));
+    let colsHtml = '';
+    for (let i = 1; i <= 5; i++) {
+        const count = counts[i];
+        const pct = count > 0 ? Math.max(12, Math.round((count / maxVal) * 100)) : 0;
+        const hasWins = count > 0;
+        colsHtml += `
+            <div class="guess-dist-col">
+                <span class="guess-col-count ${hasWins ? 'has-wins' : 'zero-wins'}">${count}</span>
+                <div class="guess-col-track">
+                    <div class="guess-col-fill ${hasWins ? 'has-wins' : 'zero-wins'}" style="height: ${pct}%;"></div>
+                </div>
+                <span class="guess-col-label">${i}</span>
+            </div>
+        `;
+    }
+
+    return `
+        <div class="guess-distribution-box">
+            <h3 class="guess-dist-title">Wins by Guess</h3>
+            <div class="guess-dist-subtitle">Games won on Review 1 through 5</div>
+            <div class="guess-dist-columns">
+                ${colsHtml}
+            </div>
+        </div>
+    `;
+}
+
 // --- v1 versions of stats functions ---
 function calculateCurrentStreak(games) {
-    if (!games.length) return { streak: 0, type: "none" };
+    const finishedGames = (games || []).filter(g => g.status === 'won' || g.status === 'lost');
+    if (!finishedGames.length) return { streak: 0, type: "none" };
     let streak = 0;
-    const mostRecentResult = games[games.length - 1].status === 'won';
+    const mostRecentResult = finishedGames[finishedGames.length - 1].status === 'won';
     const streakType = mostRecentResult ? "win" : "loss";
-    for (let i = games.length - 1; i >= 0; i--) {
-        if ((games[i].status === 'won') === mostRecentResult) streak++;
+    for (let i = finishedGames.length - 1; i >= 0; i--) {
+        if ((finishedGames[i].status === 'won') === mostRecentResult) streak++;
         else break;
     }
     return { streak, type: streakType };
@@ -258,14 +306,13 @@ function getMostGuessedMovie(games) {
     }
     const movie = allMovies.find(m => m.movieID === mostGuessed);
     if (maxCount <= 1 || !movie) return null;
-    // return `${movie.title} (${movie.year})`;
-    return `<a href="https://letterboxd.com/film/${movie.movieID}/" target="_blank" class="text-link"><u>${movie.title} (${movie.year})</u></a>`;
-
+    return `${movie.title} (${movie.year})`;
 }
 
 function longestWinningStreak(games) {
+    const finishedGames = (games || []).filter(g => g.status === 'won' || g.status === 'lost');
     let maxStreak = 0, currentStreak = 0;
-    for (const game of games) {
+    for (const game of finishedGames) {
         if (game.status === 'won') {
             currentStreak++;
             if (currentStreak > maxStreak) maxStreak = currentStreak;

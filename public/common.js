@@ -396,30 +396,24 @@ function finishGame(wonGame) {
   const searchElem = document.getElementById('search');
   if (searchElem) searchElem.remove();
 
-  // Add movie poster to page
-  const img = document.createElement('img');
-  img.src = correctMovieObject.posterLink;
-  img.alt = `${correctMovieObject.title} (${correctMovieObject.year}) movie poster`;
+  // Poster removed from game screen per user request
   const existingDiv = document.getElementById('movie_poster');
   if (existingDiv) {
     existingDiv.innerHTML = '';
-    existingDiv.appendChild(img);
-  } else {
-    console.error('Movie poster div with id movie_poster not found');
-  }
-  if (existingDiv) {
-    existingDiv.setAttribute("href", "https://letterboxd.com/film/" + correctMovieID);
-    existingDiv.setAttribute("target", "_blank");
   }
   const searchRow = document.getElementById('search-row');
   if (searchRow) {
     searchRow.remove();
   }
 
-  // Show the share button now that the game is over
+  // Ensure old buttons are removed from #allButtons so only review numbers remain
   if (shareButton) {
-    shareButton.style.display = 'inline-block';
+    shareButton.style.display = 'none';
   }
+  const oldSummaryBtn = document.getElementById('open-summary-button');
+  if (oldSummaryBtn) oldSummaryBtn.remove();
+  const oldPastGameBtn = document.getElementById('play-past-game-button');
+  if (oldPastGameBtn) oldPastGameBtn.remove();
   if (reviewNumButtons) {
     reviewNumButtons.style.marginRight = '5px';
   }
@@ -540,6 +534,13 @@ function finishGame(wonGame) {
   }
 
   displayCurrentReview(currentReviewIndex);
+
+  // Render native end-game dashboard directly on the page
+  renderEndGameDashboard();
+
+  if (wonGame) {
+    launchWinConfetti();
+  }
 }
 
 // Handles the user's guess or skip
@@ -571,10 +572,8 @@ function handleGuess(guess) {
   const guessString = remainingGuesses === 1 ? "1 Guess" : `${remainingGuesses} Guesses`;
   const previousGuessesItems = formatPreviousGuesses(collectedGuesses);
 
-  // Display simple progress message
-  if (resultDisplay) {
-    resultDisplay.innerHTML = `<div class="remaining-guesses">${guessString} Left</div>`;
-  }
+  // Update unified status bar
+  updateStatusBar();
 
   // Update the past guesses accordion
   updatePastGuessesDisplay(previousGuessesItems);
@@ -589,56 +588,309 @@ function handleGuess(guess) {
   }
 }
 
-// Handles sharing
+// -------------------------------------------------------------
+// Toast Notification
+// -------------------------------------------------------------
+function showToast(message) {
+  let toast = document.getElementById('game-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'game-toast';
+    toast.className = 'game-toast';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = message;
+  toast.classList.add('show');
+  clearTimeout(toast._timer);
+  toast._timer = setTimeout(() => {
+    toast.classList.remove('show');
+  }, 2600);
+}
+
+// -------------------------------------------------------------
+// Wordle-Style Emoji Share Generator
+// -------------------------------------------------------------
+function generateShareText() {
+  const isArchive = !!archiveDate;
+  let movieNum = '';
+  if (window.datesManifestData && Array.isArray(window.datesManifestData.dates)) {
+    const idx = window.datesManifestData.dates.indexOf(correctMovieDate);
+    if (idx !== -1) movieNum = `#${idx + 1}`;
+  }
+
+  const titleHeader = isArchive
+    ? `Guess The Movie (Archive - ${formattedMovieDate}) 🎬`
+    : `Guess The Movie ${movieNum} 🎬`.trim();
+
+  const scoreHeader = gameWon ? `${collectedGuesses.length}/${MAX_GUESSES}` : `X/${MAX_GUESSES}`;
+
+  // Build emoji tiles: 🟩 = correct, 🟨 = skipped, 🟥 = incorrect, ⬛ = unused
+  const tiles = collectedGuesses.map(g => {
+    if (g === correctMovieID) return '🟩';
+    if (g === SKIPPED_GUESS) return '🟨';
+    return '🟥';
+  });
+
+  while (tiles.length < MAX_GUESSES) {
+    tiles.push('⬛');
+  }
+
+  const emojiGrid = tiles.join('');
+  const siteUrl = isArchive ? window.location.href : 'https://guessthemovie.me/';
+
+  return `${titleHeader}\n${scoreHeader}\n\n${emojiGrid}\n\nPlay at: ${siteUrl}`;
+}
+
+// Handles sharing with native share or clipboard copy + toast feedback
 function pressShare() {
-  let shareText = ''
-  // Sets share text
-  if (gameWon) {
-    if (collectedGuesses.length === 1) {
-      shareText = `I played "Guess The Movie" and got it in 1 guess! Can you do better?`;
+  const fullShareText = generateShareText();
+
+  const onCopied = () => {
+    showToast("Copied score to clipboard! 📋");
+    const dashShareBtn = document.getElementById('dashboard-share-btn');
+    const shareBtn = document.getElementById('share-button');
+    [dashShareBtn, shareBtn].forEach(btn => {
+      if (btn) {
+        const orig = btn.innerHTML;
+        btn.innerHTML = `<i class="fa-solid fa-check icon"></i> Copied!`;
+        setTimeout(() => { btn.innerHTML = orig; }, 3000);
+      }
+    });
+  };
+
+  if (navigator.share && /mobile|android|iphone|ipad|ipod/i.test(navigator.userAgent)) {
+    navigator.share({ text: fullShareText }).catch(() => {
+      fallbackCopyText(fullShareText, onCopied);
+    });
+  } else if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(fullShareText).then(onCopied).catch(() => {
+      fallbackCopyText(fullShareText, onCopied);
+    });
+  } else {
+    fallbackCopyText(fullShareText, onCopied);
+  }
+}
+
+function fallbackCopyText(text, callback) {
+  const textArea = document.createElement("textarea");
+  textArea.value = text;
+  textArea.style.position = "fixed";
+  textArea.style.left = "-9999px";
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+  try {
+    document.execCommand('copy');
+    if (callback) callback();
+  } catch (err) {
+    console.error('Fallback copy failed', err);
+  }
+  document.body.removeChild(textArea);
+}
+
+// -------------------------------------------------------------
+// Win Confetti
+// -------------------------------------------------------------
+function launchWinConfetti() {
+  if (typeof confetti === 'function') {
+    confetti({
+      particleCount: 85,
+      spread: 70,
+      origin: { y: 0.6 }
+    });
+    setTimeout(() => {
+      confetti({ particleCount: 45, angle: 60, spread: 55, origin: { x: 0 } });
+      confetti({ particleCount: 45, angle: 120, spread: 55, origin: { x: 1 } });
+    }, 200);
+  }
+}
+
+// -------------------------------------------------------------
+// Native End-of-Game Screen Dashboard
+// -------------------------------------------------------------
+let countdownInterval = null;
+
+function renderEndGameDashboard() {
+  let dashboard = document.getElementById('end-game-dashboard');
+  if (!dashboard) {
+    dashboard = document.createElement('div');
+    dashboard.id = 'end-game-dashboard';
+    dashboard.className = 'end-game-dashboard';
+    const textDisplay = document.getElementById('textDisplay');
+    if (textDisplay && textDisplay.parentNode) {
+      textDisplay.parentNode.insertBefore(dashboard, textDisplay.nextSibling);
     } else {
-      shareText = `I played "Guess The Movie" and got it in ${collectedGuesses.length} guesses! Can you do better?`;
+      const contentWrap = document.getElementById('content-wrap') || document.body;
+      contentWrap.prepend(dashboard);
+    }
+  }
+
+  const title = (correctMovieObject && correctMovieObject.title) || 'Movie';
+  const year = (correctMovieObject && correctMovieObject.year) || '';
+  const poster = (correctMovieObject && correctMovieObject.posterLink) || '';
+  const movieID = correctMovieID || '';
+
+  const outcomeStatusText = gameWon ? 'You got it!' : 'You lost.';
+  const outcomeClass = gameWon ? 'won' : 'lost';
+
+  dashboard.innerHTML = `
+    <div class="end-game-card ${poster ? 'has-poster' : 'no-poster'}">
+      ${poster ? `
+        <div class="end-game-poster-col">
+          <img src="${poster}" alt="${title} (${year})" class="end-game-poster">
+        </div>
+      ` : ''}
+      <div class="end-game-content-col">
+        <div class="end-game-status ${outcomeClass}">${outcomeStatusText}</div>
+        <div class="end-game-movie-title">${title} (${year})</div>
+
+        <div class="end-game-actions">
+          <button id="dashboard-share-btn" class="end-game-btn share-btn" onclick="pressShare()">
+            <i class="fa-solid fa-share-nodes icon"></i> Share
+          </button>
+          <button class="end-game-btn past-btn" onclick="playRandomUnplayedGame()">
+            <i class="fa-solid fa-shuffle icon"></i> Play Past Movie
+          </button>
+          <a href="https://letterboxd.com/film/${movieID}/" target="_blank" rel="noopener noreferrer" class="end-game-btn lb-btn">
+            <img src="/images/LBColorLogo.png" class="btn-icon" alt="Letterboxd logo"> View on Letterboxd
+          </a>
+        </div>
+
+        <div class="end-game-countdown-line">
+          ⏱ New movie in <strong id="next-movie-countdown" class="countdown-val">--:--:--</strong>
+        </div>
+      </div>
+    </div>
+  `;
+
+  dashboard.style.display = 'block';
+
+  // Hide old result text to avoid duplicate message
+  const textDisplay = document.getElementById('textDisplay');
+  if (textDisplay) textDisplay.style.display = 'none';
+
+  updateStatusBar();
+  startCountdownTimer();
+}
+
+function updateStatusBar() {
+  const statusBar = document.getElementById('game-status-bar');
+  if (!statusBar) return;
+
+  const leftEl = statusBar.querySelector('.status-left');
+  const dateEl = document.getElementById('status-movie-date');
+  const pillEl = document.getElementById('status-progress-pill');
+
+  let movieNum = '';
+  if (window.datesManifestData && Array.isArray(window.datesManifestData.dates)) {
+    const idx = window.datesManifestData.dates.indexOf(correctMovieDate);
+    if (idx !== -1) movieNum = `#${idx + 1}`;
+  }
+
+  const movieText = movieNum ? `Movie ${movieNum}` : 'Movie';
+  const dateText = archiveDate ? `Archive • ${formattedMovieDate}` : formattedMovieDate;
+
+  if (gameOver && !gameWon) {
+    // When you lose: archive and date go first, left aligned with movie number after it right above the poster
+    statusBar.classList.add('lost');
+    if (leftEl) {
+      leftEl.innerHTML = `<span class="status-date">${dateText}</span><span class="status-sep">•</span><span class="status-movie"><i class="fa-solid fa-film icon"></i> <strong>${movieText}</strong></span>`;
+    }
+    if (dateEl) {
+      dateEl.textContent = '';
+    }
+    if (pillEl) {
+      pillEl.innerHTML = '';
     }
   } else {
-    shareText = `I played "Guess The Movie" but wasn't able to get it. Can you?`;
-  }
-
-  // Put the text first and append the URL so most share targets display the message first
-  const fullShareText = `${shareText} Play now at ${window.location.href}`;
-
-  // Prefer the native Share API with a text-only payload (omit `url` so platforms don't prioritize the link)
-  if (navigator.share) {
-    navigator.share({ text: fullShareText })
-      .catch(() => {
-        // If sharing fails, fallback to copying to clipboard
-        navigator.clipboard.writeText(fullShareText)
-          .then(() => {
-            if (shareButton) {
-              shareButton.textContent = "Copied";
-              setTimeout(() => { shareButton.textContent = "Share"; }, 4000);
-            }
-          })
-          .catch((err) => {
-            console.error("Failed to copy text: ", err);
-          });
-      });
-    return;
-  }
-
-  // Fallback: copy the combined text to the clipboard
-  navigator.clipboard.writeText(fullShareText)
-    .then(() => {
-      if (shareButton) {
-        shareButton.textContent = "Copied";
-        setTimeout(() => {
-          shareButton.textContent = "Share";
-        }, 4000);
+    statusBar.classList.remove('lost');
+    if (leftEl) {
+      leftEl.innerHTML = `<i class="fa-solid fa-film icon"></i> <strong id="status-movie-num">${movieText}</strong>`;
+    }
+    if (dateEl && formattedMovieDate) {
+      dateEl.textContent = dateText;
+    }
+    if (pillEl) {
+      if (gameOver && gameWon) {
+        const reviewCount = collectedGuesses.length;
+        const reviewText = reviewCount === 1 ? 'Won in 1 review' : `Won in ${reviewCount} reviews`;
+        pillEl.innerHTML = `<span class="guesses-pill won"><i class="fa-solid fa-check icon"></i> ${reviewText}</span>`;
+      } else {
+        const remainingGuesses = MAX_GUESSES - incorrectGuessCount;
+        const guessString = remainingGuesses === 1 ? "1 Guess Left" : `${remainingGuesses} Guesses Left`;
+        pillEl.innerHTML = `<span class="guesses-pill">${guessString}</span>`;
       }
-    })
-    .catch((err) => {
-      console.error("Failed to copy text: ", err);
-    });
+    }
+  }
 }
+
+function startCountdownTimer() {
+  if (countdownInterval) clearInterval(countdownInterval);
+
+  function update() {
+    const timerElem = document.getElementById('next-movie-countdown');
+    const previewElems = document.querySelectorAll('.countdown-preview');
+    if (!timerElem && previewElems.length === 0) return;
+    const now = new Date();
+    // 12:00 AM EST (America/New_York)
+    const estNowStr = now.toLocaleString("en-US", { timeZone: "America/New_York" });
+    const estNow = new Date(estNowStr);
+    const estMidnight = new Date(estNow);
+    estMidnight.setHours(24, 0, 0, 0);
+
+    const diff = Math.max(0, estMidnight - estNow);
+    const h = String(Math.floor(diff / 3600000)).padStart(2, '0');
+    const m = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
+    const s = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
+    const timeStr = `${h}:${m}:${s}`;
+    if (timerElem) timerElem.textContent = timeStr;
+    previewElems.forEach(el => { el.textContent = timeStr; });
+  }
+
+  update();
+  countdownInterval = setInterval(update, 1000);
+}
+
+// -------------------------------------------------------------
+// Play Random Unplayed Archive Movie
+// -------------------------------------------------------------
+async function playRandomUnplayedGame() {
+  try {
+    let dates = [];
+    if (window.datesManifestData && Array.isArray(window.datesManifestData.dates)) {
+      dates = window.datesManifestData.dates;
+    } else {
+      const resp = await fetch('/dates.json');
+      if (resp.ok) {
+        const json = await resp.json();
+        window.datesManifestData = json;
+        dates = json.dates || [];
+      }
+    }
+    if (!dates.length) return;
+
+    const history = JSON.parse(localStorage.getItem('gameHistory')) || [];
+    const completed = new Set(
+      history.filter(g => g.status === 'won' || g.status === 'lost').map(g => g.date)
+    );
+
+    const unplayed = dates.filter(d => !completed.has(d));
+    let targetDate = '';
+    if (unplayed.length > 0) {
+      targetDate = unplayed[Math.floor(Math.random() * unplayed.length)];
+    } else {
+      showToast("You've completed every archive game! Replaying a random favorite 🎬");
+      targetDate = dates[Math.floor(Math.random() * dates.length)];
+    }
+
+    if (targetDate) {
+      window.location.href = '/archive/' + targetDate;
+    }
+  } catch (e) {
+    console.error('Failed to pick random unplayed movie:', e);
+  }
+}
+
 
 // Clear the search input and movie list
 function clearSearchAndMovieList() {
@@ -802,6 +1054,7 @@ function updateSelectedItem() {
   items.forEach((item, index) => {
     if (index === currentMovieListIndex) {
       item.classList.add('selected');
+      item.scrollIntoView({ block: 'nearest' });
     } else {
       item.classList.remove('selected');
     }
@@ -832,12 +1085,14 @@ window.addEventListener('keydown', (event) => {
 
     event.preventDefault();
     // If the search textbox is focused, select the first movie
-    if (activeElement.id === 'search' && currentMovieListIndex == -1) {
+    if (activeElement && activeElement.id === 'search' && currentMovieListIndex === -1) {
       currentMovieListIndex = 0;
     } else {
       // Otherwise, move to the next item (with wrapping)
       if (currentMovieListIndex < items.length - 1) {
         currentMovieListIndex++;
+      } else {
+        currentMovieListIndex = 0;
       }
     }
     updateSelectedItem();
@@ -846,12 +1101,13 @@ window.addEventListener('keydown', (event) => {
   else if (event.key === 'ArrowUp') {
     const items = document.querySelectorAll('.movie-list li');
     if (items.length === 0) return;
-    const activeElement = document.activeElement;
 
     event.preventDefault();
-    // Only change index if the search box is not focused
+    // Move to previous item (with wrapping)
     if (currentMovieListIndex > 0) {
       currentMovieListIndex--;
+    } else if (currentMovieListIndex === 0) {
+      currentMovieListIndex = items.length - 1;
     }
     updateSelectedItem();
   }
@@ -859,24 +1115,17 @@ window.addEventListener('keydown', (event) => {
     const items = document.querySelectorAll('.movie-list li');
     const activeElement = document.activeElement;
 
-    // If Enter is pressed while search input is focused and no movie is selected from list
-    if (activeElement.id === 'search' && currentMovieListIndex === -1) {
-      // Submit the current search query
-      handleSubmit();
+    // If an item in the movie list is currently selected via arrow keys, select it into search bar
+    if (items.length > 0 && currentMovieListIndex >= 0 && currentMovieListIndex < items.length) {
+      event.preventDefault();
+      items[currentMovieListIndex].click();
       return;
     }
 
-    // If there are movies in the list
-    if (items.length > 0) {
-      // If the search textbox is focused and no movie is selected, select the first movie
-      if (activeElement.id === 'search' && currentMovieListIndex === -1) {
-        currentMovieListIndex = 0;
-        updateSelectedItem();
-      }
-      // Load the selected movie into search bar if valid
-      else if (currentMovieListIndex >= 0 && currentMovieListIndex < items.length) {
-        items[currentMovieListIndex].click();
-      }
+    // If Enter is pressed while search input is focused and no list item is selected, submit
+    if (activeElement && activeElement.id === 'search') {
+      handleSubmit();
+      return;
     }
   }
   else if (event.key === 'ArrowRight') {
@@ -922,12 +1171,6 @@ function displayMovieList(movies) {
 function filterMovies(event) {
   const searchInput = domElements.get('searchInput');
   if (!searchInput) return;
-
-  // Only process valid characters
-  const allowedRegex = /^[a-zA-Z0-9 !@#$ﬂ&*()_+\-=\~`{}|:"<>?$$\\;',./]$/;
-  if (event.key !== undefined && event.key !== "Backspace" && !allowedRegex.test(event.key)) {
-    return;
-  }
 
   const searchQuery = searchInput.value.trim();
 
@@ -975,6 +1218,7 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
     const datesResponse = await fetch('/dates.json');
     if (!datesResponse.ok) throw new Error('Could not load dates manifest');
     const datesData = await datesResponse.json();
+    window.datesManifestData = datesData;
     
     // Determine which date to use
     const targetDate = archiveDate || datesData.latestDate;
@@ -1028,7 +1272,9 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
         collectedGuesses = [...completedGame.guesses];
         incorrectGuessCount = completedGame.guesses.length;
       }
+      window.suppressAutoModal = true;
       finishGame(hasGameBeenWon(correctMovieID));
+      window.suppressAutoModal = false;
     }
     // Game was attempted but not completed
     else if (game_in_progress) {
@@ -1041,11 +1287,6 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
 
       // Format previous guesses
       const previousGuessesItems = formatPreviousGuesses(collectedGuesses);
-
-      // Display simple progress message
-      if (resultDisplay) {
-        resultDisplay.innerHTML = `<div class="remaining-guesses">${guessString} Left</div>`;
-      }
 
       // Update the past guesses accordion
       updatePastGuessesDisplay(previousGuessesItems);
@@ -1062,15 +1303,17 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
       if (shareButton) {
         shareButton.style.display = 'none';
       }
+      const existingSummaryBtn = document.getElementById('open-summary-button');
+      if (existingSummaryBtn) existingSummaryBtn.remove();
+      const existingPastGameBtn = document.getElementById('play-past-game-button');
+      if (existingPastGameBtn) existingPastGameBtn.remove();
+      const endDashboard = document.getElementById('end-game-dashboard');
+      if (endDashboard) endDashboard.style.display = 'none';
+      const textDisplayEl = document.getElementById('textDisplay');
+      if (textDisplayEl) textDisplayEl.style.display = 'none';
     }
     // New game
     else {
-      // Show remaining guesses for new games
-      const guessString = MAX_GUESSES === 1 ? "1 Guess" : `${MAX_GUESSES} Guesses`;
-      if (resultDisplay) {
-        resultDisplay.innerHTML = `<div class="remaining-guesses">${guessString} Left</div>`;
-      }
-
       updateReviewNumButtons();
       displayCurrentReview();
 
@@ -1078,17 +1321,18 @@ document.addEventListener('DOMContentLoaded', async function initializeGame() {
       if (shareButton) {
         shareButton.style.display = 'none';
       }
-
+      const existingSummaryBtn = document.getElementById('open-summary-button');
+      if (existingSummaryBtn) existingSummaryBtn.remove();
+      const existingPastGameBtn = document.getElementById('play-past-game-button');
+      if (existingPastGameBtn) existingPastGameBtn.remove();
+      const endDashboard = document.getElementById('end-game-dashboard');
+      if (endDashboard) endDashboard.style.display = 'none';
+      const textDisplayEl = document.getElementById('textDisplay');
+      if (textDisplayEl) textDisplayEl.style.display = 'none';
     }
 
-    if (dateDisplay) {
-      if (archiveDate) {
-        dateDisplay.textContent = `Archive (${formattedMovieDate})`;
-      } else {
-        dateDisplay.textContent = `Today's movie (${formattedMovieDate})`;
-      }
-    }
-
+    // Update unified status bar
+    updateStatusBar();
   }
   catch (error) {
     console.error('Error during initialization:', error);

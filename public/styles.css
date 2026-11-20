@@ -188,8 +188,12 @@ body {
     color: gray !important;
 }
 
-*:not(.icon) {
+*:not(.icon):not([class*="fa-"]):not(.fa-solid):not(.fa-regular):not(.fa-brands) {
     font-family: 'Familjen Grotesk', sans-serif, bold !important;
+}
+
+i[class*="fa-"], .icon[class*="fa-"], .fa-solid, .fa-regular, .fa-brands {
+    font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands" !important;
 }
 
 body {
@@ -199,15 +203,62 @@ body {
 }
 
 #share-button {
-    background-color: transparent;
+    background-color: var(--calendar-green-hover);
     color: var(--bonewhite);
-    outline: none;
     border: none;
+    outline: none;
+    padding: 7px 16px;
+    border-radius: 20px;
+    font-size: 1rem;
+    cursor: pointer;
     display: none; /* Initially hidden */
+    align-items: center;
+    gap: 6px;
 }
 
 #share-button:hover {
+    background-color: var(--calendar-green);
+}
+
+#open-summary-button {
+    background-color: transparent;
+    color: var(--bonewhite);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    outline: none;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    gap: 6px;
+    margin-left: 8px;
+}
+
+#open-summary-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+#play-past-game-button {
+    background-color: var(--LOrange);
     color: var(--LBackground);
+    border: none;
+    outline: none;
+    padding: 7px 16px;
+    border-radius: 20px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    gap: 6px;
+    margin-left: 8px;
+    transition: filter 0.15s ease, transform 0.15s ease;
+}
+
+#play-past-game-button:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
 }
 
 #search-row {
@@ -582,23 +633,28 @@ a:focus #profileIcon {
     display: inline-flex;
     gap: 8px;
     align-items: center;
-    padding: 6px 10px;
-    border-radius: 6px;
-    color: var(--LBlue); /* changed from var(--bonewhite) */
+    padding: 7px 14px;
+    border-radius: 20px;
+    color: var(--bonewhite);
     text-decoration: none;
-    background: rgba(255,255,255,0.02);
-    transition: background 0.15s ease;
+    font-size: 0.85rem;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    transition: background-color 0.15s ease, border-color 0.15s ease;
 }
 
 #affiliate-offers .where-link:hover {
-    background: rgba(255,255,255,0.06);
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: var(--bonewhite);
 }
 
 #affiliate-offers .where-link .icon {
     font-size: 1.1rem;
     width: 1.2rem;
     text-align: center;
-    color: var(--offWhite);
+    color: var(--LOrange);
 }
 
 @media (max-width: 560px) {
@@ -1396,4 +1452,512 @@ a:focus #profileIcon {
 
 .past-guesses-display.lost .guess-count-badge {
     background: var(--calendar-red-hover);
+}
+
+/* ------------------------------------------------------------- */
+/* Toast Notification                                            */
+/* ------------------------------------------------------------- */
+.game-toast {
+    position: fixed;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-20px);
+    background-color: rgba(20, 20, 25, 0.95);
+    color: var(--bonewhite);
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.15);
+    z-index: 99999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+}
+
+.game-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* ------------------------------------------------------------- */
+/* End-of-Game Screen (Clean, Flat, No Box Background)           */
+/* ------------------------------------------------------------- */
+.end-game-dashboard {
+    max-width: 600px;
+    margin: 12px auto 16px auto;
+    padding: 0 10px;
+    box-sizing: border-box;
+    text-align: center;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.end-game-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    max-width: 520px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.end-game-card.no-poster {
+    flex-direction: column;
+    text-align: center;
+}
+
+.end-game-card.no-poster .end-game-content-col {
+    align-items: center;
+    text-align: center;
+}
+
+.end-game-card.no-poster .end-game-actions {
+    justify-content: center;
+}
+
+.end-game-card.no-poster .end-game-countdown-line {
+    justify-content: center;
+}
+
+.end-game-poster-col {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.end-game-poster {
+    width: 110px;
+    height: 165px;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+    display: block;
+}
+
+.end-game-content-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    text-align: left;
+    min-width: 0;
+    flex: 1 1 auto;
+}
+
+.end-game-status {
+    font-size: 1.35rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.end-game-status.won {
+    color: var(--LGreen);
+}
+
+.end-game-status.lost {
+    color: var(--calendar-red);
+}
+
+.end-game-movie-title {
+    font-size: 1.18rem;
+    font-weight: 700;
+    color: var(--bonewhite);
+    line-height: 1.3;
+}
+
+.end-game-score-sub {
+    font-size: 0.88rem;
+    color: rgb(170, 185, 205);
+}
+
+/* Action Buttons */
+.end-game-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    margin: 10px 0 6px 0;
+}
+
+.end-game-card.no-poster .end-game-actions {
+    justify-content: center;
+}
+
+.end-game-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-size: 13.5px;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    color: #ffffff !important;
+    transition: background-color 0.15s ease;
+    transform: none !important;
+    white-space: nowrap;
+}
+
+.end-game-btn:hover {
+    transform: none !important;
+}
+
+.end-game-btn.share-btn {
+    background-color: var(--calendar-green-hover);
+    color: #ffffff !important;
+}
+
+.end-game-btn.share-btn:hover {
+    background-color: var(--calendar-green);
+}
+
+.end-game-btn.past-btn {
+    background-color: var(--LOrange);
+    color: #ffffff !important;
+}
+
+.end-game-btn.past-btn:hover {
+    background-color: #d67220;
+}
+
+.end-game-btn.lb-btn {
+    background-color: #0077cc;
+    color: #ffffff !important;
+}
+
+.end-game-btn.lb-btn:hover {
+    background-color: var(--LBlue);
+}
+
+.end-game-btn.lb-btn .btn-icon {
+    height: 12px;
+    width: auto;
+    object-fit: contain;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Next Movie Countdown Line */
+.end-game-countdown-line {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.92rem;
+    color: rgb(180, 195, 215);
+    margin-top: 4px;
+    margin-bottom: 2px;
+}
+
+.end-game-countdown-line strong.countdown-val {
+    color: #ffffff !important;
+    font-family: monospace;
+    font-size: 1.05rem;
+}
+
+@media (max-width: 480px) {
+    .end-game-poster {
+        width: 92px;
+        height: 138px;
+    }
+    .end-game-card {
+        gap: 12px;
+    }
+    .end-game-status {
+        font-size: 1.2rem;
+    }
+    .end-game-movie-title {
+        font-size: 1.05rem;
+    }
+    .end-game-btn {
+        padding: 5px 10px;
+        font-size: 12.5px;
+    }
+}
+
+/* ------------------------------------------------------------- */
+/* Calendar Bottom Action (Option 3)                             */
+/* ------------------------------------------------------------- */
+.calendar-footer-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+    padding-top: 8px;
+    border-top: none;
+}
+
+.calendar-footer-hint {
+    font-size: 0.9rem;
+    color: rgb(180, 195, 215);
+}
+
+.random-unplayed-archive-btn {
+    background-color: var(--LOrange);
+    color: #ffffff !important;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: none;
+    transition: background-color 0.15s ease;
+    transform: none !important;
+    white-space: nowrap;
+}
+
+.random-unplayed-archive-btn:hover {
+    background-color: #d67220;
+    transform: none !important;
+}
+
+.archive-nav-disabled {
+    opacity: 0.3 !important;
+    pointer-events: none !important;
+    cursor: default !important;
+}
+
+/* ------------------------------------------------------------- */
+/* Wins by Guess Horizontal Chart on Stats Page                  */
+/* ------------------------------------------------------------- */
+.guess-distribution-box {
+    margin: 24px 0 26px 0;
+    max-width: 440px;
+}
+
+.guess-dist-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--bonewhite);
+    margin: 0 0 2px 0;
+}
+
+.guess-dist-subtitle {
+    font-size: 0.85rem;
+    color: rgb(170, 185, 205);
+    margin: 0 0 12px 0;
+}
+
+.guess-dist-columns {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px;
+    height: 140px;
+    padding: 12px 14px 10px 14px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.guess-dist-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    flex: 1;
+    height: 100%;
+    min-width: 32px;
+}
+
+.guess-col-count {
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+    line-height: 1;
+}
+
+.guess-col-count.has-wins {
+    color: var(--LGreen);
+}
+
+.guess-col-count.zero-wins {
+    color: rgba(255, 255, 255, 0.35);
+}
+
+.guess-col-track {
+    width: 100%;
+    max-width: 46px;
+    height: 84px;
+    display: flex;
+    align-items: flex-end;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 4px 4px 0 0;
+    overflow: hidden;
+}
+
+.guess-col-fill {
+    width: 100%;
+    transition: height 0.35s ease;
+    border-radius: 3px 3px 0 0;
+}
+
+.guess-col-fill.has-wins {
+    background-color: var(--LGreen);
+}
+
+.guess-col-fill.zero-wins {
+    background-color: transparent;
+}
+
+.guess-col-label {
+    margin-top: 6px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--bonewhite);
+    line-height: 1;
+}
+
+/* ------------------------------------------------------------- */
+/* Unified Game Status Bar (Borderless)                          */
+/* ------------------------------------------------------------- */
+.unified-status-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 720px;
+    margin: 8px auto 14px auto;
+    background: transparent;
+    border: none;
+    padding: 4px 6px;
+    box-sizing: border-box;
+    font-size: 0.95rem;
+}
+
+.unified-status-bar .status-left {
+    color: var(--LOrange);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 700;
+}
+
+.unified-status-bar .status-center {
+    color: var(--bonewhite);
+    font-weight: 700;
+}
+
+.unified-status-bar .status-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    min-height: 26px;
+}
+
+.remaining-guesses {
+    display: none !important;
+}
+
+.unified-status-bar .guesses-pill {
+    background: rgba(102, 185, 239, 0.18);
+    color: var(--LBlue);
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    letter-spacing: 0.2px;
+}
+
+.unified-status-bar .guesses-pill.won {
+    background: rgba(0, 224, 84, 0.18);
+    color: var(--LGreen);
+}
+
+/* Lost state: left-aligned with archive & date first, movie number after, right above poster */
+.unified-status-bar.lost {
+    max-width: 520px;
+    justify-content: flex-start;
+    padding: 4px 0;
+    margin: 8px auto 8px auto;
+}
+
+.unified-status-bar.lost .status-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.92rem;
+}
+
+.unified-status-bar.lost .status-date {
+    color: var(--bonewhite);
+    font-weight: 700;
+}
+
+.unified-status-bar.lost .status-sep {
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 700;
+    margin: 0 2px;
+}
+
+.unified-status-bar.lost .status-movie {
+    color: var(--LOrange);
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+@media (max-width: 600px) {
+    .unified-status-bar {
+        padding: 4px 4px;
+        font-size: 0.85rem;
+        margin: 6px auto 12px auto;
+    }
+
+    .unified-status-bar .guesses-pill {
+        padding: 2px 7px;
+        font-size: 0.78rem;
+    }
+
+    .unified-status-bar.lost {
+        max-width: 100%;
+        padding: 4px 10px;
+    }
+}
+
+@media (max-width: 420px) {
+    .unified-status-bar {
+        font-size: 0.80rem;
+    }
+
+    .unified-status-bar .status-left {
+        gap: 4px;
+    }
+
+    .unified-status-bar .guesses-pill {
+        padding: 2px 5px;
+        font-size: 0.74rem;
+    }
+
+    .unified-status-bar.lost .status-left {
+        font-size: 0.80rem;
+        gap: 4px;
+    }
 }

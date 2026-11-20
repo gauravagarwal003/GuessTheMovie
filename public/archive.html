@@ -22,6 +22,13 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css">
     <link rel="icon" type="image/x-icon" href="/images/just_logo.png">
+    <link rel="apple-touch-icon" href="/images/just_logo.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#141419">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="GuessMovie">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js"></script>
     <link rel="stylesheet" href="/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -79,17 +86,19 @@
         </header>
 
         <div id="content-wrap">
-            <div id="dateDisplay">
-                <a id="dateDisplayMessage"></a>
+            <div id="game-status-bar" class="unified-status-bar">
+                <div class="status-left"><i class="fa-solid fa-film icon"></i> <strong id="status-movie-num">Movie</strong></div>
+                <div class="status-center" id="status-movie-date"></div>
+                <div class="status-right" id="status-progress-pill"><span class="guesses-pill" id="status-guesses-text">5 Guesses Left</span></div>
             </div>
-            <div id="textDisplay">
-                <div id="resultDisplay">
-                    <span class="message"></span>
-                    <a class="text-link"></a>
-                    <span class="message"></span>
-                </div>
+
+            <div id="textDisplay" style="display: none;">
+                <div id="resultDisplay"></div>
                 <a id="come-back-text"></a>
             </div>
+
+            <!-- End-of-Game Screen Dashboard -->
+            <div id="end-game-dashboard" class="end-game-dashboard" style="display: none;"></div>
 
             <!-- Affiliate offers (static) -->
             <div id="affiliate-offers" aria-hidden="true">
@@ -183,7 +192,7 @@
                 </a>
                 <a href="/about.html" class="footer-item" id="contactItem">
                     <i class="fa-solid fa-paper-plane icon" id="contactIcon"></i>
-                    <span id="contactLabel" class="footer-full">Contact Us</span>
+                    <span id="contactLabel" class="footer-full">Contact Me</span>
                     <span id="contactLabel" class="footer-short">Contact</span>
                 </a>
             </div>
