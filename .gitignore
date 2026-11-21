@@ -32,3 +32,18 @@ coverage/
 .heroku/
 .npm/
 .profile.d/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# OAuth secrets & tokens
+scripts/client_secrets.json
+scripts/youtube_token.json
+scripts/*token.json
+*.token.json
+
+# Local test frames & generated shorts
+test_*.png
+dist/shorts/
