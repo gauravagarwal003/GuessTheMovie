@@ -3,7 +3,8 @@
 generate_short_video.py
 Turns any GuessTheMovie daily puzzle into a 1080x1920 (9:16) vertical video
 that exactly matches the website's visual styling, colors, and branding,
-with full native emoji, phonetic extension (superscripts), and unicode symbol support.
+with full native emoji, phonetic extension (superscripts), and unicode symbol support,
+plus synchronized cinematic audio (ambient drone, rhythmic clue ticks, countdown beeps, reveal chord).
 """
 
 import os
@@ -17,6 +18,8 @@ import tempfile
 import subprocess
 import argparse
 import unicodedata
+import wave
+import numpy as np
 from datetime import datetime
 from urllib.request import urlopen, Request
 from PIL import Image, ImageDraw, ImageFont
@@ -37,7 +40,6 @@ COLOR_PILL_BG = (30, 48, 65)          # rgba(102, 185, 239, 0.18) on dark
 COLOR_MUTED = (165, 170, 185)         # clean muted text for slate bg
 COLOR_MUTED_CARD = (150, 150, 150)    # rgb(150, 150, 150) inside dark card
 
-# Countdown Colors: 3 -> Orange, 2 -> Green, 1 -> Blue
 COUNTDOWN_COLORS = {
     3: COLOR_ORANGE,
     2: COLOR_GREEN,
@@ -49,7 +51,6 @@ FONT_PATH = os.path.join(BASE_DIR, "scripts", "fonts", "FamiljenGrotesk-Bold.ttf
 EMOJI_FONT_PATH = "/System/Library/Fonts/Apple Color Emoji.ttc"
 SUPPORTED_EMOJI_SIZES = [20, 32, 40, 48, 64, 96, 160]
 
-# Regex matching complete emoji grapheme clusters (including skin tones, variation selectors, ZWJ sequences)
 EMOJI_PATTERN = re.compile(
     r'(?:'
     r'[\U0001F1E6-\U0001F1FF]{2}|'
@@ -65,13 +66,6 @@ EMOJI_PATTERN = re.compile(
 _font_cache = {}
 
 def get_font_cascade(size):
-    """
-    Returns a list of fonts covering:
-    1. Familjen Grotesk Bold (main brand font)
-    2. Arial.ttf (supports superscripts, phonetic extensions like ᶜᵃⁿ ᴵ ᵍᵉᵗ ᵘʰʰʰʰ, Latin-ext, IPA, Cyrillic)
-    3. Arial Unicode.ttf (supports CJK, Asian scripts, symbols like ･ﾟ✧)
-    4. Times New Roman.ttf & Helvetica.ttc (additional math & Latin symbols)
-    """
     key = ("cascade", size)
     if key not in _font_cache:
         paths = [
@@ -133,22 +127,14 @@ def get_emoji_img(emoji_str, target_size):
         return None
 
 def find_font_for_char(ch, cascade, notdefs):
-    """
-    Finds the first font in the cascade that has a glyph for `ch`.
-    Falls back to Unicode NFKC normalization if mathematical/fancy script.
-    """
     for f, nd in zip(cascade, notdefs):
         if f.getmask(ch).size != nd:
             return f, ch
-
-    # Try Unicode NFKC normalization (handles mathematical bold/fraktur/script e.g. 𝐣 -> j)
     norm = unicodedata.normalize('NFKC', ch)
     if norm != ch:
         for f, nd in zip(cascade, notdefs):
             if all(f.getmask(c).size != nd for c in norm):
                 return f, norm
-
-    # Fallback to second font in cascade (usually Arial.ttf)
     fallback = cascade[1] if len(cascade) > 1 else cascade[0]
     return fallback, ch
 
@@ -157,7 +143,6 @@ def get_rich_text_width(text, font_size):
     tokens = EMOJI_PATTERN.split(text)
     emojis = EMOJI_PATTERN.findall(text)
     total_w = 0
-
     for i in range(len(tokens)):
         chunk = tokens[i]
         if chunk:
@@ -169,10 +154,6 @@ def get_rich_text_width(text, font_size):
     return total_w
 
 def draw_rich_text(img, draw, x, y, text, font_size, color=COLOR_BONEWHITE):
-    """
-    Renders text with full native color emoji support, phonetic extensions
-    (superscripts/subscripts), and Unicode symbols without missing glyph boxes.
-    """
     cascade, notdefs = get_font_cascade(font_size)
     tokens = EMOJI_PATTERN.split(text)
     emojis = EMOJI_PATTERN.findall(text)
@@ -206,12 +187,6 @@ def clean_text(html_content):
     return text
 
 def calculate_review_duration(review_text):
-    """
-    Calculates display time based on reading length.
-    Short reviews (~5-10 words): ~3.0s - 3.5s
-    Medium reviews (~20-30 words): ~4.5s - 5.5s
-    Long reviews (~50+ words): ~6.0s - 7.0s
-    """
     clean = clean_text(review_text)
     words = len(clean.split())
     duration = 2.5 + (words * 0.10)
@@ -342,7 +317,6 @@ def draw_status_bar(draw, y_top, date_str, right_pill_text, movie_num_str):
     font_status = get_font(32)
     font_pill = get_font(26)
 
-    # 1. Left: Film icon + Movie #X (perfect vertical alignment)
     icon_size = 28
     icon_cx = status_x + icon_size // 2 + 10
     draw_film_icon(draw, icon_cx, center_y, icon_size, COLOR_ORANGE)
@@ -352,7 +326,6 @@ def draw_status_bar(draw, y_top, date_str, right_pill_text, movie_num_str):
     text_y = center_y - (bbox_m[3] + bbox_m[1]) / 2
     draw.text((text_x, text_y), movie_num_str, font=font_status, fill=COLOR_ORANGE)
 
-    # 2. Center: Formatted Date
     try:
         dt = datetime.strptime(date_str, "%Y-%m-%d")
         formatted_date = dt.strftime("%B %d, %Y")
@@ -364,7 +337,6 @@ def draw_status_bar(draw, y_top, date_str, right_pill_text, movie_num_str):
     date_y = center_y - (bbox_date[3] + bbox_date[1]) / 2
     draw.text(((WIDTH - w_date) // 2, date_y), formatted_date, font=font_status, fill=COLOR_BONEWHITE)
 
-    # 3. Right: Pill text
     if right_pill_text:
         bbox_pill = draw.textbbox((0, 0), right_pill_text, font=font_pill)
         pw = (bbox_pill[2] - bbox_pill[0]) + 30
@@ -379,7 +351,6 @@ def draw_status_bar(draw, y_top, date_str, right_pill_text, movie_num_str):
 # --- Slides ---
 
 def create_intro_frame(date_str, movie_num_str, countdown_val):
-    """Intro frame on light gray background with countdown in Orange, Green, Blue."""
     img = Image.new("RGB", (WIDTH, HEIGHT), color=COLOR_BODY_BG)
     draw = ImageDraw.Draw(img)
     draw_site_header(img, draw)
@@ -391,12 +362,10 @@ def create_intro_frame(date_str, movie_num_str, countdown_val):
     font_cnt_label = get_font(36)
     font_number = get_font(180)
 
-    # Subtitle
     t1 = "DAILY FILM CHALLENGE"
     bbox1 = draw.textbbox((0, 0), t1, font=font_sub)
     draw.text(((WIDTH - (bbox1[2] - bbox1[0])) // 2, 420), t1, font=font_sub, fill=COLOR_ORANGE)
 
-    # Main Heading
     t2 = "Can you guess"
     t3 = "today's movie?"
     bbox2 = draw.textbbox((0, 0), t2, font=font_huge)
@@ -404,12 +373,10 @@ def create_intro_frame(date_str, movie_num_str, countdown_val):
     bbox3 = draw.textbbox((0, 0), t3, font=font_huge)
     draw.text(((WIDTH - (bbox3[2] - bbox3[0])) // 2, 610), t3, font=font_huge, fill=COLOR_BONEWHITE)
 
-    # Description
     desc = "5 Real Letterboxd Reviews"
     bbox_d = draw.textbbox((0, 0), desc, font=font_desc)
     draw.text(((WIDTH - (bbox_d[2] - bbox_d[0])) // 2, 750), desc, font=font_desc, fill=COLOR_MUTED)
 
-    # Animated Countdown section: 3 -> Orange, 2 -> Green, 1 -> Blue
     c_label = "CLUE #1 STARTS IN"
     bbox_cl = draw.textbbox((0, 0), c_label, font=font_cnt_label)
     draw.text(((WIDTH - (bbox_cl[2] - bbox_cl[0])) // 2, 1000), c_label, font=font_cnt_label, fill=COLOR_MUTED)
@@ -423,7 +390,6 @@ def create_intro_frame(date_str, movie_num_str, countdown_val):
     return img
 
 def create_review_slide(date_str, movie_num_str, review_index, review_data, total_reviews=5):
-    """Review card slide matching styles.css with full rich emoji & phonetic/superscript support."""
     img = Image.new("RGB", (WIDTH, HEIGHT), color=COLOR_BODY_BG)
     draw = ImageDraw.Draw(img)
     draw_site_header(img, draw)
@@ -438,12 +404,10 @@ def create_review_slide(date_str, movie_num_str, review_index, review_data, tota
 
     draw.rounded_rectangle([(card_x, card_y), (card_x + card_w, card_y + card_h)], radius=24, fill=COLOR_CARD_BG)
 
-    # Header inside Review Card
     header_pad = 44
     header_y = card_y + header_pad
     avatar_size = 90
 
-    # Profile Avatar
     avatar_raw = download_image(review_data.get("profilePhotoLink"), target_size=(avatar_size, avatar_size))
     avatar = make_circular_avatar(avatar_raw, avatar_size)
     if avatar:
@@ -458,11 +422,9 @@ def create_review_slide(date_str, movie_num_str, review_index, review_data, tota
     uname = review_data.get("username", "Letterboxd User")
     date_reviewed = review_data.get("date", "")
 
-    # Draw username with rich emoji & unicode cascade!
     draw_rich_text(img, draw, card_x + header_pad + avatar_size + 24, header_y + 4, uname, 38, COLOR_BONEWHITE)
     draw.text((card_x + header_pad + avatar_size + 24, header_y + 50), date_reviewed, font=font_date, fill=COLOR_MUTED_CARD)
 
-    # Rating & Liked Heart
     rating_val = 0.0
     try:
         rating_str = str(review_data.get("rating", "")).strip()
@@ -489,10 +451,8 @@ def create_review_slide(date_str, movie_num_str, review_index, review_data, tota
         heart_y = star_y + 42
         draw_heart(draw, star_x_end - 6, heart_y, 24, COLOR_ORANGE)
 
-    # Separator Line
     draw.line([(card_x + header_pad, card_y + 160), (card_x + card_w - header_pad, card_y + 160)], fill=(38, 38, 48), width=2)
 
-    # Review Text
     raw_review = review_data.get("text", "")
     review_text = clean_text(raw_review)
 
@@ -519,7 +479,6 @@ def create_review_slide(date_str, movie_num_str, review_index, review_data, tota
         draw_rich_text(img, draw, card_x + header_pad + 10, start_text_y, line, f_size, COLOR_BONEWHITE)
         start_text_y += l_height
 
-    # Footer inside Card (Strictly aligned icons and numbers)
     footer_sep_y = card_y + card_h - 100
     draw.line([(card_x + header_pad, footer_sep_y), (card_x + card_w - header_pad, footer_sep_y)], fill=(38, 38, 48), width=2)
 
@@ -551,7 +510,6 @@ def create_review_slide(date_str, movie_num_str, review_index, review_data, tota
     return img
 
 def create_countdown_frame(date_str, movie_num_str, countdown_val):
-    """Countdown frame in Orange, Green, Blue on clean slate background."""
     img = Image.new("RGB", (WIDTH, HEIGHT), color=COLOR_BODY_BG)
     draw = ImageDraw.Draw(img)
     draw_site_header(img, draw)
@@ -578,10 +536,6 @@ def create_countdown_frame(date_str, movie_num_str, countdown_val):
     return img
 
 def create_reveal_slide(title, year, poster_url, date_str, movie_num_str):
-    """
-    Reveal slide with the movie poster filling the space properly at 640x960,
-    no dark card background, and a prominent website link.
-    """
     img = Image.new("RGB", (WIDTH, HEIGHT), color=COLOR_BODY_BG)
     draw = ImageDraw.Draw(img)
     draw_site_header(img, draw)
@@ -660,6 +614,65 @@ def load_movie_details(movie_id):
                 return row.get("title", ""), row.get("year", ""), row.get("posterLink", "")
     return movie_id.replace("-", " ").title(), "Unknown", ""
 
+def generate_cinematic_audio(total_duration, countdown_start_sec, reveal_start_sec, out_wav_path):
+    """
+    Clean, light, pleasant sound design:
+    1. Crisp countdown beeps on 3, 2, 1 for BOTH the intro countdown and the reveal countdown.
+    2. Completely clean during review reading (NO drone, NO clock ticks).
+    3. Pleasant, bright 'ding' chime when the movie is revealed!
+    """
+    sample_rate = 44100
+    t = np.linspace(0, total_duration, int(sample_rate * total_duration), endpoint=False)
+    audio = np.zeros_like(t)
+
+    def add_beep(start_t, freq=800, dur=0.14, vol=0.45):
+        start_idx = int(round(start_t * sample_rate))
+        length = int(dur * sample_rate)
+        tb = np.linspace(0, dur, length, endpoint=False)
+        envelope = np.minimum(tb / 0.008, 1.0) * np.exp(-tb * 14.0)
+        beep = vol * np.sin(2 * np.pi * freq * tb) * envelope
+        end_idx = min(len(audio), start_idx + length)
+        if start_idx < len(audio):
+            audio[start_idx:end_idx] += beep[:end_idx - start_idx]
+
+    def add_ding(start_t, vol=0.55):
+        start_idx = int(round(start_t * sample_rate))
+        dur = 1.2
+        length = int(dur * sample_rate)
+        tb = np.linspace(0, dur, length, endpoint=False)
+        # Bright bell ding: fundamental A6 (1760Hz), A7 (3520Hz), E7 (2640Hz)
+        env = np.minimum(tb / 0.003, 1.0) * np.exp(-tb * 3.8)
+        ding = (0.55 * np.sin(2 * np.pi * 1760 * tb) +
+                0.30 * np.sin(2 * np.pi * 3520 * tb) +
+                0.15 * np.sin(2 * np.pi * 2640 * tb)) * env * vol
+        end_idx = min(len(audio), start_idx + length)
+        if start_idx < len(audio):
+            audio[start_idx:end_idx] += ding[:end_idx - start_idx]
+
+    # 1. Intro Countdown Beeps: 3 (800Hz), 2 (800Hz), 1 (1200Hz)
+    add_beep(0.0, freq=800)
+    add_beep(1.0, freq=800)
+    add_beep(2.0, freq=1200)
+
+    # 2. Reveal Countdown Beeps: 3 (800Hz), 2 (800Hz), 1 (1200Hz)
+    add_beep(countdown_start_sec + 0.0, freq=800)
+    add_beep(countdown_start_sec + 1.0, freq=800)
+    add_beep(countdown_start_sec + 2.0, freq=1200)
+
+    # 3. Clean, pleasant ding when the movie is revealed
+    add_ding(reveal_start_sec)
+
+    max_val = np.max(np.abs(audio))
+    if max_val > 0:
+        audio = (audio / max_val) * 0.75
+    audio_int16 = (audio * 32767).astype(np.int16)
+
+    with wave.open(out_wav_path, 'w') as wf:
+        wf.setnchannels(1)
+        wf.setsampwidth(2)
+        wf.setframerate(sample_rate)
+        wf.writeframes(audio_int16.tobytes())
+
 def generate_video_for_date(date_str, output_path=None):
     movie_json_path = os.path.join(BASE_DIR, "movies", f"{date_str}.json")
     if not os.path.exists(movie_json_path):
@@ -684,7 +697,7 @@ def generate_video_for_date(date_str, output_path=None):
     with tempfile.TemporaryDirectory() as tmpdir:
         slides = []
 
-        # 1. Intro Countdown (3 -> 2 -> 1, 1.0s each: Orange -> Green -> Blue)
+        # 1. Intro Countdown (3 -> 2 -> 1, 1.0s each)
         for cnt in [3, 2, 1]:
             f_img = create_intro_frame(date_str, movie_num_str, cnt)
             p = os.path.join(tmpdir, f"intro_{cnt}.png")
@@ -701,12 +714,17 @@ def generate_video_for_date(date_str, output_path=None):
             print(f"   - Review {idx} ({len(clean_text(rev.get('text', '')).split())} words): {dur}s")
             slides.append((p, dur))
 
-        # 3. Reveal Countdown (3 -> 2 -> 1, 1.0s each: Orange -> Green -> Blue)
+        # Track timestamps for audio synchronization
+        countdown_start_sec = sum(dur for _, dur in slides)
+
+        # 3. Reveal Countdown (3 -> 2 -> 1, 1.0s each)
         for cnt in [3, 2, 1]:
             cnt_img = create_countdown_frame(date_str, movie_num_str, cnt)
             p = os.path.join(tmpdir, f"countdown_{cnt}.png")
             cnt_img.save(p)
             slides.append((p, 1.0))
+
+        reveal_start_sec = sum(dur for _, dur in slides)
 
         # 4. Reveal Screen (5.0s)
         rev_img = create_reveal_slide(title, year, poster, date_str, movie_num_str)
@@ -716,6 +734,18 @@ def generate_video_for_date(date_str, output_path=None):
 
         total_duration = sum(dur for _, dur in slides)
 
+        # 5. Build/Mix Cinematic Audio Track
+        audio_wav_path = os.path.join(tmpdir, "cinematic_audio.wav")
+        custom_audio_path = os.path.join(BASE_DIR, "scripts", "assets", "audio.mp3")
+
+        if os.path.exists(custom_audio_path):
+            print(f"🎵 Using custom background audio: {custom_audio_path}")
+            audio_input = custom_audio_path
+        else:
+            print("🎵 Synthesizing synchronized cinematic audio track...")
+            generate_cinematic_audio(total_duration, countdown_start_sec, reveal_start_sec, audio_wav_path)
+            audio_input = audio_wav_path
+
         # Build ffmpeg concat file
         concat_txt_path = os.path.join(tmpdir, "concat.txt")
         with open(concat_txt_path, "w") as f:
@@ -724,26 +754,31 @@ def generate_video_for_date(date_str, output_path=None):
                 f.write(f"duration {dur}\n")
             f.write(f"file '{slides[-1][0]}'\n")
 
+        # Encode video with audio in one clean pass
         cmd = [
             "ffmpeg", "-y",
             "-f", "concat",
             "-safe", "0",
             "-i", concat_txt_path,
+            "-i", audio_input,
             "-vf", "format=yuv420p",
             "-c:v", "libx264",
+            "-c:a", "aac",
+            "-b:a", "128k",
             "-r", "30",
             "-pix_fmt", "yuv420p",
+            "-shortest",
             output_path
         ]
 
-        print("⚡ Rendering video with FFmpeg...")
+        print("⚡ Rendering video + audio with FFmpeg...")
         res = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
         if res.returncode != 0:
             print("FFmpeg error:", res.stderr)
             raise RuntimeError("FFmpeg rendering failed")
 
     print(f"✅ Video created successfully: {output_path}")
-    print(f"   Duration: ~{total_duration:.1f}s | 1080x1920 (9:16)")
+    print(f"   Duration: ~{total_duration:.1f}s | 1080x1920 (9:16) with AAC Stereo Audio")
     return output_path
 
 def main():
@@ -763,7 +798,7 @@ def main():
             target_date = datetime.now().strftime("%Y-%m-%d")
 
     video_path = generate_video_for_date(target_date, args.output)
-    print(f"\n🎉 Video is ready for TikTok / YouTube Shorts!")
+    print(f"\n🎉 Video is ready with audio for YouTube Shorts & TikTok!")
     print(f"File location: {video_path}")
 
 if __name__ == "__main__":

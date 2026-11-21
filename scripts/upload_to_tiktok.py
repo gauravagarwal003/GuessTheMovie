@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
 upload_to_tiktok.py
-Uploads or dispatches a video to TikTok using either:
-1. TikTok Official Content Posting API (Direct Post)
-2. Social Scheduler API (Buffer / Ayrshare / Zapier Webhook)
-3. Local macOS Helper (Reveals file in Finder and opens TikTok Creator Center)
+Uploads or dispatches a video or photo carousel to TikTok using either:
+1. TikTok Official Content Posting API (Direct Post / Media Upload)
+2. Social Scheduler API (Buffer / Ayrshare / Zapier / Make Webhook)
+3. Local macOS Helper (Reveals file/folder in Finder and opens TikTok Creator Center)
 """
 
 import os
@@ -16,13 +16,19 @@ import requests
 
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
-def post_via_tiktok_api(video_path, caption, access_token):
+def post_via_tiktok_api(media_path, caption, access_token):
     """
     Official TikTok Content Posting API v2.
     https://developers.tiktok.com/doc/content-posting-api-reference-direct-post
     """
+    if os.path.isdir(media_path):
+        print("ℹ️ TikTok API Photo Mode requires pre-hosted public HTTPS image URLs.")
+        print("   Falling back to local helper / webhook.")
+        local_macos_helper(media_path, caption)
+        return None
+
     print("📡 Initializing TikTok direct post upload...")
-    video_size = os.path.getsize(video_path)
+    video_size = os.path.getsize(media_path)
     
     init_url = "https://open.tiktokapis.com/v2/post/publish/video/init/"
     headers = {
@@ -59,7 +65,7 @@ def post_via_tiktok_api(video_path, caption, access_token):
         raise RuntimeError(f"No upload URL returned by TikTok: {resp.text}")
 
     print("📤 Uploading video binary to TikTok...")
-    with open(video_path, "rb") as f:
+    with open(media_path, "rb") as f:
         video_bytes = f.read()
 
     upload_headers = {
@@ -73,15 +79,28 @@ def post_via_tiktok_api(video_path, caption, access_token):
     print(f"🎉 Success! Video posted to TikTok (Publish ID: {publish_id})")
     return publish_id
 
-def post_via_webhook(video_path, caption, webhook_url):
+def post_via_webhook(media_path, caption, webhook_url):
     """
-    Sends notification or video payload to a Make.com, Zapier, or Buffer webhook.
+    Sends notification or video/photos payload to a Make.com, Zapier, or Buffer webhook.
     """
-    print(f"📡 Sending video to social scheduler webhook: {webhook_url}")
-    with open(video_path, "rb") as f:
-        files = {"file": f}
-        data = {"caption": caption}
-        resp = requests.post(webhook_url, data=data, files=files)
+    print(f"📡 Sending media to social scheduler webhook: {webhook_url}")
+    if os.path.isdir(media_path):
+        files = []
+        file_handles = []
+        try:
+            sorted_files = sorted([f for f in os.listdir(media_path) if f.endswith('.png')])
+            for sf in sorted_files:
+                fh = open(os.path.join(media_path, sf), "rb")
+                file_handles.append(fh)
+                files.append(("files", (sf, fh, "image/png")))
+            resp = requests.post(webhook_url, data={"caption": caption}, files=files)
+        finally:
+            for fh in file_handles:
+                fh.close()
+    else:
+        with open(media_path, "rb") as f:
+            resp = requests.post(webhook_url, data={"caption": caption}, files={"file": f})
+
     if resp.status_code in [200, 201, 202]:
         print("🎉 Successfully dispatched to scheduler webhook!")
         return True
@@ -89,14 +108,14 @@ def post_via_webhook(video_path, caption, webhook_url):
         print(f"Webhook response error ({resp.status_code}): {resp.text}")
         return False
 
-def local_macos_helper(video_path, caption):
+def local_macos_helper(media_path, caption):
     """
-    Opens TikTok Creator Center in browser and reveals video in Finder.
+    Opens TikTok Creator Center in browser and reveals video/carousel folder in Finder.
     Copies the caption to clipboard.
     """
-    print("\n💡 macOS Local Helper:")
+    print("\n💡 macOS Local Helper (TikTok):")
     print("   1. Opening TikTok Creator Center in your browser...")
-    print("   2. Revealing video file in Finder...")
+    print("   2. Revealing media in Finder...")
     print("   3. Copied caption to your clipboard (Cmd+V)!")
 
     # Copy caption to clipboard
@@ -107,22 +126,26 @@ def local_macos_helper(video_path, caption):
         pass
 
     # Reveal in Finder
-    subprocess.run(["open", "-R", video_path])
+    if os.path.exists(media_path):
+        if os.path.isdir(media_path):
+            subprocess.run(["open", media_path])
+        else:
+            subprocess.run(["open", "-R", media_path])
 
     # Open TikTok Creator Center
     import webbrowser
     webbrowser.open("https://www.tiktok.com/creator-center/upload")
 
 def main():
-    parser = argparse.ArgumentParser(description="Upload or dispatch video to TikTok")
-    parser.add_argument("--video", required=True, help="Path to MP4 file")
+    parser = argparse.ArgumentParser(description="Upload or dispatch media to TikTok")
+    parser.add_argument("--media", "--video", dest="media", required=True, help="Path to MP4 file or carousel folder")
     parser.add_argument("--caption", help="TikTok caption/title")
     parser.add_argument("--access-token", help="TikTok API access token")
     parser.add_argument("--webhook", help="Webhook URL for social scheduler (Buffer/Zapier/Make)")
     args = parser.parse_args()
 
-    if not os.path.exists(args.video):
-        print(f"❌ Video file not found: {args.video}")
+    if not os.path.exists(args.media):
+        print(f"❌ Media file/folder not found: {args.media}")
         sys.exit(1)
 
     caption = args.caption or (
@@ -131,18 +154,18 @@ def main():
     )
 
     token = args.access_token or os.environ.get("TIKTOK_ACCESS_TOKEN")
-    webhook = args.webhook or os.environ.get("TIKTOK_WEBHOOK_URL")
+    webhook = args.webhook or os.environ.get("TIKTOK_WEBHOOK_URL") or os.environ.get("SOCIAL_WEBHOOK_URL")
 
-    if token:
+    if token and not os.path.isdir(args.media):
         try:
-            post_via_tiktok_api(args.video, caption, token)
+            post_via_tiktok_api(args.media, caption, token)
         except Exception as e:
             print(f"API upload failed: {e}")
-            local_macos_helper(args.video, caption)
+            local_macos_helper(args.media, caption)
     elif webhook:
-        post_via_webhook(args.video, caption, webhook)
+        post_via_webhook(args.media, caption, webhook)
     else:
-        local_macos_helper(args.video, caption)
+        local_macos_helper(args.media, caption)
 
 if __name__ == "__main__":
     main()
