@@ -4,3 +4,5 @@ beautifulsoup4
 lxml
 selenium
 webdriver-manager
+numpy
+Pillow

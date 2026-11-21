@@ -4,7 +4,7 @@ generate_short_video.py
 Turns any GuessTheMovie daily puzzle into a 1080x1920 (9:16) vertical video
 that exactly matches the website's visual styling, colors, and branding,
 with full native emoji, phonetic extension (superscripts), and unicode symbol support,
-plus synchronized cinematic audio (ambient drone, rhythmic clue ticks, countdown beeps, reveal chord).
+plus synchronized cinematic audio (light music, review transitions, countdown beeps, reveal chord).
 """
 
 import os
@@ -614,23 +614,68 @@ def load_movie_details(movie_id):
                 return row.get("title", ""), row.get("year", ""), row.get("posterLink", "")
     return movie_id.replace("-", " ").title(), "Unknown", ""
 
-def generate_cinematic_audio(total_duration, countdown_start_sec, reveal_start_sec, out_wav_path):
+def generate_cinematic_audio(total_duration, countdown_start_sec, reveal_start_sec, out_wav_path,
+                             review_start_secs=None):
     """
-    Clean, light, pleasant sound design:
-    1. Crisp countdown beeps on 3, 2, 1 for BOTH the intro countdown and the reveal countdown.
-    2. Completely clean during review reading (NO drone, NO clock ticks).
-    3. Pleasant, bright 'ding' chime when the movie is revealed!
+    Layered, restrained sound design:
+    1. A subtle, rhythmic C-major music phrase throughout the video.
+    2. A soft transition tone at the start of every review.
+    3. Crisp countdown beeps on 3, 2, 1 for both countdown sequences.
+    4. A bright chime when the movie is revealed.
     """
     sample_rate = 44100
     t = np.linspace(0, total_duration, int(sample_rate * total_duration), endpoint=False)
     audio = np.zeros_like(t)
+
+    def add_background_music():
+        # Gentle C-major plucked phrases: rhythmic notes instead of a continuous drone.
+        phrase = np.array([523.25, 392.00, 659.25, 587.33,
+                           523.25, 440.00, 392.00, 329.63])
+        note_step = 0.75
+        note_count = int(np.ceil(total_duration / note_step))
+        for index in range(note_count):
+            start_t = index * note_step
+            start_idx = int(round(start_t * sample_rate))
+            dur = 0.68
+            length = int(dur * sample_rate)
+            tb = np.linspace(0, dur, length, endpoint=False)
+            freq = phrase[index % len(phrase)]
+            envelope = np.minimum(tb / 0.012, 1.0) * np.exp(-tb * 4.8)
+            pluck = (
+                0.12 * np.sin(2 * np.pi * freq * tb)
+                + 0.035 * np.sin(2 * np.pi * freq * 2 * tb)
+                + 0.018 * np.sin(2 * np.pi * freq * 3 * tb)
+            ) * envelope
+            end_idx = min(len(audio), start_idx + length)
+            if start_idx < len(audio):
+                audio[start_idx:end_idx] += pluck[:end_idx - start_idx]
+
+    def add_transition(start_t, vol=0.24):
+        start_idx = int(round(start_t * sample_rate))
+        dur = 0.42
+        length = int(dur * sample_rate)
+        tb = np.linspace(0, dur, length, endpoint=False)
+        envelope = np.minimum(tb / 0.018, 1.0) * np.exp(-tb * 7.5)
+        noise = np.random.default_rng(int(start_t * 1000) + 137).normal(0, 1, length)
+        noise = np.convolve(noise, np.ones(24) / 24, mode="same")
+        transition = (
+            0.38 * noise
+            + 0.31 * np.sin(2 * np.pi * 520 * tb)
+            + 0.16 * np.sin(2 * np.pi * 780 * tb)
+        ) * envelope * vol
+        end_idx = min(len(audio), start_idx + length)
+        if start_idx < len(audio):
+            audio[start_idx:end_idx] += transition[:end_idx - start_idx]
 
     def add_beep(start_t, freq=800, dur=0.14, vol=0.45):
         start_idx = int(round(start_t * sample_rate))
         length = int(dur * sample_rate)
         tb = np.linspace(0, dur, length, endpoint=False)
         envelope = np.minimum(tb / 0.008, 1.0) * np.exp(-tb * 14.0)
-        beep = vol * np.sin(2 * np.pi * freq * tb) * envelope
+        beep = vol * (
+            np.sin(2 * np.pi * freq * tb)
+            + 0.22 * np.sin(2 * np.pi * freq * 2 * tb)
+        ) * envelope
         end_idx = min(len(audio), start_idx + length)
         if start_idx < len(audio):
             audio[start_idx:end_idx] += beep[:end_idx - start_idx]
@@ -648,6 +693,12 @@ def generate_cinematic_audio(total_duration, countdown_start_sec, reveal_start_s
         end_idx = min(len(audio), start_idx + length)
         if start_idx < len(audio):
             audio[start_idx:end_idx] += ding[:end_idx - start_idx]
+
+    add_background_music()
+
+    # A brief musical entrance makes it obvious that a new review has appeared.
+    for start_t in review_start_secs or []:
+        add_transition(start_t)
 
     # 1. Intro Countdown Beeps: 3 (800Hz), 2 (800Hz), 1 (1200Hz)
     add_beep(0.0, freq=800)
@@ -696,6 +747,7 @@ def generate_video_for_date(date_str, output_path=None):
 
     with tempfile.TemporaryDirectory() as tmpdir:
         slides = []
+        review_start_secs = []
 
         # 1. Intro Countdown (3 -> 2 -> 1, 1.0s each)
         for cnt in [3, 2, 1]:
@@ -707,6 +759,7 @@ def generate_video_for_date(date_str, output_path=None):
         # 2. All 5 Reviews with Dynamic Durations based on length
         print("   Review Pacing:")
         for idx, rev in enumerate(reviews[:5], 1):
+            review_start_secs.append(sum(dur for _, dur in slides))
             clue_img = create_review_slide(date_str, movie_num_str, idx, rev, total_reviews=5)
             p = os.path.join(tmpdir, f"slide_{idx}.png")
             clue_img.save(p)
@@ -740,11 +793,17 @@ def generate_video_for_date(date_str, output_path=None):
 
         if os.path.exists(custom_audio_path):
             print(f"🎵 Using custom background audio: {custom_audio_path}")
-            audio_input = custom_audio_path
         else:
             print("🎵 Synthesizing synchronized cinematic audio track...")
-            generate_cinematic_audio(total_duration, countdown_start_sec, reveal_start_sec, audio_wav_path)
-            audio_input = audio_wav_path
+
+        generate_cinematic_audio(
+            total_duration,
+            countdown_start_sec,
+            reveal_start_sec,
+            audio_wav_path,
+            review_start_secs=review_start_secs,
+        )
+        audio_input = audio_wav_path
 
         # Build ffmpeg concat file
         concat_txt_path = os.path.join(tmpdir, "concat.txt")
@@ -760,16 +819,47 @@ def generate_video_for_date(date_str, output_path=None):
             "-f", "concat",
             "-safe", "0",
             "-i", concat_txt_path,
-            "-i", audio_input,
+        ]
+
+        if os.path.exists(custom_audio_path):
+            cmd.extend([
+                "-stream_loop", "-1",
+                "-i", custom_audio_path,
+                "-i", audio_wav_path,
+            ])
+
+            print("🎵 Mixing custom background music with synchronized cinematic cues...")
+            cmd.extend([
+                "-filter_complex",
+                (
+                    f"[1:a]atrim=duration={total_duration:.3f},asetpts=PTS-STARTPTS,"
+                    f"volume=0.12,aformat=channel_layouts=stereo[bed];"
+                    f"[2:a]aformat=channel_layouts=stereo[cues];"
+                    "[bed][cues]amix=inputs=2:duration=first:"
+                    "dropout_transition=1:normalize=0[aout]"
+                ),
+                "-map", "0:v",
+                "-map", "[aout]",
+            ])
+        else:
+            cmd.extend([
+                "-i", audio_input,
+                "-map", "0:v",
+                "-map", "1:a",
+            ])
+
+        cmd.extend([
             "-vf", "format=yuv420p",
             "-c:v", "libx264",
             "-c:a", "aac",
             "-b:a", "128k",
+            "-ac", "2",
             "-r", "30",
             "-pix_fmt", "yuv420p",
+            "-t", f"{total_duration:.3f}",
             "-shortest",
-            output_path
-        ]
+            output_path,
+        ])
 
         print("⚡ Rendering video + audio with FFmpeg...")
         res = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)

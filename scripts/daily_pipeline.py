@@ -91,6 +91,20 @@ def run_pipeline(date_str=None, make_carousel=True, make_video=True,
         except Exception as e:
             print(f"⚠️ YouTube upload error: {e}")
 
+    # Check for Buffer integration (handles both Instagram & TikTok in one go)
+    buffer_api_key = os.environ.get("BUFFER_API_KEY") or os.environ.get("BUFFER_ACCESS_TOKEN")
+    buffer_channels = [p.strip() for p in os.environ.get("BUFFER_CHANNEL_IDS", "").split(",") if p.strip()]
+
+    if (upload_tiktok or upload_instagram) and buffer_api_key and buffer_channels and carousel_dir:
+        print("\n▶️ Step 4 & 5: Dispatching 7-Slide Carousel to Buffer (Instagram & TikTok)...")
+        try:
+            import upload_to_buffer
+            upload_to_buffer.post_carousel_to_buffer(carousel_dir, social_caption, buffer_api_key, buffer_channels)
+            upload_tiktok = False
+            upload_instagram = False
+        except Exception as e:
+            print(f"⚠️ Buffer dispatch error: {e}. Falling back to individual channels...")
+
     # 5. Post to TikTok
     if upload_tiktok:
         print("\n▶️ Step 4: Dispatching to TikTok...")
@@ -115,13 +129,9 @@ def run_pipeline(date_str=None, make_carousel=True, make_video=True,
         try:
             import upload_to_instagram
             target_to_post = carousel_dir if carousel_dir else video_path
-            buffer_token = os.environ.get("BUFFER_ACCESS_TOKEN")
-            buffer_profiles = [p.strip() for p in os.environ.get("BUFFER_PROFILE_IDS", "").split(",") if p.strip()]
             webhook = os.environ.get("INSTAGRAM_WEBHOOK_URL") or os.environ.get("SOCIAL_WEBHOOK_URL")
 
-            if buffer_token and buffer_profiles:
-                upload_to_instagram.post_via_buffer(target_to_post, social_caption, buffer_token, buffer_profiles)
-            elif webhook:
+            if webhook:
                 upload_to_instagram.post_via_webhook(target_to_post, social_caption, webhook)
             else:
                 upload_to_instagram.local_macos_helper(target_to_post, social_caption)

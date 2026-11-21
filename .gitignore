@@ -5,7 +5,8 @@ node_modules/
 .next/
 
 # Production build output (if using custom build folders)
-dist/
+dist/*
+!dist/carousels/
 
 # Environment variable files
 .env
