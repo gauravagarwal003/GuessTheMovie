@@ -13,6 +13,16 @@ on:
         description: 'Target Date (YYYY-MM-DD), leave blank for latest'
         required: false
         default: ''
+      platform:
+        description: 'Publish target'
+        required: false
+        type: choice
+        default: all
+        options:
+          - all
+          - instagram
+          - tiktok
+          - youtube
 
 jobs:
   render_and_publish:
@@ -57,11 +67,26 @@ jobs:
             TARGET_FLAG="--date ${{ github.event.inputs.target_date }}"
           fi
           
-          FLAGS="--youtube"
-          if [ -n "$BUFFER_API_KEY" ] || [ -n "$TIKTOK_ACCESS_TOKEN" ] || [ -n "$TIKTOK_WEBHOOK_URL" ] || [ -n "$SOCIAL_WEBHOOK_URL" ]; then
+          PLATFORM="${{ github.event.inputs.platform }}"
+          if [ -z "$PLATFORM" ] || [ "$PLATFORM" = "all" ] || [ "$PLATFORM" = "youtube" ]; then
+            FLAGS="--youtube"
+          else
+            FLAGS=""
+          fi
+          if [ "$PLATFORM" = "all" ] || [ "$PLATFORM" = "tiktok" ]; then
+            PLATFORM_TIKTOK=true
+          else
+            PLATFORM_TIKTOK=false
+          fi
+          if [ "$PLATFORM" = "all" ] || [ "$PLATFORM" = "instagram" ]; then
+            PLATFORM_INSTAGRAM=true
+          else
+            PLATFORM_INSTAGRAM=false
+          fi
+          if [ "$PLATFORM_TIKTOK" = "true" ] && { [ -n "$BUFFER_API_KEY" ] || [ -n "$TIKTOK_ACCESS_TOKEN" ] || [ -n "$TIKTOK_WEBHOOK_URL" ] || [ -n "$SOCIAL_WEBHOOK_URL" ]; }; then
             FLAGS="$FLAGS --tiktok"
           fi
-          if [ -n "$BUFFER_API_KEY" ] || [ -n "$INSTAGRAM_WEBHOOK_URL" ] || [ -n "$SOCIAL_WEBHOOK_URL" ]; then
+          if [ "$PLATFORM_INSTAGRAM" = "true" ] && { [ -n "$BUFFER_API_KEY" ] || [ -n "$INSTAGRAM_WEBHOOK_URL" ] || [ -n "$SOCIAL_WEBHOOK_URL" ]; }; then
             FLAGS="$FLAGS --instagram"
           fi
           

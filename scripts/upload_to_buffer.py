@@ -164,6 +164,12 @@ def post_carousel_to_buffer(carousel_dir, caption, api_key, channel_ids, due_at=
                     variables["input"]["schedulingType"] = "notification"
                     variables["input"]["mode"] = "addToQueue"
                     variables["input"].pop("dueAt", None)
+                    variables["input"]["metadata"] = {
+                        "instagram": {
+                            "type": "post",
+                            "shouldShareToFeed": True,
+                        }
+                    }
                     retry = query_graphql(api_key, mutation, variables)
                     retry_res = retry.get("createPost", {})
                     if "post" in retry_res:
