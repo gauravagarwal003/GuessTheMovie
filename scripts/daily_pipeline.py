@@ -16,7 +16,7 @@ import sys
 import json
 import argparse
 import subprocess
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
@@ -114,7 +114,10 @@ def run_pipeline(date_str=None, make_carousel=True, make_video=True,
                     subprocess.run(["git", "push"], check=True)
 
             import upload_to_buffer
-            due_at = datetime.strptime(date_str, "%Y-%m-%d").replace(hour=18, minute=0, second=0, tzinfo=timezone.utc).isoformat().replace("+00:00", "Z")
+            if os.environ.get("GITHUB_EVENT_NAME") == "workflow_dispatch":
+                due_at = (datetime.now(timezone.utc) + timedelta(minutes=5)).isoformat(timespec="seconds").replace("+00:00", "Z")
+            else:
+                due_at = datetime.strptime(date_str, "%Y-%m-%d").replace(hour=18, minute=0, second=0, tzinfo=timezone.utc).isoformat().replace("+00:00", "Z")
             upload_to_buffer.post_carousel_to_buffer(
                 carousel_dir,
                 social_caption,

@@ -160,6 +160,27 @@ def post_carousel_to_buffer(carousel_dir, caption, api_key, channel_ids, due_at=
             else:
                 msg = create_res.get("message", "Unknown error")
                 print(f"   ⚠️ Buffer error for channel {ch_id}: {msg}")
+                if "personal profile" in msg.lower() or "notification scheduling" in msg.lower():
+                    variables["input"]["schedulingType"] = "notification"
+                    variables["input"]["mode"] = "addToQueue"
+                    variables["input"].pop("dueAt", None)
+                    retry = query_graphql(api_key, mutation, variables)
+                    retry_res = retry.get("createPost", {})
+                    if "post" in retry_res:
+                        print(f"   ✅ Instagram notification/reminder created for channel {ch_id} (Post ID: {retry_res['post']['id']})")
+                        successes += 1
+                    else:
+                        print(f"   ⚠️ Buffer notification retry failed for channel {ch_id}: {retry_res.get('message', 'Unknown error')}")
+                elif "future" in msg.lower():
+                    variables["input"]["mode"] = "addToQueue"
+                    variables["input"].pop("dueAt", None)
+                    retry = query_graphql(api_key, mutation, variables)
+                    retry_res = retry.get("createPost", {})
+                    if "post" in retry_res:
+                        print(f"   ✅ Added TikTok post to Buffer queue for channel {ch_id} (Post ID: {retry_res['post']['id']})")
+                        successes += 1
+                    else:
+                        print(f"   ⚠️ Buffer queue retry failed for channel {ch_id}: {retry_res.get('message', 'Unknown error')}")
         except Exception as e:
             print(f"   ❌ Failed to schedule for channel {ch_id}: {e}")
 

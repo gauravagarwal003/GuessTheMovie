@@ -29,7 +29,7 @@ try:
 except ImportError:
     GOOGLE_LIBS_AVAILABLE = False
 
-SCOPES = ['https://www.googleapis.com/auth/youtube.force-ssl']
+SCOPES = ['https://www.googleapis.com/auth/youtube.upload']
 API_SERVICE_NAME = 'youtube'
 API_VERSION = 'v3'
 
