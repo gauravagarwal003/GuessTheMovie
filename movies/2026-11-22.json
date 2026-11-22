@@ -1,0 +1,76 @@
+{
+  "date": "2026-11-22",
+  "movieID": "the-amazing-spider-man",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "1",
+      "date": "September 8, 2021",
+      "username": "nongpong",
+      "numLikes": "311",
+      "rating": "3.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/4/1/5/0/5/5/9/shard/avtr-0-80-0-80-crop.jpg?v=c4b90e8998",
+      "liked": false,
+      "collapsed": false,
+      "text": "\n<p>he looks like a basketball</p>\n",
+      "link": "https://letterboxd.com/nongpong/film/the-amazing-spider-man/",
+      "spoiler": false
+    },
+    {
+      "num_comments": "0",
+      "date": "April 26, 2014",
+      "username": "matt lynch",
+      "numLikes": "410",
+      "rating": "1.5",
+      "profilePhotoLink": "https://secure.gravatar.com/avatar/fb4cae3779fcedc4f707ee7359b12a3e?rating=PG&size=80&border=&default=https%3A%2F%2Fs.ltrbxd.com%2Fstatic%2Fimg%2Favatar80-CTtJ8HSs.png",
+      "liked": false,
+      "collapsed": false,
+      "text": "\n<p>a beat-for-beat rehash, aside from a few details, of Raimi's original, with the tension recalibrated from Tex Avery anarchy to CW teen angst. brutal.</p>\n",
+      "link": "https://letterboxd.com/colonelmortimer/film/the-amazing-spider-man/",
+      "spoiler": false
+    },
+    {
+      "num_comments": "9",
+      "date": "December 23, 2021",
+      "username": "Jay",
+      "numLikes": "2922",
+      "rating": "2.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/9/3/4/3/7/shard/avtr-0-80-0-80-crop.jpg?v=39f7913a9f",
+      "liked": false,
+      "collapsed": false,
+      "text": "\n<p>“directed by marc webb” lands like a punchline</p>\n",
+      "link": "https://letterboxd.com/jay/film/the-amazing-spider-man/",
+      "spoiler": false
+    },
+    {
+      "num_comments": "18",
+      "date": "September 13, 2025",
+      "username": "zoë rose bryant",
+      "numLikes": "2736",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/5/0/1/5/4/7/shard/avtr-0-80-0-80-crop.jpg?v=605547c342",
+      "liked": true,
+      "collapsed": false,
+      "text": "\n<p>because of this movie my first sexual fantasy was cleaning my shirtless superhero boyfriend’s wounds in my bedroom and in all honesty not much has changed</p>\n",
+      "link": "https://letterboxd.com/zoerosebryant/film/the-amazing-spider-man/2/",
+      "spoiler": false
+    },
+    {
+      "num_comments": "4",
+      "date": "March 6, 2021",
+      "username": "fleur",
+      "numLikes": "7862",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/3/1/8/7/8/0/shard/avtr-0-80-0-80-crop.jpg?v=693ef28909",
+      "liked": false,
+      "collapsed": false,
+      "text": "\n<p>andrew garfield u sexy mf</p>\n",
+      "link": "https://letterboxd.com/angelinajjolie/film/the-amazing-spider-man/",
+      "spoiler": false
+    }
+  ],
+  "affiliate_links": {
+    "amazon-dvd": "https://link.amazon/B01w6tfNe",
+    "prime-video": "https://link.amazon/A04FZ7LVu"
+  }
+}
