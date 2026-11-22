@@ -99,7 +99,14 @@ def generate_carousel_for_date(date_str, output_dir=None):
 
     # Slides 1 to 5: REVIEWS 1 TO 5 (Slide 1 is Review 1!)
     for idx, rev in enumerate(reviews[:5], 1):
-        slide_img = create_review_slide(date_str, movie_num_str, idx, rev, total_reviews=5)
+        slide_img = create_review_slide(
+            date_str,
+            movie_num_str,
+            idx,
+            rev,
+            total_reviews=5,
+            show_intro=(idx == 1),
+        )
         filename = f"slide_{idx}_review{idx}.png"
         filepath = os.path.join(output_dir, filename)
         slide_img.save(filepath, "PNG")

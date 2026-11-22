@@ -389,13 +389,19 @@ def create_intro_frame(date_str, movie_num_str, countdown_val):
 
     return img
 
-def create_review_slide(date_str, movie_num_str, review_index, review_data, total_reviews=5):
+def create_review_slide(date_str, movie_num_str, review_index, review_data, total_reviews=5, show_intro=False):
     img = Image.new("RGB", (WIDTH, HEIGHT), color=COLOR_BODY_BG)
     draw = ImageDraw.Draw(img)
     draw_site_header(img, draw)
 
     pill_text = f"Review {review_index} of {total_reviews}"
     draw_status_bar(draw, 190, date_str, pill_text, movie_num_str)
+
+    if show_intro:
+        intro_font = get_font(34)
+        intro_text = "Can you guess today's movie?"
+        bbox = draw.textbbox((0, 0), intro_text, font=intro_font)
+        draw.text(((WIDTH - (bbox[2] - bbox[0])) // 2, 248), intro_text, font=intro_font, fill=COLOR_ORANGE)
 
     card_w = 940
     card_h = 1380
@@ -615,7 +621,7 @@ def load_movie_details(movie_id):
     return movie_id.replace("-", " ").title(), "Unknown", ""
 
 def generate_cinematic_audio(total_duration, countdown_start_sec, reveal_start_sec, out_wav_path,
-                             review_start_secs=None):
+                             review_start_secs=None, include_background_music=True):
     """
     Layered, restrained sound design:
     1. A subtle, rhythmic C-major music phrase throughout the video.
@@ -667,15 +673,12 @@ def generate_cinematic_audio(total_duration, countdown_start_sec, reveal_start_s
         if start_idx < len(audio):
             audio[start_idx:end_idx] += transition[:end_idx - start_idx]
 
-    def add_beep(start_t, freq=800, dur=0.14, vol=0.45):
+    def add_beep(start_t, freq=800, dur=0.16, vol=0.28):
         start_idx = int(round(start_t * sample_rate))
         length = int(dur * sample_rate)
         tb = np.linspace(0, dur, length, endpoint=False)
-        envelope = np.minimum(tb / 0.008, 1.0) * np.exp(-tb * 14.0)
-        beep = vol * (
-            np.sin(2 * np.pi * freq * tb)
-            + 0.22 * np.sin(2 * np.pi * freq * 2 * tb)
-        ) * envelope
+        envelope = np.minimum(tb / 0.025, 1.0) * np.exp(-tb * 10.0)
+        beep = vol * np.sin(2 * np.pi * freq * tb) * envelope
         end_idx = min(len(audio), start_idx + length)
         if start_idx < len(audio):
             audio[start_idx:end_idx] += beep[:end_idx - start_idx]
@@ -694,7 +697,8 @@ def generate_cinematic_audio(total_duration, countdown_start_sec, reveal_start_s
         if start_idx < len(audio):
             audio[start_idx:end_idx] += ding[:end_idx - start_idx]
 
-    add_background_music()
+    if include_background_music:
+        add_background_music()
 
     # A brief musical entrance makes it obvious that a new review has appeared.
     for start_t in review_start_secs or []:
@@ -779,11 +783,11 @@ def generate_video_for_date(date_str, output_path=None):
 
         reveal_start_sec = sum(dur for _, dur in slides)
 
-        # 4. Reveal Screen (5.0s)
+        # 4. Hold the reveal long enough for the music and title to land.
         rev_img = create_reveal_slide(title, year, poster, date_str, movie_num_str)
         p_rev = os.path.join(tmpdir, "slide_reveal.png")
         rev_img.save(p_rev)
-        slides.append((p_rev, 5.0))
+        slides.append((p_rev, 7.5))
 
         total_duration = sum(dur for _, dur in slides)
 
@@ -802,24 +806,30 @@ def generate_video_for_date(date_str, output_path=None):
             reveal_start_sec,
             audio_wav_path,
             review_start_secs=review_start_secs,
+            include_background_music=not os.path.exists(custom_audio_path),
         )
         audio_input = audio_wav_path
 
-        # Build ffmpeg concat file
-        concat_txt_path = os.path.join(tmpdir, "concat.txt")
-        with open(concat_txt_path, "w") as f:
-            for path, dur in slides:
-                f.write(f"file '{path}'\n")
-                f.write(f"duration {dur}\n")
-            f.write(f"file '{slides[-1][0]}'\n")
-
-        # Encode video with audio in one clean pass
-        cmd = [
-            "ffmpeg", "-y",
-            "-f", "concat",
-            "-safe", "0",
-            "-i", concat_txt_path,
-        ]
+        # Encode each slide for its exact duration before concatenating.
+        cmd = ["ffmpeg", "-y"]
+        for path, dur in slides:
+            cmd.extend([
+                "-loop", "1",
+                "-framerate", "30",
+                "-t", f"{dur:.3f}",
+                "-i", path,
+            ])
+        video_inputs = len(slides)
+        video_filters = []
+        for i in range(video_inputs):
+            video_filters.append(
+                f"[{i}:v]scale={WIDTH}:{HEIGHT}:flags=lanczos,"
+                f"setsar=1,trim=duration={slides[i][1]:.3f},setpts=PTS-STARTPTS[v{i}]"
+            )
+        concat_inputs = "".join(f"[v{i}]" for i in range(video_inputs))
+        video_filters.append(
+            f"{concat_inputs}concat=n={video_inputs}:v=1:a=0,format=yuv420p[vout]"
+        )
 
         if os.path.exists(custom_audio_path):
             cmd.extend([
@@ -827,29 +837,35 @@ def generate_video_for_date(date_str, output_path=None):
                 "-i", custom_audio_path,
                 "-i", audio_wav_path,
             ])
-
             print("🎵 Mixing custom background music with synchronized cinematic cues...")
             cmd.extend([
                 "-filter_complex",
                 (
-                    f"[1:a]atrim=duration={total_duration:.3f},asetpts=PTS-STARTPTS,"
+                    ";".join(video_filters)
+                    + ";"
+                    f"[{video_inputs}:a]atrim=duration={total_duration:.3f},asetpts=PTS-STARTPTS,"
                     f"volume=0.12,aformat=channel_layouts=stereo[bed];"
-                    f"[2:a]aformat=channel_layouts=stereo[cues];"
+                    f"[{video_inputs + 1}:a]aformat=channel_layouts=stereo[cues];"
                     "[bed][cues]amix=inputs=2:duration=first:"
                     "dropout_transition=1:normalize=0[aout]"
                 ),
-                "-map", "0:v",
+                "-map", "[vout]",
                 "-map", "[aout]",
             ])
         else:
             cmd.extend([
                 "-i", audio_input,
-                "-map", "0:v",
-                "-map", "1:a",
+                "-filter_complex",
+                (
+                    ";".join(video_filters)
+                    + ";"
+                    f"[{video_inputs}:a]aformat=channel_layouts=stereo[aout]"
+                ),
+                "-map", "[vout]",
+                "-map", "[aout]",
             ])
 
         cmd.extend([
-            "-vf", "format=yuv420p",
             "-c:v", "libx264",
             "-c:a", "aac",
             "-b:a", "128k",
@@ -857,7 +873,6 @@ def generate_video_for_date(date_str, output_path=None):
             "-r", "30",
             "-pix_fmt", "yuv420p",
             "-t", f"{total_duration:.3f}",
-            "-shortest",
             output_path,
         ])
 
