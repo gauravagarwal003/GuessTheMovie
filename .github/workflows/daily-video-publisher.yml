@@ -91,17 +91,3 @@ jobs:
           fi
           
           python scripts/daily_pipeline.py $TARGET_FLAG $FLAGS
-
-      - name: Upload Video Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: daily-short-video
-          path: dist/shorts/*.mp4
-          retention-days: 7
-
-      - name: Upload Carousel Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: daily-photo-carousel
-          path: dist/carousels/
-          retention-days: 7

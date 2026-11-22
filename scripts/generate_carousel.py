@@ -26,7 +26,7 @@ BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 from generate_short_video import (
     WIDTH, HEIGHT,
     COLOR_BODY_BG, COLOR_CARD_BG, COLOR_BONEWHITE, COLOR_ORANGE, COLOR_GREEN, COLOR_BLUE, COLOR_MUTED,
-    get_font, draw_site_header, draw_status_bar, draw_rich_text,
+    get_font, draw_site_header, draw_status_bar, draw_rich_text, get_rich_text_width,
     create_review_slide, create_reveal_slide,
     load_movie_details, get_movie_number_str
 )
@@ -62,15 +62,15 @@ def create_cliffhanger_slide(date_str, movie_num_str):
 
     c1 = "💬 Drop your guess in the comments"
     c2 = "before you swipe to the reveal!"
-    bbox_c1 = draw.textbbox((0, 0), c1, font=font_call)
-    draw.text(((WIDTH - (bbox_c1[2] - bbox_c1[0])) // 2, card_y + 80), c1, font=font_call, fill=COLOR_BONEWHITE)
+    w_c1 = get_rich_text_width(c1, 48)
+    draw_rich_text(img, draw, (WIDTH - int(w_c1)) // 2, card_y + 80, c1, 48, COLOR_BONEWHITE)
     bbox_c2 = draw.textbbox((0, 0), c2, font=font_call)
     draw.text(((WIDTH - (bbox_c2[2] - bbox_c2[0])) // 2, card_y + 160), c2, font=font_call, fill=COLOR_MUTED)
 
     # Swipe CTA
     swipe_text = "Swipe to reveal the answer 👉"
-    bbox_sw = draw.textbbox((0, 0), swipe_text, font=font_swipe)
-    draw.text(((WIDTH - (bbox_sw[2] - bbox_sw[0])) // 2, 1260), swipe_text, font=font_swipe, fill=COLOR_GREEN)
+    w_sw = get_rich_text_width(swipe_text, 56)
+    draw_rich_text(img, draw, (WIDTH - int(w_sw)) // 2, 1260, swipe_text, 56, COLOR_GREEN)
 
     return img
 

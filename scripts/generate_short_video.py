@@ -150,7 +150,12 @@ def get_rich_text_width(text, font_size):
                 f, resolved_ch = find_font_for_char(ch, cascade, notdefs)
                 total_w += f.getlength(resolved_ch)
         if i < len(emojis):
-            total_w += int(font_size * 1.1)
+            emoji_str = emojis[i]
+            e_img = get_emoji_img(emoji_str, font_size)
+            if e_img:
+                total_w += e_img.width + 8
+            else:
+                total_w += int(font_size * 1.1)
     return total_w
 
 def draw_rich_text(img, draw, x, y, text, font_size, color=COLOR_BONEWHITE):
@@ -158,6 +163,10 @@ def draw_rich_text(img, draw, x, y, text, font_size, color=COLOR_BONEWHITE):
     tokens = EMOJI_PATTERN.split(text)
     emojis = EMOJI_PATTERN.findall(text)
     curr_x = x
+
+    primary_font = cascade[0]
+    bbox_cap = primary_font.getbbox("H")
+    cap_center_offset = (bbox_cap[1] + bbox_cap[3]) / 2
 
     for i in range(len(tokens)):
         chunk = tokens[i]
@@ -170,8 +179,9 @@ def draw_rich_text(img, draw, x, y, text, font_size, color=COLOR_BONEWHITE):
             emoji_str = emojis[i]
             e_img = get_emoji_img(emoji_str, font_size)
             if e_img:
-                img.paste(e_img, (int(curr_x), int(y - 2)), mask=e_img)
-                curr_x += e_img.width + 4
+                emoji_y = int(round(y + cap_center_offset - (e_img.height / 2)))
+                img.paste(e_img, (int(curr_x), emoji_y), mask=e_img)
+                curr_x += e_img.width + 8
             else:
                 f, resolved_ch = find_font_for_char(emoji_str[0], cascade, notdefs)
                 draw.text((curr_x, y), emoji_str, font=f, fill=color)
@@ -389,7 +399,7 @@ def create_intro_frame(date_str, movie_num_str, countdown_val):
 
     return img
 
-def create_review_slide(date_str, movie_num_str, review_index, review_data, total_reviews=5, show_intro=False):
+def create_review_slide(date_str, movie_num_str, review_index, review_data, total_reviews=5, show_intro=False, swipe_cta=None):
     img = Image.new("RGB", (WIDTH, HEIGHT), color=COLOR_BODY_BG)
     draw = ImageDraw.Draw(img)
     draw_site_header(img, draw)
@@ -397,16 +407,36 @@ def create_review_slide(date_str, movie_num_str, review_index, review_data, tota
     pill_text = f"Review {review_index} of {total_reviews}"
     draw_status_bar(draw, 190, date_str, pill_text, movie_num_str)
 
-    if show_intro:
-        intro_font = get_font(56)
-        intro_text = "Can you guess today's movie?"
-        bbox = draw.textbbox((0, 0), intro_text, font=intro_font)
-        draw.text(((WIDTH - (bbox[2] - bbox[0])) // 2, 260), intro_text, font=intro_font, fill=COLOR_ORANGE)
-
     card_w = 940
-    card_h = 1300
+    card_h = 1110 if show_intro else 1380
     card_x = (WIDTH - card_w) // 2
-    card_y = 360 if show_intro else 280
+    card_y = 500 if show_intro else 280
+
+    if show_intro:
+        intro_font = get_font(76)
+        line1 = "Can you guess the"
+        line2 = "movie from its reviews?"
+        bbox1 = draw.textbbox((0, 0), line1, font=intro_font)
+        bbox2 = draw.textbbox((0, 0), line2, font=intro_font)
+        line_gap = int(76 * 1.15)
+
+        try:
+            dt = datetime.strptime(date_str, "%Y-%m-%d")
+            formatted_date = dt.strftime("%B %d, %Y")
+        except Exception:
+            formatted_date = date_str
+        font_status = get_font(32)
+        bbox_date = draw.textbbox((0, 0), formatted_date, font=font_status)
+        date_bottom = 215 + (bbox_date[3] - bbox_date[1]) / 2
+
+        text_ink_h = (line_gap + bbox2[3]) - bbox1[1]
+        space_center = (date_bottom + card_y) / 2
+        start_ink_y = space_center - (text_ink_h / 2)
+        line1_y = int(round(start_ink_y - bbox1[1]))
+        line2_y = line1_y + line_gap
+
+        draw.text(((WIDTH - (bbox1[2] - bbox1[0])) // 2, line1_y), line1, font=intro_font, fill=COLOR_ORANGE)
+        draw.text(((WIDTH - (bbox2[2] - bbox2[0])) // 2, line2_y), line2, font=intro_font, fill=COLOR_ORANGE)
 
     draw.rounded_rectangle([(card_x, card_y), (card_x + card_w, card_y + card_h)], radius=24, fill=COLOR_CARD_BG)
 
@@ -462,7 +492,10 @@ def create_review_slide(date_str, movie_num_str, review_index, review_data, tota
     raw_review = review_data.get("text", "")
     review_text = clean_text(raw_review)
 
-    if len(review_text) > 350:
+    if show_intro and len(review_text) <= 100:
+        f_size = 72
+        l_height = 104
+    elif len(review_text) > 350:
         f_size = 40
         l_height = 58
     elif len(review_text) > 200:
@@ -479,7 +512,13 @@ def create_review_slide(date_str, movie_num_str, review_index, review_data, tota
 
     text_area_h = card_h - 180 - 130
     total_lines_h = len(wrapped_lines) * l_height
-    start_text_y = card_y + 180 + max(30, (text_area_h - total_lines_h) // 2)
+    if show_intro:
+        content_top = card_y + 160
+        content_bottom = card_y + card_h - 100
+        avail_h = content_bottom - content_top
+        start_text_y = content_top + max(50, min(100, (avail_h - total_lines_h) // 3))
+    else:
+        start_text_y = card_y + 180 + max(30, (text_area_h - total_lines_h) // 2)
 
     for line in wrapped_lines[:12]:
         draw_rich_text(img, draw, card_x + header_pad + 10, start_text_y, line, f_size, COLOR_BONEWHITE)
@@ -512,6 +551,19 @@ def create_review_slide(date_str, movie_num_str, review_index, review_data, tota
     bbox_c = draw.textbbox((0, 0), comments_num, font=font_meta)
     comm_text_y = footer_center_y - (bbox_c[3] + bbox_c[1]) / 2
     draw.text((comm_text_x, comm_text_y), comments_num, font=font_meta, fill=COLOR_MUTED_CARD)
+
+    if swipe_cta is None and show_intro:
+        swipe_cta = "Swipe for more clues 👉"
+
+    if swipe_cta:
+        swipe_font_size = 60
+        w_sw = get_rich_text_width(swipe_cta, swipe_font_size)
+        bottom_space_center = (card_y + card_h + HEIGHT) // 2
+        f_swipe = get_font(swipe_font_size)
+        bbox_sw_m = f_swipe.getbbox("M")
+        sw_text_center = (bbox_sw_m[1] + bbox_sw_m[3]) / 2
+        swipe_y = int(round(bottom_space_center - sw_text_center))
+        draw_rich_text(img, draw, (WIDTH - int(w_sw)) // 2, swipe_y, swipe_cta, swipe_font_size, COLOR_GREEN)
 
     return img
 

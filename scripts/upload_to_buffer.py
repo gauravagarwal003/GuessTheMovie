@@ -16,7 +16,49 @@ import argparse
 import requests
 
 BUFFER_GRAPHQL_URL = "https://api.buffer.com"
-GITHUB_RAW_BASE = "https://raw.githubusercontent.com/gauravagarwal003/GuessTheMovie/main"
+
+def upload_slide_to_temp_host(file_path):
+    """
+    Uploads a slide to an ephemeral hosting service (automatically deleted after a few hours)
+    so Buffer can download the image without committing or saving it to GitHub.
+    """
+    filename = os.path.basename(file_path)
+    headers = {"User-Agent": "Mozilla/5.0 (compatible; GuessTheMovieBot/1.0)"}
+
+    # 1. Primary: Litterbox (catbox.moe temporary service, 24h retention)
+    try:
+        with open(file_path, "rb") as f:
+            data = {"reqtype": "fileupload", "time": "24h"}
+            resp = requests.post(
+                "https://litterbox.catbox.moe/resources/internals/api.php",
+                data=data,
+                files={"fileToUpload": f},
+                headers=headers,
+                timeout=25,
+            )
+            if resp.status_code == 200 and resp.text.strip().startswith("http"):
+                return resp.text.strip()
+    except Exception as e:
+        print(f"   ⚠️ Primary ephemeral host failed for {filename}: {e}")
+
+    # 2. Fallback: Uguu.se (3h retention)
+    try:
+        with open(file_path, "rb") as f:
+            resp = requests.post(
+                "https://uguu.se/upload",
+                files={"files[]": f},
+                headers=headers,
+                timeout=25,
+            )
+            if resp.status_code == 200:
+                rj = resp.json()
+                files = rj.get("files", [])
+                if files and files[0].get("url"):
+                    return files[0]["url"]
+    except Exception as e:
+        print(f"   ⚠️ Fallback ephemeral host failed for {filename}: {e}")
+
+    raise RuntimeError(f"Could not host slide {filename} ephemerally for Buffer dispatch.")
 
 def query_graphql(api_key, query_str, variables=None):
     headers = {
@@ -100,26 +142,41 @@ def run_setup(api_key):
     print(f'BUFFER_CHANNEL_IDS="{",".join(all_ids)}"')
     print("-------------------------------------------------------\n")
 
+def sanitize_caption(caption, max_hashtags=5):
+    """
+    Instagram enforces a strict limit of max 5 hashtags per post via Buffer.
+    Ensures caption never exceeds max_hashtags.
+    """
+    words = caption.split()
+    hashtag_count = 0
+    clean_words = []
+    for w in words:
+        if w.startswith("#"):
+            hashtag_count += 1
+            if hashtag_count <= max_hashtags:
+                clean_words.append(w)
+        else:
+            clean_words.append(w)
+    return " ".join(clean_words)
+
 def post_carousel_to_buffer(carousel_dir, caption, api_key, channel_ids, due_at=None):
     """
     Creates a scheduled Reminder post in Buffer for each channel with the 7 slides.
     """
+    caption = sanitize_caption(caption, max_hashtags=5)
     # 1. Gather sorted slide files
     slide_files = sorted([f for f in os.listdir(carousel_dir) if f.startswith("slide_") and f.endswith(".png")])
     if not slide_files:
         raise FileNotFoundError(f"No slides found in {carousel_dir}")
 
-    folder_name = os.path.basename(os.path.normpath(carousel_dir))
-    
-    # 2. Build public HTTPS URLs
+    # 2. Upload slides to ephemeral hosting so Buffer gets direct HTTPS URLs (not saved in Git)
     assets = []
-    for sf in slide_files:
-        raw_url = f"{GITHUB_RAW_BASE}/dist/carousels/{folder_name}/{sf}"
-        assets.append({"image": {"url": raw_url}})
-
-    print(f"📡 Dispatching 7-Slide Carousel to Buffer ({len(channel_ids)} channels)...")
-    for idx, a in enumerate(assets, 1):
-        print(f"   Slide {idx}: {a['image']['url']}")
+    print(f"📡 Uploading {len(slide_files)} slides to ephemeral hosting for Buffer (zero git commits)...")
+    for idx, sf in enumerate(slide_files, 1):
+        file_path = os.path.join(carousel_dir, sf)
+        temp_url = upload_slide_to_temp_host(file_path)
+        print(f"   ✓ Slide {idx}: {temp_url}")
+        assets.append({"image": {"url": temp_url}})
 
     mutation = """
     mutation CreatePost($input: CreatePostInput!) {
