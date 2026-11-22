@@ -15,7 +15,8 @@ import os
 import sys
 import json
 import argparse
-from datetime import datetime
+import subprocess
+from datetime import datetime, timezone
 
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
@@ -98,8 +99,29 @@ def run_pipeline(date_str=None, make_carousel=True, make_video=True,
     if (upload_tiktok or upload_instagram) and buffer_api_key and buffer_channels and carousel_dir:
         print("\n▶️ Step 4 & 5: Dispatching 7-Slide Carousel to Buffer (Instagram & TikTok)...")
         try:
+            if os.environ.get("GITHUB_ACTIONS") == "true":
+                subprocess.run(["git", "config", "user.name", "github-actions[bot]"], check=True)
+                subprocess.run(["git", "config", "user.email", "41898282+github-actions[bot]@users.noreply.github.com"], check=True)
+                subprocess.run(["git", "add", carousel_dir], check=True)
+                commit = subprocess.run(
+                    ["git", "commit", "-m", f"Add {date_str} social carousel [skip ci]"],
+                    capture_output=True,
+                    text=True,
+                )
+                if commit.returncode not in (0, 1):
+                    raise RuntimeError(commit.stderr.strip())
+                if commit.returncode == 0:
+                    subprocess.run(["git", "push"], check=True)
+
             import upload_to_buffer
-            upload_to_buffer.post_carousel_to_buffer(carousel_dir, social_caption, buffer_api_key, buffer_channels)
+            due_at = datetime.strptime(date_str, "%Y-%m-%d").replace(hour=18, minute=0, second=0, tzinfo=timezone.utc).isoformat().replace("+00:00", "Z")
+            upload_to_buffer.post_carousel_to_buffer(
+                carousel_dir,
+                social_caption,
+                buffer_api_key,
+                buffer_channels,
+                due_at=due_at,
+            )
             upload_tiktok = False
             upload_instagram = False
         except Exception as e:

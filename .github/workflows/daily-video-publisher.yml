@@ -1,9 +1,12 @@
 name: Daily Video & Carousel Publisher (YouTube, TikTok, Instagram)
 
+permissions:
+  contents: write
+
 on:
   schedule:
-    # Runs at 05:15 UTC every day (9:15 PM PST / 12:15 AM EST), 15 mins after the movie sync worker runs
-    - cron: '15 5 * * *'
+    # Fixed to 18:00 UTC, which is 10:00 AM PST.
+    - cron: '0 18 * * *'
   workflow_dispatch:
     inputs:
       target_date:
@@ -31,7 +34,7 @@ jobs:
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pillow requests google-api-python-client google-auth-oauthlib google-auth-httplib2
+          pip install numpy pillow requests google-api-python-client google-auth-oauthlib google-auth-httplib2
 
       - name: Restore YouTube Token from Secret
         if: env.YOUTUBE_TOKEN_JSON != ''

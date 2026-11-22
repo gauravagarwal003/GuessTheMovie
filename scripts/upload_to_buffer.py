@@ -100,7 +100,7 @@ def run_setup(api_key):
     print(f'BUFFER_CHANNEL_IDS="{",".join(all_ids)}"')
     print("-------------------------------------------------------\n")
 
-def post_carousel_to_buffer(carousel_dir, caption, api_key, channel_ids):
+def post_carousel_to_buffer(carousel_dir, caption, api_key, channel_ids, due_at=None):
     """
     Creates a scheduled Reminder post in Buffer for each channel with the 7 slides.
     """
@@ -143,11 +143,13 @@ def post_carousel_to_buffer(carousel_dir, caption, api_key, channel_ids):
             "input": {
                 "text": caption,
                 "channelId": ch_id,
-                "schedulingType": "notification",  # Triggers mobile reminder for trending sound!
-                "mode": "addToQueue",
+                "schedulingType": "automatic",
+                "mode": "customScheduled" if due_at else "addToQueue",
                 "assets": assets
             }
         }
+        if due_at:
+            variables["input"]["dueAt"] = due_at
         try:
             res = query_graphql(api_key, mutation, variables)
             create_res = res.get("createPost", {})
