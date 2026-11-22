@@ -398,15 +398,15 @@ def create_review_slide(date_str, movie_num_str, review_index, review_data, tota
     draw_status_bar(draw, 190, date_str, pill_text, movie_num_str)
 
     if show_intro:
-        intro_font = get_font(34)
+        intro_font = get_font(56)
         intro_text = "Can you guess today's movie?"
         bbox = draw.textbbox((0, 0), intro_text, font=intro_font)
-        draw.text(((WIDTH - (bbox[2] - bbox[0])) // 2, 248), intro_text, font=intro_font, fill=COLOR_ORANGE)
+        draw.text(((WIDTH - (bbox[2] - bbox[0])) // 2, 260), intro_text, font=intro_font, fill=COLOR_ORANGE)
 
     card_w = 940
-    card_h = 1380
+    card_h = 1300
     card_x = (WIDTH - card_w) // 2
-    card_y = 280
+    card_y = 360 if show_intro else 280
 
     draw.rounded_rectangle([(card_x, card_y), (card_x + card_w, card_y + card_h)], radius=24, fill=COLOR_CARD_BG)
 
