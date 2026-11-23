@@ -1,0 +1,76 @@
+{
+  "date": "2026-11-23",
+  "movieID": "the-whale-2022",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "16",
+      "date": "February 10, 2023",
+      "username": "molly",
+      "numLikes": "4967",
+      "rating": "4.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/2/5/9/9/2/2/shard/avtr-0-80-0-80-crop.jpg?v=dba5ae3233",
+      "liked": true,
+      "collapsed": false,
+      "text": "\n<p>felt very weird about eating my cinema snacks during this</p>\n",
+      "link": "https://letterboxd.com/m__ollymac/film/the-whale-2022/",
+      "spoiler": false
+    },
+    {
+      "num_comments": "1",
+      "date": "February 25, 2023",
+      "username": "sophie",
+      "numLikes": "2589",
+      "rating": "2.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/3/7/3/2/5/shard/avtr-0-80-0-80-crop.jpg?v=1d19016187",
+      "liked": false,
+      "collapsed": false,
+      "text": "\n<p>i do not think that aronofsky intended for those last 10 seconds to be unbelievably hilarious</p>\n",
+      "link": "https://letterboxd.com/sophiedarcy/film/the-whale-2022/",
+      "spoiler": false
+    },
+    {
+      "num_comments": "11",
+      "date": "January 22, 2023",
+      "username": "nat🥀",
+      "numLikes": "3775",
+      "rating": "",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/3/2/7/6/4/4/shard/avtr-0-80-0-80-crop.jpg?v=990d92ce92",
+      "liked": false,
+      "collapsed": false,
+      "text": "\n<p>my nightmare blunt rotation is sadie sink‘s character &amp; the white boy who wouldn’t shut the fuck up about jesus</p>\n",
+      "link": "https://letterboxd.com/natb294/film/the-whale-2022/",
+      "spoiler": false
+    },
+    {
+      "num_comments": "1",
+      "date": "December 20, 2022",
+      "username": "coffee",
+      "numLikes": "1912",
+      "rating": "0.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/7/1/7/1/7/0/shard/avtr-0-80-0-80-crop.jpg?v=68d1aa1a6e",
+      "liked": false,
+      "collapsed": false,
+      "text": "\n<p>Brendan Fraser is so clearly channeling raw and authentic emotion and pain here that he almost makes you forget how deeply obvious and idiotic the writing he’s delivering is</p>\n",
+      "link": "https://letterboxd.com/coffeevirus/film/the-whale-2022/",
+      "spoiler": false
+    },
+    {
+      "num_comments": "6",
+      "date": "December 29, 2022",
+      "username": "Nick Naney",
+      "numLikes": "735",
+      "rating": "1.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/2/3/2/2/3/shard/avtr-0-80-0-80-crop.jpg?v=fd5a18b3eb",
+      "liked": false,
+      "collapsed": false,
+      "text": "\n<p>Crazy that that pizza guy had never seen a fat guy before</p>\n",
+      "link": "https://letterboxd.com/nicknaney/film/the-whale-2022/",
+      "spoiler": false
+    }
+  ],
+  "affiliate_links": {
+    "amazon-dvd": "https://link.amazon/B0bnPfG2x",
+    "prime-video": "https://link.amazon/A075j0XTf"
+  }
+}
