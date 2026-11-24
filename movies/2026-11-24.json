@@ -1,0 +1,76 @@
+{
+  "date": "2026-11-24",
+  "movieID": "the-french-dispatch",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "9",
+      "date": "February 19, 2022",
+      "username": "txmnxwton",
+      "numLikes": "702",
+      "rating": "2.0",
+      "profilePhotoLink": "https://s.ltrbxd.com/static/img/avatar80-CTtJ8HSs.png",
+      "liked": false,
+      "collapsed": false,
+      "text": "\n<p>the definition of style over substance</p>\n",
+      "link": "https://letterboxd.com/txmnxwton/film/the-french-dispatch-of-the-liberty-kansas/",
+      "spoiler": false
+    },
+    {
+      "num_comments": "19",
+      "date": "October 20, 2021",
+      "username": "Kap 🏳️‍🌈",
+      "numLikes": "7594",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/8/4/9/1/2/shard/avtr-0-80-0-80-crop.jpg?v=7a7243f395",
+      "liked": false,
+      "collapsed": false,
+      "text": "\n<p>They finally made a movie for people who use The New Yorker tote bags</p>\n",
+      "link": "https://letterboxd.com/swtlj/film/the-french-dispatch-of-the-liberty-kansas/",
+      "spoiler": false
+    },
+    {
+      "num_comments": "10",
+      "date": "October 29, 2021",
+      "username": "Megan Bitchell",
+      "numLikes": "7375",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/0/0/3/9/3/8/shard/avtr-0-80-0-80-crop.jpg?v=4da0e9fc01",
+      "liked": true,
+      "collapsed": false,
+      "text": "\n<p>the second movie where Timothée lies about being a virgin</p>\n",
+      "link": "https://letterboxd.com/megbitchell/film/the-french-dispatch-of-the-liberty-kansas/",
+      "spoiler": false
+    },
+    {
+      "num_comments": "0",
+      "date": "October 23, 2021",
+      "username": "gabby!",
+      "numLikes": "323",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/6/3/6/4/0/5/shard/avtr-0-80-0-80-crop.jpg?v=391dab1638",
+      "liked": true,
+      "collapsed": false,
+      "text": "\n<p>i could watch owen wilson ride his little bike around little french towns all day</p>\n",
+      "link": "https://letterboxd.com/gabbwoo/film/the-french-dispatch-of-the-liberty-kansas/",
+      "spoiler": false
+    },
+    {
+      "num_comments": "7",
+      "date": "November 7, 2021",
+      "username": "Kenneth Clark",
+      "numLikes": "3587",
+      "rating": "4.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/2/3/4/6/9/0/shard/avtr-0-80-0-80-crop.jpg?v=6239199dde",
+      "liked": true,
+      "collapsed": false,
+      "text": "\n<p>Wes Anderson is more of a genre than a director at this point</p>\n",
+      "link": "https://letterboxd.com/itskennethclark/film/the-french-dispatch-of-the-liberty-kansas/",
+      "spoiler": false
+    }
+  ],
+  "affiliate_links": {
+    "amazon-dvd": "https://link.amazon/B02q9CaSi",
+    "prime-video": "https://link.amazon/A0fhZW7sU"
+  }
+}
