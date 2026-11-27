@@ -1,0 +1,76 @@
+{
+  "date": "2026-11-27",
+  "movieID": "rango",
+  "reviewCount": 5,
+  "reviews": [
+    {
+      "num_comments": "0",
+      "date": "August 18, 2020",
+      "username": "adambolt",
+      "numLikes": "7827",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/4/6/6/3/7/7/shard/avtr-0-80-0-80-crop.jpg?v=6d2d5edf03",
+      "liked": true,
+      "collapsed": false,
+      "text": "\n<p>everyone in this movie is so ugly i love it</p>\n",
+      "link": "https://letterboxd.com/adambolt/film/rango/",
+      "spoiler": false
+    },
+    {
+      "num_comments": "4",
+      "date": "June 7, 2021",
+      "username": "malik",
+      "numLikes": "1951",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/1/3/9/8/9/2/9/shard/avtr-0-80-0-80-crop.jpg?v=542895ea9d",
+      "liked": true,
+      "collapsed": false,
+      "text": "\n<p>put me in the desert for more than 5 minutes with no water and i’m killing myself in record time</p>\n",
+      "link": "https://letterboxd.com/maliklgndre/film/rango/",
+      "spoiler": false
+    },
+    {
+      "num_comments": "0",
+      "date": "December 21, 2017",
+      "username": "COBRARocky",
+      "numLikes": "252",
+      "rating": "4.0",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/twitter/1/2/2/1/2/1/shard/http___pbs.twimg.com_profile_images_1030076820593373184_FvWImWh2-0-80-0-80-crop.jpg?v=dc0c373678",
+      "liked": false,
+      "collapsed": false,
+      "text": "\n<p>Its a great Western wearing the skin of a shitty Madagascar movie. Doesnt overdo the comedy and everybody doesnt sing and dance at the end. </p><p>Might well be the Iron Giant of the 2010s</p>\n",
+      "link": "https://letterboxd.com/cobrarocky/film/rango/",
+      "spoiler": false
+    },
+    {
+      "num_comments": "8",
+      "date": "June 1, 2026",
+      "username": "euforico",
+      "numLikes": "173",
+      "rating": "4.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/4/9/8/9/5/8/9/shard/avtr-0-80-0-80-crop.jpg?v=d132b0cbf5",
+      "liked": true,
+      "collapsed": false,
+      "text": "\n<p>bro that snake has a minigun instead of a rattlesnake tail, definitely the best villain in an animated movie</p><p>someday i'll tell my kids that chameleon was clint eastwood</p>\n",
+      "link": "https://letterboxd.com/euforico/film/rango/",
+      "spoiler": false
+    },
+    {
+      "num_comments": "0",
+      "date": "December 29, 2023",
+      "username": "Robbie Cooper",
+      "numLikes": "95",
+      "rating": "3.5",
+      "profilePhotoLink": "https://a.ltrbxd.com/resized/avatar/upload/3/2/2/8/1/1/6/shard/avtr-0-80-0-80-crop.jpg?v=1222981721",
+      "liked": true,
+      "collapsed": false,
+      "text": "\n<p>What appears to be a film about a cowboy chameleon played by Jack Sparrow masquerades as one of the most beautiful animated films of all time and a loving tribute to the western genre.</p>\n",
+      "link": "https://letterboxd.com/robviews/film/rango/",
+      "spoiler": false
+    }
+  ],
+  "affiliate_links": {
+    "amazon-dvd": "https://link.amazon/B00yvpERw",
+    "prime-video": "https://link.amazon/A099k7xIg"
+  }
+}
